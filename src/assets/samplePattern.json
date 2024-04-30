@@ -1,4 +1,36 @@
 {
   "tempo": 200,
-  "duration": 100
+  "duration": 64,
+  "measure": {
+    "base": 4,
+    "beats": 4
+  },
+  "instruments": [
+    {
+      "name": "drum",
+      "parties": [
+        {
+          "name": "solid",
+          "spans": [[1,8], [17,8]]
+        },
+        {
+          "name": "snare trello",
+          "spans": [[9,8], [25,8]]
+        }
+      ]
+    },
+    {
+      "name": "saxo",
+      "parties": [
+        {
+          "name": "slow melo",
+          "spans": [[5,8], [21,8]]
+        },
+        {
+          "name": "fast chaos",
+          "spans": [[13,8], [29,8]]
+        }
+      ]
+    }
+  ]
 }
