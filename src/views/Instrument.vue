@@ -1,7 +1,7 @@
 <template>
   <div class="d-flex align-items-center justify-content-center">
-    <h1 class="display-6 fw-bold">Instrument info:</h1>
-    <div class="display-6 fw-bold">{{ pattern }}</div>
+    <div class="fw-bold">Instrument info:</div>
+    <div class="fw-bold">{{ pattern }}</div>
   </div>
 </template>
 <script>
@@ -16,7 +16,7 @@ export default {
   },
   computed: {
     pattern() {
-      return this.$store.pattern
+      return this.$store.state.pattern
     }
   }
 }
