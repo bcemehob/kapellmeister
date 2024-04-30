@@ -5,6 +5,7 @@
       <p class="h3 my-3 text-success fw-bold">Play mode</p>
       <div class="container mt-3">TEMPO: {{ pattern.tempo }} bpm</div>
       <div class="container mt-3">DURATION: {{ pattern.duration }} bpm</div>
+      <div v-show="error" class="alert alert-danger">{{ error}}</div>
       <input type="file" ref="json" @change="readPattern()" />
       <div v-if="!!beatEmitter" class="container control">
         <button v-if="!playing" class="btn btn-dark" @click="play()">Play</button>
@@ -27,6 +28,7 @@ export default {
     return {
       beatEmitter: null,
       playing: false,
+      error: null
     }
   },
   computed: {
@@ -48,17 +50,22 @@ export default {
       this.playing = false
     },
     readPattern() {
+      this.error = null
       const file = this.$refs.json.files[0];
       const reader = new FileReader();
       if (file.name.includes(".json")) {
         reader.onload = (res) => {
-          this.$store.commit('setPattern', JSON.parse(res.target.result))
-          this.beatEmitter = new BeatEmitter(this.pattern.tempo, this.pattern.duration, this.handleBeat)
+          try {
+            this.$store.commit('setPattern', JSON.parse(res.target.result))
+            this.beatEmitter = new BeatEmitter(this.pattern.tempo, this.pattern.duration, this.handleBeat)
+          } catch (e) {
+            this.error = 'Could not read file'
+          }
         };
-        reader.onerror = (err) => console.log(err);
+        reader.onerror = (err) => this.error = err
         reader.readAsText(file);
       } else {
-        throw new Error("Invalid file type");
+        this.error = `Invalid file format: ${file.name}`;
       }
     }
   }
