@@ -1,37 +1,17 @@
-import axios from "axios";
-import { createStore } from 'vuex';
-import { state } from 'vuex';
+import {createStore} from 'vuex';
+
 export default createStore({
-  state: {
-    groups: [],
-    employees: []
-  },
-  getters: {
-    getEmployees() {
-      return state.employees;
+    state: {
+        pattern: {}
     },
-    getEmployeeById(contactId) {
-      return state.employees.filter(employee => employee.contactId === contactId);
+    getters: {
+        getPattern(state) {
+            return state.pattern
+        },
     },
-    getGroups() {
-      return state.groups;
+    mutations: {
+        setPattern(state, payload) {
+            state.pattern = payload;
+        },
     },
-    getGroupById(groupId) {
-      return state.groups.filter(group => group.id === groupId);
-    }
-  },
-  mutations: {
-    setEmployees(state, payload) {
-      state.employees = payload;
-    },
-    setGroups () {}
-  },
-  actions: {
-    getAllEmployees(context){
-      let dataURL= `${this.serverURL}/employees`;
-      context.commit("setEmployees", axios.get(dataURL))
-  }
-  },
-  modules: {
-  }
 })
