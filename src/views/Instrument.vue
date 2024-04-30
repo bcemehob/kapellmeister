@@ -11,9 +11,6 @@ export default {
   props: {
     beatCounter: Number
   },
-  mounted() {
-    console.log('Component mounted.', this.$store)
-  },
   computed: {
     pattern() {
       return this.$store.state.pattern

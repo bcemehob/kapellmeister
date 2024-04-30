@@ -1,7 +1,7 @@
 
 export class ConductorService {
 
-    static getTempo(){
-        return 120
+    static durationInBeats(pattern){
+        return pattern.duration * pattern.measure.beats
     }
 }

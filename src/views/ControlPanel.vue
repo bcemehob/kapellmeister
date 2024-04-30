@@ -1,10 +1,9 @@
 <template>
   <div class="row">
     <div class="col">
-
       <p class="h3 my-3 text-success fw-bold">Play mode</p>
       <div class="container mt-3">TEMPO: {{ pattern.tempo }} bpm</div>
-      <div class="container mt-3">DURATION: {{ pattern.duration }} bpm</div>
+      <div v-if="beatEmitter" class="container mt-3">DURATION: {{ ConductorService.durationInBeats(pattern) }} bpm</div>
       <div v-show="error" class="alert alert-danger">{{ error}}</div>
       <input type="file" ref="json" @change="readPattern()" />
       <div v-if="!!beatEmitter" class="container control">
@@ -18,6 +17,7 @@
 <script>
 
 import {BeatEmitter} from "@/services/BeatEmitter";
+import {ConductorService} from "@/services/ConductorService";
 
 export default {
   name: 'ControlPanel',
@@ -32,6 +32,9 @@ export default {
     }
   },
   computed: {
+    ConductorService() {
+      return ConductorService
+    },
     pattern() {
       return this.$store.state.pattern
     }
@@ -57,7 +60,7 @@ export default {
         reader.onload = (res) => {
           try {
             this.$store.commit('setPattern', JSON.parse(res.target.result))
-            this.beatEmitter = new BeatEmitter(this.pattern.tempo, this.pattern.duration, this.handleBeat)
+            this.beatEmitter = new BeatEmitter(this.pattern.tempo, ConductorService.durationInBeats(this.pattern), this.handleBeat)
           } catch (e) {
             this.error = 'Could not read file'
           }
