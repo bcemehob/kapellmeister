@@ -22,7 +22,6 @@ export default {
           fontSize: 30,
           errorMessage: null,
           beatEmitter: null,
-          isBeating: false,
           currentBeat: 0,
         }
 
@@ -30,8 +29,6 @@ export default {
   methods: {
     handleBeat(currentBeat) {
       console.log("beat", currentBeat, new Date().getTime())
-      this.isBeating = true
-      setTimeout(() => this.isBeating = false, 200)
       this.currentBeat = currentBeat
     },
   }
