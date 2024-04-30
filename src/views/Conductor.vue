@@ -15,7 +15,7 @@ import ControlPanel from "@/views/ControlPanel.vue";
 <script>
 
 export default {
-  name: 'EmployeeManager',
+  name: 'KapellMeister',
   data:
       function () {
         return {

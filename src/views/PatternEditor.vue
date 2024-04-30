@@ -38,7 +38,7 @@
 import {ConductorService} from '@/services/ConductorService'
 
 export default {
-  name: "EditEmployee",
+  name: "PatternEditor",
   data: function () {
     return {
       name: '',
