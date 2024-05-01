@@ -45,9 +45,9 @@ export default {
   transform: translate(30%, 40%) scale(150%);
   fill: #18643a;
 }
-
 .svg-container {
-  border: 1px solid black;
+  border: 1px solid #7d858d;
+  background-color: #cddadc;
   width: 50%;
 }
 

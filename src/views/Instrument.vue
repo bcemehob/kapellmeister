@@ -23,6 +23,7 @@ export default {
   .inline-box{
     padding: 5px;
     margin: 5px;
-    background: #dddcdd;
+    border: 1px solid #7d858d;
+    background-color: #cddadc;
   }
 </style>

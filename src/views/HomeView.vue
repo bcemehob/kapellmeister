@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="home" id="bg-adb5bd">
     <Conductor></Conductor>
     <PatternEditor></PatternEditor>
 
