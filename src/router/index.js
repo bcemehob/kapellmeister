@@ -1,5 +1,4 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
 import Conductor from "@/views/Conductor.vue"
 import PatternEditor from "@/views/PatternEditor.vue"
 import PageNotFound from "@/views/PageNotFound";
@@ -7,11 +6,6 @@ import PageNotFound from "@/views/PageNotFound";
 const routes = [
   {
     path: '/',
-    name: 'home',
-    component: HomeView
-  },
-  {
-    path: '/conductor',
     name: 'Conductor',
 
     component: Conductor

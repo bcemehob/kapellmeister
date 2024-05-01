@@ -1,11 +1,9 @@
 <template>
-  <div>
-    <div class="container">
+  <div class="section">
+    <div class="title">Pattern editor</div>
+    <div>
       <div class="row">
-        <div class="col">
-          <p class="h3 my-3 text-success fw-bold">Pattern editor</p>
           <p>Edit pattern of composition</p>
-        </div>
       </div>
     </div>
     <div class="container mt-3">

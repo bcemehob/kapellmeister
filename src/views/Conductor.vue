@@ -1,8 +1,10 @@
 <template>
-  <div class="container">
+  <div class="section">
+    <div class="title">KapellMeister</div>
     <ControlPanel :handle-beat="handleBeat"></ControlPanel>
     <MotionViewer :current-beat="this.currentBeat"></MotionViewer>
     <Instruments :pattern="pattern" :current-beat="currentBeat"></Instruments>
+    <PatternEditor></PatternEditor>
   </div>
 </template>
 
@@ -10,6 +12,7 @@
 import Instruments from "@/views/Instruments.vue";
 import MotionViewer from "@/views/MotionViewer.vue";
 import ControlPanel from "@/views/ControlPanel.vue";
+import PatternEditor from "@/views/PatternEditor.vue";
 </script>
 
 <script>
