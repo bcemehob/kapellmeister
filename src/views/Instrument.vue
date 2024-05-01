@@ -1,7 +1,7 @@
 <template>
-  <div class="d-flex align-items-center justify-content-center">
-    <div class="fw-bold">Instrument info:</div>
-    <div class="fw-bold">{{ pattern }}</div>
+  <div class="row inline-box">
+    <div class="row">Instrument info:</div>
+    <div class="row">{{ parties }}</div>
   </div>
 </template>
 <script>
@@ -9,7 +9,8 @@
 export default {
   name: 'InstruMent',
   props: {
-    beatCounter: Number
+    beatCounter: Number,
+    parties: Object
   },
   computed: {
     pattern() {
@@ -19,5 +20,9 @@ export default {
 }
 </script>
 <style scoped>
-
+  .inline-box{
+    padding: 5px;
+    margin: 5px;
+    background: #dddcdd;
+  }
 </style>

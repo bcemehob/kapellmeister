@@ -2,7 +2,9 @@
   <div class="container">
     <ControlPanel :handle-beat="handleBeat"></ControlPanel>
     <MotionViewer :current-beat="this.currentBeat"></MotionViewer>
-    <Instrument></Instrument>
+    <div class="d-flex align-items-center justify-content-center">
+      <Instrument v-for="instrument in pattern.instruments" :key="instrument.name" :parties="instrument"></Instrument>
+    </div>
   </div>
 </template>
 
@@ -26,6 +28,11 @@ export default {
         }
 
       },
+  computed: {
+    pattern() {
+      return this.$store.state.pattern
+    }
+  },
   methods: {
     handleBeat(currentBeat) {
       console.log("beat", currentBeat, new Date().getTime())
