@@ -2,14 +2,12 @@
   <div class="container">
     <ControlPanel :handle-beat="handleBeat"></ControlPanel>
     <MotionViewer :current-beat="this.currentBeat"></MotionViewer>
-    <div class="d-flex align-items-center justify-content-center">
-      <Instrument v-for="instrument in pattern.instruments" :key="instrument.name" :parties="instrument"></Instrument>
-    </div>
+    <Instruments :pattern="pattern" :current-beat="currentBeat"></Instruments>
   </div>
 </template>
 
 <script setup>
-import Instrument from "@/views/Instrument.vue";
+import Instruments from "@/views/Instruments.vue";
 import MotionViewer from "@/views/MotionViewer.vue";
 import ControlPanel from "@/views/ControlPanel.vue";
 </script>

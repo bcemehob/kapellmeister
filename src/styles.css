@@ -1,19 +1,10 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap');
 
-body{
+body {
     font-family: 'Roboto Light', sans-serif !important;
-    background-color:#adb5bd !important;
-}
-.employee-img{
-    width: 118px;
-    border-radius: 50%;
+    background-color: #adb5bd !important;
 }
 
-.employee-img-big{
-    width: 220px;
-    border-radius:50%;
-}
 .button {
     padding: 15px 25px;
     font-size: 24px;
@@ -25,9 +16,9 @@ body{
     border: none;
     border-radius: 15px;
     box-shadow: 0 9px rgb(245, 225, 225);
-  }
+}
 
-  .disabledButton{
+.disabledButton {
     padding: 15px 25px;
     font-size: 24px;
     text-align: center;
@@ -38,18 +29,28 @@ body{
     border: none;
     border-radius: 15px;
     box-shadow: 0 9px rgb(245, 225, 225);
+}
 
-  }
+.button:hover {
+    background-color: #3e8e41
+}
 
-  .button:hover {background-color: #3e8e41}
-
-  .button:active {
+.button:active {
     background-color: #3e8e41;
     box-shadow: 0 5px rgb(235, 222, 222);
     transform: translateY(4px);
-  }
+}
 
-  .logo-icon path {
-      fill: #0dcaf0;
-  }
+.logo-icon path {
+    fill: #0dcaf0;
+}
 
+.section .title {
+    color: #4d555d;
+    font-weight: normal;
+    font-size: 24px;
+}
+
+.section {
+    border: 1px dotted #7d858d;
+}
