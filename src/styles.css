@@ -53,4 +53,6 @@ body {
 
 .section {
     border: 1px dotted #7d858d;
+    padding: 10px;
+    margin: 10px;
 }

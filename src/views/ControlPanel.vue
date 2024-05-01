@@ -1,16 +1,18 @@
 <template>
-  <div class="row">
-    <div class="col">
-      <p class="h3 my-3 text-success fw-bold">Play mode</p>
-      <div class="container mt-3">TEMPO: {{ pattern.tempo }} bpm</div>
-      <div v-if="beatEmitter" class="container mt-3">DURATION: {{ ConductorService.durationInBeats(pattern) }} bpm</div>
-      <div v-show="error" class="alert alert-danger">{{ error}}</div>
-      <input type="file" ref="json" @change="readPattern()" />
-      <div v-if="!!beatEmitter" class="container control">
-        <button v-if="!playing" class="btn btn-dark" @click="play()">Play</button>
-        <button v-else class="btn btn-dark" @click="pause()">Pause</button>
-        <button :disabled="!playing" class="btn btn-dark" @click="stop()">Stop</button>
+  <div class="row section">
+    <div class="title">Play mode</div>
+    <div class="d-flex space-between">
+      <input type="file" ref="json" @change="readPattern()"/>
+      <div v-if="beatEmitter" class="d-flex" style="flex: 1">
+        <div class="container mt-3">TEMPO: {{ pattern.tempo }} bpm</div>
+        <div class="container mt-3">DURATION: {{ ConductorService.durationInBeats(pattern) }} bpm</div>
       </div>
+    </div>
+    <div v-show="error" class="alert alert-danger">{{ error }}</div>
+    <div v-if="!!beatEmitter" class="container control">
+      <button v-if="!playing" class="btn btn-dark" @click="play()"><i class="fa-solid fa-play"></i></button>
+      <button v-else class="btn btn-dark" @click="pause()"><i class="fa-solid fa-pause"></i></button>
+      <button :disabled="!playing" class="btn btn-dark" @click="stop()"><i class="fa-solid fa-stop"></i></button>
     </div>
   </div>
 </template>
@@ -75,5 +77,13 @@ export default {
 }
 </script>
 <style scoped>
-
+.space-between {
+  justify-content: space-between;
+}
+button {
+  margin: 2px;
+  width: 48px;
+  height: 48px;
+  font-size: 24px;
+}
 </style>
