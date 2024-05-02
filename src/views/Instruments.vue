@@ -5,6 +5,7 @@
       <Instrument v-for="instrument in pattern.instruments"
                   :key="instrument.name"
                   :instrument="instrument"
+                  :measure="pattern.measure"
                   :current-beat="currentBeat"></Instrument>
     </div>
   </div>

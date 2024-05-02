@@ -6,12 +6,13 @@
   </div>
 </template>
 <script>
-
+const EMPTY_PARTY = {start: 0, duration: 0}
 export default {
   name: 'InstruMent',
   props: {
     currentBeat: Number,
-    instrument: Object
+    instrument: Object,
+    measure: Object
   },
   data() {
     return {
@@ -21,16 +22,18 @@ export default {
   computed: {
     currentParty() {
       const currentParty = this.partyTimeline[this.currentBeat]
-      return currentParty ? currentParty : {start: 0, duration: 0}
+      return currentParty ? currentParty : EMPTY_PARTY
     },
     upcomingParty() {
-      if (this.currentBeat >= this.partyTimeline.length - 4) return {start: 0, duration: 0}
-      const upcomingParty = this.partyTimeline[this.currentBeat + 4]
-      if (!upcomingParty) return {start: 0, duration: 0}
-      return !this.currentParty || this.currentParty.name === upcomingParty.name ?  {start: 0, duration: 0} : upcomingParty
+      if (this.currentBeat >= this.partyTimeline.length - this.measure.beats) return EMPTY_PARTY
+      const upcomingParty = this.partyTimeline[this.currentBeat + this.measure.beats]
+      if (!upcomingParty) return EMPTY_PARTY
+      return !this.currentParty || this.currentParty.name === upcomingParty.name ?
+          {start: 0, duration: 0} : upcomingParty
     },
     countDown() {
-      return this.upcomingParty.start === 0 ? "-" : this.upcomingParty.start - this.currentBeat
+      return this.upcomingParty.start === 0 ? "-" :
+          Math.ceil((this.upcomingParty.start - this.currentBeat) / this.measure.beats)
     }
   },
   mounted() {
