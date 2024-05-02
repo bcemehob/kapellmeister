@@ -5,7 +5,7 @@
       <input type="file" ref="json" @change="readPattern()"/>
       <div v-if="beatEmitter" class="d-flex" style="flex: 1">
         <div class="container mt-3">TEMPO: {{ pattern.tempo }} bpm</div>
-        <div class="container mt-3">DURATION: {{ ConductorService.durationInBeats(pattern) }} bpm</div>
+        <div class="container mt-3">DURATION: {{ ConductorService.durationInBeats(pattern) }} beats ({{ pattern.duration}} measures)</div>
       </div>
     </div>
     <div v-show="error" class="alert alert-danger">{{ error }}</div>
