@@ -8,9 +8,9 @@
 
   </div>
   </div>
- 
+
   </div>
- 
+
    <div class="col">
  <button class="btn btn-dark" @click="$emit('btn-click')">Click me</button>
  </div>
@@ -28,9 +28,8 @@ export default {
   },
   watch: { // It listens to the change in prop name
     name: function () {
-      console.log("name change"); 
       // print out when the name changes
-      
+
     },
   },
 };

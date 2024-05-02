@@ -57,7 +57,7 @@ export class BeatEmitter {
         this.beatCallback(this.currentBeat)
         this.timeoutId = setTimeout(() => that.beat(), nextBeatTimeout)
 
-        console.log(`BeatEmitter beat #${this.currentBeat}, beat time: ${beatTime}, real time: ${new Date().getTime()}  interval: ${nextBeatTimeout}`);
+        // console.log(`BeatEmitter beat #${this.currentBeat}, beat time: ${beatTime}, real time: ${new Date().getTime()}  interval: ${nextBeatTimeout}`);
     }
 
 
