@@ -1,47 +1,42 @@
 <template>
   <div class="row inline-box">
     <div class="row title">{{ instrument.name }}</div>
-    <div class="row">Current party: {{ currentParty.name }}</div>
-    <div class="row">Upcoming party: {{ upcomingParty.name }} {{countDown}}</div>
+    <div v-if="instrumentService">
+      <div class="row">Current party:{{ currentParty.name }}</div>
+      <div class="row">Upcoming party: {{ upcomingParty.name }} {{ countDown }}
+      </div>
+    </div>
   </div>
 </template>
 <script>
-const EMPTY_PARTY = {start: 0, duration: 0}
+import {InstrumentService} from '@/services/InstrumentService'
+
 export default {
   name: 'InstruMent',
   props: {
     currentBeat: Number,
     instrument: Object,
-    measure: Object
+    measure: Object,
   },
   data() {
     return {
-      partyTimeline: []
+      partyTimeline: [],
+      instrumentService: null
     }
   },
   computed: {
     currentParty() {
-      const currentParty = this.partyTimeline[this.currentBeat]
-      return currentParty ? currentParty : EMPTY_PARTY
+      return this.instrumentService.currentParty(this.currentBeat)
     },
     upcomingParty() {
-      if (this.currentBeat >= this.partyTimeline.length - this.measure.beats) return EMPTY_PARTY
-      const upcomingParty = this.partyTimeline[this.currentBeat + this.measure.beats]
-      if (!upcomingParty) return EMPTY_PARTY
-      return !this.currentParty || this.currentParty.name === upcomingParty.name ?
-          {start: 0, duration: 0} : upcomingParty
+      return this.instrumentService.upcomingParty(this.currentBeat)
     },
     countDown() {
-      return this.upcomingParty.start === 0 ? "-" :
-          Math.ceil((this.upcomingParty.start - this.currentBeat) / this.measure.beats)
+      return this.instrumentService.countDown(this.currentBeat)
     }
   },
   mounted() {
-    this.instrument.parties.forEach(party => party.spans.forEach((span => {
-      for (let i = span[0]; i < span[0] + span[1]; i++) {
-        this.partyTimeline[i] = {name: party.name, start: span[0], duration: span[1]}
-      }
-    })))
+    this.instrumentService = new InstrumentService(this.instrument, this.partyTimeline, this.measure)
   }
 }
 </script>
