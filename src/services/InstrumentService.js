@@ -30,7 +30,7 @@ export class InstrumentService {
         return currentParty ? currentParty : EMPTY_PARTY
     }
 
-    countDown(currentBeat) {
+    prerollCountDown(currentBeat) {
         return this.upcomingParty(currentBeat).start === 0 ? "-" :
             Math.ceil((this.upcomingParty(currentBeat).start - currentBeat) / this.measure.beats)
     }

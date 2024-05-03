@@ -3,7 +3,7 @@
     <div class="row title">{{ instrument.name }}</div>
     <div v-if="instrumentService">
       <div class="row">Current party:{{ currentParty.name }}</div>
-      <div class="row">Upcoming party: {{ upcomingParty.name }} {{ countDown }}
+      <div class="row">Upcoming party: {{ upcomingParty.name }} {{ prerollCountDown }}
       </div>
     </div>
   </div>
@@ -31,8 +31,8 @@ export default {
     upcomingParty() {
       return this.instrumentService.upcomingParty(this.currentBeat)
     },
-    countDown() {
-      return this.instrumentService.countDown(this.currentBeat)
+    prerollCountDown() {
+      return this.instrumentService.prerollCountDown(this.currentBeat)
     }
   },
   mounted() {
