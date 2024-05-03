@@ -1,4 +1,5 @@
 const EMPTY_PARTY = {start: 0, duration: 0}
+const PREROLL_MEASURES = 4
 
 export class InstrumentService {
     partyTimeline = []
@@ -13,11 +14,15 @@ export class InstrumentService {
     }
 
     upcomingParty(currentBeat) {
-        if (currentBeat >= this.partyTimeline.length - this.measure.beats) return EMPTY_PARTY
-        const upcomingParty = this.partyTimeline[currentBeat + this.measure.beats]
+        if (currentBeat >= this.partyTimeline.length - this.prerollBeats()) return EMPTY_PARTY
+        const upcomingParty = this.partyTimeline[currentBeat + this.prerollBeats()]
         if (!upcomingParty) return EMPTY_PARTY
         let currentParty = this.currentParty(currentBeat)
         return !currentParty || currentParty.name === upcomingParty.name ? EMPTY_PARTY : upcomingParty
+    }
+
+    prerollBeats() {
+        return this.measure.beats * PREROLL_MEASURES
     }
 
     currentParty(currentBeat) {
