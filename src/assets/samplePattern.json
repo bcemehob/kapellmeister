@@ -1,6 +1,6 @@
 {
   "tempo": 128,
-  "duration": 256,
+  "duration": 64,
   "measure": {
     "base": 4,
     "beats": 4
