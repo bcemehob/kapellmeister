@@ -14,10 +14,10 @@ export class InstrumentService {
 
     upcomingParty(currentBeat) {
         if (currentBeat >= this.partyTimeline.length - this.measure.beats) return EMPTY_PARTY
-        const upcomingParty = this.partyTimeline[this.currentBeat + this.measure.beats]
+        const upcomingParty = this.partyTimeline[currentBeat + this.measure.beats]
         if (!upcomingParty) return EMPTY_PARTY
-        return !this.currentParty || this.currentParty.name === upcomingParty.name ?
-            {start: 0, duration: 0} : upcomingParty
+        let currentParty = this.currentParty(currentBeat)
+        return !currentParty || currentParty.name === upcomingParty.name ? EMPTY_PARTY : upcomingParty
     }
 
     currentParty(currentBeat) {

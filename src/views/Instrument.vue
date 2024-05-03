@@ -36,7 +36,7 @@ export default {
     }
   },
   mounted() {
-    this.instrumentService = new InstrumentService(this.instrument, this.partyTimeline, this.measure)
+    this.instrumentService = new InstrumentService(this.instrument, this.measure)
   }
 }
 </script>
