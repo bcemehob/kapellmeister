@@ -32,12 +32,12 @@ export class InstrumentService {
 
     currentCountDown(currentBeat) {
         const currentParty = this.currentParty(currentBeat)
-        return currentParty.start === 0 ? "-" :
+        return currentParty.start === 0 ? 0 :
             Math.ceil((currentParty.start + currentParty.duration - currentBeat) / this.measure.beats)
     }
 
     upcomingCountDown(currentBeat) {
-        return this.upcomingParty(currentBeat).start === 0 ? "-" :
+        return this.upcomingParty(currentBeat).start === 0 ? 0 :
             Math.ceil((this.upcomingParty(currentBeat).start - currentBeat) / this.measure.beats)
     }
 
@@ -45,7 +45,9 @@ export class InstrumentService {
     countDown(currentBeat) {
         const current = this.currentCountDown(currentBeat)
         const upcoming = this.upcomingCountDown(currentBeat)
-        return  current === upcoming ? {common: current} : {current, upcoming}
+        if (current === 0 && upcoming === 0) return {type: 'no-count', count: null}
+        else if (current === upcoming) return {type: 'common', count: current}
+        return current ? {type: 'current', count: current} : {type: 'upcoming', count: upcoming}
     }
 
 }

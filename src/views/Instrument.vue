@@ -3,14 +3,9 @@
     <div class="title">{{ instrument.name }}</div>
     <div v-if="instrumentService" class="party-info w-100 h-100">
       <div class="current-party">
-        <div class="d-flex" v-if="currentParty.name">
+        <div class="d-flex">
           <div class="fw-bold"> {{ currentParty.name }}</div>
-          <div v-if="countDown.current" class="count-down"> {{ countDown.current}} </div>
-          <div v-if="countDown.common" class="count-down red"> {{ countDown.common}} </div>
-        </div>
-        <div class="d-flex" v-else>
-          <div>-</div>
-          <div v-if="countDown.upcoming" class="count-down blue"> {{ countDown.upcoming}} </div>
+          <div v-if="countDown" :class="'count-down ' + countDown.type"> {{ countDown.count}} </div>
         </div>
       </div>
       <div v-if="upcomingParty.name" class="upcoming-party">
@@ -78,10 +73,10 @@ export default {
   font-size: 30px;
 }
 
-.count-down.red {
+.count-down.common {
   color: red;
 }
-.count-down.blue {
+.count-down.upcoming {
   color: blue;
 }
 .party-info {
