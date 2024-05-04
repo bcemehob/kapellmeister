@@ -30,13 +30,22 @@ export class InstrumentService {
         return currentParty ? currentParty : EMPTY_PARTY
     }
 
-    prerollCountDown(currentBeat) {
+    currentCountDown(currentBeat) {
+        const currentParty = this.currentParty(currentBeat)
+        return currentParty.start === 0 ? "-" :
+            Math.ceil((currentParty.start + currentParty.duration - currentBeat) / this.measure.beats)
+    }
+
+    upcomingCountDown(currentBeat) {
         return this.upcomingParty(currentBeat).start === 0 ? "-" :
             Math.ceil((this.upcomingParty(currentBeat).start - currentBeat) / this.measure.beats)
     }
 
 
-
-
+    countDown(currentBeat) {
+        const current = this.currentCountDown(currentBeat)
+        const upcoming = this.upcomingCountDown(currentBeat)
+        return  current === upcoming ? {common: current} : {current, upcoming}
+    }
 
 }
