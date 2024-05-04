@@ -2,8 +2,10 @@
   <div class="section">
     <div class="title">KapellMeister</div>
     <ControlPanel :handle-beat="handleBeat"></ControlPanel>
-    <MotionViewer :current-beat="this.currentBeat"></MotionViewer>
-    <Instruments :pattern="pattern" :current-beat="currentBeat"></Instruments>
+    <div class="d-flex">
+      <MotionViewer :current-beat="this.currentBeat"></MotionViewer>
+      <Instruments :pattern="pattern" :current-beat="currentBeat"></Instruments>
+    </div>
     <PatternEditor></PatternEditor>
   </div>
 </template>

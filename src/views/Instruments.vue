@@ -1,5 +1,5 @@
 <template>
-  <div class="section">
+  <div class="section w-50">
     <div class="title">Instruments</div>
     <div class="d-flex align-items-center justify-content-center">
       <Instrument v-for="instrument in pattern.instruments"
