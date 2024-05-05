@@ -21,26 +21,6 @@
       </div>
 
     </div>
-    <!--    <div class="container mt-3">
-          <div class="row">
-            <div class=" col-md-4">
-              <form>
-                <div class=" mb-3">
-                  <input required v-model="name" type="text" class="form-control" placeholder="Name">
-                </div>
-                <div class="mb-3">
-                  <select required v-model="groups" class="form-control">
-                    <option value="">Name</option>
-                    <option :value="name" v-for="group of groups" :key="group.id">{{ group.name }}</option>
-                  </select>
-                </div>
-                <div class="mb-3">
-                  <input type="submit" class="btn btn-danger" value="Submit">
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>-->
   </div>
 
 </template>
