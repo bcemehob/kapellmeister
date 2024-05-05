@@ -1,7 +1,6 @@
 <template>
   <div class="timeline">
-    <div class="timeline-item">Timeline go down</div>
-    <table>
+      <table>
       <tr>
         <th class="narrow-column"> measure</th>
         <th v-for="instrument in pattern.instruments" v-bind:key="instrument.name"> {{ instrument.name }}</th>
@@ -43,7 +42,7 @@ export default {
       return ret
     },
     partySpanStyle(partySpan) {
-      return  {top: (partySpan.start / 4) * 10 - 18 + 'px', height: (partySpan.duration / 4) * 10 + 'px'};
+      return  {top: (partySpan.start / 4) * 12 - 18 + 'px', height: (partySpan.duration / 4) * 12 + 'px'};
     }
   },
   computed: {
@@ -66,12 +65,16 @@ table {
 
   th {
     border-bottom: 1px dotted #7d858d;
+    padding: 0;
   }
 
   th, td {
-    padding: 3px 7px;
+    padding: 0 7px;
   }
-
+  tr {
+    box-sizing: border-box;
+    padding: 0;
+  }
   th:not(:first-child), td:not(:first-child) {
     border-left: 1px dotted #7d858d;
   }
