@@ -42,7 +42,7 @@ export default {
       return this.$store.state.pattern
     },
     isPatternEmpty() {
-      return Object.keys(this.pattern).length === 0;
+      return ConductorService.isEmpty(this.pattern)
     },
     isExpanded() {
       return this.$route.name === 'PatternEditor'

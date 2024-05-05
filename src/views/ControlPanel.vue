@@ -59,9 +59,11 @@ export default {
       const file = this.$refs.json.files[0];
       const reader = new FileReader();
       if (file.name.endsWith(".kpm")) {
-        reader.onload = (res) => {
+        reader.onload = (readingEvent) => {
           try {
-            this.$store.commit('setPattern', JSON.parse(res.target.result))
+            const pattern = JSON.parse(readingEvent.target.result)
+            this.$store.commit('setPattern', pattern)
+            localStorage.setItem('pattern', readingEvent.target.result)
             this.beatEmitter = new BeatEmitter(this.pattern.tempo, ConductorService.durationInBeats(this.pattern), this.handleBeat)
           } catch (e) {
             this.error = 'Could not read file'
@@ -71,6 +73,15 @@ export default {
         reader.readAsText(file);
       } else {
         this.error = `Invalid file format: ${file.name}`;
+      }
+    }
+  },
+  mounted() {
+    if (ConductorService.isEmpty(this.pattern)) {
+      const patternJson = localStorage.getItem('pattern')
+      if (patternJson) {
+        this.$store.commit('setPattern', JSON.parse(patternJson))
+        this.beatEmitter = new BeatEmitter(this.pattern.tempo, ConductorService.durationInBeats(this.pattern), this.handleBeat)
       }
     }
   }
