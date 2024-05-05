@@ -2,9 +2,10 @@
   <div class="section">
     <div class="title">Pattern editor</div>
     <div>
-      <div class="row">
-          <p>Edit pattern of composition</p>
-      </div>
+      <button class="btn btn-dark" @click="save()"><i class="fa fa-save"></i></button>
+
+
+
     </div>
     <div class="container mt-3">
       <div class="row">
@@ -44,34 +45,26 @@ export default {
       groups: []
     }
   },
-  created: async function () {
-    try {
-      let response = await ConductorService.getEmployee(this.employeeId);
-      this.employee = response.data;
-      let groupResponse = await ConductorService.getAllGroups();
-      this.groups = groupResponse.data;
-
-    } catch (error) {
-      this.errorMessage = error;
-
-
-    }
-
-  },
 
   methods: {
+    save: function () {
+      const link = document.createElement("a");
+      const content = "file content";
+      const file = new Blob([content], { type: 'application/json' });
+      link.href = URL.createObjectURL(file);
+      link.download = "pattern.json";
+      link.click();
+      URL.revokeObjectURL(link.href);
+    },
     editSubmit: async function () {
       try {
         let response = await ConductorService.updateEmployee(this.employee, this.employeeId);
         if (response) {
-
           return this.$router.push('/');
-
         }
       } catch (error) {
         console.log(error);
       }
-
     }
   }
 

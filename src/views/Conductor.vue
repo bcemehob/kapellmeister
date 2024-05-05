@@ -1,12 +1,12 @@
 <template>
   <div class="section">
     <div class="title">KapellMeister</div>
+    <PatternEditor></PatternEditor>
     <ControlPanel :handle-beat="handleBeat"></ControlPanel>
     <div class="d-flex">
       <MotionViewer :current-beat="this.currentBeat"></MotionViewer>
       <Instruments :pattern="pattern" :current-beat="currentBeat"></Instruments>
     </div>
-    <PatternEditor></PatternEditor>
   </div>
 </template>
 
