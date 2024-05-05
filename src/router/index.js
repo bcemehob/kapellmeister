@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Conductor from "@/views/Conductor.vue"
-import PatternEditor from "@/views/PatternEditor.vue"
+import PatternEditor from "@/views/editor/PatternEditor.vue"
 import PageNotFound from "@/views/PageNotFound";
 
 const routes = [

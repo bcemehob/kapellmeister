@@ -14,7 +14,7 @@
 import Instruments from "@/views/Instruments.vue";
 import MotionViewer from "@/views/MotionViewer.vue";
 import ControlPanel from "@/views/ControlPanel.vue";
-import PatternEditor from "@/views/PatternEditor.vue";
+import PatternEditor from "@/views/editor/PatternEditor.vue";
 </script>
 
 <script>

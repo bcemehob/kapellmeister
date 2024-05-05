@@ -52,7 +52,40 @@ body {
 }
 
 .section {
+    position: relative;
     border: 1px dotted #7d858d;
     padding: 10px;
     margin: 10px;
+}
+
+.controls-bar {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    width: 100%;
+    display: flex;
+    justify-content: end;
+}
+.controls-bar .btn {
+    margin: 2px 2px 2px 10px;
+}
+
+.editor {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.editor > div {
+    display: inline-block;
+    border: 1px dotted #7d858d;
+    padding: 12px;
+    margin: 0.5%;
+    box-sizing: border-box;
+}
+.timeline {
+    width: 59%;
+}
+
+.options {
+    width: 39%;
 }
