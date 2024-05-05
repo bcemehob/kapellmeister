@@ -2,15 +2,12 @@
   <div class="section">
     <div class="title">Pattern editor</div>
     <div>
-      <button class="btn btn-dark" @click="save()"><i class="fa fa-save"></i></button>
-
-
-
+      <button class="btn btn-dark" @click="save()" :disabled="isPatternEmpty()"><i class="fa fa-save"></i></button>
     </div>
-    <div class="container mt-3">
+<!--    <div class="container mt-3">
       <div class="row">
         <div class=" col-md-4">
-          <form @submit.prevent="editSubmit()">
+          <form>
             <div class=" mb-3">
               <input required v-model="name" type="text" class="form-control" placeholder="Name">
             </div>
@@ -18,7 +15,6 @@
               <select required v-model="groups" class="form-control">
                 <option value="">Name</option>
                 <option :value="name" v-for="group of groups" :key="group.id">{{ group.name }}</option>
-
               </select>
             </div>
             <div class="mb-3">
@@ -27,14 +23,11 @@
           </form>
         </div>
       </div>
-
-
-    </div>
+    </div>-->
   </div>
 
 </template>
 <script>
-import {ConductorService} from '@/services/ConductorService'
 
 export default {
   name: "PatternEditor",
@@ -45,26 +38,22 @@ export default {
       groups: []
     }
   },
-
+  computed: {
+    pattern() {
+      return this.$store.state.pattern
+    }
+  },
   methods: {
     save: function () {
       const link = document.createElement("a");
-      const content = "file content";
-      const file = new Blob([content], { type: 'application/json' });
+      const file = new Blob([JSON.stringify(this.pattern)], {type: 'application/json'});
       link.href = URL.createObjectURL(file);
-      link.download = "pattern.json";
+      link.download = "pattern.kpm";
       link.click();
       URL.revokeObjectURL(link.href);
     },
-    editSubmit: async function () {
-      try {
-        let response = await ConductorService.updateEmployee(this.employee, this.employeeId);
-        if (response) {
-          return this.$router.push('/');
-        }
-      } catch (error) {
-        console.log(error);
-      }
+    isPatternEmpty() {
+      return Object.keys(this.pattern).length === 0;
     }
   }
 

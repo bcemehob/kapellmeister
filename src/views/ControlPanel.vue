@@ -58,7 +58,7 @@ export default {
       this.error = null
       const file = this.$refs.json.files[0];
       const reader = new FileReader();
-      if (file.name.includes(".json")) {
+      if (file.name.endsWith(".kpm")) {
         reader.onload = (res) => {
           try {
             this.$store.commit('setPattern', JSON.parse(res.target.result))
