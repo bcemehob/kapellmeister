@@ -13,9 +13,7 @@
       </router-link>
     </div>
     <div v-if="isExpanded" class="editor">
-      <div class="timeline">
-        <div class="timeline-item">Timeline go down</div>
-      </div>
+      <Timeline></Timeline>
       <div class="options">
         <div class="option">Options here</div>
       </div>
@@ -26,8 +24,12 @@
 </template>
 <script>
 
+import Timeline from "@/views/editor/Timeline.vue";
+import {ConductorService} from "@/services/ConductorService";
+
 export default {
   name: "PatternEditor",
+  components: {Timeline},
   data: function () {
     return {
       name: '',
