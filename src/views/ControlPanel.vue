@@ -77,12 +77,8 @@ export default {
     }
   },
   mounted() {
-    if (ConductorService.isEmpty(this.pattern)) {
-      const patternJson = localStorage.getItem('pattern')
-      if (patternJson) {
-        this.$store.commit('setPattern', JSON.parse(patternJson))
-        this.beatEmitter = new BeatEmitter(this.pattern.tempo, ConductorService.durationInBeats(this.pattern), this.handleBeat)
-      }
+    if (this.pattern) {
+      this.beatEmitter = new BeatEmitter(this.pattern.tempo, ConductorService.durationInBeats(this.pattern), this.handleBeat)
     }
   }
 }
