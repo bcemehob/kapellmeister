@@ -58,7 +58,7 @@ export default {
       this.error = null
       const file = this.$refs.json.files[0];
       const reader = new FileReader();
-      if (file.name.endsWith(".kpm")) {
+      if (file.name.endsWith(".kpm") || file.name.endsWith(".json")) {
         reader.onload = (readingEvent) => {
           try {
             const pattern = JSON.parse(readingEvent.target.result)
