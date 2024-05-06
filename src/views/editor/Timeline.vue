@@ -14,7 +14,8 @@
       <tr>
         <td>
           <div v-for="measure in measures" v-bind:key="measure.id" class="measure">
-            {{ measure.id }}
+            <span v-if="measure.type" :class="measure.type">{{ measure.id }}</span>
+            <span v-else>&#8226;</span>
           </div>
         </td>
         <td v-for="(instrument, i) in pattern.instruments" v-bind:key="i" class="instrument">
@@ -32,6 +33,8 @@
 </template>
 
 <script>
+import {ConductorService} from "@/services/ConductorService";
+
 const PARTY_COLORS = [
   '#EAD992', '#51abad', '#ed7981',
   '#7d8cf3', '#89f37d', '#f3ae7d'
@@ -76,9 +79,11 @@ export default {
   },
   mounted() {
     for (let i = 1; i <= this.pattern.duration; i++) {
-      this.measures.push({id: i})
+      let type = null
+      if ((i - 1) % ConductorService.DOUBLE === 0) type = 'double'
+      else if (i % ConductorService.SQUARE === 1) type = 'square'
+      this.measures.push({id: i, type})
     }
-    console.log(this.pattern)
   }
 }
 </script>
@@ -122,6 +127,16 @@ table {
       font-size: 12px;
       height: 12px;
       padding: 2px;
+      .square {
+        display: inline-block;
+        width: 15%;
+        border-top: 1px solid #7d858d;
+      }
+      .double {
+        display: inline-block;
+        width: 30%;
+        border-top: 2px solid #7d858d;
+      }
     }
 
     .parties-container {
