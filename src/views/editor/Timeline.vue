@@ -1,6 +1,6 @@
 <template>
   <div class="timeline">
-      <table>
+    <table>
       <tr>
         <th class="narrow-column"> measure</th>
         <th v-for="instrument in pattern.instruments" v-bind:key="instrument.name"> {{ instrument.name }}</th>
@@ -71,56 +71,57 @@ export default {
 table {
   width: 100%;
 
-  th {
-    border-bottom: 1px dotted #7d858d;
-    padding: 0;
-  }
-
-  th, td {
-    padding: 0 7px;
-  }
-
   tr {
     box-sizing: border-box;
     padding: 0;
-  }
 
-  th:not(:first-child), td:not(:first-child) {
-    border-left: 1px dotted #7d858d;
-  }
 
-  th.narrow-column {
-    width: 5%;
-    font-size: 16px;
-    letter-spacing: -1px;
-  }
+    th {
+      border-bottom: 1px dotted #7d858d;
+      padding: 0;
+    }
 
-  td.instrument {
-    vertical-align: top;
-    width: 20%;
-    max-width: 20%;
-  }
+    th, td {
+      padding: 0 7px;
+    }
 
-  .measure {
-    box-sizing: border-box;
-    font-size: 12px;
-    height: 12px;
-    padding: 2px;
-  }
+    th:not(:first-child), td:not(:first-child) {
+      border-left: 1px dotted #7d858d;
+    }
 
-  .parties-container {
-    display: inline-block;
-    position: relative;
-    height: 100%;
-    width: 100%;
+    th.narrow-column {
+      width: 5%;
+      font-size: 16px;
+      letter-spacing: -1px;
+    }
 
-    .party {
-      border: 1px solid #7d858d;
-      position: absolute;
-      height: 12px;
-      top: -18px;
+    td.instrument {
+      vertical-align: top;
+      width: 20%;
+      max-width: 20%;
+    }
+
+    .measure {
+      box-sizing: border-box;
       font-size: 12px;
-      width: 70%;
+      height: 12px;
+      padding: 2px;
+    }
+
+    .parties-container {
+      display: inline-block;
+      position: relative;
+      height: 100%;
+      width: 100%;
+
+      .party {
+        border: 1px solid #7d858d;
+        position: absolute;
+        height: 12px;
+        top: -18px;
+        font-size: 12px;
+        width: 70%;
+      }
     }
   }
 }
