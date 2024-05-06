@@ -36,6 +36,14 @@ const PARTY_COLORS = [
   '#EAD992', '#51abad', '#ed7981',
   '#7d8cf3', '#89f37d', '#f3ae7d'
 ]
+const partySpan = (partyName, span) => {
+  return {
+    id: `${partyName}-${span[0]}`,
+    name: partyName,
+    start: span[0],
+    duration: span[1]
+  }
+}
 export default {
   name: "TimeLine",
   data() {
@@ -46,16 +54,7 @@ export default {
   },
   methods: {
     partySpans(instrument) {
-      const ret = []
-      instrument.parties
-          .forEach(party => party.spans
-              .forEach(span => ret.push({
-                id: `${party.name}-${span[0]}`,
-                name: party.name,
-                start: span[0],
-                duration: span[1]
-              })))
-      return ret
+      return instrument.parties.flatMap(party => party.spans.map(span => partySpan(party.name, span)))
     },
     partySpanStyle(partySpan, i) {
       return {
