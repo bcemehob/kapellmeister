@@ -23,7 +23,8 @@
             <div v-for="partySpan in partySpans(instrument)"
                  v-bind:key="partySpan.id" class="party"
                  :style="partySpanStyle(partySpan, i)">
-              {{ partySpan.name }}
+              <span class="span-title">{{ partySpan.name }}</span>
+              <div class="bottom">==</div>
             </div>
           </div>
         </td>
@@ -152,6 +153,23 @@ table {
         top: -18px;
         font-size: 12px;
         width: 70%;
+        text-align: center;
+        .span-title {
+          font-weight: bold;
+          font-size: 14px
+        }
+        .bottom {
+          position: absolute;
+          bottom: 0;
+          border-top: 1px dashed #7d858d;
+          color: #7d858d;
+          user-select: none;
+          height: 10px;
+          line-height: 8px;
+          width: 100%;
+          text-align: center;
+          cursor: pointer;
+        }
       }
     }
   }
