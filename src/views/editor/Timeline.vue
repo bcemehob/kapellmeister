@@ -11,11 +11,11 @@
             {{ measure.id }}
           </div>
         </td>
-        <td v-for="instrument in pattern.instruments" v-bind:key="instrument.name" class="instrument">
+        <td v-for="(instrument, i) in pattern.instruments" v-bind:key="i" class="instrument">
           <div class="parties-container">
             <div v-for="partySpan in partySpans(instrument)"
                  v-bind:key="partySpan.id" class="party"
-                 :style="partySpanStyle(partySpan)">
+                 :style="partySpanStyle(partySpan, i)">
               {{ partySpan.id }}
             </div>
           </div>
@@ -26,6 +26,10 @@
 </template>
 
 <script>
+const PARTY_COLORS = [
+  '#EAD992', '#51abad', '#ed7981',
+  '#7d8cf3', '#89f37d', '#f3ae7d'
+]
 export default {
   name: "TimeLine",
   data() {
@@ -41,8 +45,12 @@ export default {
               .forEach(span => ret.push({id: `${party.name}-${span[0]}`, start: span[0], duration: span[1]})))
       return ret
     },
-    partySpanStyle(partySpan) {
-      return  {top: (partySpan.start / 4) * 12 - 18 + 'px', height: (partySpan.duration / 4) * 12 + 'px'};
+    partySpanStyle(partySpan, i) {
+      return {
+        top: (partySpan.start / 4) * 12 - 18 + 'px',
+        height: (partySpan.duration / 4) * 12 + 'px',
+        backgroundColor: PARTY_COLORS[i],
+      };
     }
   },
   computed: {
@@ -71,10 +79,12 @@ table {
   th, td {
     padding: 0 7px;
   }
+
   tr {
     box-sizing: border-box;
     padding: 0;
   }
+
   th:not(:first-child), td:not(:first-child) {
     border-left: 1px dotted #7d858d;
   }
@@ -84,26 +94,33 @@ table {
     font-size: 16px;
     letter-spacing: -1px;
   }
+
   td.instrument {
     vertical-align: top;
+    width: 20%;
+    max-width: 20%;
   }
+
   .measure {
     box-sizing: border-box;
     font-size: 12px;
     height: 12px;
     padding: 2px;
   }
+
   .parties-container {
     display: inline-block;
     position: relative;
     height: 100%;
     width: 100%;
+
     .party {
       border: 1px solid #7d858d;
       position: absolute;
       height: 12px;
       top: -18px;
       font-size: 12px;
+      width: 70%;
     }
   }
 }
