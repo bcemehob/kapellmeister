@@ -101,8 +101,8 @@ export default {
 
     stopStretch(eClick, eStop, partySpan) {
       partySpan.duration = partySpan.initialDuration + Math.ceil((eStop.y - eClick.y) / 3)
-      let nxSpan = this.timelineService.nextSpan(partySpan)
-      let measureBeats = this.pattern.measure.beats
+      const nxSpan = this.timelineService.nextSpan(partySpan)
+      const measureBeats = this.pattern.measure.beats
       if (partySpan.duration < measureBeats * ConductorService.SQUARE) {
         partySpan.duration = measureBeats * ConductorService.SQUARE
       } else if (partySpan.start + partySpan.duration >= nxSpan.start) {
