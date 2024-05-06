@@ -16,7 +16,7 @@
             <div v-for="partySpan in partySpans(instrument)"
                  v-bind:key="partySpan.id" class="party"
                  :style="partySpanStyle(partySpan, i)">
-              {{ partySpan.id }}
+              {{ partySpan.name }}
             </div>
           </div>
         </td>
@@ -42,7 +42,7 @@ export default {
       const ret = []
       instrument.parties
           .forEach(party => party.spans
-              .forEach(span => ret.push({id: `${party.name}-${span[0]}`, start: span[0], duration: span[1]})))
+              .forEach(span => ret.push({id: `${party.name}-${span[0]}`, name: party.name, start: span[0], duration: span[1]})))
       return ret
     },
     partySpanStyle(partySpan, i) {
