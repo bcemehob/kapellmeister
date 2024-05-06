@@ -24,7 +24,7 @@
                  v-bind:key="partySpan.id" class="party"
                  :style="partySpanStyle(partySpan, i)">
               <span class="span-title">{{ partySpan.name }}</span>
-              <div class="bottom">==</div>
+              <div class="bottom" @mousedown="startDrag($event, partySpan)">==</div>
             </div>
           </div>
         </td>
@@ -35,31 +35,30 @@
 
 <script>
 import {ConductorService} from "@/services/ConductorService";
+import {TimelineService} from "@/services/TimelineService";
 
 const PARTY_COLORS = [
   '#EAD992', '#51abad', '#ed7981',
   '#7d8cf3', '#89f37d', '#f3ae7d'
 ]
-const partySpan = (partyName, span) => {
-  return {
-    id: `${partyName}-${span[0]}`,
-    name: partyName,
-    start: span[0],
-    duration: span[1]
-  }
-}
+
 export default {
   name: "TimeLine",
   data() {
     return {
       measures: [],
-      isInstrumentNameChanging: []
+      isInstrumentNameChanging: [],
+      stretchListener: null,
+      stopStretchListener: null,
+      timelineService: null,
     }
   },
   methods: {
     partySpans(instrument) {
-      return instrument.parties.flatMap(party => party.spans.map(span => partySpan(party.name, span)))
+      if (!this.timelineService) return {}
+      return this.timelineService.partySpans(instrument)
     },
+
     partySpanStyle(partySpan, i) {
       return {
         top: (partySpan.start / 4) * 12 - 18 + 'px',
@@ -67,11 +66,58 @@ export default {
         backgroundColor: PARTY_COLORS[i],
       };
     },
+
     changeName(i) {
       this.$store.commit('setPattern', this.pattern)
       localStorage.setItem('pattern', JSON.stringify(this.pattern))
       this.isInstrumentNameChanging[i] = false
     },
+
+    startDrag(eClick, partySpan) {
+      this.setListeners(eClick, partySpan)
+      document.addEventListener('mousemove', this.stretchListener)
+      document.addEventListener('mouseup', this.stopStretchListener)
+    },
+
+    setListeners(eClick, partySpan) {
+      const that = this
+      this.stretchListener = function (eMove) {
+        that.stretch(eClick, eMove, partySpan)
+      }
+      this.stopStretchListener = function (eStop) {
+        that.stopStretch(eClick, eStop, partySpan)
+      }
+    },
+
+    stretch(eClick, eMove, partySpan) {
+      if (Math.abs(eMove.y - eClick.y) < 6) return
+      partySpan.duration = partySpan.initialDuration + Math.ceil((eMove.y - eClick.y) / 3)
+      if (!this.timelineService.canStretch(partySpan)) {
+        partySpan.duration = partySpan.initialDuration
+        return
+      }
+      partySpan.span[1] = partySpan.duration
+    },
+
+    stopStretch(eClick, eStop, partySpan) {
+      partySpan.duration = partySpan.initialDuration + Math.ceil((eStop.y - eClick.y) / 3)
+      let nxSpan = this.timelineService.nextSpan(partySpan)
+      let measureBeats = this.pattern.measure.beats
+      if (partySpan.duration < measureBeats * ConductorService.SQUARE) {
+        partySpan.duration = measureBeats * ConductorService.SQUARE
+      } else if (partySpan.start + partySpan.duration >= nxSpan.start) {
+        partySpan.duration = nxSpan.start - partySpan.start
+      } else {
+        let remainder = partySpan.duration % measureBeats
+        if (remainder > measureBeats / 2) partySpan.duration += measureBeats - remainder
+        else partySpan.duration -= remainder
+      }
+      partySpan.span[1] = partySpan.duration
+      this.$store.commit('setPattern', this.pattern)
+      localStorage.setItem('pattern', JSON.stringify(this.pattern))
+      document.removeEventListener('mousemove', this.stretchListener)
+      document.removeEventListener('mouseup', this.stopStretchListener)
+    }
   },
   computed: {
     pattern() {
@@ -79,6 +125,7 @@ export default {
     },
   },
   mounted() {
+    this.timelineService = new TimelineService()
     for (let i = 1; i <= this.pattern.duration; i++) {
       let type = null
       if ((i - 1) % ConductorService.DOUBLE === 0) type = 'double'
@@ -128,11 +175,13 @@ table {
       font-size: 12px;
       height: 12px;
       padding: 2px;
+
       .square {
         display: inline-block;
         width: 15%;
         border-top: 1px solid #7d858d;
       }
+
       .double {
         display: inline-block;
         width: 30%;
@@ -154,10 +203,12 @@ table {
         font-size: 12px;
         width: 70%;
         text-align: center;
+
         .span-title {
           font-weight: bold;
           font-size: 14px
         }
+
         .bottom {
           position: absolute;
           bottom: 0;
