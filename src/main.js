@@ -10,5 +10,5 @@ import "../node_modules/@fortawesome/fontawesome-free/css/all.css";
 /*import des fichiers css et js de */
 import "../node_modules/bootstrap/dist/css/bootstrap.css";
 import "../node_modules/bootstrap/dist/js/bootstrap.bundle";
-import "./styles.css"; //stylesheet dyal lmain
+import "./styles/styles.css"; //stylesheet dyal lmain
 createApp(App).use(store).use(router).mount('#app')
