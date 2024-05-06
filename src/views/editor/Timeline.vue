@@ -3,7 +3,13 @@
     <table>
       <tr>
         <th class="narrow-column"> measure</th>
-        <th v-for="instrument in pattern.instruments" v-bind:key="instrument.name"> {{ instrument.name }}</th>
+        <th v-for="(instrument, i) in pattern.instruments" v-bind:key="i">
+          <span v-if="!isInstrumentNameChanging[i]"
+                @click="isInstrumentNameChanging[i] = true">{{ instrument.name }}</span>
+          <span v-else>
+            <input v-model="instrument.name" type="text" @blur="changeName(i)">
+          </span>
+        </th>
       </tr>
       <tr>
         <td>
@@ -34,7 +40,8 @@ export default {
   name: "TimeLine",
   data() {
     return {
-      measures: []
+      measures: [],
+      isInstrumentNameChanging: []
     }
   },
   methods: {
@@ -42,7 +49,12 @@ export default {
       const ret = []
       instrument.parties
           .forEach(party => party.spans
-              .forEach(span => ret.push({id: `${party.name}-${span[0]}`, name: party.name, start: span[0], duration: span[1]})))
+              .forEach(span => ret.push({
+                id: `${party.name}-${span[0]}`,
+                name: party.name,
+                start: span[0],
+                duration: span[1]
+              })))
       return ret
     },
     partySpanStyle(partySpan, i) {
@@ -51,7 +63,12 @@ export default {
         height: (partySpan.duration / 4) * 12 + 'px',
         backgroundColor: PARTY_COLORS[i],
       };
-    }
+    },
+    changeName(i) {
+      this.$store.commit('setPattern', this.pattern)
+      localStorage.setItem('pattern', JSON.stringify(this.pattern))
+      this.isInstrumentNameChanging[i] = false
+    },
   },
   computed: {
     pattern() {
