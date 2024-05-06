@@ -81,6 +81,7 @@ body {
     padding: 12px;
     margin: 0.5%;
     box-sizing: border-box;
+    vertical-align: top;
 }
 .timeline {
     width: 59%;
