@@ -23,7 +23,8 @@
             <div v-for="partySpan in partySpans(instrument)"
                  v-bind:key="partySpan.id" class="party"
                  :style="partySpanStyle(partySpan, i)">
-              <span class="span-title">{{ partySpan.name }}</span>
+              <span class="span-title" @mousedown="startMove($event, partySpan)">{{ partySpan.name }}</span>
+              <span>start: {{partySpan.start}}, dur: {{partySpan.duration}}</span>
               <div class="bottom" @mousedown="startDrag($event, partySpan)">==</div>
             </div>
           </div>
@@ -50,6 +51,8 @@ export default {
       isInstrumentNameChanging: [],
       stretchListener: null,
       stopStretchListener: null,
+      moveListener: null,
+      stopMoveListener: null,
       timelineService: null,
     }
   },
@@ -74,18 +77,34 @@ export default {
     },
 
     startDrag(eClick, partySpan) {
-      this.setListeners(eClick, partySpan)
+      this.setStretchListeners(eClick, partySpan)
       document.addEventListener('mousemove', this.stretchListener)
       document.addEventListener('mouseup', this.stopStretchListener)
     },
 
-    setListeners(eClick, partySpan) {
+    startMove(eClick, partySpan) {
+      this.setMoveListeners(eClick, partySpan)
+      document.addEventListener('mousemove', this.moveListener)
+      document.addEventListener('mouseup', this.stopMoveListener)
+    },
+
+    setStretchListeners(eClick, partySpan) {
       const that = this
       this.stretchListener = function (eMove) {
         that.stretch(eClick, eMove, partySpan)
       }
       this.stopStretchListener = function (eStop) {
         that.stopStretch(eClick, eStop, partySpan)
+      }
+    },
+
+    setMoveListeners(eClick, partySpan) {
+      const that = this
+      this.moveListener = function (eMove) {
+        that.move(eClick, eMove, partySpan)
+      }
+      this.stopMoveListener = function (eStop) {
+        that.stopMove(eClick, eStop, partySpan)
       }
     },
 
@@ -99,13 +118,52 @@ export default {
       partySpan.span[1] = partySpan.duration
     },
 
+    move(eClick, eMove, partySpan) {
+      if (Math.abs(eMove.y - eClick.y) < 6) return
+      partySpan.start = partySpan.initialStart + Math.ceil((eMove.y - eClick.y) / 3)
+      if (!this.timelineService.canMove(partySpan)) {
+        partySpan.start = partySpan.initialStart
+        return
+      }
+      partySpan.span[0] = partySpan.start
+    },
+
+    stopMove(eClick, eStop, partySpan) {
+      const nxSpan = this.timelineService.nextSpan(partySpan)
+      const prevSpan = this.timelineService.previousSpan(partySpan)
+      partySpan.start = partySpan.initialStart + Math.ceil((eStop.y - eClick.y) / 3)
+      const measureBeats = this.pattern.measure.beats
+      if (partySpan.start < 1) {
+        partySpan.start = 1
+      }
+      let remainder = partySpan.start % measureBeats
+      if (remainder > measureBeats / 2) partySpan.start += measureBeats - remainder + 1
+      else partySpan.start -= remainder + 1
+
+      if (!nxSpan && partySpan.start + partySpan.duration > this.timelineService.durationInBeats) {
+        partySpan.start = this.timelineService.durationInBeats - partySpan.duration
+      } else if (nxSpan && partySpan.start + partySpan.duration >= nxSpan.start) {
+        partySpan.start = nxSpan.start - partySpan.duration
+      } else if (prevSpan && partySpan.start <= prevSpan.start + prevSpan.duration) {
+        partySpan.start = prevSpan.start + prevSpan.duration
+      }
+      partySpan.span[0] = partySpan.start
+      this.$store.commit('setPattern', this.pattern)
+      localStorage.setItem('pattern', JSON.stringify(this.pattern))
+      document.removeEventListener('mousemove', this.moveListener)
+      document.removeEventListener('mouseup', this.stopMoveListener)
+    },
+
     stopStretch(eClick, eStop, partySpan) {
       partySpan.duration = partySpan.initialDuration + Math.ceil((eStop.y - eClick.y) / 3)
       const nxSpan = this.timelineService.nextSpan(partySpan)
       const measureBeats = this.pattern.measure.beats
       if (partySpan.duration < measureBeats * ConductorService.SQUARE) {
         partySpan.duration = measureBeats * ConductorService.SQUARE
-      } else if (partySpan.start + partySpan.duration >= nxSpan.start) {
+      }
+      if (!nxSpan && partySpan.start + partySpan.duration > this.timelineService.durationInBeats) {
+          partySpan.duration = this.timelineService.durationInBeats - partySpan.start
+      } else if (nxSpan && partySpan.start + partySpan.duration >= nxSpan.start) {
         partySpan.duration = nxSpan.start - partySpan.start
       } else {
         let remainder = partySpan.duration % measureBeats
@@ -122,10 +180,10 @@ export default {
   computed: {
     pattern() {
       return this.$store.state.pattern
-    },
+    }
   },
   mounted() {
-    this.timelineService = new TimelineService()
+    this.timelineService = new TimelineService(this.pattern.duration, this.pattern.measure)
     for (let i = 1; i <= this.pattern.duration; i++) {
       let type = null
       if ((i - 1) % ConductorService.DOUBLE === 0) type = 'double'
@@ -135,5 +193,5 @@ export default {
   }
 }
 </script>
-<style scoped src="@/styles/timeline.css" />
+<style scoped src="@/styles/timeline.css"/>
 
