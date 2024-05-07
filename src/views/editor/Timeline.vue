@@ -24,7 +24,7 @@
                  v-bind:key="partySpan.id" class="party"
                  :style="partySpanStyle(partySpan, i)">
               <span class="span-title" @mousedown="startMove($event, partySpan)">{{ partySpan.name }}</span>
-              <span>start: {{partySpan.start}}, dur: {{partySpan.duration}}</span>
+              <span>start: {{partySpan.start}} ({{((partySpan.start - 1) / pattern.measure.beats) + 1}}), dur: {{partySpan.duration}}</span>
               <div class="bottom" @mousedown="startDrag($event, partySpan)">==</div>
             </div>
           </div>
