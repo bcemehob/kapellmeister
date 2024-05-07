@@ -138,12 +138,12 @@ export default {
       }
       let remainder = partySpan.start % measureBeats
       if (remainder > measureBeats / 2) partySpan.start += measureBeats - remainder + 1
-      else partySpan.start -= remainder + 1
+      else partySpan.start -= remainder - 1
 
       if (!nxSpan && partySpan.start + partySpan.duration > this.timelineService.durationInBeats) {
-        partySpan.start = this.timelineService.durationInBeats - partySpan.duration
+        partySpan.start = this.timelineService.durationInBeats - partySpan.duration + 1
       } else if (nxSpan && partySpan.start + partySpan.duration >= nxSpan.start) {
-        partySpan.start = nxSpan.start - partySpan.duration + 1
+        partySpan.start = nxSpan.start - partySpan.duration
       } else if (prevSpan && partySpan.start <= prevSpan.start + prevSpan.duration) {
         partySpan.start = prevSpan.start + prevSpan.duration
       }
