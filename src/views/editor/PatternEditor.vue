@@ -14,10 +14,7 @@
     </div>
     <div v-if="isExpanded" class="editor">
       <Timeline></Timeline>
-      <div class="options">
-        <div class="option">Options here</div>
-      </div>
-
+      <Options></Options>
     </div>
   </div>
 
@@ -26,10 +23,11 @@
 
 import Timeline from "@/views/editor/Timeline.vue";
 import {ConductorService} from "@/services/ConductorService";
+import Options from "@/views/editor/Options.vue";
 
 export default {
   name: "PatternEditor",
-  components: {Timeline},
+  components: {Options, Timeline},
   data: function () {
     return {
       name: '',
