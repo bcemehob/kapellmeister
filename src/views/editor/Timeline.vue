@@ -143,7 +143,7 @@ export default {
       if (!nxSpan && partySpan.start + partySpan.duration > this.timelineService.durationInBeats) {
         partySpan.start = this.timelineService.durationInBeats - partySpan.duration
       } else if (nxSpan && partySpan.start + partySpan.duration >= nxSpan.start) {
-        partySpan.start = nxSpan.start - partySpan.duration
+        partySpan.start = nxSpan.start - partySpan.duration + 1
       } else if (prevSpan && partySpan.start <= prevSpan.start + prevSpan.duration) {
         partySpan.start = prevSpan.start + prevSpan.duration
       }
@@ -162,7 +162,7 @@ export default {
         partySpan.duration = measureBeats * ConductorService.SQUARE
       }
       if (!nxSpan && partySpan.start + partySpan.duration > this.timelineService.durationInBeats) {
-          partySpan.duration = this.timelineService.durationInBeats - partySpan.start
+          partySpan.duration = this.timelineService.durationInBeats - partySpan.start + 1
       } else if (nxSpan && partySpan.start + partySpan.duration >= nxSpan.start) {
         partySpan.duration = nxSpan.start - partySpan.start
       } else {
