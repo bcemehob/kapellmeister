@@ -51,21 +51,23 @@ const expectedPartySpans = [
     }
 ]
 describe('TimelineService', () => {
+    const service = new TimelineService(64, {base: 4, beats: 4})
     test('changeSpanDuration is a function', () => {
-        const service = new TimelineService(64, {base: 4, beats: 4})
         expect(typeof service.changeSpanDuration).toBe("function");
-
     })
     it('can create spans for UI', () => {
-        const service = new TimelineService(64, {base: 4, beats: 4})
         expect(service.partySpans(instrument)).toStrictEqual(expectedPartySpans);
     })
-    it('can find next span for UI', () => {
-        const service = new TimelineService(64, {base: 4, beats: 4})
+    it('can find next span', () => {
         expect(service.nextSpan(expectedPartySpans[0])).toStrictEqual(expectedPartySpans[1]);
     })
     it('returns undefined if no next span', () => {
-        const service = new TimelineService(64, {base: 4, beats: 4})
         expect(service.nextSpan(expectedPartySpans[3])).toBe(undefined);
+    })
+    it('can find previous span', () => {
+        expect(service.previousSpan(expectedPartySpans[2])).toStrictEqual(expectedPartySpans[1]);
+    })
+    it('returns undefined if no previous span', () => {
+        expect(service.previousSpan(expectedPartySpans[0])).toBe(undefined);
     })
 })
