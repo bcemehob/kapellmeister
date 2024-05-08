@@ -129,53 +129,24 @@ export default {
     },
 
     stopMove(eClick, eStop, partySpan) {
-      const nxSpan = this.timelineService.nextSpan(partySpan)
-      const prevSpan = this.timelineService.previousSpan(partySpan)
-      partySpan.start = partySpan.initialStart + Math.ceil((eStop.y - eClick.y) / 3)
-      const measureBeats = this.pattern.measure.beats
-      if (partySpan.start < 1) {
-        partySpan.start = 1
-      }
-      let remainder = partySpan.start % measureBeats
-      if (remainder > measureBeats / 2) partySpan.start += measureBeats - remainder + 1
-      else partySpan.start -= remainder - 1
-
-      if (!nxSpan && partySpan.start + partySpan.duration > this.timelineService.durationInBeats) {
-        partySpan.start = this.timelineService.durationInBeats - partySpan.duration + 1
-      } else if (nxSpan && partySpan.start + partySpan.duration >= nxSpan.start) {
-        partySpan.start = nxSpan.start - partySpan.duration
-      } else if (prevSpan && partySpan.start <= prevSpan.start + prevSpan.duration) {
-        partySpan.start = prevSpan.start + prevSpan.duration
-      }
+      this.timelineService.changeSpanStart(partySpan, eStop.y - eClick.y)
       partySpan.span[0] = partySpan.start
-      this.$store.commit('setPattern', this.pattern)
-      localStorage.setItem('pattern', JSON.stringify(this.pattern))
-      document.removeEventListener('mousemove', this.moveListener)
-      document.removeEventListener('mouseup', this.stopMoveListener)
+      this.finalizeChange(this.moveListener, this.stopMoveListener)
     },
 
     stopStretch(eClick, eStop, partySpan) {
-      partySpan.duration = partySpan.initialDuration + Math.ceil((eStop.y - eClick.y) / 3)
-      const nxSpan = this.timelineService.nextSpan(partySpan)
-      const measureBeats = this.pattern.measure.beats
-      if (partySpan.duration < measureBeats * ConductorService.SQUARE) {
-        partySpan.duration = measureBeats * ConductorService.SQUARE
-      }
-      if (!nxSpan && partySpan.start + partySpan.duration > this.timelineService.durationInBeats) {
-          partySpan.duration = this.timelineService.durationInBeats - partySpan.start + 1
-      } else if (nxSpan && partySpan.start + partySpan.duration >= nxSpan.start) {
-        partySpan.duration = nxSpan.start - partySpan.start
-      } else {
-        let remainder = partySpan.duration % measureBeats
-        if (remainder > measureBeats / 2) partySpan.duration += measureBeats - remainder
-        else partySpan.duration -= remainder
-      }
+      this.timelineService.changeSpanDuration(partySpan, eStop.y - eClick.y)
       partySpan.span[1] = partySpan.duration
+      this.finalizeChange(this.stretchListener, this.stopStretchListener)
+    },
+
+    finalizeChange(mouseMoveListener, mouseUpListener) {
       this.$store.commit('setPattern', this.pattern)
       localStorage.setItem('pattern', JSON.stringify(this.pattern))
-      document.removeEventListener('mousemove', this.stretchListener)
-      document.removeEventListener('mouseup', this.stopStretchListener)
+      document.removeEventListener('mousemove', mouseMoveListener)
+      document.removeEventListener('mouseup', mouseUpListener)
     },
+
     init() {
       this.timelineService = new TimelineService(this.pattern.duration, this.pattern.measure)
       this.measures = []

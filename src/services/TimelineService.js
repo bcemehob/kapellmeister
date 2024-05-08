@@ -1,3 +1,5 @@
+import {ConductorService} from "@/services/ConductorService";
+
 export class TimelineService {
     constructor(durationInMeasures, measure) {
         this.measure = measure
@@ -41,6 +43,44 @@ export class TimelineService {
 
     outOfBounds(partySpan) {
         return partySpan.start + partySpan.duration > this.durationInBeats
+    }
+
+    changeSpanDuration(partySpan, delta) {
+        partySpan.duration = partySpan.initialDuration + Math.ceil(delta / 3)
+        const nxSpan = this.nextSpan(partySpan)
+        const measureBeats = this.measure.beats
+        let remainder = partySpan.duration % measureBeats
+        if (remainder > measureBeats / 2) partySpan.duration += measureBeats - remainder
+        else partySpan.duration -= remainder
+        if (partySpan.duration < measureBeats * ConductorService.SQUARE) {
+            partySpan.duration = measureBeats * ConductorService.SQUARE
+        }
+        if (!nxSpan && partySpan.start + partySpan.duration > this.durationInBeats) {
+            partySpan.duration = this.durationInBeats - partySpan.start + 1
+        } else if (nxSpan && partySpan.start + partySpan.duration >= nxSpan.start) {
+            partySpan.duration = nxSpan.start - partySpan.start
+        }
+    }
+
+    changeSpanStart(partySpan, delta) {
+        const nxSpan = this.nextSpan(partySpan)
+        const prevSpan = this.previousSpan(partySpan)
+        partySpan.start = partySpan.initialStart + Math.ceil(delta / 3)
+        const measureBeats = this.measure.beats
+        if (partySpan.start < 1) {
+            partySpan.start = 1
+        }
+        let remainder = partySpan.start % measureBeats
+        if (remainder > measureBeats / 2) partySpan.start += measureBeats - remainder + 1
+        else partySpan.start -= remainder - 1
+
+        if (!nxSpan && partySpan.start + partySpan.duration > this.durationInBeats) {
+            partySpan.start = this.durationInBeats - partySpan.duration + 1
+        } else if (nxSpan && partySpan.start + partySpan.duration >= nxSpan.start) {
+            partySpan.start = nxSpan.start - partySpan.duration
+        } else if (prevSpan && partySpan.start <= prevSpan.start + prevSpan.duration) {
+            partySpan.start = prevSpan.start + prevSpan.duration
+        }
     }
 
     partySpan(partyName, span, i, instrument) {
