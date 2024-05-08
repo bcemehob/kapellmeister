@@ -51,7 +51,7 @@ const expectedPartySpans = [
     }
 ]
 describe('TimelineService', () => {
-    const service = new TimelineService(80, {base: 4, beats: 4})
+    const service = new TimelineService(20, {base: 4, beats: 4})
     test('changeSpanDuration is a function', () => {
         expect(typeof service.changeSpanDuration).toBe("function")
     })
@@ -72,8 +72,6 @@ describe('TimelineService', () => {
     })
     it('detects if can increase span duration', () => {
         expectedPartySpans[0].duration = 16
-        console.log(expectedPartySpans[0])
-        console.log(expectedPartySpans[3])
         expect(service.canStretch(expectedPartySpans[0])).toBeTruthy()
         expect(service.canStretch(expectedPartySpans[3])).toBeTruthy()
     })
@@ -88,5 +86,19 @@ describe('TimelineService', () => {
         expect(service.canStretch(expectedPartySpans[3])).toBeFalsy()
         expectedPartySpans[0].duration = 16
         expectedPartySpans[3].duration = 16
+    })
+    it('detects if can change span start', () => {
+        expect(service.canMove(expectedPartySpans[0])).toBeTruthy()
+        expect(service.canMove(expectedPartySpans[3])).toBeTruthy()
+    })
+    it('detects if cannot change span start', () => {
+        expectedPartySpans[0].start = 0
+        expect(service.canMove(expectedPartySpans[0])).toBeFalsy()
+        expectedPartySpans[0].start = 2
+        expect(service.canMove(expectedPartySpans[0])).toBeFalsy()
+        expectedPartySpans[3].start = 70
+        expect(service.canMove(expectedPartySpans[3])).toBeFalsy()
+        expectedPartySpans[0].start = 1
+        expectedPartySpans[3].start = 55
     })
 })
