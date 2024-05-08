@@ -175,6 +175,16 @@ export default {
       localStorage.setItem('pattern', JSON.stringify(this.pattern))
       document.removeEventListener('mousemove', this.stretchListener)
       document.removeEventListener('mouseup', this.stopStretchListener)
+    },
+    init() {
+      this.timelineService = new TimelineService(this.pattern.duration, this.pattern.measure)
+      this.measures = []
+      for (let i = 1; i <= this.pattern.duration; i++) {
+        let type = null
+        if ((i - 1) % ConductorService.DOUBLE === 0) type = 'double'
+        else if (i % ConductorService.SQUARE === 1) type = 'square'
+        this.measures.push({id: i, type})
+      }
     }
   },
   computed: {
@@ -183,13 +193,13 @@ export default {
     }
   },
   mounted() {
-    this.timelineService = new TimelineService(this.pattern.duration, this.pattern.measure)
-    for (let i = 1; i <= this.pattern.duration; i++) {
-      let type = null
-      if ((i - 1) % ConductorService.DOUBLE === 0) type = 'double'
-      else if (i % ConductorService.SQUARE === 1) type = 'square'
-      this.measures.push({id: i, type})
-    }
+    this.init()
+    this.unsubscribe = this.$store.subscribe(mutation => {
+      if (mutation.type === 'setPattern') this.init()
+    })
+  },
+  beforeUnmount() {
+    this.unsubscribe()
   }
 }
 </script>
