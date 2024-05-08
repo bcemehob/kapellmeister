@@ -60,6 +60,7 @@ export class TimelineService {
         } else if (nxSpan && partySpan.start + partySpan.duration >= nxSpan.start) {
             partySpan.duration = nxSpan.start - partySpan.start
         }
+        partySpan.span[1] = partySpan.duration
     }
 
     changeSpanStart(partySpan, delta) {
@@ -81,6 +82,7 @@ export class TimelineService {
         } else if (prevSpan && partySpan.start <= prevSpan.start + prevSpan.duration) {
             partySpan.start = prevSpan.start + prevSpan.duration
         }
+        partySpan.span[0] = partySpan.start
     }
 
     move(partySpan, delta) {

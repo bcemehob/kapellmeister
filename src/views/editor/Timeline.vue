@@ -124,13 +124,11 @@ export default {
 
     stopMove(eClick, eStop, partySpan) {
       this.timelineService.changeSpanStart(partySpan, eStop.y - eClick.y)
-      partySpan.span[0] = partySpan.start
       this.finalizeChange(this.moveListener, this.stopMoveListener)
     },
 
     stopStretch(eClick, eStop, partySpan) {
       this.timelineService.changeSpanDuration(partySpan, eStop.y - eClick.y)
-      partySpan.span[1] = partySpan.duration
       this.finalizeChange(this.stretchListener, this.stopStretchListener)
     },
 

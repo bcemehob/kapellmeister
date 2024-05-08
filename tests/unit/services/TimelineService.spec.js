@@ -104,9 +104,12 @@ describe('TimelineService', () => {
     it('can change span duration', () => {
         service.changeSpanDuration(expectedPartySpans[3], 9)
         expect(expectedPartySpans[3].duration).toBe( 16 + 4)
+        expect(expectedPartySpans[3].span).toStrictEqual([55, 16 + 4])
         expectedPartySpans[3].duration = 16
+        expectedPartySpans[3].span = [55,16]
         service.changeSpanDuration(expectedPartySpans[3], 5)
         expect(expectedPartySpans[3].duration).toBe(16)
+        expect(expectedPartySpans[3].span).toStrictEqual([55, 16])
     })
     it('can change span start', () => {
         expectedPartySpans[3].start = 55
@@ -114,13 +117,18 @@ describe('TimelineService', () => {
         expect(expectedPartySpans[3].start).toBe( 49)
         expectedPartySpans[3].start = 55
         service.changeSpanStart(expectedPartySpans[3], 27)
-        expect(expectedPartySpans[3].start).toBe(65)
+        expect(expectedPartySpans[3].start).toBe(55 + 27 / 3 + 1)
+        expect(expectedPartySpans[3].span).toStrictEqual([55 + 27 / 3 + 1,16])
+        expectedPartySpans[3].start = 55
+        expectedPartySpans[3].span = [55,16]
         expectedPartySpans[0].start = 2
         service.changeSpanStart(expectedPartySpans[0], -9)
         expect(expectedPartySpans[0].start).toBe(1)
         service.changeSpanStart(expectedPartySpans[2], 25)
-        expect(expectedPartySpans[2].start).toBe(39)
+        expect(expectedPartySpans[2].start).toBe(33 + 6)
+        expect(expectedPartySpans[2].span).toStrictEqual([33 + 6,16])
         expectedPartySpans[2].start = 33
+        expectedPartySpans[2].span = [33,16]
     })
 
     it('can move span by mouse drag', () => {
