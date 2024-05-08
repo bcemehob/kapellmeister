@@ -108,4 +108,18 @@ describe('TimelineService', () => {
         service.changeSpanDuration(expectedPartySpans[3], 5)
         expect(expectedPartySpans[3].duration).toBe(16)
     })
+    it('can change span start', () => {
+        expectedPartySpans[3].start = 55
+        service.changeSpanStart(expectedPartySpans[3], -27)
+        expect(expectedPartySpans[3].start).toBe( 49)
+        expectedPartySpans[3].start = 55
+        service.changeSpanStart(expectedPartySpans[3], 27)
+        expect(expectedPartySpans[3].start).toBe(65)
+        expectedPartySpans[0].start = 2
+        service.changeSpanStart(expectedPartySpans[0], -9)
+        expect(expectedPartySpans[0].start).toBe(1)
+        service.changeSpanStart(expectedPartySpans[2], 25)
+        expect(expectedPartySpans[2].start).toBe(39)
+        expectedPartySpans[2].start = 33
+    })
 })
