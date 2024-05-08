@@ -33,7 +33,7 @@ export class TimelineService {
 
     overlapsNextSpan(partySpan, nextSpan) {
         if (!nextSpan) nextSpan = this.nextSpan(partySpan)
-        return nextSpan && partySpan.start + partySpan.duration >= nextSpan.start
+        return nextSpan && partySpan.start + partySpan.duration > nextSpan.start
     }
 
     overlapsPreviousSpan(partySpan, previousSpan) {
