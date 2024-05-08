@@ -55,9 +55,9 @@ export class TimelineService {
         if (partySpan.duration < measureBeats * ConductorService.SQUARE) {
             partySpan.duration = measureBeats * ConductorService.SQUARE
         }
-        if (!nxSpan && partySpan.start + partySpan.duration > this.durationInBeats) {
+        if (!nxSpan && this.outOfBounds(partySpan)) {
             partySpan.duration = this.durationInBeats - partySpan.start + 1
-        } else if (nxSpan && partySpan.start + partySpan.duration >= nxSpan.start) {
+        } else if (nxSpan && this.overlapsNextSpan(partySpan, nxSpan)) {
             partySpan.duration = nxSpan.start - partySpan.start
         }
         partySpan.span[1] = partySpan.duration
@@ -73,11 +73,11 @@ export class TimelineService {
         if (remainder > measureBeats / 2) partySpan.start += measureBeats - remainder + 1
         else partySpan.start -= remainder - 1
 
-        if (!nxSpan && partySpan.start + partySpan.duration > this.durationInBeats) {
+        if (!nxSpan && this.outOfBounds(partySpan)) {
             partySpan.start = this.durationInBeats - partySpan.duration + 1
-        } else if (nxSpan && partySpan.start + partySpan.duration >= nxSpan.start) {
+        } else if (nxSpan && this.overlapsNextSpan(partySpan, nxSpan)) {
             partySpan.start = nxSpan.start - partySpan.duration
-        } else if (prevSpan && partySpan.start <= prevSpan.start + prevSpan.duration) {
+        } else if (prevSpan && this.overlapsPreviousSpan(partySpan, prevSpan)) {
             partySpan.start = prevSpan.start + prevSpan.duration
         }
         partySpan.span[0] = partySpan.start
