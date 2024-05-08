@@ -119,13 +119,7 @@ export default {
     },
 
     move(eClick, eMove, partySpan) {
-      if (Math.abs(eMove.y - eClick.y) < 6) return
-      partySpan.start = partySpan.initialStart + Math.ceil((eMove.y - eClick.y) / 3)
-      if (!this.timelineService.canMove(partySpan)) {
-        partySpan.start = partySpan.initialStart
-        return
-      }
-      partySpan.span[0] = partySpan.start
+      this.timelineService.move(partySpan, eMove.y - eClick.y)
     },
 
     stopMove(eClick, eStop, partySpan) {

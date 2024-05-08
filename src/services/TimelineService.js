@@ -83,6 +83,16 @@ export class TimelineService {
         }
     }
 
+    move(partySpan, delta) {
+        if (Math.abs(delta) < 6) return
+        partySpan.start = partySpan.initialStart + Math.ceil(delta / 3)
+        if (!this.canMove(partySpan)) {
+            partySpan.start = partySpan.initialStart
+            return
+        }
+        partySpan.span[0] = partySpan.start
+    }
+
     partySpan(partyName, span, i, instrument) {
         return {
             id: `${partyName}-${i}`,

@@ -122,4 +122,25 @@ describe('TimelineService', () => {
         expect(expectedPartySpans[2].start).toBe(39)
         expectedPartySpans[2].start = 33
     })
+
+    it('can move span by mouse drag', () => {
+        expectedPartySpans[3].start = 55
+        service.move(expectedPartySpans[3], -2)
+        expect(expectedPartySpans[3].start).toBe( 55)
+        expect(expectedPartySpans[3].span).toStrictEqual( [55,16])
+        service.move(expectedPartySpans[3], -12)
+        expect(expectedPartySpans[3].start).toBe(51)
+        expect(expectedPartySpans[3].span).toStrictEqual( [51,16])
+        service.move(expectedPartySpans[3], -100)
+        expect(expectedPartySpans[3].start).toBe(55)
+        expect(expectedPartySpans[3].span).toStrictEqual( [51,16])
+        service.move(expectedPartySpans[0], -9)
+        expect(expectedPartySpans[0].start).toBe(1)
+        expect(expectedPartySpans[0].span).toStrictEqual( [1,16])
+        service.move(expectedPartySpans[2], 25)
+        expect(expectedPartySpans[2].start).toBe(33)
+        expect(expectedPartySpans[2].span).toStrictEqual( [33,16])
+        expectedPartySpans[2].start = 33
+    })
+
 })
