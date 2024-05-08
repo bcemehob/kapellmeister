@@ -149,6 +149,9 @@ describe('TimelineService', () => {
         expect(expectedPartySpans[2].start).toBe(33)
         expect(expectedPartySpans[2].span).toStrictEqual( [33,16])
         expectedPartySpans[2].start = 33
+        expectedPartySpans[3].start = 55
+        expectedPartySpans[3].span = [55,16]
+
     })
     it('can stretch span by mouse drag', () => {
         service.stretch(expectedPartySpans[3], -2)
@@ -172,7 +175,10 @@ describe('TimelineService', () => {
         service.stretch(expectedPartySpans[2], 15)
         expect(expectedPartySpans[2].duration).toBe(16+5)
         expect(expectedPartySpans[2].span).toStrictEqual( [33,16+5])
-        expectedPartySpans[2].duration = 33
+        expectedPartySpans[2].duration = 16
+        expectedPartySpans[3].duration = 16
+        expectedPartySpans[3].span = [55,16]
+
     })
 
 })

@@ -68,9 +68,7 @@ export class TimelineService {
         const prevSpan = this.previousSpan(partySpan)
         partySpan.start = partySpan.initialStart + Math.ceil(delta / 3)
         const measureBeats = this.measure.beats
-        if (partySpan.start < 1) {
-            partySpan.start = 1
-        }
+        if (partySpan.start < 1) partySpan.start = 1
         let remainder = partySpan.start % measureBeats
         if (remainder > measureBeats / 2) partySpan.start += measureBeats - remainder + 1
         else partySpan.start -= remainder - 1
