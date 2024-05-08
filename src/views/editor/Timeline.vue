@@ -109,13 +109,7 @@ export default {
     },
 
     stretch(eClick, eMove, partySpan) {
-      if (Math.abs(eMove.y - eClick.y) < 6) return
-      partySpan.duration = partySpan.initialDuration + Math.ceil((eMove.y - eClick.y) / 3)
-      if (!this.timelineService.canStretch(partySpan)) {
-        partySpan.duration = partySpan.initialDuration
-        return
-      }
-      partySpan.span[1] = partySpan.duration
+      this.timelineService.stretch(partySpan, eMove.y - eClick.y)
     },
 
     move(eClick, eMove, partySpan) {

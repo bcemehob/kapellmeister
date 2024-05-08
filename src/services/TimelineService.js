@@ -95,6 +95,16 @@ export class TimelineService {
         partySpan.span[0] = partySpan.start
     }
 
+    stretch(partySpan, delta) {
+        if (Math.abs(delta) < 6) return
+        partySpan.duration = partySpan.initialDuration + Math.ceil(delta / 3)
+        if (!this.canStretch(partySpan)) {
+            partySpan.duration = partySpan.initialDuration
+            return
+        }
+        partySpan.span[1] = partySpan.duration
+    }
+
     partySpan(partyName, span, i, instrument) {
         return {
             id: `${partyName}-${i}`,
