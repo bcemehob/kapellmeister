@@ -3,7 +3,7 @@
     <table>
       <tr>
         <th class="narrow-column"> measure</th>
-        <th v-for="(instrument, i) in pattern.instruments" v-bind:key="i">
+        <th v-for="(instrument, i) in pattern.instruments" v-bind:key="i" @contextmenu="customContext">
           <InstrumentNameField :instrument @name="n => instrument.name = n" />
         </th>
       </tr>
@@ -30,6 +30,12 @@ export default {
   data() {
     return {
       measures: []
+    }
+  },
+  methods: {
+    customContext(event) {
+      console.log("Custom context menu")
+      event.preventDefault()
     }
   },
   computed: {

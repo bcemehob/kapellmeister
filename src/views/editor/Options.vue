@@ -28,6 +28,7 @@ export default {
   methods: {
     changePattern() {
       this.$store.commit('setPattern', this.pattern)
+      localStorage.setItem('pattern', JSON.stringify(this.pattern))
     },
     highlightDuration() {
       if (this.pattern.duration % (this.pattern.measure.beats * ConductorService.DOUBLE) === 0) return "great"
@@ -37,6 +38,7 @@ export default {
     },
     addInstrument() {
       this.pattern.instruments.push({name: 'new instrument', parties: []})
+      this.changePattern()
     }
   },
   computed: {
