@@ -1,10 +1,17 @@
 <template>
   <div class="options section">
     <div class="title">Options</div>
-    <div class="info">
-      <label>Duration: &nbsp;</label>
-      <input type="number" v-model="pattern.duration" :class="squaredSize()" @input="setPatternDuration">
-      <label>&nbsp;measures ({{ durationInBeats }} beats, {{ duration }})</label>
+    <div class="block">
+      <div class="info">
+        <label class="option-name">Duration: &nbsp;</label>
+        <input type="number" v-model="pattern.duration" :class="squaredSize()" @input="changePattern">
+        <label>&nbsp;measures ({{ durationInBeats }} beats, {{ duration }})</label>
+      </div>
+      <div class="info">
+        <label class="option-name">Tempo: &nbsp;</label>
+        <input type="number" v-model="pattern.tempo" @input="changePattern">
+        <label>&nbsp;beats per minute (BPM)</label>
+      </div>
     </div>
   </div>
 </template>
@@ -15,7 +22,7 @@ import {ConductorService} from "@/services/ConductorService";
 export default {
   name: "OptionsView",
   methods: {
-    setPatternDuration() {
+    changePattern() {
       this.$store.commit('setPattern', this.pattern)
     },
     squaredSize() {
@@ -26,7 +33,7 @@ export default {
     }
   },
   computed: {
-    pattern(){
+    pattern() {
       return this.$store.state.pattern
     },
     durationInBeats() {
@@ -43,25 +50,37 @@ export default {
 input {
   width: 65px;
   font-weight: bold;
+
   &.not-ok {
     color: #7f0101;
     background-color: #FFDBE2;
   }
+
   &.good {
     color: #020276;
     background-color: #dbffe9;
 
   }
+
   &.great {
     color: #004b00;
     background-color: #bcfd96;
   }
 
 }
+
 .options {
   font-size: 14px;
-  .info{
+
+  .block {
     padding: 15px;
+  }
+  .info {
+    padding: 5px;
+
+    .option-name {
+      width: 65px;
+    }
   }
 }
 </style>
