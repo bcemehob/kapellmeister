@@ -3,14 +3,18 @@
     <div class="title">Options</div>
     <div class="block">
       <div class="info">
-        <label class="option-name">Duration: &nbsp;</label>
-        <input type="number" v-model="pattern.duration" :class="squaredSize()" @input="changePattern">
+        <label class="option-name">Duration:</label>
+        <input type="number" v-model="pattern.duration" :class="highlightDuration()" @input="changePattern">
         <label>&nbsp;measures ({{ durationInBeats }} beats, {{ duration }})</label>
       </div>
       <div class="info">
-        <label class="option-name">Tempo: &nbsp;</label>
+        <label class="option-name">Tempo:</label>
         <input type="number" v-model="pattern.tempo" @input="changePattern">
         <label>&nbsp;beats per minute (BPM)</label>
+      </div>
+      <div class="info">
+        <label>Add new instrument: &nbsp;</label>
+        <div class="btn btn-dark" @click="addInstrument"><i class="fa fa-plus"></i> </div>
       </div>
     </div>
   </div>
@@ -25,11 +29,14 @@ export default {
     changePattern() {
       this.$store.commit('setPattern', this.pattern)
     },
-    squaredSize() {
+    highlightDuration() {
       if (this.pattern.duration % (this.pattern.measure.beats * ConductorService.DOUBLE) === 0) return "great"
       if (this.pattern.duration % (this.pattern.measure.beats * ConductorService.SQUARE) === 0) return "good"
       if (this.pattern.duration % this.pattern.measure.beats === 0) return "ok"
       else return "not-ok"
+    },
+    addInstrument() {
+      this.pattern.instruments.push({name: 'new instrument', parties: []})
     }
   },
   computed: {
@@ -82,5 +89,11 @@ input {
       width: 65px;
     }
   }
+}
+.btn {
+  width: 26px;
+  height: 26px;
+  padding:0;
+  font-size: 16px;
 }
 </style>

@@ -48,4 +48,8 @@ export default {
 
 <style scoped>
 
+input {
+  width: 100px;
+}
+
 </style>
