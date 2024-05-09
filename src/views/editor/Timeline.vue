@@ -4,11 +4,7 @@
       <tr>
         <th class="narrow-column"> measure</th>
         <th v-for="(instrument, i) in pattern.instruments" v-bind:key="i">
-          <span v-if="!isInstrumentNameChanging[i]"
-                @click="isInstrumentNameChanging[i] = true">{{ instrument.name }}</span>
-          <span v-else>
-            <input v-model="instrument.name" type="text" @blur="changeName(i)">
-          </span>
+          <InstrumentNameField :instrument @name="n => instrument.name = n"></InstrumentNameField>
         </th>
       </tr>
       <tr>
@@ -24,7 +20,9 @@
                  v-bind:key="partySpan.id" class="party"
                  :style="partySpanStyle(partySpan, i)">
               <span class="span-title" @mousedown="startMove($event, partySpan)">{{ partySpan.name }}</span>
-              <span>start: {{partySpan.start}} ({{((partySpan.start - 1) / pattern.measure.beats) + 1}}), dur: {{partySpan.duration}}</span>
+              <span>start: {{ partySpan.start }} ({{
+                  ((partySpan.start - 1) / pattern.measure.beats) + 1
+                }}), dur: {{ partySpan.duration }}</span>
               <div class="bottom" @mousedown="startDrag($event, partySpan)">==</div>
             </div>
           </div>
@@ -37,6 +35,7 @@
 <script>
 import {ConductorService} from "@/services/ConductorService";
 import {TimelineService} from "@/services/TimelineService";
+import InstrumentNameField from "@/views/editor/InstrumentNameField.vue";
 
 const PARTY_COLORS = [
   '#EAD992', '#51abad', '#ed7981',
@@ -45,6 +44,7 @@ const PARTY_COLORS = [
 
 export default {
   name: "TimeLine",
+  components: {InstrumentNameField},
   data() {
     return {
       measures: [],
@@ -69,13 +69,6 @@ export default {
         backgroundColor: PARTY_COLORS[i],
       };
     },
-
-    changeName(i) {
-      this.$store.commit('setPattern', this.pattern)
-      localStorage.setItem('pattern', JSON.stringify(this.pattern))
-      this.isInstrumentNameChanging[i] = false
-    },
-
     startDrag(eClick, partySpan) {
       this.setStretchListeners(eClick, partySpan)
       document.addEventListener('mousemove', this.stretchListener)
