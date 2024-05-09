@@ -1,7 +1,8 @@
 <template>
   <div>
     <span v-if="!isInstrumentNameChanging"
-          @click="isInstrumentNameChanging = true">{{ instrument.name }}
+          @click="isInstrumentNameChanging = true">
+      {{ instrument.name }}
     </span>
     <span v-else>
       <input v-model="name" type="text" @blur="changeName()">
