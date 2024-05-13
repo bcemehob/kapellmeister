@@ -41,6 +41,10 @@ table {
   border: 1px solid #7d858d;
   border-radius: 4px;
   background-color: rgba(242, 251, 253, 0.75);
+  .menu-title{
+    padding: 5px 5px 0 5px;
+    font-weight: bold;
+  }
   ul {
     padding: 5px 4px;
     margin: 0;
@@ -54,6 +58,9 @@ table {
         opacity: 1;
         color:#000;
         background-color: #f2fbfd;
+      }
+      &:last-child {
+        border-bottom: none;
       }
     }
   }
