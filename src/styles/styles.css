@@ -85,6 +85,7 @@ body {
 }
 .timeline {
     width: 59%;
+    position: relative;
 }
 
 .options {

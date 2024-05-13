@@ -32,3 +32,29 @@ table {
     }
   }
 }
+.context-menu {
+  position: absolute;
+  top: 100px;
+  z-index: 2000;
+  display: block;
+  font-size: 14px;
+  border: 1px solid #7d858d;
+  border-radius: 4px;
+  background-color: rgba(242, 251, 253, 0.75);
+  ul {
+    padding: 5px 4px;
+    margin: 0;
+    list-style-type: none;
+    li {
+      border-bottom: 1px dotted #7d858d;
+      padding: 4px;
+      color: #555;
+      cursor: pointer;
+      &:hover {
+        opacity: 1;
+        color:#000;
+        background-color: #f2fbfd;
+      }
+    }
+  }
+}
