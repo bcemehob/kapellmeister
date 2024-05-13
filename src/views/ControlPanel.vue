@@ -77,7 +77,7 @@ export default {
     }
   },
   mounted() {
-    if (this.pattern) {
+    if (this.pattern && !ConductorService.isEmpty(this.pattern)) {
       this.beatEmitter = new BeatEmitter(this.pattern.tempo, ConductorService.durationInBeats(this.pattern), this.handleBeat)
     }
   }
