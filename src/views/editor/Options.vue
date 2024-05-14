@@ -16,6 +16,10 @@
         <label>Add new instrument: &nbsp;</label>
         <div class="btn btn-dark" @click="addInstrument"><i class="fa fa-plus"></i> </div>
       </div>
+      <div class="info">
+        <button class="btn btn-dark" :disabled="!undoAvailable" @click="undo()"><i class="fa fa-undo"></i></button>
+        <button class="btn btn-dark" :disabled="!redoAvailable" @click="redo()"><i class="fa fa-redo"></i></button>
+      </div>
     </div>
   </div>
 </template>
@@ -39,6 +43,12 @@ export default {
     addInstrument() {
       this.pattern.instruments.push({name: 'new instrument', parties: []})
       this.changePattern()
+    },
+    undo(){
+      this.$store.dispatch('undo')
+    },
+    redo(){
+      this.$store.dispatch('redo')
     }
   },
   computed: {
@@ -50,6 +60,12 @@ export default {
     },
     duration() {
       return ConductorService.calculateDuration(this.durationInBeats, this.pattern.tempo)
+    },
+    undoAvailable() {
+      return this.$store.state.patternUndoStack.length
+    },
+    redoAvailable() {
+      return this.$store.state.patternRedoStack.length
     }
   }
 }

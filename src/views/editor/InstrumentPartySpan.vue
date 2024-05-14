@@ -49,12 +49,14 @@ export default {
       };
     },
     startDrag(eClick, partySpan) {
+      this.$store.dispatch('backup')
       this.setStretchListeners(eClick, partySpan)
       document.addEventListener('mousemove', this.stretchListener)
       document.addEventListener('mouseup', this.stopStretchListener)
     },
 
     startMove(eClick, partySpan) {
+      this.$store.dispatch('backup')
       this.setMoveListeners(eClick, partySpan)
       document.addEventListener('mousemove', this.moveListener)
       document.addEventListener('mouseup', this.stopMoveListener)
