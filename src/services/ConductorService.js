@@ -2,7 +2,7 @@ export class ConductorService {
     static SQUARE = 4
     static DOUBLE = 8;
     static durationInBeats(pattern){
-        if (!pattern || this.isEmpty(pattern)) return 0
+        if (this.isEmpty(pattern)) return 0
         return pattern.duration * pattern.measure.beats
     }
 

@@ -35,6 +35,7 @@ export default {
       localStorage.setItem('pattern', JSON.stringify(this.pattern))
     },
     highlightDuration() {
+      if (ConductorService.isEmpty(this.pattern)) return ""
       if (this.pattern.duration % (this.pattern.measure.beats * ConductorService.DOUBLE) === 0) return "great"
       if (this.pattern.duration % (this.pattern.measure.beats * ConductorService.SQUARE) === 0) return "good"
       if (this.pattern.duration % this.pattern.measure.beats === 0) return "ok"
@@ -56,7 +57,7 @@ export default {
       return this.$store.state.pattern
     },
     durationInBeats() {
-      return this.pattern.duration * this.pattern.measure.beats
+      return ConductorService.isEmpty(this.pattern) ? 0 : this.pattern.duration * this.pattern.measure.beats
     },
     duration() {
       return ConductorService.calculateDuration(this.durationInBeats, this.pattern.tempo)
