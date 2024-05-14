@@ -44,7 +44,7 @@ export default {
   data() {
     return {
       measures: [],
-      currentContextMenu: {offsetX: 0, offsetY: 0},
+      currentContextMenu: {offsetX: 0, offsetY: 0, instrument: null},
     }
   },
   methods: {
@@ -71,8 +71,42 @@ export default {
       this.$store.dispatch('persistPattern')
     },
     addInstrumentRight() {
+      const data = this.instrumentData()
+      if (data.instrumentIndex === this.pattern.instruments.length - 1) {
+        data.resultInstruments = [...this.pattern.instruments, data.newInstrument]
+      } else {
+        this.addResultInstrumentsToData(data)
+      }
+      this.updatePattern(data.resultInstruments)
+    },
+    addInstrumentLeft() {
+      const data = this.instrumentData()
+      if (data.instrumentIndex === 0) {
+        data.resultInstruments = [data.newInstrument, ...this.pattern.instruments]
+      } else {
+        this.addResultInstrumentsToData(data)
+      }
+      this.updatePattern(data.resultInstruments)
+    },
+    instrumentData() {
       this.$store.dispatch('backup')
-      this.pattern.instruments.push({name: 'new instrument', parties: []})
+      const instrumentIndex = this.pattern.instruments.findIndex(ins => ins === this.currentContextMenu.instrument)
+      if (instrumentIndex < 0) {
+        throw new Error('instrument not found')
+      }
+      return {
+        newInstrument: {name: 'new instrument', parties: []},
+        instrumentIndex: instrumentIndex,
+
+      }
+    },
+    addResultInstrumentsToData(instrumentData) {
+      const head = this.pattern.instruments.slice(0, instrumentData.instrumentIndex)
+      const tail = this.pattern.instruments.slice(instrumentData.instrumentIndex)
+      instrumentData.resultInstruments = [...head, instrumentData.newInstrument, ...tail]
+    },
+    updatePattern(instruments){
+      this.pattern.instruments = instruments
       this.$store.dispatch('persistPattern')
     }
   },
