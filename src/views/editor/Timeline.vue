@@ -26,8 +26,8 @@
         <li @click="deleteInstrument()"><i class="fa fa-trash"></i> delete</li>
         <li @click="addInstrumentRight()"><i class="fa fa-plus"></i> add after</li>
         <li @click="addInstrumentLeft()"><i class="fa fa-plus"></i> add before</li>
-        <li @click="moveRight()"><i class="fa fa-arrow-right"></i> move right</li>
-        <li @click="moveLeft()"><i class="fa fa-arrow-left"></i> move left</li>
+        <li v-if="!isLastInstrument()" @click="moveRight()"><i class="fa fa-arrow-right"></i> move right</li>
+        <li v-if="!isFirstInstrument()" @click="moveLeft()"><i class="fa fa-arrow-left"></i> move left</li>
       </ul>
     </div>
   </div>
@@ -75,7 +75,7 @@ export default {
       if (data.instrumentIndex === this.pattern.instruments.length - 1) {
         data.resultInstruments = [...this.pattern.instruments, data.newInstrument]
       } else {
-        this.addResultInstrumentsToData(data)
+        this.addResultInstrumentsToData(data, 1)
       }
       this.updatePattern(data.resultInstruments)
     },
@@ -100,9 +100,15 @@ export default {
 
       }
     },
-    addResultInstrumentsToData(instrumentData) {
-      const head = this.pattern.instruments.slice(0, instrumentData.instrumentIndex)
-      const tail = this.pattern.instruments.slice(instrumentData.instrumentIndex)
+    isLastInstrument() {
+      return this.currentInstrumentIndex === this.pattern.instruments.length - 1
+    },
+    isFirstInstrument() {
+      return this.currentInstrumentIndex === 0
+    },
+    addResultInstrumentsToData(instrumentData, increment) {
+      const head = this.pattern.instruments.slice(0, instrumentData.instrumentIndex + increment)
+      const tail = this.pattern.instruments.slice(instrumentData.instrumentIndex + increment)
       instrumentData.resultInstruments = [...head, instrumentData.newInstrument, ...tail]
     },
     updatePattern(instruments){
@@ -116,6 +122,9 @@ export default {
     },
     contextMenuShown() {
       return this.$store.state.contextMenuShown
+    },
+    currentInstrumentIndex() {
+      return this.pattern.instruments.findIndex(ins => ins === this.currentContextMenu.instrument)
     }
   }
 }
