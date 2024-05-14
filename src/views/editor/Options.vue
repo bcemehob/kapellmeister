@@ -13,10 +13,6 @@
         <label>&nbsp;beats per minute (BPM)</label>
       </div>
       <div class="info">
-        <label>Add new instrument: &nbsp;</label>
-        <div class="btn btn-dark" @click="addInstrument"><i class="fa fa-plus"></i> </div>
-      </div>
-      <div class="info">
         <button class="btn btn-dark" :disabled="!undoAvailable" @click="undo()"><i class="fa fa-undo"></i></button>
         <button class="btn btn-dark" :disabled="!redoAvailable" @click="redo()"><i class="fa fa-redo"></i></button>
       </div>
@@ -39,10 +35,6 @@ export default {
       if (this.pattern.duration % (this.pattern.measure.beats * ConductorService.SQUARE) === 0) return "good"
       if (this.pattern.duration % this.pattern.measure.beats === 0) return "ok"
       else return "not-ok"
-    },
-    addInstrument() {
-      this.pattern.instruments.push({name: 'new instrument', parties: []})
-      this.$store.dispatch('persistPattern')
     },
     undo(){
       this.$store.dispatch('undo')
@@ -112,6 +104,7 @@ input {
   width: 26px;
   height: 26px;
   padding:0;
+  margin:2px;
   font-size: 16px;
 }
 </style>
