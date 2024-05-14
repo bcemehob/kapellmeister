@@ -95,7 +95,7 @@ export default {
         throw new Error('instrument not found')
       }
       return {
-        newInstrument: {name: 'new instrument', parties: []},
+        newInstrument: {name: `instrument ${this.pattern.instruments.length + 1}`, parties: []},
         instrumentIndex: instrumentIndex,
 
       }
