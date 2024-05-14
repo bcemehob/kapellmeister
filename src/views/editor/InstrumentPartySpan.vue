@@ -101,8 +101,7 @@ export default {
     },
 
     finalizeChange(mouseMoveListener, mouseUpListener) {
-      this.$store.commit('setPattern', this.pattern)
-      localStorage.setItem('pattern', JSON.stringify(this.pattern))
+      this.$store.dispatch('persistPattern')
       document.removeEventListener('mousemove', mouseMoveListener)
       document.removeEventListener('mouseup', mouseUpListener)
     },

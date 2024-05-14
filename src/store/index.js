@@ -58,6 +58,11 @@ export default createStore({
             commit('setPatternUndoStack', undoStack)
             commit('setPatternRedoStack', redoStack)
             commit('setPattern', nextPattern)
+        },
+        persistPattern({ commit, state }, pattern) {
+            pattern = !pattern ? state.pattern : pattern
+            commit('setPattern', pattern)
+            localStorage.setItem('pattern', JSON.stringify(pattern))
         }
     }
 })

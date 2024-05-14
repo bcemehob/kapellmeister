@@ -24,8 +24,7 @@ export default {
   },
   methods: {
     changeName() {
-      this.$store.commit('setPattern', this.pattern)
-      localStorage.setItem('pattern', JSON.stringify(this.pattern))
+      this.$store.dispatch('persistPattern')
       this.isInstrumentNameChanging = false
     }
   },

@@ -66,9 +66,14 @@ export default {
       return `instrument-th-${instrument.name}-${i}`
     },
     deleteInstrument() {
+      this.$store.dispatch('backup')
       this.pattern.instruments = this.pattern.instruments.filter(ins => ins !== this.currentContextMenu.instrument)
-      this.$store.commit("setPattern", this.pattern)
-      localStorage.setItem('pattern', this.pattern.instruments)
+      this.$store.dispatch('persistPattern')
+    },
+    addInstrumentRight() {
+      this.$store.dispatch('backup')
+      this.pattern.instruments.push({name: 'new instrument', parties: []})
+      this.$store.dispatch('persistPattern')
     }
   },
   computed: {

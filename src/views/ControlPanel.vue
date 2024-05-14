@@ -61,9 +61,7 @@ export default {
       if (file.name.endsWith(".kpm") || file.name.endsWith(".json")) {
         reader.onload = (readingEvent) => {
           try {
-            const pattern = JSON.parse(readingEvent.target.result)
-            this.$store.commit('setPattern', pattern)
-            localStorage.setItem('pattern', readingEvent.target.result)
+            this.$store.dispatch('persistPattern', JSON.parse(readingEvent.target.result))
             this.beatEmitter = new BeatEmitter(this.pattern.tempo, ConductorService.durationInBeats(this.pattern), this.handleBeat)
           } catch (e) {
             this.error = 'Could not read file'

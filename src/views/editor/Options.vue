@@ -31,8 +31,7 @@ export default {
   name: "OptionsView",
   methods: {
     changePattern() {
-      this.$store.commit('setPattern', this.pattern)
-      localStorage.setItem('pattern', JSON.stringify(this.pattern))
+      this.$store.dispatch('persistPattern')
     },
     highlightDuration() {
       if (ConductorService.isEmpty(this.pattern)) return ""
@@ -43,7 +42,7 @@ export default {
     },
     addInstrument() {
       this.pattern.instruments.push({name: 'new instrument', parties: []})
-      this.changePattern()
+      this.$store.dispatch('persistPattern')
     },
     undo(){
       this.$store.dispatch('undo')
