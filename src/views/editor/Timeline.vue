@@ -23,11 +23,11 @@
     <div v-show="contextMenuShown" class="context-menu" :style="getContextMenuStyle()">
       <div class="menu-title">Instrument:</div>
       <ul>
-        <li @click="deleteInstrument()"><i class="fa fa-trash"></i> delete</li>
         <li @click="addInstrumentRight()"><i class="fa fa-plus"></i> add after</li>
         <li @click="addInstrumentLeft()"><i class="fa fa-plus"></i> add before</li>
         <li v-if="!isLastInstrument()" @click="moveRight()"><i class="fa fa-arrow-right"></i> move right</li>
         <li v-if="!isFirstInstrument()" @click="moveLeft()"><i class="fa fa-arrow-left"></i> move left</li>
+        <li @click="deleteInstrument()"><i class="fa fa-trash"></i> delete</li>
       </ul>
     </div>
   </div>
@@ -75,29 +75,34 @@ export default {
       if (data.instrumentIndex === this.pattern.instruments.length - 1) {
         data.resultInstruments = [...this.pattern.instruments, data.newInstrument]
       } else {
-        this.addResultInstrumentsToData(data, 1)
+        const head = this.pattern.instruments.slice(0, data.instrumentIndex + 1)
+        const tail = this.pattern.instruments.slice(data.instrumentIndex + 1)
+        data.resultInstruments = [...head, data.newInstrument, ...tail]
       }
-      this.updatePattern(data.resultInstruments)
+      this.pattern.instruments = data.resultInstruments
+      this.$store.dispatch('persistPattern')
     },
     addInstrumentLeft() {
       const data = this.instrumentData()
       if (data.instrumentIndex === 0) {
         data.resultInstruments = [data.newInstrument, ...this.pattern.instruments]
       } else {
-        this.addResultInstrumentsToData(data)
+        const head = this.pattern.instruments.slice(0, data.instrumentIndex)
+        const tail = this.pattern.instruments.slice(data.instrumentIndex)
+        data.resultInstruments = [...head, data.newInstrument, ...tail]
       }
-      this.updatePattern(data.resultInstruments)
+      this.pattern.instruments = data.resultInstruments
+      this.$store.dispatch('persistPattern')
     },
     instrumentData() {
       this.$store.dispatch('backup')
-      const instrumentIndex = this.pattern.instruments.findIndex(ins => ins === this.currentContextMenu.instrument)
+      const instrumentIndex = this.currentInstrumentIndex
       if (instrumentIndex < 0) {
         throw new Error('instrument not found')
       }
       return {
         newInstrument: {name: `instrument ${this.pattern.instruments.length + 1}`, parties: []},
         instrumentIndex: instrumentIndex,
-
       }
     },
     isLastInstrument() {
@@ -106,15 +111,6 @@ export default {
     isFirstInstrument() {
       return this.currentInstrumentIndex === 0
     },
-    addResultInstrumentsToData(instrumentData, increment) {
-      const head = this.pattern.instruments.slice(0, instrumentData.instrumentIndex + increment)
-      const tail = this.pattern.instruments.slice(instrumentData.instrumentIndex + increment)
-      instrumentData.resultInstruments = [...head, instrumentData.newInstrument, ...tail]
-    },
-    updatePattern(instruments){
-      this.pattern.instruments = instruments
-      this.$store.dispatch('persistPattern')
-    }
   },
   computed: {
     pattern() {
