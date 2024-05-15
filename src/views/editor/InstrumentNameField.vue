@@ -5,7 +5,7 @@
       {{ instrument.name }}
     </span>
     <span v-else>
-      <input v-model="name" type="text" @blur="changeName()">
+      <input v-model="name" type="text" @blur="changeName" @keyup.enter="changeName">
     </span>
   </div>
 
