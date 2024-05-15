@@ -111,6 +111,19 @@ export default {
     isFirstInstrument() {
       return this.currentInstrumentIndex === 0
     },
+    moveLeft() {
+      this.swapColumns(-1)
+    },
+    moveRight() {
+      this.swapColumns(1)
+    },
+    swapColumns(neighbourIndex) {
+      const i = this.currentInstrumentIndex
+      const currentInstrument = this.pattern.instruments[i]
+      this.pattern.instruments[i] = this.pattern.instruments[i + neighbourIndex]
+      this.pattern.instruments[i + neighbourIndex] = currentInstrument
+      this.$store.dispatch('persistPattern')
+    },
   },
   computed: {
     pattern() {
