@@ -1,0 +1,674 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="BnAndroidLogFilters">
+    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="75ac8b11-f25e-424d-a965-21f4d294e6d6" name="Changes" comment="sample composition title adjustment">
+      <change beforePath="$PROJECT_DIR$/src/styles/instrumentPartySpan.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/instrumentPartySpan.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/editor/InstrumentPartySpan.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/editor/InstrumentPartySpan.vue" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="tsconfig.json" />
+        <option value="Vue Composition API Component" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="REBASE" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;bcemehob&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/bcemehob/kapellmeister.git&quot;,
+    &quot;accountId&quot;: &quot;71408d80-f257-42aa-b167-286e23a66fd5&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4
+}</component>
+  <component name="ProjectId" id="2fn0GmvSlGM81UwTZ6oZkA2ghMh" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;Jest.All Tests.executor&quot;: &quot;Run&quot;,
+    &quot;Jest.TimelineService (1).executor&quot;: &quot;Run&quot;,
+    &quot;Jest.TimelineService.calculates 1 time from beats num and tempo.executor&quot;: &quot;Debug&quot;,
+    &quot;Jest.TimelineService.calculates time from beats num and tempo.executor&quot;: &quot;Debug&quot;,
+    &quot;Jest.TimelineService.can change span duration.executor&quot;: &quot;Debug&quot;,
+    &quot;Jest.TimelineService.can change span start.executor&quot;: &quot;Debug&quot;,
+    &quot;Jest.TimelineService.can create spans for UI.executor&quot;: &quot;Debug&quot;,
+    &quot;Jest.TimelineService.can detect if cannot increase span duration.executor&quot;: &quot;Run&quot;,
+    &quot;Jest.TimelineService.can find next span for UI.executor&quot;: &quot;Run&quot;,
+    &quot;Jest.TimelineService.can move span by mouse drag.executor&quot;: &quot;Debug&quot;,
+    &quot;Jest.TimelineService.can stretch span by mouse drag.executor&quot;: &quot;Debug&quot;,
+    &quot;Jest.TimelineService.changeSpanDuration is a function.executor&quot;: &quot;Run&quot;,
+    &quot;Jest.TimelineService.detects if cannot change span start.executor&quot;: &quot;Debug&quot;,
+    &quot;Jest.TimelineService.executor&quot;: &quot;Debug&quot;,
+    &quot;Jest.TimelineService.returns null if no next span.executor&quot;: &quot;Run&quot;,
+    &quot;Jest.TimelineService.spec.js.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/vadimsemenov/IdeaProjects/kapellmeister/tests/unit/services&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs.jest.jest_package&quot;: &quot;/Users/vadimsemenov/IdeaProjects/kapellmeister/node_modules/@vue/cli-service&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;npm.serve.executor&quot;: &quot;Run&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;Errors&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/Applications/IntelliJ IDEA.app/Contents/plugins/javascript-impl/jsLanguageServicesImpl/external&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
+      &quot;TEXT&quot;,
+      &quot;JSON&quot;
+    ],
+    &quot;vue.recent.templates&quot;: [
+      &quot;Vue Composition API Component&quot;
+    ]
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/tests/unit/services" />
+      <recent name="$PROJECT_DIR$/src/views/editor" />
+      <recent name="$PROJECT_DIR$/src/styles" />
+      <recent name="$PROJECT_DIR$/src/services" />
+      <recent name="$PROJECT_DIR$/src/views" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/tests/unit" />
+      <recent name="$PROJECT_DIR$/src/styles" />
+      <recent name="$PROJECT_DIR$/src/views/editor" />
+      <recent name="$PROJECT_DIR$/src/assets" />
+    </key>
+  </component>
+  <component name="RunManager" selected="npm.serve">
+    <configuration name="TimelineService" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <jest-package value="$PROJECT_DIR$/node_modules/@vue/cli-service" />
+      <working-dir value="$PROJECT_DIR$" />
+      <envs />
+      <scope-kind value="SUITE" />
+      <test-file value="$PROJECT_DIR$/tests/unit/services/ConductorService.spec.js" />
+      <test-names>
+        <test-name value="TimelineService" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <configuration name="TimelineService.calculates 1 time from beats num and tempo" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <jest-package value="$PROJECT_DIR$/node_modules/@vue/cli-service" />
+      <working-dir value="$PROJECT_DIR$" />
+      <envs />
+      <scope-kind value="TEST" />
+      <test-file value="$PROJECT_DIR$/tests/unit/services/ConductorService.spec.js" />
+      <test-names>
+        <test-name value="TimelineService" />
+        <test-name value="calculates 1 time from beats num and tempo" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <configuration name="TimelineService.calculates time from beats num and tempo" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <jest-package value="$PROJECT_DIR$/node_modules/@vue/cli-service" />
+      <working-dir value="$PROJECT_DIR$" />
+      <envs />
+      <scope-kind value="TEST" />
+      <test-file value="$PROJECT_DIR$/tests/unit/services/ConductorService.spec.js" />
+      <test-names>
+        <test-name value="TimelineService" />
+        <test-name value="calculates time from beats num and tempo" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <configuration name="TimelineService.can stretch span by mouse drag" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <jest-package value="$PROJECT_DIR$/node_modules/@vue/cli-service" />
+      <working-dir value="$PROJECT_DIR$" />
+      <envs />
+      <scope-kind value="TEST" />
+      <test-file value="$PROJECT_DIR$/tests/unit/services/TimelineService.spec.js" />
+      <test-names>
+        <test-name value="TimelineService" />
+        <test-name value="can stretch span by mouse drag" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <configuration name="TimelineService.spec.js" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <jest-package value="$PROJECT_DIR$/node_modules/@vue/cli-service" />
+      <working-dir value="$PROJECT_DIR$" />
+      <envs />
+      <scope-kind value="TEST_FILE" />
+      <test-file value="$PROJECT_DIR$/tests/unit/services/TimelineService.spec.js" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Jest.All Tests" />
+      <item itemvalue="Jest.TimelineService" />
+      <item itemvalue="Jest.TimelineService.calculates 1 time from beats num and tempo" />
+      <item itemvalue="Jest.TimelineService.calculates time from beats num and tempo" />
+      <item itemvalue="Jest.TimelineService.can stretch span by mouse drag" />
+      <item itemvalue="Jest.TimelineService.spec.js" />
+      <item itemvalue="npm.serve" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Jest.TimelineService.spec.js" />
+        <item itemvalue="Jest.TimelineService.can stretch span by mouse drag" />
+        <item itemvalue="Jest.TimelineService.calculates time from beats num and tempo" />
+        <item itemvalue="Jest.TimelineService.calculates 1 time from beats num and tempo" />
+        <item itemvalue="Jest.TimelineService" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9f38398b9061-18abd8497189-intellij.indexing.shared.core-IU-241.14494.240" />
+        <option value="bundled-js-predefined-1d06a55b98c1-74d2a5396914-JavaScript-IU-241.14494.240" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="75ac8b11-f25e-424d-a965-21f4d294e6d6" name="Changes" comment="" />
+      <created>1714421441043</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1714421441043</updated>
+      <workItem from="1714421442080" duration="3581000" />
+      <workItem from="1714500261022" duration="12915000" />
+      <workItem from="1714555558482" duration="9842000" />
+      <workItem from="1714581033652" duration="7886000" />
+      <workItem from="1714680628247" duration="24757000" />
+      <workItem from="1714903297637" duration="55640000" />
+      <workItem from="1715160077617" duration="131000" />
+      <workItem from="1715160215110" duration="30882000" />
+      <workItem from="1715275579834" duration="4616000" />
+      <workItem from="1715372593221" duration="7816000" />
+      <workItem from="1715616810109" duration="21598000" />
+      <workItem from="1715705773110" duration="20240000" />
+    </task>
+    <task id="LOCAL-00054" summary="add bottom zone to party span in order to make span resizable">
+      <option name="closed" value="true" />
+      <created>1714996685537</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1714996685537</updated>
+    </task>
+    <task id="LOCAL-00055" summary="make instrument party span resizable">
+      <option name="closed" value="true" />
+      <created>1715028137794</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1715028137794</updated>
+    </task>
+    <task id="LOCAL-00056" summary="extract styles into separate folder">
+      <option name="closed" value="true" />
+      <created>1715028703408</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1715028703408</updated>
+    </task>
+    <task id="LOCAL-00057" summary="clean code">
+      <option name="closed" value="true" />
+      <created>1715028751201</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1715028751201</updated>
+    </task>
+    <task id="LOCAL-00058" summary="tune style">
+      <option name="closed" value="true" />
+      <created>1715063877356</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1715063877356</updated>
+    </task>
+    <task id="LOCAL-00059" summary="span start time can be changed by dragging">
+      <option name="closed" value="true" />
+      <created>1715114039737</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1715114039737</updated>
+    </task>
+    <task id="LOCAL-00060" summary="span start time can be changed by dragging">
+      <option name="closed" value="true" />
+      <created>1715114608826</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1715114608826</updated>
+    </task>
+    <task id="LOCAL-00061" summary="add starting measure number to span">
+      <option name="closed" value="true" />
+      <created>1715115607346</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1715115607346</updated>
+    </task>
+    <task id="LOCAL-00062" summary="fix span start when next span starts soon">
+      <option name="closed" value="true" />
+      <created>1715116167743</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1715116167743</updated>
+    </task>
+    <task id="LOCAL-00063" summary="extract options into separate view">
+      <option name="closed" value="true" />
+      <created>1715116405284</created>
+      <option name="number" value="00063" />
+      <option name="presentableId" value="LOCAL-00063" />
+      <option name="project" value="LOCAL" />
+      <updated>1715116405284</updated>
+    </task>
+    <task id="LOCAL-00064" summary="add duration change possibility">
+      <option name="closed" value="true" />
+      <created>1715157838143</created>
+      <option name="number" value="00064" />
+      <option name="presentableId" value="LOCAL-00064" />
+      <option name="project" value="LOCAL" />
+      <updated>1715157838143</updated>
+    </task>
+    <task id="LOCAL-00065" summary="refactor code: move span duration and start calculations to service level">
+      <option name="closed" value="true" />
+      <created>1715158817873</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1715158817873</updated>
+    </task>
+    <task id="LOCAL-00066" summary="add tests for timeline service">
+      <option name="closed" value="true" />
+      <created>1715163000035</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1715163000036</updated>
+    </task>
+    <task id="LOCAL-00067" summary="improve test coverage; clean code">
+      <option name="closed" value="true" />
+      <created>1715163140844</created>
+      <option name="number" value="00067" />
+      <option name="presentableId" value="LOCAL-00067" />
+      <option name="project" value="LOCAL" />
+      <updated>1715163140844</updated>
+    </task>
+    <task id="LOCAL-00068" summary="add more test cases">
+      <option name="closed" value="true" />
+      <created>1715164482555</created>
+      <option name="number" value="00068" />
+      <option name="presentableId" value="LOCAL-00068" />
+      <option name="project" value="LOCAL" />
+      <updated>1715164482555</updated>
+    </task>
+    <task id="LOCAL-00069" summary="add more test cases">
+      <option name="closed" value="true" />
+      <created>1715164574663</created>
+      <option name="number" value="00069" />
+      <option name="presentableId" value="LOCAL-00069" />
+      <option name="project" value="LOCAL" />
+      <updated>1715164574663</updated>
+    </task>
+    <task id="LOCAL-00070" summary="test can move method">
+      <option name="closed" value="true" />
+      <created>1715165018885</created>
+      <option name="number" value="00070" />
+      <option name="presentableId" value="LOCAL-00070" />
+      <option name="project" value="LOCAL" />
+      <updated>1715165018885</updated>
+    </task>
+    <task id="LOCAL-00071" summary="test span duration changing">
+      <option name="closed" value="true" />
+      <created>1715165566538</created>
+      <option name="number" value="00071" />
+      <option name="presentableId" value="LOCAL-00071" />
+      <option name="project" value="LOCAL" />
+      <updated>1715165566538</updated>
+    </task>
+    <task id="LOCAL-00072" summary="test span start changing">
+      <option name="closed" value="true" />
+      <created>1715173928179</created>
+      <option name="number" value="00072" />
+      <option name="presentableId" value="LOCAL-00072" />
+      <option name="project" value="LOCAL" />
+      <updated>1715173928179</updated>
+    </task>
+    <task id="LOCAL-00073" summary="move move method logic into service level to make it testable">
+      <option name="closed" value="true" />
+      <created>1715176127102</created>
+      <option name="number" value="00073" />
+      <option name="presentableId" value="LOCAL-00073" />
+      <option name="project" value="LOCAL" />
+      <updated>1715176127102</updated>
+    </task>
+    <task id="LOCAL-00074" summary="refactor: move more code to service">
+      <option name="closed" value="true" />
+      <created>1715176837040</created>
+      <option name="number" value="00074" />
+      <option name="presentableId" value="LOCAL-00074" />
+      <option name="project" value="LOCAL" />
+      <updated>1715176837040</updated>
+    </task>
+    <task id="LOCAL-00075" summary="refactor: move stretch code to service level">
+      <option name="closed" value="true" />
+      <created>1715177670695</created>
+      <option name="number" value="00075" />
+      <option name="presentableId" value="LOCAL-00075" />
+      <option name="project" value="LOCAL" />
+      <updated>1715177670695</updated>
+    </task>
+    <task id="LOCAL-00076" summary="fix test">
+      <option name="closed" value="true" />
+      <created>1715178799275</created>
+      <option name="number" value="00076" />
+      <option name="presentableId" value="LOCAL-00076" />
+      <option name="project" value="LOCAL" />
+      <updated>1715178799275</updated>
+    </task>
+    <task id="LOCAL-00077" summary="improve code readability: reuse existing service methods">
+      <option name="closed" value="true" />
+      <created>1715179043119</created>
+      <option name="number" value="00077" />
+      <option name="presentableId" value="LOCAL-00077" />
+      <option name="project" value="LOCAL" />
+      <updated>1715179043119</updated>
+    </task>
+    <task id="LOCAL-00078" summary="clean code">
+      <option name="closed" value="true" />
+      <created>1715234781093</created>
+      <option name="number" value="00078" />
+      <option name="presentableId" value="LOCAL-00078" />
+      <option name="project" value="LOCAL" />
+      <updated>1715234781093</updated>
+    </task>
+    <task id="LOCAL-00079" summary="extract name changing into separate component">
+      <option name="closed" value="true" />
+      <created>1715239396028</created>
+      <option name="number" value="00079" />
+      <option name="presentableId" value="LOCAL-00079" />
+      <option name="project" value="LOCAL" />
+      <updated>1715239396028</updated>
+    </task>
+    <task id="LOCAL-00080" summary="extract instrument party spans into separate component">
+      <option name="closed" value="true" />
+      <created>1715259984696</created>
+      <option name="number" value="00080" />
+      <option name="presentableId" value="LOCAL-00080" />
+      <option name="project" value="LOCAL" />
+      <updated>1715259984696</updated>
+    </task>
+    <task id="LOCAL-00081" summary="extract left ribbon with measures into separate component">
+      <option name="closed" value="true" />
+      <created>1715261024705</created>
+      <option name="number" value="00081" />
+      <option name="presentableId" value="LOCAL-00081" />
+      <option name="project" value="LOCAL" />
+      <updated>1715261024705</updated>
+    </task>
+    <task id="LOCAL-00082" summary="show track duration in minutes and seconds in options tab">
+      <option name="closed" value="true" />
+      <created>1715263973164</created>
+      <option name="number" value="00082" />
+      <option name="presentableId" value="LOCAL-00082" />
+      <option name="project" value="LOCAL" />
+      <updated>1715263973164</updated>
+    </task>
+    <task id="LOCAL-00083" summary="highlight warning if duration is not matching measures and measure blocks">
+      <option name="closed" value="true" />
+      <created>1715264958665</created>
+      <option name="number" value="00083" />
+      <option name="presentableId" value="LOCAL-00083" />
+      <option name="project" value="LOCAL" />
+      <updated>1715264958665</updated>
+    </task>
+    <task id="LOCAL-00084" summary="show tempo control in options tab">
+      <option name="closed" value="true" />
+      <created>1715265432231</created>
+      <option name="number" value="00084" />
+      <option name="presentableId" value="LOCAL-00084" />
+      <option name="project" value="LOCAL" />
+      <updated>1715265432231</updated>
+    </task>
+    <task id="LOCAL-00085" summary="add track info to navigation bar">
+      <option name="closed" value="true" />
+      <created>1715269587926</created>
+      <option name="number" value="00085" />
+      <option name="presentableId" value="LOCAL-00085" />
+      <option name="project" value="LOCAL" />
+      <updated>1715269587926</updated>
+    </task>
+    <task id="LOCAL-00086" summary="instrument can be added to track">
+      <option name="closed" value="true" />
+      <created>1715275162782</created>
+      <option name="number" value="00086" />
+      <option name="presentableId" value="LOCAL-00086" />
+      <option name="project" value="LOCAL" />
+      <updated>1715275162782</updated>
+    </task>
+    <task id="LOCAL-00087" summary="add right context menu for additional options">
+      <option name="closed" value="true" />
+      <created>1715284170212</created>
+      <option name="number" value="00087" />
+      <option name="presentableId" value="LOCAL-00087" />
+      <option name="project" value="LOCAL" />
+      <updated>1715284170213</updated>
+    </task>
+    <task id="LOCAL-00088" summary="save changed pattern to local storage">
+      <option name="closed" value="true" />
+      <created>1715284216483</created>
+      <option name="number" value="00088" />
+      <option name="presentableId" value="LOCAL-00088" />
+      <option name="project" value="LOCAL" />
+      <updated>1715284216483</updated>
+    </task>
+    <task id="LOCAL-00089" summary="timeline: add context menu to instrument">
+      <option name="closed" value="true" />
+      <created>1715617643991</created>
+      <option name="number" value="00089" />
+      <option name="presentableId" value="LOCAL-00089" />
+      <option name="project" value="LOCAL" />
+      <updated>1715617643991</updated>
+    </task>
+    <task id="LOCAL-00090" summary="add methods to instrument">
+      <option name="closed" value="true" />
+      <created>1715620434663</created>
+      <option name="number" value="00090" />
+      <option name="presentableId" value="LOCAL-00090" />
+      <option name="project" value="LOCAL" />
+      <updated>1715620434663</updated>
+    </task>
+    <task id="LOCAL-00091" summary="add fallback to not show error when no pattern is loaded">
+      <option name="closed" value="true" />
+      <created>1715621061461</created>
+      <option name="number" value="00091" />
+      <option name="presentableId" value="LOCAL-00091" />
+      <option name="project" value="LOCAL" />
+      <updated>1715621061461</updated>
+    </task>
+    <task id="LOCAL-00092" summary="add undo adn redo functionality">
+      <option name="closed" value="true" />
+      <created>1715682988330</created>
+      <option name="number" value="00092" />
+      <option name="presentableId" value="LOCAL-00092" />
+      <option name="project" value="LOCAL" />
+      <updated>1715682988330</updated>
+    </task>
+    <task id="LOCAL-00093" summary="initial checks if no pattern loaded yet">
+      <option name="closed" value="true" />
+      <created>1715686570921</created>
+      <option name="number" value="00093" />
+      <option name="presentableId" value="LOCAL-00093" />
+      <option name="project" value="LOCAL" />
+      <updated>1715686570921</updated>
+    </task>
+    <task id="LOCAL-00094" summary="can persist pattern">
+      <option name="closed" value="true" />
+      <created>1715688719028</created>
+      <option name="number" value="00094" />
+      <option name="presentableId" value="LOCAL-00094" />
+      <option name="project" value="LOCAL" />
+      <updated>1715688719028</updated>
+    </task>
+    <task id="LOCAL-00095" summary="can add instrument from context menu">
+      <option name="closed" value="true" />
+      <created>1715717027971</created>
+      <option name="number" value="00095" />
+      <option name="presentableId" value="LOCAL-00095" />
+      <option name="project" value="LOCAL" />
+      <updated>1715717027971</updated>
+    </task>
+    <task id="LOCAL-00096" summary="there is no need to add instrument from options section">
+      <option name="closed" value="true" />
+      <created>1715717583734</created>
+      <option name="number" value="00096" />
+      <option name="presentableId" value="LOCAL-00096" />
+      <option name="project" value="LOCAL" />
+      <updated>1715717583734</updated>
+    </task>
+    <task id="LOCAL-00097" summary="add unique name to instrument">
+      <option name="closed" value="true" />
+      <created>1715717763996</created>
+      <option name="number" value="00097" />
+      <option name="presentableId" value="LOCAL-00097" />
+      <option name="project" value="LOCAL" />
+      <updated>1715717763996</updated>
+    </task>
+    <task id="LOCAL-00098" summary="don't move right last instrument, don't move left the first">
+      <option name="closed" value="true" />
+      <created>1715719020550</created>
+      <option name="number" value="00098" />
+      <option name="presentableId" value="LOCAL-00098" />
+      <option name="project" value="LOCAL" />
+      <updated>1715719020550</updated>
+    </task>
+    <task id="LOCAL-00099" summary="change instrument name will submit by pressing enter key">
+      <option name="closed" value="true" />
+      <created>1715787475669</created>
+      <option name="number" value="00099" />
+      <option name="presentableId" value="LOCAL-00099" />
+      <option name="project" value="LOCAL" />
+      <updated>1715787475669</updated>
+    </task>
+    <task id="LOCAL-00100" summary="simplify code">
+      <option name="closed" value="true" />
+      <created>1715788845743</created>
+      <option name="number" value="00100" />
+      <option name="presentableId" value="LOCAL-00100" />
+      <option name="project" value="LOCAL" />
+      <updated>1715788845743</updated>
+    </task>
+    <task id="LOCAL-00101" summary="instruments can be moved">
+      <option name="closed" value="true" />
+      <created>1715790305546</created>
+      <option name="number" value="00101" />
+      <option name="presentableId" value="LOCAL-00101" />
+      <option name="project" value="LOCAL" />
+      <updated>1715790305546</updated>
+    </task>
+    <task id="LOCAL-00102" summary="sample composition title adjustment">
+      <option name="closed" value="true" />
+      <created>1715790391709</created>
+      <option name="number" value="00102" />
+      <option name="presentableId" value="LOCAL-00102" />
+      <option name="project" value="LOCAL" />
+      <updated>1715790391709</updated>
+    </task>
+    <option name="localTasksCounter" value="103" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ID_ORDER">
+      <list>
+        <option value="Default.Root" />
+        <option value="Default.Author" />
+        <option value="Default.Date" />
+        <option value="Default.Subject" />
+        <option value="Space.CommitStatus" />
+        <option value="GitHub.CommitStatus" />
+      </list>
+    </option>
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="clean code" />
+    <MESSAGE value="extract name changing into separate component" />
+    <MESSAGE value="extract instrument party spans into separate component" />
+    <MESSAGE value="extract left ribbon with measures into separate component" />
+    <MESSAGE value="show track duration in minutes and seconds in options tab" />
+    <MESSAGE value="highlight warning if duration is not matching measures and measure blocks" />
+    <MESSAGE value="show tempo control in options tab" />
+    <MESSAGE value="add track info to navigation bar" />
+    <MESSAGE value="instrument can be added to track" />
+    <MESSAGE value="add right context menu for additional options" />
+    <MESSAGE value="save changed pattern to local storage" />
+    <MESSAGE value="timeline: add context menu to instrument" />
+    <MESSAGE value="add methods to instrument" />
+    <MESSAGE value="add fallback to not show error when no pattern is loaded" />
+    <MESSAGE value="add undo adn redo functionality" />
+    <MESSAGE value="initial checks if no pattern loaded yet" />
+    <MESSAGE value="can persist pattern" />
+    <MESSAGE value="can add instrument from context menu" />
+    <MESSAGE value="there is no need to add instrument from options section" />
+    <MESSAGE value="add unique name to instrument" />
+    <MESSAGE value="don't move right last instrument, don't move left the first" />
+    <MESSAGE value="change instrument name will submit by pressing enter key" />
+    <MESSAGE value="simplify code" />
+    <MESSAGE value="instruments can be moved" />
+    <MESSAGE value="sample composition title adjustment" />
+    <option name="LAST_COMMIT_MESSAGE" value="sample composition title adjustment" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>
