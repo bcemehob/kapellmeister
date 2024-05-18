@@ -63,6 +63,10 @@ export default createStore({
             pattern = !pattern ? state.pattern : pattern
             commit('setPattern', pattern)
             localStorage.setItem('pattern', JSON.stringify(pattern))
+        },
+        addNewSpan({  dispatch }, instrument) {
+            instrument.parties.push({name: 'party x', spans: [[1,16]]})
+            dispatch('setPattern')
         }
     }
 })

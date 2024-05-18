@@ -1,5 +1,8 @@
 <template>
   <div class="parties-container">
+    <div v-if="!instrument.parties.length" class="add-party">
+      <button class="btn btn-dark" @click="addParty"><i class="fa fa-add"></i></button>
+    </div>
     <div v-for="partySpan in partySpans(instrument)"
          v-bind:key="partySpan.id" class="party"
          :style="partySpanStyle(partySpan, index)">
@@ -105,6 +108,9 @@ export default {
       document.removeEventListener('mousemove', mouseMoveListener)
       document.removeEventListener('mouseup', mouseUpListener)
     },
+    addParty() {
+      this.$store.dispatch('addNewSpan', this.instrument)
+    }
   },
   computed: {
     pattern() {

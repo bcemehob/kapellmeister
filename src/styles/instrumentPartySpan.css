@@ -46,3 +46,18 @@
     }
   }
 }
+
+.add-party {
+  position: absolute;
+  top:-8px;
+  width: 100%;
+  left:0;
+  text-align: center;
+  button {
+    width: 26px;
+    height: 26px;
+    margin: 2px;
+    padding: 0;
+    font-size: 16px;
+  }
+}
