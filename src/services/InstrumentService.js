@@ -21,10 +21,6 @@ export class InstrumentService {
         return !currentParty || currentParty.name === upcomingParty.name ? EMPTY_PARTY : upcomingParty
     }
 
-    prerollBeats() {
-        return this.measure.beats * PREROLL_MEASURES
-    }
-
     currentParty(currentBeat) {
         const currentParty = this.partyTimeline[currentBeat]
         return currentParty ? currentParty : EMPTY_PARTY
@@ -41,7 +37,6 @@ export class InstrumentService {
             Math.ceil((this.upcomingParty(currentBeat).start - currentBeat) / this.measure.beats)
     }
 
-
     countDown(currentBeat) {
         const current = this.currentCountDown(currentBeat)
         const upcoming = this.upcomingCountDown(currentBeat)
@@ -50,4 +45,7 @@ export class InstrumentService {
         return current ? {type: 'current', count: current} : {type: 'upcoming', count: upcoming}
     }
 
+    prerollBeats() {
+        return this.measure.beats * PREROLL_MEASURES
+    }
 }
