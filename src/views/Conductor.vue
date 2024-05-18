@@ -4,7 +4,7 @@
     <PatternEditor></PatternEditor>
     <ControlPanel :handle-beat="handleBeat"></ControlPanel>
     <div class="d-flex">
-      <MotionViewer :current-beat="this.currentBeat"></MotionViewer>
+      <MotionViewer :current-beat="currentBeat"></MotionViewer>
       <Instruments :pattern="pattern" :current-beat="currentBeat"></Instruments>
     </div>
   </div>
