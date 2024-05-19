@@ -6,14 +6,14 @@
         Kapellmeister
       </router-link>
       <div class="control-block">
-        <button class="btn btn-grey">
+        <button class="btn btn-grey input-label">
           <label for="file-upload" class="load-pattern"></label>
         </button>
         <input id="file-upload" type="file" ref="json" @change="readPattern"/>
-        <button @click="loadSamplePattern" class="btn btn-grey">Sample pattern
+        <button @click="loadSamplePattern" class="btn btn-grey">Sample
         </button>
-        <button class="btn btn-grey"
-                @click="clearPattern">Clear pattern
+        <button class="btn btn-grey" @click="clearPattern">
+          <icon class="fa fa-trash"></icon>
         </button>
       </div>
       <div class="track-name" v-if="!ConductorService.isEmpty(pattern)">
@@ -101,6 +101,13 @@ export default {
     font-family: "Font Awesome 5 Free";
     font-weight: 900;
     cursor: pointer;
+  }
+  button.input-label {
+    cursor: pointer;
+    padding: 0;
+    .load-pattern {
+      padding: 6px;
+    }
   }
 }
 
