@@ -6,6 +6,7 @@
         Kapellmeister
       </router-link>
       <div class="control-block">
+        <input type="file" ref="json" @change="readPattern"/>
         <button v-if="ConductorService.isEmpty(pattern)"
                 @click="loadSamplePattern"
                 class="btn btn-grey" >Sample pattern</button>
@@ -22,6 +23,7 @@
           <span class="track-info">{{ duration }}</span>
         </div>
       </div>
+      <div class="empty-track" v-else>placeholder</div>
     </div>
   </nav>
 </template>
@@ -57,12 +59,34 @@ export default {
     clearPattern() {
       this.$store.dispatch('clearPattern')
     },
+    readPattern() {
+      this.error = null
+      const file = this.$refs.json.files[0]
+      const reader = new FileReader()
+      if (file.name.endsWith(".kpm") || file.name.endsWith(".json")) {
+        reader.onload = (readingEvent) => {
+          try {
+            this.$store.dispatch('persistPattern', JSON.parse(readingEvent.target.result))
+          } catch (e) {
+            this.error = 'Could not read file'
+          }
+        };
+        reader.onerror = (err) => this.error = err
+        reader.readAsText(file)
+      } else {
+        this.error = `Invalid file format: ${file.name}`
+      }
+    },
   }
 }
 </script>
 <style scoped>
 .track-name, .control-block {
   color: #fff
+}
+.track-name, .empty-track {
+  width: 40%;
+  text-align: right;
 }
 
 .track-info {
