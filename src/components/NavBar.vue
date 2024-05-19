@@ -6,6 +6,7 @@
         Kapellmeister
       </router-link>
       <div class="control-block">
+        <label>Pattern options</label>
         <button class="btn btn-grey input-label">
           <label for="file-upload" class="load-pattern"></label>
         </button>
@@ -111,6 +112,13 @@ export default {
 }
 
 .control-block {
+  position: relative;
+  & > label {
+    position: absolute;
+    left: 4px;
+    top: -17px;
+    font-size: 14px;
+  }
   input[type="file"] {
     display: none;
   }
@@ -147,7 +155,6 @@ export default {
 
   &:hover {
     background-color: #5d656d;
-
   }
 }
 </style>
