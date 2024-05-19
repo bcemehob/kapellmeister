@@ -3,6 +3,7 @@
     <div class="title">Play mode</div>
     <div class="d-flex space-between">
       <input type="file" ref="json" @change="readPattern()"/>
+      <button class="btn btn-dark with-text" @click="loadSamplePattern">Sample pattern</button>
       <div v-if="beatEmitter" class="d-flex" style="flex: 1">
         <div class="container mt-3">TEMPO: {{ pattern.tempo }} bpm</div>
         <div class="container mt-3">DURATION: {{ ConductorService.durationInBeats(pattern) }} beats ({{ pattern.duration}} measures)</div>
@@ -18,8 +19,8 @@
 </template>
 <script>
 
-import {BeatEmitter} from "@/services/BeatEmitter";
-import {ConductorService} from "@/services/ConductorService";
+import {BeatEmitter} from "@/services/BeatEmitter"
+import {ConductorService} from "@/services/ConductorService"
 
 export default {
   name: 'ControlPanel',
@@ -42,38 +43,48 @@ export default {
     }
   },
   methods: {
+
     play: function () {
       this.beatEmitter.start()
       this.playing = true
     },
+
     stop: function () {
       this.beatEmitter.stop()
       this.playing = false
     },
+
     pause: function () {
       this.beatEmitter.pause()
       this.playing = false
     },
+
     readPattern() {
       this.error = null
-      const file = this.$refs.json.files[0];
-      const reader = new FileReader();
+      const file = this.$refs.json.files[0]
+      const reader = new FileReader()
       if (file.name.endsWith(".kpm") || file.name.endsWith(".json")) {
         reader.onload = (readingEvent) => {
           try {
-            this.initPatternWithBeatEmitter(readingEvent.target.result)
+            this.initPatternWithBeatEmitter(JSON.parse(readingEvent.target.result))
           } catch (e) {
             this.error = 'Could not read file'
           }
         };
         reader.onerror = (err) => this.error = err
-        reader.readAsText(file);
+        reader.readAsText(file)
       } else {
-        this.error = `Invalid file format: ${file.name}`;
+        this.error = `Invalid file format: ${file.name}`
       }
     },
-    initPatternWithBeatEmitter(jsonString) {
-      this.$store.dispatch('persistPattern', JSON.parse(jsonString))
+
+    loadSamplePattern() {
+      fetch("/samples/samplePattern.kpm")
+          .then(res => res.json().then(data => this.initPatternWithBeatEmitter(data)))
+    },
+
+    initPatternWithBeatEmitter(patternObject) {
+      this.$store.dispatch('persistPattern', patternObject)
       this.beatEmitter = new BeatEmitter(this.pattern.tempo, ConductorService.durationInBeats(this.pattern), this.handleBeat)
     }
   },
@@ -93,5 +104,9 @@ button {
   width: 48px;
   height: 48px;
   font-size: 24px;
+  &.with-text {
+    width: auto;
+    font-size: 14px;
+  }
 }
 </style>

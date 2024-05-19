@@ -38,7 +38,6 @@ export default {
   },
   methods: {
     handleBeat(currentBeat) {
-      // console.log("beat", currentBeat, new Date().getTime())
       this.currentBeat = currentBeat
     },
   }
