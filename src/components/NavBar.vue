@@ -9,6 +9,9 @@
         <button v-if="ConductorService.isEmpty(pattern)"
                 @click="loadSamplePattern"
                 class="btn btn-grey" >Sample pattern</button>
+        <button v-if="!ConductorService.isEmpty(pattern)"
+                class="btn btn-grey"
+                @click="clearPattern">Clear pattern</button>
       </div>
       <div class="track-name" v-if="!ConductorService.isEmpty(pattern)">
         <div>{{ pattern.name }}</div>
@@ -50,6 +53,9 @@ export default {
     loadSamplePattern() {
       fetch("/samples/samplePattern.kpm")
           .then(res => res.json().then(data => this.$store.dispatch('persistPattern', data)))
+    },
+    clearPattern() {
+      this.$store.dispatch('clearPattern')
     },
   }
 }
