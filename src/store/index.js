@@ -20,12 +20,15 @@ export default createStore({
         setPattern(state, payload) {
             state.pattern = payload;
         },
+
         setPatternUndoStack(state, payload) {
             state.patternUndoStack = payload;
         },
+
         setPatternRedoStack(state, payload) {
             state.patternRedoStack = payload;
         },
+
         setContextMenuShown(state, payload) {
             state.contextMenuShown = payload;
         },
@@ -39,6 +42,7 @@ export default createStore({
             commit('setPatternUndoStack', undoStack)
             commit('setPatternRedoStack', [])
         },
+
         undo ({ commit, state }) {
             if (!state.patternUndoStack.length) return null;
             const undoStack = [...state.patternUndoStack]
@@ -49,6 +53,7 @@ export default createStore({
             commit('setPatternRedoStack', redoStack)
             commit('setPattern', previousPattern)
         },
+
         redo ({ commit, state }) {
             if (!state.patternRedoStack.length) return null;
             const undoStack = [...state.patternUndoStack]
@@ -59,11 +64,18 @@ export default createStore({
             commit('setPatternRedoStack', redoStack)
             commit('setPattern', nextPattern)
         },
+
         persistPattern({ commit, state }, pattern) {
             pattern = !pattern ? state.pattern : pattern
             commit('setPattern', pattern)
             localStorage.setItem('pattern', JSON.stringify(pattern))
         },
+
+        clearPattern({ commit }) {
+            commit('setPattern', {})
+            localStorage.removeItem('pattern')
+        },
+
         addNewSpan({  dispatch }, instrument) {
             instrument.parties.push({name: 'party x', spans: [[1,16]]})
             dispatch('setPattern')

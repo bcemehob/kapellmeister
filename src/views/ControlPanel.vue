@@ -3,7 +3,10 @@
     <div class="title">Play mode</div>
     <div class="d-flex space-between">
       <input type="file" ref="json" @change="readPattern()"/>
-      <button class="btn btn-dark with-text" @click="loadSamplePattern">Sample pattern</button>
+      <button v-if="ConductorService.isEmpty(pattern)" class="btn btn-dark with-text" @click="loadSamplePattern">Sample pattern</button>
+      <button v-if="!ConductorService.isEmpty(pattern)"
+              class="btn btn-dark with-text"
+              @click="clearPattern">Clear pattern</button>
       <div v-if="beatEmitter" class="d-flex" style="flex: 1">
         <div class="container mt-3">TEMPO: {{ pattern.tempo }} bpm</div>
         <div class="container mt-3">DURATION: {{ ConductorService.durationInBeats(pattern) }} beats ({{ pattern.duration}} measures)</div>
@@ -81,6 +84,11 @@ export default {
     loadSamplePattern() {
       fetch("/samples/samplePattern.kpm")
           .then(res => res.json().then(data => this.initPatternWithBeatEmitter(data)))
+    },
+
+    clearPattern() {
+      this.$store.dispatch('clearPattern')
+      this.beatEmitter = null;
     },
 
     initPatternWithBeatEmitter(patternObject) {

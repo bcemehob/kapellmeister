@@ -5,9 +5,9 @@
         <SvgIcon :name="'logo'"></SvgIcon>
         Kapellmeister
       </router-link>
-      <div class="track-name">
+      <div class="track-name" v-if="!ConductorService.isEmpty(pattern)">
         <div>{{ pattern.name }}</div>
-        <div v-if="pattern">
+        <div>
           <span class="track-info">{{ pattern.tempo }} bpm</span>
           <span class="track-info">{{ pattern.duration }} measures</span>
           <span class="track-info">{{ durationInBeats }} beats</span>
