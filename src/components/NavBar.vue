@@ -5,6 +5,11 @@
         <SvgIcon :name="'logo'"></SvgIcon>
         Kapellmeister
       </router-link>
+      <div class="control-block">
+        <button v-if="ConductorService.isEmpty(pattern)"
+                @click="loadSamplePattern"
+                class="btn btn-grey" >Sample pattern</button>
+      </div>
       <div class="track-name" v-if="!ConductorService.isEmpty(pattern)">
         <div>{{ pattern.name }}</div>
         <div>
@@ -40,11 +45,17 @@ export default {
     duration() {
       return ConductorService.calculateDuration(this.durationInBeats, this.pattern.tempo)
     }
+  },
+  methods: {
+    loadSamplePattern() {
+      fetch("/samples/samplePattern.kpm")
+          .then(res => res.json().then(data => this.$store.dispatch('persistPattern', data)))
+    },
   }
 }
 </script>
 <style scoped>
-.track-name {
+.track-name, .control-block {
   color: #fff
 }
 
@@ -58,5 +69,12 @@ export default {
   padding: 0;
   border: 0;
   padding-right: 10px;
+}
+.btn-grey {
+  background-color: #7d858d;
+  &:hover {
+    background-color: #5d656d;
+
+  }
 }
 </style>

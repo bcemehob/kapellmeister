@@ -113,12 +113,20 @@ export default {
 
     initPatternWithBeatEmitter(patternObject) {
       this.$store.dispatch('persistPattern', patternObject)
-      this.beatEmitter = new BeatEmitter(this.pattern.tempo, ConductorService.durationInBeats(this.pattern), this.handleBeat)
     }
   },
+
   mounted() {
     if (this.pattern && !ConductorService.isEmpty(this.pattern)) {
       this.beatEmitter = new BeatEmitter(this.pattern.tempo, ConductorService.durationInBeats(this.pattern), this.handleBeat)
+    }
+  },
+
+  watch: {
+    pattern(newVal) {
+      this.beatEmitter = ConductorService.isEmpty(newVal) ? null :
+          new BeatEmitter(this.pattern.tempo, ConductorService.durationInBeats(this.pattern), this.handleBeat)
+
     }
   }
 }
