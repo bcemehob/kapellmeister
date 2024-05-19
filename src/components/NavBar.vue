@@ -10,6 +10,9 @@
           <label for="file-upload" class="load-pattern"></label>
         </button>
         <input id="file-upload" type="file" ref="json" @change="readPattern"/>
+        <button class="btn btn-grey" @click="addEmptyPattern">
+          <i class="fa fa-add"></i>
+        </button>
         <button @click="loadSamplePattern" class="btn btn-grey">Sample
         </button>
         <button class="btn btn-grey" @click="clearPattern">
@@ -78,6 +81,21 @@ export default {
       } else {
         this.error = `Invalid file format: ${file.name}`
       }
+    },
+    addEmptyPattern() {
+      const newPattern = {
+        name: 'new pattern',
+        tempo: 120,
+        duration: 128,
+        measure: {
+          base: 4,
+          beats: 4
+        },
+        instruments: [
+          {name: 'instrument 1', parties: []}
+        ]
+      }
+      this.$store.dispatch('persistPattern',newPattern)
     },
   }
 }
