@@ -1,5 +1,5 @@
 <template>
-  <div class="timeline">
+  <div v-if="!ConductorService.isEmpty(pattern)" class="timeline">
     <table>
       <tr>
         <th class="narrow-column"> measure</th>
@@ -37,6 +37,7 @@
 import InstrumentNameField from "@/views/editor/InstrumentNameField.vue";
 import InstrumentPartySpan from "@/views/editor/InstrumentPartySpan.vue";
 import MeasuresRibbon from "@/views/editor/MeasuresRibbon.vue";
+import {ConductorService} from "@/services/ConductorService";
 
 export default {
   name: "TimeLine",
@@ -126,6 +127,9 @@ export default {
     },
   },
   computed: {
+    ConductorService() {
+      return ConductorService
+    },
     pattern() {
       return this.$store.state.pattern
     },
