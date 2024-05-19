@@ -6,13 +6,15 @@
         Kapellmeister
       </router-link>
       <div class="control-block">
-        <input type="file" ref="json" @change="readPattern"/>
-        <button v-if="ConductorService.isEmpty(pattern)"
-                @click="loadSamplePattern"
-                class="btn btn-grey" >Sample pattern</button>
-        <button v-if="!ConductorService.isEmpty(pattern)"
-                class="btn btn-grey"
-                @click="clearPattern">Clear pattern</button>
+        <button class="btn btn-grey">
+          <label for="file-upload" class="load-pattern"></label>
+        </button>
+        <input id="file-upload" type="file" ref="json" @change="readPattern"/>
+        <button @click="loadSamplePattern" class="btn btn-grey">Sample pattern
+        </button>
+        <button class="btn btn-grey"
+                @click="clearPattern">Clear pattern
+        </button>
       </div>
       <div class="track-name" v-if="!ConductorService.isEmpty(pattern)">
         <div>{{ pattern.name }}</div>
@@ -84,9 +86,22 @@ export default {
 .track-name, .control-block {
   color: #fff
 }
+
 .track-name, .empty-track {
   width: 40%;
   text-align: right;
+}
+
+.control-block {
+  input[type="file"] {
+    display: none;
+  }
+  .load-pattern::after {
+    content: "\f07c";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    cursor: pointer;
+  }
 }
 
 .track-info {
@@ -100,8 +115,11 @@ export default {
   border: 0;
   padding-right: 10px;
 }
+
 .btn-grey {
+  margin: 4px;
   background-color: #7d858d;
+
   &:hover {
     background-color: #5d656d;
 
