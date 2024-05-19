@@ -61,8 +61,7 @@ export default {
       if (file.name.endsWith(".kpm") || file.name.endsWith(".json")) {
         reader.onload = (readingEvent) => {
           try {
-            this.$store.dispatch('persistPattern', JSON.parse(readingEvent.target.result))
-            this.beatEmitter = new BeatEmitter(this.pattern.tempo, ConductorService.durationInBeats(this.pattern), this.handleBeat)
+            this.initPatternWithBeatEmitter(readingEvent.target.result)
           } catch (e) {
             this.error = 'Could not read file'
           }
@@ -72,6 +71,10 @@ export default {
       } else {
         this.error = `Invalid file format: ${file.name}`;
       }
+    },
+    initPatternWithBeatEmitter(jsonString) {
+      this.$store.dispatch('persistPattern', JSON.parse(jsonString))
+      this.beatEmitter = new BeatEmitter(this.pattern.tempo, ConductorService.durationInBeats(this.pattern), this.handleBeat)
     }
   },
   mounted() {
