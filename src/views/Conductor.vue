@@ -2,7 +2,7 @@
   <div class="section">
     <div class="title">KapellMeister</div>
     <PatternEditor></PatternEditor>
-    <ControlPanel :handle-beat="handleBeat"></ControlPanel>
+    <TransportControlPanel :handle-beat="handleBeat" />
     <div class="d-flex">
       <MotionViewer :current-beat="currentBeat"></MotionViewer>
       <Instruments :pattern="pattern" :current-beat="currentBeat"></Instruments>
@@ -13,8 +13,8 @@
 <script setup>
 import Instruments from "@/views/Instruments.vue";
 import MotionViewer from "@/views/MotionViewer.vue";
-import ControlPanel from "@/views/controls/ControlPanel.vue";
 import PatternEditor from "@/views/editor/PatternEditor.vue";
+import TransportControlPanel from "@/views/controls/TransportControlPanel.vue";
 </script>
 
 <script>

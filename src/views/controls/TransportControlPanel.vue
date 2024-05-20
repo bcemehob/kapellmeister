@@ -16,7 +16,7 @@ import {BeatEmitter} from "@/services/BeatEmitter"
 import {ConductorService} from "@/services/ConductorService"
 ``
 export default {
-  name: 'ControlPanel',
+  name: 'TransportControlPanel',
   props: {
     handleBeat: Function
   },
