@@ -5,14 +5,8 @@
       <div>
         <button class="btn btn-dark" @click="save()" :disabled="isPatternEmpty"><i class="fa fa-save"></i></button>
       </div>
-      <router-link v-if="isExpanded" :to="'/'" class="btn btn-dark">
-        <i class="fa fa-down-left-and-up-right-to-center"></i>
-      </router-link>
-      <router-link v-else :to="'/pattern-editor'" class="btn btn-dark">
-        <i class="fa fa-up-right-and-down-left-from-center"></i>
-      </router-link>
     </div>
-    <div v-if="isExpanded" class="editor">
+    <div class="editor">
       <Timeline></Timeline>
       <Options></Options>
     </div>
@@ -41,10 +35,7 @@ export default {
     },
     isPatternEmpty() {
       return ConductorService.isEmpty(this.pattern)
-    },
-    isExpanded() {
-      return this.$route.name === 'PatternEditor'
-    },
+    }
   },
   methods: {
     save: function () {

@@ -1,15 +1,17 @@
 <template>
-
 <NavBar/>
-  <router-view/>
+  <Conductor />
+  <PatternEditor />
 
 </template>
 <script>
 import NavBar from "@/components/NavBar";
 import {ConductorService} from "@/services/ConductorService";
+import Conductor from "@/views/Conductor.vue";
+import PatternEditor from "@/views/editor/PatternEditor.vue";
 export default {
   name: 'App',
-  components: { NavBar },
+  components: {PatternEditor, Conductor, NavBar },
   methods: {
     loadPattern() {
       if (ConductorService.isEmpty(this.pattern)) {

@@ -1,10 +1,10 @@
 <template>
   <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid ">
-      <router-link to="/" class="navbar-brand">
+      <div class="navbar-brand">
         <SvgIcon :name="'logo'"></SvgIcon>
         Kapellmeister
-      </router-link>
+      </div>
       <PatternControlPanel />
       <div class="track-name" v-if="!ConductorService.isEmpty(pattern)">
         <div>{{ pattern.name }}</div>
