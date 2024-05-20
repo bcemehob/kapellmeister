@@ -7,20 +7,16 @@ const routes = [
   {
     path: '/',
     name: 'Conductor',
-
     component: Conductor
   },
   {
     path: '/pattern-editor',
     name: 'PatternEditor',
-
     component: PatternEditor
   },
   {
-    //regular expression used for mnin page is not found
     path: '/:patchMatch(.*)*',
     name: 'PageNotFound',
-
     component: PageNotFound
   },
 ]
