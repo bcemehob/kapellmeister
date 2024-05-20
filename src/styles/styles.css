@@ -91,3 +91,11 @@ body {
 .options {
     width: 39%;
 }
+
+.btn-grey {
+    margin: 4px;
+    background-color: #7d858d;
+    &:hover {
+        background-color: #5d656d;
+    }
+}
