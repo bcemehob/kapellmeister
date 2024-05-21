@@ -72,31 +72,3 @@ export default {
 
 
 </script>
-
-
-
-<style scoped>
-.control-block {
-  color: #fff;
-  position: relative;
-  & > label {
-    position: absolute;
-    left: 4px;
-    top: -17px;
-    font-size: 14px;
-  }
-  input[type="file"] {
-    display: none;
-  }
-  .load-pattern::after {
-    content: "\f07c";
-    font-family: "Font Awesome 5 Free";
-    font-weight: 900;
-    cursor: pointer;
-  }
-  button.input-label {
-    cursor: pointer;
-    padding: 0;
-  }
-}
-</style>

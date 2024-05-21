@@ -1,7 +1,6 @@
 <template>
-  <div class="row section">
-    <div class="title">Play mode</div>
-
+  <div class="control-block">
+    <label>Play controls</label>
     <div v-show="error" class="alert alert-danger">{{ error }}</div>
     <div class="container control">
       <button v-if="!beatEmitter.playing" class="btn btn-grey" @click="play()"><i class="fa-solid fa-play"></i></button>
