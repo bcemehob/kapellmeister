@@ -7,7 +7,7 @@
       </div>
       <input type="checkbox" @click="() => $emit('editMode')" />
       <PatternControlPanel />
-      <TransportControlPanel v-if="beatEmitter" :beat-emitter="beatEmitter"/>
+      <TransportControlPanel :beat-emitter="beatEmitter"/>
       <PatternGeneralOptionsPanel />
     </div>
   </nav>

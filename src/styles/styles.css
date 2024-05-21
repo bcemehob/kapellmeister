@@ -113,6 +113,7 @@ body {
 
 .control-block {
     color: #fff;
+    min-width: 20%;
     position: relative;
     & > label {
         position: absolute;

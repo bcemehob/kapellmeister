@@ -1,5 +1,5 @@
 <template>
-  <div class="control-block">
+  <div v-if="beatEmitter" class="control-block">
     <label>Play controls</label>
     <div v-show="error" class="alert alert-danger">{{ error }}</div>
     <div class="container control">
@@ -8,6 +8,7 @@
       <button :disabled="!beatEmitter.playing" class="btn btn-grey" @click="stop()"><i class="fa-solid fa-stop"></i></button>
     </div>
   </div>
+  <div v-else class="control-block"></div>
 </template>
 <script>
 
