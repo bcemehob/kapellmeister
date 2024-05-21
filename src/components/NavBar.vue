@@ -5,10 +5,13 @@
         <SvgIcon :name="'logo'"></SvgIcon>
         Kapellmeister
       </div>
-      <input type="checkbox" @click="() => $emit('editMode')" />
-      <PatternControlPanel />
+      <div class="control-block">
+        <label>Pattern editor</label>
+        <input type="checkbox" @click="() => $emit('editMode')"/>
+      </div>
+      <PatternControlPanel/>
       <TransportControlPanel :beat-emitter="beatEmitter"/>
-      <PatternGeneralOptionsPanel />
+      <PatternGeneralOptionsPanel/>
     </div>
   </nav>
 </template>

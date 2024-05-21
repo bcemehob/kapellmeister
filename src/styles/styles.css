@@ -113,8 +113,11 @@ body {
 
 .control-block {
     color: #fff;
-    min-width: 20%;
+    min-width: 10%;
     position: relative;
+    .control {
+        padding: 0;
+    }
     & > label {
         position: absolute;
         left: 4px;
@@ -123,6 +126,10 @@ body {
     }
     input[type="file"] {
         display: none;
+    }
+    input[type="checkbox"] {
+        margin: 0 4px;
+        height: 26px;
     }
     .load-pattern::after {
         content: "\f07c";
