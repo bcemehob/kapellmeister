@@ -28,7 +28,7 @@ import PatternGeneralOptionsPanel from "@/views/controls/PatternGeneralOptionsPa
 import {ConductorService} from "@/services/ConductorService";
 
 export default {
-  name: 'NavBar',
+  name: 'TopBar',
   components: {},
   props: {
     beatEmitter: Object

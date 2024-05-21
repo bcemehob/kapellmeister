@@ -1,17 +1,17 @@
 <template>
-<NavBar @edit-mode="toggleEditMode" :beat-emitter="beatEmitter"/>
+<TopBar @edit-mode="toggleEditMode" :beat-emitter="beatEmitter"/>
   <PatternEditor v-if="isEditMode" :current-beat="currentBeat"/>
   <Conductor v-else :current-beat="currentBeat"/>
 </template>
 <script>
-import NavBar from "@/components/NavBar";
 import {ConductorService} from "@/services/ConductorService";
 import Conductor from "@/views/Conductor.vue";
 import PatternEditor from "@/views/editor/PatternEditor.vue";
 import {BeatEmitter} from "@/services/BeatEmitter";
+import TopBar from "@/components/TopBar.vue";
 export default {
   name: 'App',
-  components: {PatternEditor, Conductor, NavBar },
+  components: {PatternEditor, Conductor, TopBar },
   data() {
     return {
       isEditMode: false,
