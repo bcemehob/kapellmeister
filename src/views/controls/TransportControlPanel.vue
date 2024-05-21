@@ -4,9 +4,9 @@
 
     <div v-show="error" class="alert alert-danger">{{ error }}</div>
     <div class="container control">
-      <button v-if="!beatEmitter.playing" class="btn btn-dark" @click="play()"><i class="fa-solid fa-play"></i></button>
-      <button v-else class="btn btn-dark" @click="pause()"><i class="fa-solid fa-pause"></i></button>
-      <button :disabled="!beatEmitter.playing" class="btn btn-dark" @click="stop()"><i class="fa-solid fa-stop"></i></button>
+      <button v-if="!beatEmitter.playing" class="btn btn-grey" @click="play()"><i class="fa-solid fa-play"></i></button>
+      <button v-else class="btn btn-grey" @click="pause()"><i class="fa-solid fa-pause"></i></button>
+      <button :disabled="!beatEmitter.playing" class="btn btn-grey" @click="stop()"><i class="fa-solid fa-stop"></i></button>
     </div>
   </div>
 </template>
@@ -49,11 +49,3 @@ export default {
   },
 }
 </script>
-<style scoped>
-button {
-  margin: 2px;
-  width: 48px;
-  height: 48px;
-  font-size: 24px;
-}
-</style>

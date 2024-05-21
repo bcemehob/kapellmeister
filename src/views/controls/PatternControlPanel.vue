@@ -8,7 +8,8 @@
     <button class="btn btn-grey" @click="addEmptyPattern">
       <i class="fa fa-add"></i>
     </button>
-    <button @click="loadSamplePattern" class="btn btn-grey">Sample
+    <button @click="loadSamplePattern" class="btn btn-grey">
+      <i class="fas fa-magic"></i>
     </button>
     <button class="btn btn-grey" @click="clearPattern">
       <icon class="fa fa-trash"></icon>
@@ -76,6 +77,7 @@ export default {
 
 <style scoped>
 .control-block {
+  color: #fff;
   position: relative;
   & > label {
     position: absolute;
@@ -95,9 +97,6 @@ export default {
   button.input-label {
     cursor: pointer;
     padding: 0;
-    .load-pattern {
-      padding: 6px;
-    }
   }
 }
 </style>
