@@ -8,12 +8,15 @@ import NavBar from "@/components/NavBar";
 import {ConductorService} from "@/services/ConductorService";
 import Conductor from "@/views/Conductor.vue";
 import PatternEditor from "@/views/editor/PatternEditor.vue";
+import {BeatEmitter} from "@/services/BeatEmitter";
 export default {
   name: 'App',
   components: {PatternEditor, Conductor, NavBar },
   data() {
     return {
       isEditMode: false,
+      beatEmitter: null,
+      currentBeat: 0,
     }
   },
   methods: {
@@ -27,6 +30,9 @@ export default {
     },
     handleClick() {
       document.addEventListener('click', this.closeContextMenu)
+    },
+    handleBeat(currentBeat) {
+      this.currentBeat = currentBeat
     },
     closeContextMenu() {
       this.$store.commit('setContextMenuShown', false)
@@ -43,9 +49,19 @@ export default {
   mounted() {
     this.loadPattern()
     this.handleClick()
+    if (this.pattern && !ConductorService.isEmpty(this.pattern)) {
+      this.beatEmitter = new BeatEmitter(this.pattern.tempo, ConductorService.durationInBeats(this.pattern), this.handleBeat)
+    }
   },
   beforeUnmount() {
     document.removeEventListener('click', this.closeContextMenu)
+  },
+  watch: {
+    pattern(newVal) {
+      this.beatEmitter = ConductorService.isEmpty(newVal) ? null :
+          new BeatEmitter(this.pattern.tempo, ConductorService.durationInBeats(this.pattern), this.handleBeat)
+
+    }
   }
 }
 </script>
