@@ -7,6 +7,7 @@
       </div>
       <input type="checkbox" @click="() => $emit('editMode')" />
       <PatternControlPanel />
+      <TransportControlPanel v-if="beatEmitter" :beat-emitter="beatEmitter"/>
       <div class="track-name" v-if="!ConductorService.isEmpty(pattern)">
         <div>{{ pattern.name }}</div>
         <div>
@@ -24,6 +25,7 @@
 <script setup>
 import SvgIcon from "@/components/SvgIcon.vue";
 import PatternControlPanel from "@/views/controls/PatternControlPanel.vue";
+import TransportControlPanel from "@/views/controls/TransportControlPanel.vue";
 </script>
 
 <script>
@@ -33,6 +35,9 @@ import {ConductorService} from "@/services/ConductorService";
 export default {
   name: 'NavBar',
   components: {},
+  props: {
+    beatEmitter: Object
+  },
   computed: {
     pattern() {
       return this.$store.state.pattern
@@ -48,7 +53,7 @@ export default {
 }
 </script>
 <style scoped>
-.track-name, .control-block {
+.track-name {
   color: #fff
 }
 

@@ -1,7 +1,7 @@
 <template>
-<NavBar @edit-mode="toggleEditMode"/>
-  <PatternEditor v-if="isEditMode"/>
-  <Conductor v-else/>
+<NavBar @edit-mode="toggleEditMode" :beat-emitter="beatEmitter"/>
+  <PatternEditor v-if="isEditMode" :current-beat="currentBeat"/>
+  <Conductor v-else :current-beat="currentBeat"/>
 </template>
 <script>
 import NavBar from "@/components/NavBar";
@@ -17,6 +17,7 @@ export default {
       isEditMode: false,
       beatEmitter: null,
       currentBeat: 0,
+      playing: false
     }
   },
   methods: {
@@ -28,24 +29,29 @@ export default {
         }
       }
     },
+
     handleClick() {
       document.addEventListener('click', this.closeContextMenu)
     },
+
     handleBeat(currentBeat) {
       this.currentBeat = currentBeat
     },
+
     closeContextMenu() {
       this.$store.commit('setContextMenuShown', false)
     },
+
     toggleEditMode() {
       this.isEditMode = !this.isEditMode
-    }
+    },
   },
   computed: {
     pattern() {
       return this.$store.state.pattern
     }
   },
+
   mounted() {
     this.loadPattern()
     this.handleClick()
@@ -53,14 +59,15 @@ export default {
       this.beatEmitter = new BeatEmitter(this.pattern.tempo, ConductorService.durationInBeats(this.pattern), this.handleBeat)
     }
   },
+
   beforeUnmount() {
     document.removeEventListener('click', this.closeContextMenu)
   },
+
   watch: {
     pattern(newVal) {
       this.beatEmitter = ConductorService.isEmpty(newVal) ? null :
           new BeatEmitter(this.pattern.tempo, ConductorService.durationInBeats(this.pattern), this.handleBeat)
-
     }
   }
 }
