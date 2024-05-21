@@ -5,6 +5,7 @@
         <SvgIcon :name="'logo'"></SvgIcon>
         Kapellmeister
       </div>
+      <input type="checkbox" @click="() => $emit('editMode')" />
       <PatternControlPanel />
       <div class="track-name" v-if="!ConductorService.isEmpty(pattern)">
         <div>{{ pattern.name }}</div>
