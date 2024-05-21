@@ -8,16 +8,7 @@
       <input type="checkbox" @click="() => $emit('editMode')" />
       <PatternControlPanel />
       <TransportControlPanel v-if="beatEmitter" :beat-emitter="beatEmitter"/>
-      <div class="track-name" v-if="!ConductorService.isEmpty(pattern)">
-        <div>{{ pattern.name }}</div>
-        <div>
-          <span class="track-info">{{ pattern.tempo }} bpm</span>
-          <span class="track-info">{{ pattern.duration }} measures</span>
-          <span class="track-info">{{ durationInBeats }} beats</span>
-          <span class="track-info">{{ duration }}</span>
-        </div>
-      </div>
-      <div class="empty-track" v-else>placeholder</div>
+      <PatternGeneralOptionsPanel />
     </div>
   </nav>
 </template>
@@ -26,6 +17,7 @@
 import SvgIcon from "@/components/SvgIcon.vue";
 import PatternControlPanel from "@/views/controls/PatternControlPanel.vue";
 import TransportControlPanel from "@/views/controls/TransportControlPanel.vue";
+import PatternGeneralOptionsPanel from "@/views/controls/PatternGeneralOptionsPanel.vue";
 </script>
 
 <script>
@@ -52,26 +44,3 @@ export default {
   }
 }
 </script>
-<style scoped>
-.track-name {
-  color: #fff
-}
-
-.track-name, .empty-track {
-  width: 40%;
-  text-align: right;
-}
-
-
-.track-info {
-  color: #999;
-  padding: 0 10px;
-  border-left: 1px solid #777;
-}
-
-.track-info:first-child {
-  padding: 0;
-  border: 0;
-  padding-right: 10px;
-}
-</style>
