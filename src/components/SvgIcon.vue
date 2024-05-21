@@ -6,7 +6,7 @@
 
 
 export default {
-  name: 'NavBar',
+  name: 'SvgIcon',
   props: {
     color: String
   },
