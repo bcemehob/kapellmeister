@@ -1,10 +1,7 @@
 <template>
   <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid ">
-      <div class="navbar-brand">
-        <SvgIcon :name="'logo'"></SvgIcon>
-        Kapellmeister
-      </div>
+      <BrandWithLogo />
       <EditModeControlPanel />
       <PatternControlPanel/>
       <TransportControlPanel :beat-emitter="beatEmitter"/>
@@ -14,11 +11,11 @@
 </template>
 
 <script setup>
-import SvgIcon from "@/components/SvgIcon.vue";
 import PatternControlPanel from "@/views/controls/PatternControlPanel.vue";
 import TransportControlPanel from "@/views/controls/TransportControlPanel.vue";
 import PatternGeneralOptionsPanel from "@/views/controls/PatternGeneralOptionsPanel.vue";
 import EditModeControlPanel from "@/views/controls/EditModeControlPanel.vue";
+import BrandWithLogo from "@/views/BrandWithLogo.vue";
 </script>
 
 <script>
