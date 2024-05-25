@@ -7,7 +7,7 @@
       </div>
       <div class="control-block">
         <label>Pattern editor</label>
-        <input type="checkbox" @click="() => $emit('editMode')"/>
+        <input type="checkbox" @click="() => $store.dispatch('toggleEditMode')"/>
       </div>
       <PatternControlPanel/>
       <TransportControlPanel :beat-emitter="beatEmitter"/>

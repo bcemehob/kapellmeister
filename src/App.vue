@@ -1,6 +1,6 @@
 <template>
-<TopBar @edit-mode="toggleEditMode" :beat-emitter="beatEmitter"/>
-  <PatternEditor v-if="isEditMode" :current-beat="currentBeat"/>
+  <TopBar :beat-emitter="beatEmitter"/>
+  <PatternEditor v-if="editMode" :current-beat="currentBeat"/>
   <Conductor v-else :current-beat="currentBeat"/>
 </template>
 <script>
@@ -9,12 +9,12 @@ import Conductor from "@/views/Conductor.vue";
 import PatternEditor from "@/views/editor/PatternEditor.vue";
 import {BeatEmitter} from "@/services/BeatEmitter";
 import TopBar from "@/components/TopBar.vue";
+
 export default {
   name: 'App',
-  components: {PatternEditor, Conductor, TopBar },
+  components: {PatternEditor, Conductor, TopBar},
   data() {
     return {
-      isEditMode: false,
       beatEmitter: null,
       currentBeat: 0,
       playing: false
@@ -41,14 +41,14 @@ export default {
     closeContextMenu() {
       this.$store.commit('setContextMenuShown', false)
     },
-
-    toggleEditMode() {
-      this.isEditMode = !this.isEditMode
-    },
   },
   computed: {
     pattern() {
       return this.$store.state.pattern
+    },
+
+    editMode() {
+      return this.$store.state.editMode
     }
   },
 

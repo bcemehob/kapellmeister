@@ -6,7 +6,8 @@ export default createStore({
         pattern: {},
         patternUndoStack: [],
         patternRedoStack: [],
-        contextMenuShown: false
+        contextMenuShown: false,
+        editMode: false
     },
     getters: {
         getPattern(state) {
@@ -14,6 +15,9 @@ export default createStore({
         },
         getContextMenuShown(state) {
             return state.contextMenuShown
+        },
+        isEditMode(state) {
+            return state.editMode
         }
     },
     mutations: {
@@ -32,6 +36,10 @@ export default createStore({
         setContextMenuShown(state, payload) {
             state.contextMenuShown = payload;
         },
+
+        setEditMode(state, payload) {
+            state.editMode = payload;
+        }
     },
     actions: {
         backup ({ commit, state }) {
@@ -79,6 +87,10 @@ export default createStore({
         addNewSpan({  dispatch }, instrument) {
             instrument.parties.push({name: 'party x', spans: [[1,16]]})
             dispatch('persistPattern')
+        },
+
+        toggleEditMode( {state, commit }) {
+            commit('setEditMode', !state.editMode)
         }
     }
 })
