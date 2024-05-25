@@ -5,10 +5,7 @@
         <SvgIcon :name="'logo'"></SvgIcon>
         Kapellmeister
       </div>
-      <div class="control-block">
-        <label>Pattern editor</label>
-        <input type="checkbox" @click="() => $store.dispatch('toggleEditMode')"/>
-      </div>
+      <EditModeControlPanel />
       <PatternControlPanel/>
       <TransportControlPanel :beat-emitter="beatEmitter"/>
       <PatternGeneralOptionsPanel/>
@@ -21,6 +18,7 @@ import SvgIcon from "@/components/SvgIcon.vue";
 import PatternControlPanel from "@/views/controls/PatternControlPanel.vue";
 import TransportControlPanel from "@/views/controls/TransportControlPanel.vue";
 import PatternGeneralOptionsPanel from "@/views/controls/PatternGeneralOptionsPanel.vue";
+import EditModeControlPanel from "@/views/controls/EditModeControlPanel.vue";
 </script>
 
 <script>
