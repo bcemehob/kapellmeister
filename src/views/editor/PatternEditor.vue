@@ -8,7 +8,6 @@
     </div>
     <div class="editor">
       <Timeline></Timeline>
-      <Options></Options>
     </div>
   </div>
 
@@ -17,11 +16,10 @@
 
 import Timeline from "@/views/editor/Timeline.vue";
 import {ConductorService} from "@/services/ConductorService";
-import Options from "@/views/editor/Options.vue";
 
 export default {
   name: "PatternEditor",
-  components: {Options, Timeline},
+  components: {Timeline},
   data: function () {
     return {
       name: '',
