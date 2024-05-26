@@ -62,7 +62,6 @@ function finishEdit() {
     appearance: textfield;
     border: 0;
     border-radius: 4px;
-    cursor: ns-resize;
   }
 
   /* Chrome, Safari, Edge, Opera */
