@@ -1,6 +1,6 @@
 <template>
   <div class="control-block">
-    <label>Pattern editor</label>
+    <label>Actions</label>
     <button class="btn btn-grey" :disabled="!undoAvailable" @click="undo()"><i class="fa fa-undo"></i></button>
     <button class="btn btn-grey" :disabled="!redoAvailable" @click="redo()"><i class="fa fa-redo"></i></button>
   </div>
