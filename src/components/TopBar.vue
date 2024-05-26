@@ -19,29 +19,5 @@ import EditModeControlPanel from "@/views/controls/EditModeControlPanel.vue"
 import BrandWithLogo from "@/views/BrandWithLogo.vue"
 import ActionsControlPanel from "@/views/controls/ActionsControlPanel.vue";
 
-</script>
-
-<script>
-
-import {ConductorService} from "@/services/ConductorService";
-
-export default {
-  name: 'TopBar',
-  components: {},
-  props: {
-    beatEmitter: Object
-  },
-  computed: {
-    pattern() {
-      return this.$store.state.pattern
-    },
-    durationInBeats() {
-      if (!this.pattern.measure) return 0
-      return this.pattern.duration * this.pattern.measure.beats
-    },
-    duration() {
-      return ConductorService.calculateDuration(this.durationInBeats, this.pattern.tempo)
-    }
-  }
-}
+defineProps(['beatEmitter'])
 </script>
