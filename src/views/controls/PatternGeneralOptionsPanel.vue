@@ -2,9 +2,14 @@
   <div v-if="!ConductorService.isEmpty(pattern)" class="track-name">
     <div>{{ pattern.name }}</div>
     <div>
-      <span class="track-info">{{ pattern.tempo }} bpm</span>
-      <span class="track-info">{{ pattern.duration }} measures</span>
+      <span class="track-info"><ClickableEditable v-model="pattern.tempo" /> bpm</span>
+      <span class="track-info"><ClickableEditable v-model="pattern.duration" /> measures</span>
       <span class="track-info">{{ durationInBeats }} beats</span>
+      <span class="track-info">
+        <ClickableEditable v-model="pattern.measure.beats" />
+         /
+        <ClickableEditable v-model="pattern.measure.base" />
+      </span>
       <span class="track-info">{{ duration }}</span>
     </div>
   </div>
@@ -13,9 +18,11 @@
 
 <script>
 import {ConductorService} from "@/services/ConductorService";
+import ClickableEditable from "@/views/controls/ClickableEditable.vue";
 
 export default {
   name: "PatternGeneralOptionsPanel",
+  components: {ClickableEditable},
   computed: {
     ConductorService() {
       return ConductorService
