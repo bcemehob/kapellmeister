@@ -4,7 +4,6 @@
     <div>
       <span class="track-info"><ClickableEditable v-model="pattern.tempo" /> bpm</span>
       <span class="track-info"><ClickableEditable v-model="pattern.duration" /> measures</span>
-      <span class="track-info">{{ durationInBeats }} beats</span>
       <span class="track-info">
         <ClickableEditable v-model="pattern.measure.beats" />
          /
@@ -16,29 +15,16 @@
   <div v-else class="empty-track">placeholder</div>
 </template>
 
-<script>
+<script setup>
+import {useStore} from "vuex";
+import {computed} from "vue";
 import {ConductorService} from "@/services/ConductorService";
 import ClickableEditable from "@/views/controls/ClickableEditable.vue";
-
-export default {
-  name: "PatternGeneralOptionsPanel",
-  components: {ClickableEditable},
-  computed: {
-    ConductorService() {
-      return ConductorService
-    },
-    pattern() {
-      return this.$store.state.pattern
-    },
-    durationInBeats() {
-      if (!this.pattern.measure) return 0
-      return this.pattern.duration * this.pattern.measure.beats
-    },
-    duration() {
-      return ConductorService.calculateDuration(this.durationInBeats, this.pattern.tempo)
-    }
-  }
-}
+const store = useStore()
+const pattern = computed(() => store.state.pattern)
+const durationInBeats = computed(() => calculateBeats(pattern.value))
+const duration = computed(() => ConductorService.calculateDuration(durationInBeats.value, pattern.value.tempo))
+const calculateBeats = p => !p.measure ? 0 : p.duration * p.measure.beats
 </script>
 
 <style scoped>
