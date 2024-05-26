@@ -5,17 +5,20 @@
       <EditModeControlPanel />
       <PatternControlPanel/>
       <TransportControlPanel :beat-emitter="beatEmitter"/>
+      <ActionsControlPanel />
       <PatternGeneralOptionsPanel/>
     </div>
   </nav>
 </template>
 
 <script setup>
-import PatternControlPanel from "@/views/controls/PatternControlPanel.vue";
-import TransportControlPanel from "@/views/controls/TransportControlPanel.vue";
-import PatternGeneralOptionsPanel from "@/views/controls/PatternGeneralOptionsPanel.vue";
-import EditModeControlPanel from "@/views/controls/EditModeControlPanel.vue";
-import BrandWithLogo from "@/views/BrandWithLogo.vue";
+import PatternControlPanel from "@/views/controls/PatternControlPanel.vue"
+import TransportControlPanel from "@/views/controls/TransportControlPanel.vue"
+import PatternGeneralOptionsPanel from "@/views/controls/PatternGeneralOptionsPanel.vue"
+import EditModeControlPanel from "@/views/controls/EditModeControlPanel.vue"
+import BrandWithLogo from "@/views/BrandWithLogo.vue"
+import ActionsControlPanel from "@/views/controls/ActionsControlPanel.vue";
+
 </script>
 
 <script>
