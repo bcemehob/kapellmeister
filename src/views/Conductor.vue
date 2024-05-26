@@ -10,7 +10,7 @@
 
 <script setup>
 import Instruments from "@/views/Instruments.vue";
-import MotionViewer from "@/views/MotionViewer.vue";
+import MotionViewer from "@/views/MotionViewerV2.vue";
 </script>
 
 <script>
