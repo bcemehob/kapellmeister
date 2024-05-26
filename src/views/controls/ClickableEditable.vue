@@ -1,11 +1,13 @@
 <template>
   <div class="wrapp">
-    <div class="disp" @click="startEdit">{{ value }}</div>
-    <input v-if="editMode" type="number" v-model="value"
+    <div class="clickable-value" @click="startEdit">{{ value }}</div>
+    <input v-show="editMode" type="number" v-model="value"
+           ref="input"
            @wheel="() => {}"
            @blur="finishEdit"/>
   </div>
 </template>
+
 <script setup>
 import {computed, ref} from "vue";
 import {useStore} from "vuex";
@@ -16,6 +18,7 @@ const props = defineProps({
 })
 const emit = defineEmits(['update:modelValue'])
 const editMode = ref(false)
+const input = ref(null)
 const value = computed({
   get() {
     return props.modelValue
@@ -27,13 +30,13 @@ const value = computed({
 
 function startEdit() {
   editMode.value = true
+  if (input.value) setTimeout(() => input.value.focus())
 }
 
 function finishEdit() {
   editMode.value = false
   store.dispatch('persistPattern')
 }
-
 </script>
 
 <style scoped>
@@ -41,7 +44,11 @@ function finishEdit() {
   display: inline-block;
   position: relative;
 
-  .disp {
+  .clickable-value {
+    cursor: pointer;
+    &:hover {
+      color: #cbcbcb;
+    }
   }
 
   input {
@@ -55,10 +62,10 @@ function finishEdit() {
     appearance: textfield;
     border: 0;
     border-radius: 4px;
+    cursor: ns-resize;
   }
 
   /* Chrome, Safari, Edge, Opera */
-
   input::-webkit-outer-spin-button,
   input::-webkit-inner-spin-button {
     -webkit-appearance: none;
@@ -66,7 +73,6 @@ function finishEdit() {
   }
 
   /* Firefox */
-
   input[type=number] {
     -moz-appearance: textfield;
   }
