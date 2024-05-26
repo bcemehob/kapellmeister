@@ -1,47 +1,37 @@
 <template>
-   <div class="wrapp">
+  <div class="wrapp">
     <div class="disp" @click="startEdit">{{ value }}</div>
     <input v-if="editMode" type="number" v-model="value"
            @wheel="() => {}"
            @blur="finishEdit"/>
-   </div>
+  </div>
 </template>
+<script setup>
+import {computed, ref} from "vue";
+import {useStore} from "vuex";
 
-<script>
-
-export default {
-  name: 'ClickableEditable',
-  props: {
-    modelValue: Number,
+const store = useStore()
+const props = defineProps({
+  modelValue: Number
+})
+const emit = defineEmits(['update:modelValue'])
+const editMode = ref(false)
+const value = computed({
+  get() {
+    return props.modelValue
   },
-  data() {
-    return {
-      editMode: false
-    }
-  },
-  computed: {
-    pattern() {
-      return this.$store.state.pattern
-    },
-    value: {
-      get() {
-        return this.modelValue;
-      },
-      set(value) {
-        this.$emit('update:modelValue', value)
-      }
-    }
-  },
-  methods: {
-    startEdit() {
-      this.editMode = true
-    },
-
-    finishEdit() {
-      this.editMode = false
-      this.$store.dispatch('persistPattern')
-    },
+  set(value) {
+    emit('update:modelValue', value)
   }
+})
+
+function startEdit() {
+  editMode.value = true
+}
+
+function finishEdit() {
+  editMode.value = false
+  store.dispatch('persistPattern')
 }
 
 </script>
@@ -57,7 +47,8 @@ export default {
   input {
     position: absolute;
     left: 0;
-    width: auto;
+    top: 0;
+    width: 150%;
     background-color: #4d555d;
     color: #fff;
     outline: none;
