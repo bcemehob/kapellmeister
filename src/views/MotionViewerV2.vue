@@ -31,10 +31,10 @@ function isCurrent(beat) {
 .beat-container {
   border: 1px solid #7d858d;
   background-color: #cddadc;
-  width: 50%;
+  width: 70%;
   .beat {
     display: inline-block;
-    width:170px;
+    width:150px;
     height: 300px;
     text-align: center;
     vertical-align: top;
