@@ -52,6 +52,7 @@ export default {
       };
     },
     startDrag(eClick, partySpan) {
+      if (eClick.button !== 0) return
       this.$store.dispatch('backup')
       this.setStretchListeners(eClick, partySpan)
       document.addEventListener('mousemove', this.stretchListener)
@@ -59,6 +60,7 @@ export default {
     },
 
     startMove(eClick, partySpan) {
+      if (eClick.button !== 0) return
       this.$store.dispatch('backup')
       this.setMoveListeners(eClick, partySpan)
       document.addEventListener('mousemove', this.moveListener)
@@ -78,6 +80,7 @@ export default {
     setMoveListeners(eClick, partySpan) {
       const that = this
       this.moveListener = function (eMove) {
+        console.log("start move")
         that.move(eClick, eMove, partySpan)
       }
       this.stopMoveListener = function (eStop) {
