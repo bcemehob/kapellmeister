@@ -24,7 +24,7 @@ const PARTY_COLORS = [
 ]
 
 export default {
-  name: "InstrumentPartySpan",
+  name: "InstrumentPartySpans",
   props: {
     instrument: Object,
     index: Number

@@ -15,7 +15,7 @@
           <MeasuresRibbon />
         </td>
         <td v-for="(instrument, index) in pattern.instruments" v-bind:key="index" class="instrument">
-          <InstrumentPartySpan :instrument :index />
+          <InstrumentPartySpans :instrument :index />
         </td>
         <td>-</td>
       </tr>
@@ -35,13 +35,13 @@
 
 <script>
 import InstrumentNameField from "@/views/editor/InstrumentNameField.vue";
-import InstrumentPartySpan from "@/views/editor/InstrumentPartySpan.vue";
+import InstrumentPartySpans from "@/views/editor/InstrumentPartySpans.vue";
 import MeasuresRibbon from "@/views/editor/MeasuresRibbon.vue";
 import {ConductorService} from "@/services/ConductorService";
 
 export default {
   name: "TimeLine",
-  components: {MeasuresRibbon, InstrumentPartySpan, InstrumentNameField},
+  components: {InstrumentPartySpans, MeasuresRibbon, InstrumentNameField},
   data() {
     return {
       measures: [],
