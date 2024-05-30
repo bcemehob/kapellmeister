@@ -6,7 +6,7 @@
         <th v-for="(instrument, i) in pattern.instruments" v-bind:key="i"
             @contextmenu="e => showContextMenu(e, instrument, i)"
             :id="instrumentThId(instrument, i)">
-          <InstrumentNameField :instrument @name="n => instrument.name = n" />
+          <ClickableEditable v-model="instrument.name" type="text"/>
         </th>
         <th class="narrow-column">menu</th>
       </tr>
@@ -34,14 +34,14 @@
 </template>
 
 <script>
-import InstrumentNameField from "@/views/editor/InstrumentNameField.vue";
 import InstrumentPartySpans from "@/views/editor/InstrumentPartySpans.vue";
 import MeasuresRibbon from "@/views/editor/MeasuresRibbon.vue";
 import {ConductorService} from "@/services/ConductorService";
+import ClickableEditable from "@/views/controls/ClickableEditable.vue";
 
 export default {
   name: "TimeLine",
-  components: {InstrumentPartySpans, MeasuresRibbon, InstrumentNameField},
+  components: {ClickableEditable, InstrumentPartySpans, MeasuresRibbon},
   data() {
     return {
       measures: [],

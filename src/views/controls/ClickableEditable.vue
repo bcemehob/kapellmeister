@@ -1,10 +1,11 @@
 <template>
   <div class="wrapp">
     <div class="clickable-value" @click="startEdit">{{ value }}</div>
-    <input v-show="editMode" type="number" v-model="value"
+    <input v-show="editMode" :type="type" v-model="value"
            ref="input"
            @wheel="() => {}"
-           @blur="finishEdit"/>
+           @blur="finishEdit"
+           @keyup.enter="finishEdit"/>
   </div>
 </template>
 
@@ -14,7 +15,8 @@ import {useStore} from "vuex";
 
 const store = useStore()
 const props = defineProps({
-  modelValue: Number
+  modelValue: Number,
+  type: {type: String, required: false, default: "number"},
 })
 const emit = defineEmits(['update:modelValue'])
 const editMode = ref(false)
