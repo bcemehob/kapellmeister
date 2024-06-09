@@ -17,6 +17,7 @@ export class BeatEmitter {
         this.intervalBetweenBeats = 60  * 1000 / this.tempo
         this.beatCallback = beatCallback
         this.playing = false
+        this.pausedBeat = 0
     }
     // parameters:
     // 1. Tempo (bpm)
@@ -25,7 +26,9 @@ export class BeatEmitter {
 
     start(){
         console.log("BeatEmitter started. Interval: ", this.intervalBetweenBeats);
-        this.beat()
+        this.firstBeatTime = new Date().getTime()
+        this.pausedBeat = this.currentBeat
+        this.beat(this.firstBeatTime)
         this.playing = true
     }
 
@@ -42,13 +45,11 @@ export class BeatEmitter {
         console.log("BeatEmitter paused");
     }
 
-    beat() {
-        let beatTime = new Date().getTime()
-        if (this.currentBeat === 0) this.firstBeatTime = beatTime
+    beat(beatTime) {
+        beatTime = beatTime || new Date().getTime()
         this.currentBeat++
-        let expectedNextBeatTime = this.firstBeatTime + this.intervalBetweenBeats * this.currentBeat
+        const expectedNextBeatTime = this.firstBeatTime + this.intervalBetweenBeats * (this.currentBeat - this.pausedBeat)
         let nextBeatTimeout = expectedNextBeatTime - beatTime - 5
-
         if (this.currentBeat > this.duration) {
             this.stop()
             this.printMetrics(beatTime);
