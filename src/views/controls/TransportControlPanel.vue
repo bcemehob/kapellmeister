@@ -1,7 +1,6 @@
 <template>
   <div v-if="beatEmitter" class="control-block">
     <label>Play controls</label>
-    <div v-show="error" class="alert alert-danger">{{ error }}</div>
     <div class="container control">
       <button v-if="!beatEmitter.playing" class="btn btn-grey" @click="play()"><i class="fa-solid fa-play"></i></button>
       <button v-else class="btn btn-grey" @click="pause()"><i class="fa-solid fa-pause"></i></button>
@@ -10,42 +9,22 @@
   </div>
   <div v-else class="control-block"></div>
 </template>
-<script>
 
-import {ConductorService} from "@/services/ConductorService"
+<script setup>
+const props = defineProps({
+  beatEmitter: Object
+})
 
-export default {
-  name: 'TransportControlPanel',
-  props: {
-    handleBeat: Function,
-    beatEmitter: Object
-  },
-  data() {
-    return {
-      playing: false,
-      error: null
-    }
-  },
-  computed: {
-    ConductorService() {
-      return ConductorService
-    },
-    pattern() {
-      return this.$store.state.pattern
-    }
-  },
-  methods: {
-    play: function () {
-      this.beatEmitter.start()
-    },
-
-    stop: function () {
-      this.beatEmitter.stop()
-    },
-
-    pause: function () {
-      this.beatEmitter.pause()
-    },
-  },
+function play() {
+  props.beatEmitter.start()
 }
+
+function stop() {
+  props.beatEmitter.stop()
+}
+
+function pause() {
+  props.beatEmitter.pause()
+}
+
 </script>
