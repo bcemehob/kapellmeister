@@ -1,15 +1,15 @@
 <template>
   <div v-if="!ConductorService.isEmpty(pattern)" class="track-name">
-    <div><ClickableEditable v-model="pattern.name" :narrow="true" type="text"/></div>
+    <div><clickable-editable v-model="pattern.name" :narrow="true" type="text"/></div>
     <div>
-      <span class="track-info"><ClickableEditable v-model="pattern.tempo"/> bpm</span>
-      <span class="track-info"><ClickableEditable v-model="pattern.duration"/>
+      <span class="track-info"><clickable-editable v-model="pattern.tempo"/> bpm</span>
+      <span class="track-info"><clickable-editable v-model="pattern.duration"/>
         measures <i class="fa" :class="measureClass"></i>
       </span>
       <span class="track-info">
-        <ClickableEditable v-model="pattern.measure.beats"/>
+        <clickable-editable v-model="pattern.measure.beats"/>
          /
-        <ClickableEditable v-model="pattern.measure.base"/>
+        <clickable-editable v-model="pattern.measure.base"/>
       </span>
       <span class="track-info">{{ duration }}</span>
     </div>
@@ -84,5 +84,4 @@ const measureClassMapped = className => {
     color: #58dab4;
   }
 }
-
 </style>

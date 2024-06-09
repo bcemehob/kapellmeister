@@ -7,7 +7,7 @@
       </div>
     </div>
     <div class="editor">
-      <Timeline></Timeline>
+      <timeline />
     </div>
   </div>
 

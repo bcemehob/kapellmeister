@@ -2,11 +2,11 @@
   <div class="section w-50">
     <div class="title">Instruments</div>
     <div class="d-flex align-items-center justify-content-center">
-      <Instrument v-for="instrument in pattern.instruments"
+      <instrument v-for="instrument in pattern.instruments"
                   :key="instrument.name"
                   :instrument="instrument"
                   :measure="pattern.measure"
-                  :current-beat="currentBeat"></Instrument>
+                  :current-beat="currentBeat" />
     </div>
   </div>
 </template>

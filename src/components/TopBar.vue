@@ -1,12 +1,12 @@
 <template>
   <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid ">
-      <BrandWithLogo />
-      <EditModeControlPanel />
-      <PatternControlPanel/>
-      <TransportControlPanel :beat-emitter="beatEmitter"/>
-      <ActionsControlPanel />
-      <PatternGeneralOptionsPanel/>
+      <brand-with-logo />
+      <edit-mode-control-panel />
+      <pattern-control-panel/>
+      <transport-control-panel :beat-emitter="beatEmitter"/>
+      <actions-control-panel />
+      <pattern-general-options-panel/>
     </div>
   </nav>
 </template>

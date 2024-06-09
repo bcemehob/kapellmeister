@@ -6,16 +6,16 @@
         <th v-for="(instrument, i) in pattern.instruments" v-bind:key="i"
             @contextmenu="e => showContextMenu(e, instrument, i)"
             :id="instrumentThId(instrument, i)">
-          <ClickableEditable v-model="instrument.name" type="text"/>
+          <clickable-editable v-model="instrument.name" type="text"/>
         </th>
         <th class="narrow-column">menu</th>
       </tr>
       <tr>
         <td>
-          <MeasuresRibbon />
+          <measures-ribbon />
         </td>
         <td v-for="(instrument, index) in pattern.instruments" v-bind:key="index" class="instrument">
-          <InstrumentPartySpans :instrument :index />
+          <instrument-party-spans :instrument :index />
         </td>
         <td>-</td>
       </tr>

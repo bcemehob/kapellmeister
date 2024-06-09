@@ -2,8 +2,8 @@
   <div class="section">
     <div class="title">KapellMeister</div>
     <div class="d-flex">
-      <MotionViewer :current-beat="currentBeat"></MotionViewer>
-      <Instruments :pattern="pattern" :current-beat="currentBeat"></Instruments>
+      <motion-viewer :current-beat="currentBeat" />
+      <instruments :pattern="pattern" :current-beat="currentBeat" />
     </div>
   </div>
 </template>
