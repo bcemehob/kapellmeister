@@ -2,6 +2,7 @@
   <div class="wrapp">
     <div class="clickable-value" @click="startEdit">{{ value }}</div>
     <input v-show="editMode" :type="type" v-model="value"
+           :class="narrow ? 'narrow' : ''"
            ref="input"
            @wheel="() => {}"
            @blur="finishEdit"
@@ -17,6 +18,7 @@ const store = useStore()
 const props = defineProps({
   modelValue: Number,
   type: {type: String, required: false, default: "number"},
+  narrow: Boolean
 })
 const emit = defineEmits(['update:modelValue'])
 const editMode = ref(false)
@@ -64,6 +66,9 @@ function finishEdit() {
     appearance: textfield;
     border: 0;
     border-radius: 4px;
+    &.narrow {
+      width: 100%;
+    }
   }
 
   /* Chrome, Safari, Edge, Opera */

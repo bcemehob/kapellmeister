@@ -1,10 +1,11 @@
 <template>
   <div v-if="!ConductorService.isEmpty(pattern)" class="track-name">
-    <div>{{ pattern.name }}</div>
+    <div><ClickableEditable v-model="pattern.name" :narrow="true" type="text"/></div>
     <div>
       <span class="track-info"><ClickableEditable v-model="pattern.tempo"/> bpm</span>
-      <span class="track-info"><ClickableEditable v-model="pattern.duration"/> measures <i class="fa"
-                                                                                           :class="measureClass"></i></span>
+      <span class="track-info"><ClickableEditable v-model="pattern.duration"/>
+        measures <i class="fa" :class="measureClass"></i>
+      </span>
       <span class="track-info">
         <ClickableEditable v-model="pattern.measure.beats"/>
          /
