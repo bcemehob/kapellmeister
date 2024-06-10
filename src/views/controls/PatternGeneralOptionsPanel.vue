@@ -25,10 +25,8 @@ import ClickableEditable from "@/views/controls/ClickableEditable.vue";
 
 const store = useStore()
 const pattern = computed(() => store.state.pattern)
-const durationInBeats = computed(() => calculateBeats(pattern.value))
-const duration = computed(() => ConductorService.calculateDuration(durationInBeats.value, pattern.value.tempo))
+const duration = computed(() => ConductorService.calculateDuration(ConductorService.durationInBeats(pattern.value), pattern.value.tempo).timeString)
 const measureClass = computed(() => measureClassMapped(ConductorService.getClassName(pattern.value)))
-const calculateBeats = p => !p.measure ? 0 : p.duration * p.measure.beats
 
 const measureClassMapped = className => {
   switch (className) {
