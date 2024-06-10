@@ -3,9 +3,9 @@
     <div class="container-fluid ">
       <brand-with-logo />
       <edit-mode-control-panel />
+      <actions-control-panel />
       <pattern-control-panel/>
       <transport-control-panel :beat-emitter="beatEmitter"/>
-      <actions-control-panel />
       <pattern-general-options-panel/>
     </div>
   </nav>
