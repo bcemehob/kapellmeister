@@ -1,7 +1,7 @@
 <template>
-  <TopBar :beat-emitter="beatEmitter"/>
-  <PatternEditor v-if="editMode" :current-beat="currentBeat"/>
-  <Conductor v-else :current-beat="currentBeat"/>
+  <top-bar :beat-emitter="beatEmitter"/>
+  <pattern-editor v-if="editMode" :current-beat="currentBeat"/>
+  <conductor v-else :current-beat="currentBeat"/>
 </template>
 <script>
 import {ConductorService} from "@/services/ConductorService";
