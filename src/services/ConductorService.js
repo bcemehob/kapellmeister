@@ -1,16 +1,17 @@
 export class ConductorService {
     static SQUARE = 4
     static DOUBLE = 8;
-    static durationInBeats(pattern){
+
+    static durationInBeats(pattern) {
         if (this.isEmpty(pattern)) return 0
         return pattern.duration * pattern.measure.beats
     }
 
-    static isEmpty(pattern){
+    static isEmpty(pattern) {
         return Object.keys(pattern).length === 0;
     }
 
-    static calculateDuration(durationInBeats, tempo){
+    static calculateDuration(durationInBeats, tempo) {
         let minutes = Math.floor(durationInBeats / tempo)
         const beatRate = tempo / 60
         const remainder = durationInBeats - minutes * tempo
@@ -20,8 +21,11 @@ export class ConductorService {
             minutes++
             seconds -= 60
         }
-        let secondsStr = ('0'+seconds).slice(-2);
-        return `${minutes}:${secondsStr}`
+        let secondsStr = ('0' + seconds).slice(-2)
+        return {
+            seconds: minutes * 60 + seconds,
+            timeString: `${minutes}:${secondsStr}`
+        }
     }
 
     static getClassName(pattern) {
