@@ -4,18 +4,13 @@ export class BeatEmitter {
     timeoutId
     intervalBetweenBeats = 0
     firstBeatTime = 0
-    beatCallback
-    constructor(tempo, duration, beatCallback) {
+    constructor(tempo, duration) {
         if (!tempo || !duration || isNaN(tempo) || isNaN(duration)) {
             throw new Error('Tempo or duration must be a number')
-        }
-        if (!beatCallback || typeof beatCallback !== 'function') {
-            throw new Error('Beat callback must be a function')
         }
         this.tempo = tempo;
         this.duration = duration;
         this.intervalBetweenBeats = 60  * 1000 / this.tempo
-        this.beatCallback = beatCallback
         this.playing = false
         this.pausedBeat = 0
     }
@@ -56,7 +51,6 @@ export class BeatEmitter {
             return
         }
         let that = this
-        this.beatCallback(this.currentBeat)
         this.timeoutId = setTimeout(() => that.beat(), nextBeatTimeout)
 
         // console.log(`BeatEmitter beat #${this.currentBeat}, beat time: ${beatTime}, real time: ${new Date().getTime()}  interval: ${nextBeatTimeout}`);
