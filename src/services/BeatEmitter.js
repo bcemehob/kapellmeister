@@ -1,7 +1,9 @@
 
 export class BeatEmitter {
     currentBeat = 0
+    currentSecond = 0
     timeoutId
+    secondTimeoutId
     intervalBetweenBeats = 0
     firstBeatTime = 0
     constructor(tempo, duration) {
@@ -13,6 +15,7 @@ export class BeatEmitter {
         this.intervalBetweenBeats = 60  * 1000 / this.tempo
         this.playing = false
         this.pausedBeat = 0
+        this.pausedSecond = 0
     }
     // parameters:
     // 1. Tempo (bpm)
@@ -23,12 +26,15 @@ export class BeatEmitter {
         console.log("BeatEmitter started. Interval: ", this.intervalBetweenBeats);
         this.firstBeatTime = new Date().getTime()
         this.pausedBeat = this.currentBeat
+        this.pausedSecond = this.currentSecond
         this.beat(this.firstBeatTime)
+        this.second(this.firstBeatTime)
         this.playing = true
     }
 
     stop(){
         clearTimeout(this.timeoutId)
+        clearTimeout(this.secondTimeoutId)
         this.currentBeat = 0
         this.playing = false
         console.log("BeatEmitter stopped");
@@ -36,6 +42,7 @@ export class BeatEmitter {
 
     pause(){
         clearTimeout(this.timeoutId)
+        clearTimeout(this.secondTimeoutId)
         this.playing = false
         console.log("BeatEmitter paused");
     }
@@ -56,6 +63,21 @@ export class BeatEmitter {
         // console.log(`BeatEmitter beat #${this.currentBeat}, beat time: ${beatTime}, real time: ${new Date().getTime()}  interval: ${nextBeatTimeout}`);
     }
 
+    second(secondTime) {
+        secondTime = secondTime || new Date().getTime()
+        this.currentSecond++
+        // console.log("currentSecond added", this.currentSecond)
+        const expectedNextSecondTime = this.firstBeatTime + (this.currentSecond - this.pausedSecond) * 1000
+        let nextSecondTimeout = expectedNextSecondTime - secondTime
+        // console.log("next second timeout", nextSecondTimeout)
+        if (this.currentSecond > this.duration * (this.intervalBetweenBeats - this.pausedSecond) / 1000) {
+            this.stop()
+            this.printMetrics(secondTime);
+            return
+        }
+        let that = this
+        this.secondTimeoutId = setTimeout(() => that.second(), nextSecondTimeout)
+    }
 
     printMetrics(beatTime) {
         console.log("Stop")

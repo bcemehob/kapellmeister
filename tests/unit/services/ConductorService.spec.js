@@ -11,6 +11,14 @@ describe('TimelineService', () => {
         expect(ConductorService.calculateDuration(1000, 101))
             .toStrictEqual({"seconds": 594, "timeString": "9:54"})
     })
+    it('calculates time from seconds', () => {
+        expect(ConductorService.duration(61))
+            .toStrictEqual({"seconds": 61, "timeString": "1:01"})
+        expect(ConductorService.duration(0))
+            .toStrictEqual({"seconds": 0, "timeString": "0:00"})
+        expect(ConductorService.duration(1000, 100))
+            .toStrictEqual({"seconds": 1000, "timeString": "16:40"})
+    })
     it('can detect measurement class name', () => {
         expect(ConductorService.getClassName({})).toBe("")
         expect(ConductorService.getClassName({duration: 111, measure: {beats: 4}})).toBe("not-ok")

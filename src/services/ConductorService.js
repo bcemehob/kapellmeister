@@ -11,6 +11,10 @@ export class ConductorService {
         return Object.keys(pattern).length === 0;
     }
 
+    static calculateTimeDuration(pattern) {
+        return this.calculateDuration(this.durationInBeats(pattern), pattern.tempo)
+    }
+
     static calculateDuration(durationInBeats, tempo) {
         let minutes = Math.floor(durationInBeats / tempo)
         const beatRate = tempo / 60
@@ -24,6 +28,16 @@ export class ConductorService {
         let secondsStr = ('0' + seconds).slice(-2)
         return {
             seconds: minutes * 60 + seconds,
+            timeString: `${minutes}:${secondsStr}`
+        }
+    }
+
+    static duration(durationInSeconds) {
+        const minutes = Math.floor(durationInSeconds / 60)
+        const seconds = durationInSeconds % 60
+        const secondsStr = ('0' + seconds).slice(-2)
+        return {
+            seconds: durationInSeconds,
             timeString: `${minutes}:${secondsStr}`
         }
     }
