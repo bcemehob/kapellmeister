@@ -36,6 +36,7 @@ export class BeatEmitter {
         clearTimeout(this.timeoutId)
         clearTimeout(this.secondTimeoutId)
         this.currentBeat = 0
+        this.currentSecond = 0
         this.playing = false
         console.log("BeatEmitter stopped");
     }
