@@ -4,7 +4,7 @@
     <div>{{ moment.currentTime.seconds }}</div> :
     <div>{{ moment.currentTime.timeString }}</div> :
     <div>{{ moment.totalTime.timeString }}</div>
-
+    <progress id="time" max="100" :value="currentTimePercentage()" />
   </div>
 </template>
 
@@ -26,6 +26,11 @@ const moment = computed( () =>  {
 const props = defineProps({
   beatEmitter: Object
 })
+
+const currentTimePercentage = () => {
+  return Math.floor(100 * moment.value.currentTime.seconds / moment.value.totalTime.seconds)
+}
+
 </script>
 
 <style scoped>
