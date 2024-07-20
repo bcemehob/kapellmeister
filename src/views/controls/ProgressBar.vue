@@ -64,12 +64,12 @@ progress {
 }
 
 progress::-webkit-progress-bar {
-  background-color: rgb(162, 250, 211);
+  background-color: #D5DAD8FF;
   border-radius: 7px;
 }
 
 progress::-webkit-progress-value {
-  background-color: #36866e;
+  background-color: #119b72;
   border-radius: 7px;
 }
 
