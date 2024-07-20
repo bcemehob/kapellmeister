@@ -89,8 +89,11 @@ export class BeatEmitter {
     }
 
     goToBeat(currentBeat, tempo) {
+        const isPlaying = this.playing
         this.stop()
         this.currentBeat = currentBeat
         this.currentSecond = ConductorService.calculateDuration(currentBeat, tempo).seconds
+        if (!isPlaying) this.pause()
+        else this.start()
     }
 }

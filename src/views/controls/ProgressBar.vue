@@ -33,7 +33,6 @@ const currentTimePercentage = () => {
 const startFromTime = (event) => {
   const currentBeat = getCurrentBeat(event.offsetX, event.target.getBoundingClientRect().width)
   props.beatEmitter.goToBeat(currentBeat, pattern.value.tempo)
-  props.beatEmitter.pause()
 }
 
 const getCurrentBeat = (offsetX, elementWidth) => {
