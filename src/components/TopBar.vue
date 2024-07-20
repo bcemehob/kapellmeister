@@ -5,10 +5,12 @@
       <edit-mode-control-panel />
       <actions-control-panel />
       <pattern-control-panel/>
-      <transport-control-panel :beat-emitter="beatEmitter"/>
       <pattern-general-options-panel/>
     </div>
   </nav>
+  <div class="row under-navbar">
+    <transport-control-panel :beat-emitter="beatEmitter"/>
+  </div>
 </template>
 
 <script setup>
@@ -21,3 +23,9 @@ import ActionsControlPanel from "@/views/controls/ActionsControlPanel.vue";
 
 defineProps(['beatEmitter'])
 </script>
+
+<style scoped>
+.under-navbar {
+  background-color: black;
+}
+</style>

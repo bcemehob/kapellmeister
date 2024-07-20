@@ -1,6 +1,5 @@
 <template>
   <div v-if="beatEmitter" class="control-block">
-    <label>Play controls</label>
     <div class="container control">
       <button v-if="!beatEmitter.playing" class="btn btn-grey" @click="play()"><i class="fa-solid fa-play"></i></button>
       <button v-else class="btn btn-grey" @click="pause()"><i class="fa-solid fa-pause"></i></button>

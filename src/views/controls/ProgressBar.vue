@@ -1,9 +1,7 @@
 <template>
   <div class="bar">
     <div>{{ moment.currentBeat }}</div> :
-    <div>{{ moment.currentTime.seconds }}</div> :
-    <div>{{ moment.currentTime.timeString }}</div> :
-    <div>{{ moment.totalTime.timeString }}</div>
+    <div>{{ moment.currentTime.timeString }}</div>
     <progress id="time" max="100" :value="currentTimePercentage()" @click="startFromTime" />
   </div>
 </template>
@@ -52,6 +50,12 @@ const getCurrentBeat = (offsetX, elementWidth) => {
 }
 
 progress {
+  margin: 0 20px;
   cursor: pointer;
+  width: 85%;
+}
+.bar {
+  display: inline-block;
+  width: 90%;
 }
 </style>
