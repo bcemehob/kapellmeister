@@ -43,10 +43,9 @@ const getCurrentBeat = (offsetX, elementWidth) => {
 }
 
 const getMeasure = () => {
-  const integerPart = Math.floor(moment.value.currentBeat / pattern.value.measure.base)
+  const integerPart = Math.ceil(moment.value.currentBeat / pattern.value.measure.base)
   const remainder = moment.value.currentBeat % pattern.value.measure.base
   const fraction = remainder > 0 ? ` ${remainder}/${pattern.value.measure.base}` : ''
-  console.log(integerPart, remainder, pattern.value.measure.base, fraction)
   return `${integerPart}&nbsp;<span class="fraction">${fraction}</span>`
 }
 
