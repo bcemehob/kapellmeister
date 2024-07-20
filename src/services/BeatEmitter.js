@@ -1,3 +1,4 @@
+import {ConductorService} from "@/services/ConductorService";
 
 export class BeatEmitter {
     currentBeat = 0
@@ -85,5 +86,11 @@ export class BeatEmitter {
         console.log("First beat time: " + this.firstBeatTime)
         console.log("Last beat time: " + beatTime)
         console.log("End time: " + new Date().getTime())
+    }
+
+    goToBeat(currentBeat, tempo) {
+        this.stop()
+        this.currentBeat = currentBeat
+        this.currentSecond = ConductorService.calculateDuration(currentBeat, tempo).seconds
     }
 }

@@ -4,7 +4,7 @@
     <div>{{ moment.currentTime.seconds }}</div> :
     <div>{{ moment.currentTime.timeString }}</div> :
     <div>{{ moment.totalTime.timeString }}</div>
-    <progress id="time" max="100" :value="currentTimePercentage()" />
+    <progress id="time" max="100" :value="currentTimePercentage()" @click="startFromTime" />
   </div>
 </template>
 
@@ -31,10 +31,27 @@ const currentTimePercentage = () => {
   return Math.floor(100 * moment.value.currentTime.seconds / moment.value.totalTime.seconds)
 }
 
+
+const startFromTime = (event) => {
+  const currentBeat = getCurrentBeat(event.offsetX, event.target.getBoundingClientRect().width)
+  props.beatEmitter.goToBeat(currentBeat, pattern.value.tempo)
+  props.beatEmitter.pause()
+}
+
+const getCurrentBeat = (offsetX, elementWidth) => {
+  const beatsTotal = ConductorService.durationInBeats(pattern.value)
+  const beatsForPixel = beatsTotal / elementWidth
+  return  Math.floor(offsetX * beatsForPixel)
+}
+
 </script>
 
 <style scoped>
 .bar > div{
   display: inline-block;
+}
+
+progress {
+  cursor: pointer;
 }
 </style>
