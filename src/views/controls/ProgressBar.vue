@@ -1,7 +1,7 @@
 <template>
   <div class="bar">
-    <div>{{ moment.currentBeat }}</div> :
-    <div>{{ moment.currentTime.timeString }}</div>
+    <div class="current-measure" v-html="getMeasure()"></div>
+    <div class="current-time">{{ moment.currentTime.timeString }}</div>
     <progress id="time" max="100" :value="currentTimePercentage()" @click="startFromTime" />
   </div>
 </template>
@@ -42,6 +42,14 @@ const getCurrentBeat = (offsetX, elementWidth) => {
   return  Math.floor(offsetX * beatsForPixel)
 }
 
+const getMeasure = () => {
+  const integerPart = Math.floor(moment.value.currentBeat / pattern.value.measure.base)
+  const remainder = moment.value.currentBeat % pattern.value.measure.base
+  const fraction = remainder > 0 ? ` ${remainder}/${pattern.value.measure.base}` : ''
+  console.log(integerPart, remainder, pattern.value.measure.base, fraction)
+  return `${integerPart}&nbsp;<span class="fraction">${fraction}</span>`
+}
+
 </script>
 
 <style scoped>
@@ -50,12 +58,18 @@ const getCurrentBeat = (offsetX, elementWidth) => {
 }
 
 progress {
-  margin: 0 20px;
+  margin: 0 0 0 20px;
   cursor: pointer;
-  width: 85%;
+  width: 80%;
 }
 .bar {
   display: inline-block;
   width: 90%;
+}
+.current-measure {
+  color: #58dab4;
+  margin: 0 20px;
+  width: 50px;
+  font-size: 20px;
 }
 </style>

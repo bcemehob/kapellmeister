@@ -176,3 +176,8 @@ body {
         }
     }
 }
+
+.fraction {
+    display: inline-block;
+    font-size: 15px;
+}
