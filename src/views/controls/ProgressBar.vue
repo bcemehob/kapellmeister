@@ -2,16 +2,24 @@
   <div class="bar">
     <div class="current-measure" v-html="getMeasure()"></div>
     <div class="current-time">{{ moment.currentTime.timeString }}</div>
-    <progress id="time" max="100" :value="currentTimePercentage()" @click="startFromTime"/>
+    <span>
+      <progress ref="progress" id="time" max="100" :value="currentTimePercentage()"
+                @click="startFromTime"
+                @mouseout="hideTooltip"
+                @mousemove="moveTooltip"/>
+      <span class="dynamic-tooltip" ref="tooltip"></span>
+    </span>
   </div>
 </template>
 
 <script setup>
 import {useStore} from "vuex";
-import {computed} from "vue";
+import {computed, ref} from "vue";
 import {ConductorService} from "@/services/ConductorService";
 
 const store = useStore()
+const tooltip = ref(null)
+const progress = ref(null)
 const pattern = computed(() => store.state.pattern)
 const moment = computed(() => {
   return {
@@ -29,7 +37,6 @@ const currentTimePercentage = () => {
   return Math.floor(100 * moment.value.currentTime.seconds / moment.value.totalTime.seconds)
 }
 
-
 const startFromTime = (event) => {
   const currentBeat = getCurrentBeat(event.offsetX, event.target.getBoundingClientRect().width)
   props.beatEmitter.goToBeat(currentBeat, pattern.value.tempo)
@@ -42,10 +49,26 @@ const getCurrentBeat = (offsetX, elementWidth) => {
 }
 
 const getMeasure = () => {
-  const integerPart = Math.ceil(moment.value.currentBeat / pattern.value.measure.base)
-  const remainder = moment.value.currentBeat % pattern.value.measure.base
+  return getMeasureForBeat(moment.value.currentBeat)
+}
+
+const getMeasureForBeat = currentBeat => {
+  const intPart = Math.ceil(currentBeat / pattern.value.measure.base)
+  const remainder = currentBeat % pattern.value.measure.base
   const fraction = remainder > 0 ? ` ${remainder}/${pattern.value.measure.base}` : ''
-  return `${integerPart}&nbsp;<span class="fraction">${fraction}</span>`
+  return `${intPart}&nbsp;<span class="fraction">${fraction}</span>`
+}
+
+const moveTooltip = e => {
+  tooltip.value.style.visibility = 'visible'
+  tooltip.value.style.top = (e.clientY - 50) + 'px'
+  tooltip.value.style.left = e.clientX + 'px'
+  const selectedBeat = getCurrentBeat(e.offsetX, progress.value.getBoundingClientRect().width)
+  tooltip.value.innerHTML = `${getMeasureForBeat(selectedBeat)} (${ConductorService.calculateDuration(selectedBeat, pattern.value.tempo).timeString})`
+}
+
+const hideTooltip = () => {
+  tooltip.value.style.visibility = 'hidden'
 }
 
 </script>
@@ -69,13 +92,25 @@ progress::-webkit-progress-bar {
 }
 
 progress::-webkit-progress-value {
-  background-color: #119b72;
+  background-color: rgba(17, 150, 114, 100);
   border-radius: 7px;
 }
 
 .bar {
   display: inline-block;
   width: 90%;
+
+  .dynamic-tooltip {
+    display: block;
+    visibility: hidden;
+    position: fixed;
+    background-color: #d8d892;
+    color: #000;
+    border: 1px solid #000;
+    border-radius: 3px;
+    padding: 3px 5px;
+    z-index: 10000;
+  }
 }
 
 .current-measure {
