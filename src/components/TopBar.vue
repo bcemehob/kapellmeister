@@ -3,6 +3,7 @@
     <div class="container-fluid ">
       <brand-with-logo />
       <edit-mode-control-panel />
+      <pre-roll-control-panel />
       <actions-control-panel />
       <pattern-control-panel/>
       <pattern-general-options-panel/>
@@ -20,6 +21,7 @@ import PatternGeneralOptionsPanel from "@/views/controls/PatternGeneralOptionsPa
 import EditModeControlPanel from "@/views/controls/EditModeControlPanel.vue"
 import BrandWithLogo from "@/views/BrandWithLogo.vue"
 import ActionsControlPanel from "@/views/controls/ActionsControlPanel.vue";
+import PreRollControlPanel from "@/views/controls/PreRollControlPanel.vue";
 
 defineProps(['beatEmitter'])
 </script>

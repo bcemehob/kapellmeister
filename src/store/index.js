@@ -6,6 +6,7 @@ export default createStore({
         pattern: {},
         patternUndoStack: [],
         patternRedoStack: [],
+        preRollMeasures: 0,
         contextMenuShown: false,
         editMode: false
     },
@@ -18,6 +19,9 @@ export default createStore({
         },
         isEditMode(state) {
             return state.editMode
+        },
+        getPreRollMeasures(state) {
+            return state.preRollEnabled
         }
     },
     mutations: {
@@ -35,6 +39,10 @@ export default createStore({
 
         setContextMenuShown(state, payload) {
             state.contextMenuShown = payload;
+        },
+
+        setPreRollMeasures(state, payload) {
+            state.preRollMeasures = payload;
         },
 
         setEditMode(state, payload) {
