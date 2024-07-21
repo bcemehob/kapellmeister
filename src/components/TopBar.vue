@@ -26,6 +26,7 @@ defineProps(['beatEmitter'])
 
 <style scoped>
 .under-navbar {
-  background-color: black;
+  background: linear-gradient(180deg, #313539 0%, #212529 30%, #212529 70%, #313539 100%);
+  padding: 5px 0;
 }
 </style>
