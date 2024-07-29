@@ -1,7 +1,7 @@
 <template>
   <div class="control-block">
-    <label>Measures to pre-roll:</label>
-    <select v-model="preRollMeasures">
+    <label>Preroll measures:</label>
+    <select v-model="prerollMeasures">
       <option>0</option>
       <option>1</option>
       <option>2</option>
@@ -17,12 +17,12 @@ import {useStore} from "vuex";
 import {computed} from "vue";
 
 const store = useStore()
-const preRollMeasures = computed({
+const prerollMeasures = computed({
   get() {
-    return store.state.preRollMeasures
+    return store.state.prerollMeasures
   },
   set(val) {
-    store.commit('setPreRollMeasures', val)
+    store.commit('setPrerollMeasures', val)
   }
 })
 </script>

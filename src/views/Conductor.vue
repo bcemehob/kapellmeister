@@ -2,6 +2,7 @@
   <div class="section">
     <div class="title">KapellMeister</div>
     <div class="d-flex">
+      <div v-if="currentPrerollBeat">preroll {{currentPrerollBeat}}</div>
       <motion-viewer :current-beat="currentBeat" />
       <instruments :pattern="pattern" :current-beat="currentBeat" />
     </div>
@@ -18,7 +19,8 @@ import MotionViewer from "@/views/MotionViewerV2.vue";
 export default {
   name: 'KapellMeister',
   props: {
-    currentBeat: Number
+    currentBeat: Number,
+    currentPrerollBeat: Number,
   },
   data:
       function () {
