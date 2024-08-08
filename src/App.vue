@@ -50,7 +50,7 @@ export default {
       return this.beatEmitter ? this.beatEmitter.getCurrentPrerollBeat() : 0
     },
     prerollBeats() {
-      return ConductorService.isEmpty(this.pattern) ? 0 : this.$store.state.prerollMeasures * this.pattern.measure.base
+      return ConductorService.isEmpty(this.pattern) ? 0 : this.$store.state.prerollMeasures * this.pattern.measure.beats
     }
   },
   mounted() {
