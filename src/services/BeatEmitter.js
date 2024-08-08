@@ -50,7 +50,7 @@ export class BeatEmitter {
         this.currentBeat = 0
         this.currentSecond = 0
         this.playing = false
-        this.resetPreroll(this.preroll.duration)
+        this.preroll && this.resetPreroll(this.preroll.duration)
         console.log("BeatEmitter stopped");
     }
 
