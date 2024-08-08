@@ -2,7 +2,7 @@
   <div class="section">
     <div class="title">KapellMeister</div>
     <div class="d-flex">
-      <div v-if="currentPrerollBeat">preroll {{currentPrerollBeat}}</div>
+      <PreRoll :current-preroll-beat="currentPrerollBeat" />
       <motion-viewer :current-beat="currentBeat" />
       <instruments :pattern="pattern" :current-beat="currentBeat" />
     </div>
@@ -12,6 +12,7 @@
 <script setup>
 import Instruments from "@/views/Instruments.vue";
 import MotionViewer from "@/views/MotionViewerV2.vue";
+import PreRoll from "@/views/PreRoll.vue";
 </script>
 
 <script>
