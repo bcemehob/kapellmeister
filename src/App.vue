@@ -1,6 +1,5 @@
 <template>
   <top-bar :beat-emitter="beatEmitter"/>
-  <div>asdfjasdlfjk {{prerollBeats}}</div>
   <pattern-editor v-if="editMode" :current-beat="currentBeat"/>
   <conductor v-else :current-beat="currentBeat" :current-preroll-beat="currentPrerollBeat"/>
 </template>
