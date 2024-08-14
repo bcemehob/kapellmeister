@@ -30,8 +30,6 @@ export class BeatEmitter {
 
     start(){
         if (this.preroll && this.preroll.currentBeat === 0) {
-            this.preroll.firstBeatTime = new Date().getTime()
-            console.log("Preroll started. Interval: ", this.preroll.intervalBetweenBeats)
             this.prerollStart()
             return
         }
@@ -78,13 +76,15 @@ export class BeatEmitter {
     }
 
     prerollStart() {
-        this.preroll.firstBeatTime = new Date().getTime()
+        this.preroll.start()
+        console.log("Preroll started. Interval: ", this.preroll.intervalBetweenBeats)
         this.prerollBeat()
     }
 
     prerollStop(){
         clearTimeout(this.prerollTimeoutId)
-        this.playing = false
+        this.preroll.stop()
+        console.log("Preroll stopped");
         this.start()
     }
 
