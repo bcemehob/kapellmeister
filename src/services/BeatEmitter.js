@@ -4,8 +4,8 @@ import {Preroll} from "@/services/Preroll";
 export class BeatEmitter {
     currentBeat = 0
     currentSecond = 0
-    timeoutId
-    secondTimeoutId
+    timeoutId = null
+    secondTimeoutId = null
     intervalBetweenBeats = 0
     firstBeatTime = 0
     preroll
@@ -13,7 +13,7 @@ export class BeatEmitter {
 
     constructor(tempo, duration, prerollBeats) {
         if (!tempo || !duration || isNaN(tempo) || isNaN(duration)) {
-            throw new Error('Tempo or duration must be a number')
+            throw new Error('Tempo and duration must be numbers')
         }
         this.tempo = tempo;
         this.duration = duration;
