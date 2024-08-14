@@ -1,7 +1,8 @@
 <template>
   <div v-if="beatEmitter" class="control-block">
     <div class="container control">
-      <button v-if="!beatEmitter.playing" class="btn btn-grey" @click="play()"><i class="fa-solid fa-play"></i></button>
+      <button v-if="!beatEmitter.playing" :disabled="beatEmitter.isPrerollPlaying()"
+              class="btn btn-grey" @click="play()"><i class="fa-solid fa-play"></i></button>
       <button v-else class="btn btn-grey" @click="pause()"><i class="fa-solid fa-pause"></i></button>
       <button :disabled="!beatEmitter.playing" class="btn btn-grey" @click="stop()"><i class="fa-solid fa-stop"></i></button>
       <progress-bar :beat-emitter="beatEmitter"/>

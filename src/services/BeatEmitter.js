@@ -139,4 +139,8 @@ export class BeatEmitter {
     getCurrentPrerollBeat() {
         return this.preroll ? this.preroll.currentBeat : 0
     }
+
+    isPrerollPlaying() {
+        return this.preroll && this.preroll.playing
+    }
 }
