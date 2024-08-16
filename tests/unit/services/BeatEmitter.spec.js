@@ -1,6 +1,6 @@
 import {BeatEmitter} from "@/services/BeatEmitter";
 
-describe('InstrumentService', () => {
+describe('BeatEmitter', () => {
     it('throws error when invalid arguments', () => {
         expect(() => new BeatEmitter(null, null, null))
             .toThrow("Tempo and duration must be numbers");
@@ -13,7 +13,7 @@ describe('InstrumentService', () => {
         expect(() => new BeatEmitter(123, "abc", null))
             .toThrow("Tempo and duration must be numbers");
     })
-    it('compiles valid BeatEmitter', () => {
+    it('compiles valid instance', () => {
         const beatEmitter = new BeatEmitter(120, 24, null)
         expect(beatEmitter.tempo).toBe(120)
         expect(beatEmitter.duration).toEqual(24)
