@@ -1,7 +1,8 @@
 export class Preroll {
+    tempo
     duration
     currentBeat = 0
-    firstBeatTime
+    firstBeatTime = null
     intervalBetweenBeats
     playing = false
 
