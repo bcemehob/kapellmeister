@@ -56,7 +56,7 @@ export class BeatEmitter {
         clearTimeout(this.timeoutId)
         clearTimeout(this.secondTimeoutId)
         this.playing = false
-        this.resetPreroll(this.preroll.duration)
+        this.preroll && this.resetPreroll(this.preroll.duration)
         console.log("BeatEmitter paused");
     }
 
