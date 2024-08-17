@@ -33,9 +33,4 @@ export class Preroll {
         let that = this
         this.timeoutId = setTimeout(() => that.beat(resolve), nextBeatTimeout)
     }
-
-    stop(){
-        clearTimeout(this.timeoutId)
-        this.playing = false
-    }
 }
