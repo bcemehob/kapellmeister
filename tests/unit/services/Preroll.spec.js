@@ -19,7 +19,7 @@ describe('Preroll', () => {
     })
     it('will stop Preroll after start if current beat value exceeds duration', () => {
         const preroll = new Preroll(120, 0, onPrerollStop)
-        preroll.start()
+        expect(preroll.start()).toStrictEqual(new Promise(resolve => {}))
         let firstBeatTime = preroll.firstBeatTime
         expect(firstBeatTime).toBeLessThanOrEqual(new Date().getTime())
         expect(setTimeout).not.toHaveBeenCalled()
