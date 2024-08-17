@@ -9,7 +9,6 @@ export class BeatEmitter {
     intervalBetweenBeats = 0
     firstBeatTime = 0
     preroll
-    prerollTimeoutId = null
 
     constructor(tempo, duration, prerollBeats) {
         if (!tempo || !duration || isNaN(tempo) || isNaN(duration)) {
@@ -29,10 +28,11 @@ export class BeatEmitter {
     // emits events on each beat
 
     start(){
-        if (this.preroll && this.preroll.currentBeat === 0) {
-            this.prerollStart()
-            return
-        }
+        if (this.preroll) this.preroll.start().then(() => this.startMain())
+        else this.startMain()
+    }
+
+    startMain() {
         console.log("BeatEmitter started. Interval: ", this.intervalBetweenBeats);
         this.firstBeatTime = new Date().getTime()
         this.pausedBeat = this.currentBeat
@@ -73,31 +73,6 @@ export class BeatEmitter {
         let that = this
         this.timeoutId = setTimeout(() => that.beat(), nextBeatTimeout)
         // console.log(`BeatEmitter beat #${this.currentBeat}, beat time: ${beatTime}, real time: ${new Date().getTime()}  interval: ${nextBeatTimeout}`);
-    }
-
-    prerollStart() {
-        this.preroll.start()
-        console.log("Preroll started. Interval: ", this.preroll.intervalBetweenBeats)
-        this.prerollBeat()
-    }
-
-    prerollStop(){
-        clearTimeout(this.prerollTimeoutId)
-        this.preroll.stop()
-        console.log("Preroll stopped");
-        this.start()
-    }
-
-    prerollBeat() {
-        this.preroll.currentBeat++
-        const expectedNextBeatTime = this.preroll.firstBeatTime + this.preroll.intervalBetweenBeats * this.preroll.currentBeat
-        let nextBeatTimeout = expectedNextBeatTime - new Date().getTime() - 5
-        if (this.preroll.currentBeat > this.preroll.duration) {
-            this.prerollStop()
-            return
-        }
-        let that = this
-        this.prerollTimeoutId = setTimeout(() => that.prerollBeat(), nextBeatTimeout)
     }
 
     second(secondTime) {

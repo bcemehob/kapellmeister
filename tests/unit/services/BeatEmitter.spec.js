@@ -27,6 +27,5 @@ describe('BeatEmitter', () => {
         expect(beatEmitter.preroll).toBeNull()
         expect(beatEmitter.timeoutId).toBeNull()
         expect(beatEmitter.secondTimeoutId).toBeNull()
-        expect(beatEmitter.prerollTimeoutId).toBeNull()
     })
 })
