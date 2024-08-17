@@ -72,16 +72,13 @@ export class BeatEmitter {
         }
         let that = this
         this.timeoutId = setTimeout(() => that.beat(), nextBeatTimeout)
-        // console.log(`BeatEmitter beat #${this.currentBeat}, beat time: ${beatTime}, real time: ${new Date().getTime()}  interval: ${nextBeatTimeout}`);
     }
 
     second(secondTime) {
         secondTime = secondTime || new Date().getTime()
         this.currentSecond++
-        // console.log("currentSecond added", this.currentSecond)
         const expectedNextSecondTime = this.firstBeatTime + (this.currentSecond - this.pausedSecond) * 1000
         let nextSecondTimeout = expectedNextSecondTime - secondTime
-        // console.log("next second timeout", nextSecondTimeout)
         if (this.currentSecond > ConductorService.calculateDuration(this.duration, this.tempo)) {
             this.stop()
             this.printMetrics(secondTime);
