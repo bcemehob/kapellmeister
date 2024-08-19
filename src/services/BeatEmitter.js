@@ -34,12 +34,12 @@ export class BeatEmitter {
 
     startMain() {
         console.log("BeatEmitter started. Interval: ", this.intervalBetweenBeats);
+        this.playing = true
         this.firstBeatTime = new Date().getTime()
         this.pausedBeat = this.currentBeat
         this.pausedSecond = this.currentSecond
         this.beat(this.firstBeatTime)
         this.second(this.firstBeatTime)
-        this.playing = true
     }
 
     stop(){
@@ -79,7 +79,7 @@ export class BeatEmitter {
         this.currentSecond++
         const expectedNextSecondTime = this.firstBeatTime + (this.currentSecond - this.pausedSecond) * 1000
         let nextSecondTimeout = expectedNextSecondTime - secondTime
-        if (this.currentSecond > ConductorService.calculateDuration(this.duration, this.tempo)) {
+        if (!this.playing || this.currentSecond > ConductorService.calculateDuration(this.duration, this.tempo)) {
             this.stop()
             this.printMetrics(secondTime);
             return

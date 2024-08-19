@@ -1,11 +1,11 @@
-import {Preroll} from "@/services/Preroll";
-jest.spyOn(global, "setTimeout");
-jest.spyOn(global, "clearTimeout");
+import {Preroll} from "@/services/Preroll"
+jest.spyOn(global, "setTimeout")
+jest.spyOn(global, "clearTimeout")
 
 afterEach(() => {
-    jest.clearAllMocks();
+    jest.clearAllMocks()
 });
-const onPrerollStop = jest.fn(() => {});
+const onPrerollStop = jest.fn(() => {})
 
 describe('Preroll', () => {
     const preroll = new Preroll(120, 24, onPrerollStop)
@@ -19,7 +19,7 @@ describe('Preroll', () => {
     })
     it('will start Preroll with not 0 duration and return a Promise', () => {
         const preroll = new Preroll(120, 1, onPrerollStop)
-        expect(preroll.start()).toStrictEqual(new Promise(_ => {}))
+        expect(preroll.start()).toBeInstanceOf(Promise)
         let firstBeatTime = preroll.firstBeatTime
         expect(firstBeatTime).toBeLessThanOrEqual(new Date().getTime())
         expect(setTimeout).toHaveBeenCalledWith(expect.any(Function), expect.any(Number));
