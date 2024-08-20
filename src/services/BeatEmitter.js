@@ -86,7 +86,8 @@ export class BeatEmitter {
         this.currentSecond++
         const expectedNextSecondTime = this.firstBeatTime + (this.currentSecond - this.pausedSecond) * 1000
         let nextSecondTimeout = expectedNextSecondTime - secondTime
-        if (this.currentSecond > ConductorService.calculateDuration(this.duration, this.tempo)) {
+        const duration = ConductorService.calculateDuration(this.duration, this.tempo)
+        if (this.currentSecond > duration.seconds) {
             this.stop()
             this.printMetrics(secondTime);
             return

@@ -87,6 +87,20 @@ describe('BeatEmitter', () => {
         expect(setTimeout).not.toHaveBeenCalled();
         expect(clearTimeout).not.toHaveBeenCalled()
     })
+    it('BeatEmitter stops when currentSecond exceeds duration', () => {
+        const beatEmitter = new BeatEmitter(120, 1, 0)
+        beatEmitter.currentSecond = 2
+
+        beatEmitter.start()
+
+        expect(setTimeout).toHaveBeenCalledWith(expect.any(Function), expect.any(Number));
+        expect(setTimeout.mock.calls).toHaveLength(1);
+        let receivedInterval = setTimeout.mock.calls[0][1]
+        expect(receivedInterval / 100).toBeCloseTo(5, 0)
+
+        expect(clearTimeout).toHaveBeenCalledTimes(1)
+        expect(clearTimeout.mock.calls[0][0]).not.toBeNull()
+    })
     it('BeatEmitter can be stopped', () => {
         const beatEmitter = new BeatEmitter(120, 24, 0)
 
@@ -144,6 +158,8 @@ function assertSetTimeout() {
     expect(setTimeout.mock.calls).toHaveLength(2);
     let receivedInterval = setTimeout.mock.calls[0][1]
     expect(receivedInterval / 100).toBeCloseTo(5, 0)
+    let receivedSecondInterval = setTimeout.mock.calls[1][1]
+    expect(receivedSecondInterval / 1000).toBeCloseTo(1, 0)
 }
 
 function assertClearTimeout(beatTimeoutId, secondTimeoutId) {
