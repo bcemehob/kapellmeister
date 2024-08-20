@@ -152,6 +152,21 @@ describe('BeatEmitter', () => {
         beatEmitter.start()
         assertBeatEmitterStartedAfterPause(beatEmitter)
     })
+    it('BeatEmitter can go to particular beat', () => {
+        const beatEmitter = new BeatEmitter(120, 24, 0)
+
+        beatEmitter.start()
+
+        assertBeatEmitterStarted(beatEmitter)
+        const beatTimeoutId = beatEmitter.timeoutId
+        const secondTimeoutId = beatEmitter.secondTimeoutId
+
+        beatEmitter.goToBeat(3, 120)
+
+        assertClearTimeout(beatTimeoutId, secondTimeoutId)
+        expect(setTimeout.mock.calls).toHaveLength(4);
+        assertBeatEmitterStartedFrom4thBeat(beatEmitter)
+    })
     it('BeatEmitter can reset preroll', () => {
         const beatEmitter = new BeatEmitter(120, 24, 2)
 
@@ -190,8 +205,8 @@ describe('BeatEmitter', () => {
 })
 
 function assertSetTimeout() {
-    expect(setTimeout).toHaveBeenCalledTimes(2);
     expect(setTimeout).toHaveBeenCalledWith(expect.any(Function), expect.any(Number));
+    console.log(setTimeout.mock.calls)
     expect(setTimeout.mock.calls).toHaveLength(2);
     let receivedInterval = setTimeout.mock.calls[0][1]
     expect(receivedInterval / 100).toBeCloseTo(5, 0)
@@ -235,6 +250,15 @@ function assertBeatEmitterStartedAfterPause(beatEmitter) {
     expect(beatEmitter.currentSecond).toBe(2)
     expect(beatEmitter.pausedBeat).toBe(1)
     expect(beatEmitter.pausedSecond).toBe(1)
+    expect(beatEmitter.timeoutId).not.toBeNull()
+    expect(beatEmitter.secondTimeoutId).not.toBeNull()
+}
+function assertBeatEmitterStartedFrom4thBeat(beatEmitter) {
+    expect(beatEmitter.playing).toBeTruthy()
+    expect(beatEmitter.currentBeat).toBe(4)
+    expect(beatEmitter.currentSecond).toBe(3)
+    expect(beatEmitter.pausedBeat).toBe(3)
+    expect(beatEmitter.pausedSecond).toBe(2)
     expect(beatEmitter.timeoutId).not.toBeNull()
     expect(beatEmitter.secondTimeoutId).not.toBeNull()
 }
