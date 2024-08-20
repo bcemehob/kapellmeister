@@ -8,13 +8,16 @@ afterEach(() => {
     jest.clearAllMocks()
 });
 
+let mockPlaying = false
+
 const mockPrerollStart = jest.fn().mockImplementation(() => Promise.resolve())
 
 jest.mock('@/services/Preroll', () => ({
     Preroll: jest.fn().mockImplementation(() => ({
         Preroll: "dummy",
         start: mockPrerollStart,
-        currentBeat: 12
+        currentBeat: 12,
+        playing: mockPlaying
     }))
 }))
 
@@ -162,6 +165,24 @@ describe('BeatEmitter', () => {
         const beatEmitter = new BeatEmitter(120, 24, 2)
 
         expect(beatEmitter.getCurrentPrerollBeat()).toBe(12)
+
+        expect(Preroll).toHaveBeenCalledTimes(1)
+        expect(Preroll).toHaveBeenCalledWith( 120, 2)
+    })
+    it('BeatEmitter can detect if preroll is playing', () => {
+        mockPlaying = true
+        const beatEmitter = new BeatEmitter(120, 24, 2)
+
+        expect(beatEmitter.isPrerollPlaying()).toBeTruthy()
+
+        expect(Preroll).toHaveBeenCalledTimes(1)
+        expect(Preroll).toHaveBeenCalledWith( 120, 2)
+    })
+    it('BeatEmitter can detect if preroll is not playing', () => {
+        mockPlaying = false
+        const beatEmitter = new BeatEmitter(120, 24, 2)
+
+        expect(beatEmitter.isPrerollPlaying()).toBeFalsy()
 
         expect(Preroll).toHaveBeenCalledTimes(1)
         expect(Preroll).toHaveBeenCalledWith( 120, 2)
