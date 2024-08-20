@@ -46,7 +46,9 @@ export class BeatEmitter {
         clearTimeout(this.timeoutId)
         clearTimeout(this.secondTimeoutId)
         this.currentBeat = 0
+        this.pausedBeat = 0
         this.currentSecond = 0
+        this.pausedSecond = 0
         this.playing = false
         this.preroll && this.resetPreroll(this.preroll.duration)
         console.log("BeatEmitter stopped");
@@ -75,11 +77,12 @@ export class BeatEmitter {
     }
 
     second(secondTime) {
+        if (!this.playing) return
         secondTime = secondTime || new Date().getTime()
         this.currentSecond++
         const expectedNextSecondTime = this.firstBeatTime + (this.currentSecond - this.pausedSecond) * 1000
         let nextSecondTimeout = expectedNextSecondTime - secondTime
-        if (!this.playing || this.currentSecond > ConductorService.calculateDuration(this.duration, this.tempo)) {
+        if (this.currentSecond > ConductorService.calculateDuration(this.duration, this.tempo)) {
             this.stop()
             this.printMetrics(secondTime);
             return

@@ -87,11 +87,14 @@ describe('BeatEmitter', () => {
         expect(beatEmitter.firstBeatTime).not.toBeNull()
 
         expect(setTimeout).not.toHaveBeenCalled();
+        expect(clearTimeout).toHaveBeenCalledTimes(2)
+        expect(clearTimeout).toHaveBeenCalledWith(beatEmitter.timeoutId)
+        expect(clearTimeout).toHaveBeenCalledWith(beatEmitter.secondTimeoutId)
         expect(beatEmitter.intervalBetweenBeats).toEqual(60 * 1000 / 120) // 500
         expect(beatEmitter.playing).toBeFalsy()
         expect(beatEmitter.currentBeat).toBe(0)
         expect(beatEmitter.currentSecond).toBe(0)
-        expect(beatEmitter.pausedBeat).toBe(1)
+        expect(beatEmitter.pausedBeat).toBe(0)
         expect(beatEmitter.pausedSecond).toBe(0)
         expect(beatEmitter.timeoutId).toBeNull()
         expect(beatEmitter.secondTimeoutId).toBeNull()
