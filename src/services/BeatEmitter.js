@@ -8,6 +8,9 @@ export class BeatEmitter {
     secondTimeoutId = null
     intervalBetweenBeats = 0
     firstBeatTime = 0
+    pausedBeat = 0
+    pausedSecond = 0
+    playing = false
     preroll
 
     constructor(tempo, duration, prerollBeats) {
@@ -17,9 +20,6 @@ export class BeatEmitter {
         this.tempo = tempo;
         this.duration = duration;
         this.intervalBetweenBeats = 60  * 1000 / this.tempo
-        this.playing = false
-        this.pausedBeat = 0
-        this.pausedSecond = 0
         this.preroll = prerollBeats ? new Preroll(this.tempo, prerollBeats) : null
     }
     // parameters:
@@ -43,8 +43,10 @@ export class BeatEmitter {
     }
 
     stop(){
-        clearTimeout(this.timeoutId)
-        clearTimeout(this.secondTimeoutId)
+        this.timeoutId && clearTimeout(this.timeoutId)
+        this.timeoutId = null
+        this.secondTimeoutId && clearTimeout(this.secondTimeoutId)
+        this.secondTimeoutId = null
         this.currentBeat = 0
         this.pausedBeat = 0
         this.currentSecond = 0

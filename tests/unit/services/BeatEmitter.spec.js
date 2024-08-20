@@ -23,17 +23,22 @@ describe('BeatEmitter', () => {
     it('throws error when invalid arguments', () => {
         expect(() => new BeatEmitter(null, null, null))
             .toThrow("Tempo and duration must be numbers");
+
         expect(() => new BeatEmitter(123, null, null))
             .toThrow("Tempo and duration must be numbers");
+
         expect(() => new BeatEmitter(null, 123, null))
             .toThrow("Tempo and duration must be numbers");
+
         expect(() => new BeatEmitter("abc", 123, null))
             .toThrow("Tempo and duration must be numbers");
+
         expect(() => new BeatEmitter(123, "abc", null))
             .toThrow("Tempo and duration must be numbers");
     })
     it('compiles valid instance', () => {
         const beatEmitter = new BeatEmitter(120, 24, null)
+
         expect(beatEmitter.tempo).toBe(120)
         expect(beatEmitter.duration).toEqual(24)
         expect(beatEmitter.intervalBetweenBeats).toEqual(60 * 1000 / 120) // 500
@@ -49,7 +54,9 @@ describe('BeatEmitter', () => {
     })
     it('starts BeatEmitter after Preroll', () => {
         const beatEmitter = new BeatEmitter(120, 24, 1)
+
         beatEmitter.start()
+
         expect(Preroll).toHaveBeenCalledTimes(1)
         expect(mockPrerollStart).toBeCalledTimes(1)
         expect(beatEmitter.preroll).not.toBeNull()
@@ -57,46 +64,72 @@ describe('BeatEmitter', () => {
     })
     it('starts BeatEmitter without Preroll', () => {
         const beatEmitter = new BeatEmitter(120, 24, 0)
+
         beatEmitter.start()
+
         expect(Preroll).not.toHaveBeenCalled()
         expect(mockPrerollStart).not.toHaveBeenCalled()
         expect(beatEmitter.preroll).toBeNull()
-        expect(beatEmitter.firstBeatTime).not.toBeNull()
 
-        expect(setTimeout).toHaveBeenCalledTimes(2);
-        expect(setTimeout).toHaveBeenCalledWith(expect.any(Function), expect.any(Number));
-        expect(setTimeout.mock.calls).toHaveLength(2);
-        let receivedInterval = setTimeout.mock.calls[0][1]
-        expect(receivedInterval / 100).toBeCloseTo(5, 0)
-        expect(beatEmitter.intervalBetweenBeats).toEqual(60 * 1000 / 120) // 500
-        expect(beatEmitter.playing).toBeTruthy()
-        expect(beatEmitter.currentBeat).toBe(1)
-        expect(beatEmitter.currentSecond).toBe(1)
-        expect(beatEmitter.pausedBeat).toBe(0)
-        expect(beatEmitter.pausedSecond).toBe(0)
-        expect(beatEmitter.timeoutId).not.toBeNull()
-        expect(beatEmitter.secondTimeoutId).not.toBeNull()
+        assertBeatEmitterStarted(beatEmitter)
     })
     it('BeatEmitter stops when currentBeat exceeds duration', () => {
         const beatEmitter = new BeatEmitter(120, 1, 0)
         beatEmitter.currentBeat = 1
+
         beatEmitter.start()
+
         expect(Preroll).not.toHaveBeenCalled()
         expect(mockPrerollStart).not.toHaveBeenCalled()
         expect(beatEmitter.preroll).toBeNull()
         expect(beatEmitter.firstBeatTime).not.toBeNull()
-
         expect(setTimeout).not.toHaveBeenCalled();
+        expect(clearTimeout).not.toHaveBeenCalled()
+    })
+    it('BeatEmitter can be stopped', () => {
+        const beatEmitter = new BeatEmitter(120, 24, 0)
+
+        beatEmitter.start()
+
+        assertBeatEmitterStarted(beatEmitter)
+        const beatTimeoutId = beatEmitter.timeoutId
+        const secondTimeoutId = beatEmitter.secondTimeoutId
+
+        beatEmitter.stop()
+
         expect(clearTimeout).toHaveBeenCalledTimes(2)
-        expect(clearTimeout).toHaveBeenCalledWith(beatEmitter.timeoutId)
-        expect(clearTimeout).toHaveBeenCalledWith(beatEmitter.secondTimeoutId)
-        expect(beatEmitter.intervalBetweenBeats).toEqual(60 * 1000 / 120) // 500
-        expect(beatEmitter.playing).toBeFalsy()
-        expect(beatEmitter.currentBeat).toBe(0)
-        expect(beatEmitter.currentSecond).toBe(0)
-        expect(beatEmitter.pausedBeat).toBe(0)
-        expect(beatEmitter.pausedSecond).toBe(0)
-        expect(beatEmitter.timeoutId).toBeNull()
-        expect(beatEmitter.secondTimeoutId).toBeNull()
+        expect(clearTimeout).toHaveBeenNthCalledWith(1, beatTimeoutId)
+        expect(clearTimeout).toHaveBeenNthCalledWith(2, secondTimeoutId)
+        assertBeatEmitterStopped(beatEmitter)
     })
 })
+
+function assertBeatEmitterStarted(beatEmitter) {
+    expect(setTimeout).toHaveBeenCalledTimes(2);
+    expect(setTimeout).toHaveBeenCalledWith(expect.any(Function), expect.any(Number));
+    expect(setTimeout.mock.calls).toHaveLength(2);
+    let receivedInterval = setTimeout.mock.calls[0][1]
+    expect(receivedInterval / 100).toBeCloseTo(5, 0)
+
+    expect(beatEmitter.firstBeatTime).not.toBeNull()
+    expect(beatEmitter.intervalBetweenBeats).toEqual(60 * 1000 / 120) // 500
+    expect(beatEmitter.playing).toBeTruthy()
+    expect(beatEmitter.currentBeat).toBe(1)
+    expect(beatEmitter.currentSecond).toBe(1)
+    expect(beatEmitter.pausedBeat).toBe(0)
+    expect(beatEmitter.pausedSecond).toBe(0)
+    expect(beatEmitter.timeoutId).not.toBeNull()
+    expect(beatEmitter.secondTimeoutId).not.toBeNull()
+}
+
+function assertBeatEmitterStopped(beatEmitter) {
+    expect(beatEmitter.firstBeatTime).not.toBeNull()
+    expect(beatEmitter.intervalBetweenBeats).toEqual(60 * 1000 / 120) // 500
+    expect(beatEmitter.playing).toBeFalsy()
+    expect(beatEmitter.currentBeat).toBe(0)
+    expect(beatEmitter.currentSecond).toBe(0)
+    expect(beatEmitter.pausedBeat).toBe(0)
+    expect(beatEmitter.pausedSecond).toBe(0)
+    expect(beatEmitter.timeoutId).toBeNull()
+    expect(beatEmitter.secondTimeoutId).toBeNull()
+}

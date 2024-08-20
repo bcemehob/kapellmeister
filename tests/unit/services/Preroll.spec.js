@@ -25,7 +25,7 @@ describe('Preroll', () => {
         expect(setTimeout).toHaveBeenCalledWith(expect.any(Function), expect.any(Number));
         expect(setTimeout.mock.calls).toHaveLength(1);
         let receivedInterval = setTimeout.mock.calls[0][1]
-        expect(receivedInterval / 10).toBeCloseTo(48, 0)
+        expect(receivedInterval / 100).toBeCloseTo(5, 0)
         expect(preroll.currentBeat).toBe(1)
         expect(preroll.timeoutId).not.toBeNull()
         expect(preroll.firstBeatTime).toBe(firstBeatTime)
