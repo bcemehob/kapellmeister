@@ -8,13 +8,13 @@ afterEach(() => {
     jest.clearAllMocks()
 });
 
-
 const mockPrerollStart = jest.fn().mockImplementation(() => Promise.resolve())
 
 jest.mock('@/services/Preroll', () => ({
     Preroll: jest.fn().mockImplementation(() => ({
         Preroll: "dummy",
-        start: mockPrerollStart
+        start: mockPrerollStart,
+        currentBeat: 12
     }))
 }))
 
@@ -97,7 +97,6 @@ describe('BeatEmitter', () => {
         expect(setTimeout.mock.calls).toHaveLength(1);
         let receivedInterval = setTimeout.mock.calls[0][1]
         expect(receivedInterval / 100).toBeCloseTo(5, 0)
-
         expect(clearTimeout).toHaveBeenCalledTimes(1)
         expect(clearTimeout.mock.calls[0][0]).not.toBeNull()
     })
@@ -149,6 +148,23 @@ describe('BeatEmitter', () => {
 
         beatEmitter.start()
         assertBeatEmitterStartedAfterPause(beatEmitter)
+    })
+    it('BeatEmitter can reset preroll', () => {
+        const beatEmitter = new BeatEmitter(120, 24, 2)
+
+        beatEmitter.resetPreroll(4)
+
+        expect(Preroll).toHaveBeenCalledTimes(2)
+        expect(Preroll).toHaveBeenNthCalledWith(1, 120, 2)
+        expect(Preroll).toHaveBeenNthCalledWith(2, 120, 4)
+    })
+    it('BeatEmitter can get current preroll beat', () => {
+        const beatEmitter = new BeatEmitter(120, 24, 2)
+
+        expect(beatEmitter.getCurrentPrerollBeat()).toBe(12)
+
+        expect(Preroll).toHaveBeenCalledTimes(1)
+        expect(Preroll).toHaveBeenCalledWith( 120, 2)
     })
 })
 
