@@ -7,19 +7,19 @@
       </div>
     </div>
     <div class="editor">
-      <timeline />
+      <horizontal-timeline />
     </div>
   </div>
 
 </template>
 <script>
 
-import Timeline from "@/views/editor/Timeline.vue";
 import {ConductorService} from "@/services/ConductorService";
+import HorizontalTimeline from "@/views/editor/HorizontalTimeline.vue";
 
 export default {
   name: "PatternEditor",
-  components: {Timeline},
+  components: {HorizontalTimeline},
   data: function () {
     return {
       name: '',
