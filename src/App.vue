@@ -1,5 +1,13 @@
 <template>
   <top-bar :beat-emitter="beatEmitter"/>
+  <div class="message-box">
+    <label for="messageInput">message:</label>
+    <input type="text" v-model="wsMessage" id="messageInput">
+    <button @click="sendMessage">Send</button>
+    <ul id="messages">
+      <li v-for="message in wsMessages" v-bind:key="message">{{ message }}</li>
+    </ul>
+  </div>
   <pattern-editor v-if="editMode" :current-beat="currentBeat"/>
   <conductor v-else :current-beat="currentBeat" :current-preroll-beat="currentPrerollBeat"/>
 </template>
@@ -10,13 +18,21 @@ import PatternEditor from "@/views/editor/PatternEditor.vue";
 import {BeatEmitter} from "@/services/BeatEmitter";
 import TopBar from "@/components/TopBar.vue";
 
+const socket = new WebSocket('ws://localhost:8080');
+
+socket.addEventListener('open', () => {
+  console.log('Connected to WebSocket server.')
+})
+
 export default {
   name: 'App',
   components: {PatternEditor, Conductor, TopBar},
   data() {
     return {
       beatEmitter: null,
-      playing: false
+      playing: false,
+      wsMessages: [],
+      wsMessage: ''
     }
   },
   methods: {
@@ -34,6 +50,10 @@ export default {
     closeContextMenu() {
       this.$store.commit('setContextMenuShown', false)
     },
+    sendMessage() {
+      socket.send(JSON.stringify({text: this.wsMessage}))
+      this.wsMessage = ''
+    }
   },
   computed: {
     pattern() {
@@ -58,6 +78,9 @@ export default {
     if (this.pattern && !ConductorService.isEmpty(this.pattern)) {
       this.beatEmitter = new BeatEmitter(this.pattern.tempo, ConductorService.durationInBeats(this.pattern), this.prerollBeats)
     }
+    socket.addEventListener('message', (event) => {
+      this.wsMessages.push(event.data)
+    })
   },
   beforeUnmount() {
     document.removeEventListener('click', this.closeContextMenu)

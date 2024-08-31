@@ -1,0 +1,33 @@
+{
+  "name": "kapellmeister-server",
+  "version": "1.0.0",
+  "description": "kapellmeister containing working server side and built frontend",
+  "main": "index.js",
+  "bin": "backend.js",
+  "scripts": {
+    "test": "test",
+    "start-backend": "node backend.js",
+    "build-app": "pkg backend.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "kapellmeister-server"
+  },
+  "keywords": [
+    "music",
+    "management",
+    "system"
+  ],
+  "author": "Vadim Semenov",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2",
+    "pkg": "^5.8.1"
+  },
+  "pkg": {
+    "scripts": "static/js/*.js",
+    "assets": "static/**/*",
+    "targets": ["node16-macos-arm64"],
+    "outputPath": "pkg-dist"
+  }
+}

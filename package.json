@@ -2,6 +2,7 @@
   "name": "kappelmeister",
   "version": "0.1.0",
   "private": true,
+  "bin": "backend.js",
   "engines": {
     "node": "20.13.1"
   },
@@ -12,8 +13,8 @@
     "test:unit": "vue-cli-service test:unit",
     "test": "jest",
     "lint": "vue-cli-service lint",
-    "start-backend": "node server.js",
-    "build-app": "pkg server.js"
+    "start-backend": "node backend.js",
+    "build-app": "pkg ."
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.1.1",
@@ -75,8 +76,8 @@
     "preset": "@vue/cli-plugin-unit-jest"
   },
   "pkg": {
-    "scripts": "static/js/*.js",
-    "assets": "static/**/*",
+    "scripts": "dist/js/*.js",
+    "assets": "dist/**/*",
     "targets": ["node16-macos-arm64"],
     "outputPath": "pkg-dist"
   }

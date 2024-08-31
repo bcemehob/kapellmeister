@@ -32,7 +32,7 @@ npm run start
 Or
 
 ```
-node server.js
+node backend.js
 ```
 
 ## Build application:
