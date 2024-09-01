@@ -6,7 +6,7 @@ const server = new WebSocket.Server({host: 'localhost', port: 8080})
 function handleWsEvents() {
     server.on('connection', socket => {
         console.log('New client connected')
-        const beatEmitter = new BeatEmitter()
+        const beatEmitter = new BeatEmitter(120, 24, 4, beatEmitterCallback)
         beatEmitter.start(beatEmitterCallback)
         socket.on('close', () => {
             console.log('Client disconnected')
