@@ -14,22 +14,23 @@ module.exports = class BeatEmitter {
     preroll
     callback = null
 
-        constructor(tempo, duration, prerollBeats, callback) {
+    constructor(tempo, duration, prerollBeats, callback) {
         if (!tempo || !duration || isNaN(tempo) || isNaN(duration)) {
             throw new Error('Tempo and duration must be numbers')
         }
         this.tempo = tempo;
         this.duration = duration;
-        this.intervalBetweenBeats = 60  * 1000 / this.tempo
+        this.intervalBetweenBeats = 60 * 1000 / this.tempo
         this.preroll = prerollBeats ? new Preroll(this.tempo, prerollBeats, callback) : null
         this.callback = callback
     }
+
     // parameters:
     // 1. Tempo (bpm)
     // 2. Length (Beats number)
     // emits events on each beat
 
-    start(){
+    start() {
         if (this.preroll) this.preroll.start().then(() => this.startMain())
         else this.startMain()
     }
@@ -44,7 +45,7 @@ module.exports = class BeatEmitter {
         this.second(this.firstBeatTime)
     }
 
-    stop(){
+    stop() {
         this.timeoutId && clearTimeout(this.timeoutId)
         this.timeoutId = null
         this.secondTimeoutId && clearTimeout(this.secondTimeoutId)
@@ -58,7 +59,7 @@ module.exports = class BeatEmitter {
         console.log("BeatEmitter stopped");
     }
 
-    pause(){
+    pause() {
         this.timeoutId && clearTimeout(this.timeoutId)
         this.timeoutId = null
         this.secondTimeoutId && clearTimeout(this.secondTimeoutId)
@@ -78,7 +79,7 @@ module.exports = class BeatEmitter {
             this.printMetrics(beatTime)
             return
         }
-        this.callback({type: 'beat', counter: this.currentBeat})
+        this.callback('beat', this.currentBeat)
         let that = this
         this.timeoutId = setTimeout(() => that.beat(), nextBeatTimeout)
     }
@@ -95,7 +96,7 @@ module.exports = class BeatEmitter {
             this.printMetrics(secondTime);
             return
         }
-        this.callback({type: 'second', counter: this.currentSecond})
+        this.callback('second', this.currentSecond)
         let that = this
         this.secondTimeoutId = setTimeout(() => that.second(), nextSecondTimeout)
     }

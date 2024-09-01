@@ -32,7 +32,7 @@ module.exports = class Preroll {
             this.playing = false
             return resolve()
         }
-        this.callback({type: 'preroll', counter: this.currentBeat})
+        this.callback('preroll', this.currentBeat)
         let that = this
         this.timeoutId = setTimeout(() => that.beat(resolve), nextBeatTimeout)
     }

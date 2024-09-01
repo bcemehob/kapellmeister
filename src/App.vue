@@ -1,13 +1,5 @@
 <template>
   <top-bar :beat-emitter="beatEmitter"/>
-  <div class="message-box">
-    <label for="messageInput">message:</label>
-    <input type="text" v-model="wsMessage" id="messageInput">
-    <button @click="sendMessage">Send</button>
-    <ul id="messages">
-      <li v-for="message in wsMessages" v-bind:key="message">{{ message }}</li>
-    </ul>
-  </div>
   <pattern-editor v-if="editMode" :current-beat="currentBeat"/>
   <conductor v-else :current-beat="currentBeat" :current-preroll-beat="currentPrerollBeat"/>
 </template>
@@ -15,14 +7,8 @@
 import {ConductorService} from "@/services/ConductorService";
 import Conductor from "@/views/Conductor.vue";
 import PatternEditor from "@/views/editor/PatternEditor.vue";
-import {BeatEmitter} from "@/services/BeatEmitter";
+import {BeatEmitterProvider} from "@/services/BeatEmitterProvider";
 import TopBar from "@/components/TopBar.vue";
-
-const socket = new WebSocket('ws://localhost:8080');
-
-socket.addEventListener('open', () => {
-  console.log('Connected to WebSocket server.')
-})
 
 export default {
   name: 'App',
@@ -30,6 +16,7 @@ export default {
   data() {
     return {
       beatEmitter: null,
+      serverBeatEmitterEnabled: true,
       playing: false,
       wsMessages: [],
       wsMessage: ''
@@ -50,10 +37,6 @@ export default {
     closeContextMenu() {
       this.$store.commit('setContextMenuShown', false)
     },
-    sendMessage() {
-      socket.send(JSON.stringify({text: this.wsMessage}))
-      this.wsMessage = ''
-    }
   },
   computed: {
     pattern() {
@@ -76,11 +59,10 @@ export default {
     this.loadPattern()
     this.handleClick()
     if (this.pattern && !ConductorService.isEmpty(this.pattern)) {
-      this.beatEmitter = new BeatEmitter(this.pattern.tempo, ConductorService.durationInBeats(this.pattern), this.prerollBeats)
+      let duration = ConductorService.durationInBeats(this.pattern);
+      this.beatEmitter = new BeatEmitterProvider(this.pattern.tempo, duration, this.prerollBeats, this.serverBeatEmitterEnabled)
+          .get()
     }
-    socket.addEventListener('message', (event) => {
-      this.wsMessages.push(event.data)
-    })
   },
   beforeUnmount() {
     document.removeEventListener('click', this.closeContextMenu)
@@ -88,8 +70,9 @@ export default {
 
   watch: {
     pattern(newVal) {
+      let duration = ConductorService.durationInBeats(this.pattern);
       this.beatEmitter = ConductorService.isEmpty(newVal) ? null :
-          new BeatEmitter(this.pattern.tempo, ConductorService.durationInBeats(this.pattern), this.prerollBeats)
+          new BeatEmitterProvider(this.pattern.tempo, duration, this.prerollBeats, this.serverBeatEmitterEnabled).get()
     },
     prerollBeats(newVal) {
       this.beatEmitter && this.beatEmitter.resetPreroll(newVal)
