@@ -10,6 +10,7 @@
     "start": "node index.js",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
+    "build-dev": "vue-cli-service build --mode development",
     "test:unit": "vue-cli-service test:unit",
     "test": "jest",
     "lint": "vue-cli-service lint",

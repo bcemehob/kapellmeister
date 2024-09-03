@@ -37,7 +37,7 @@ module.exports = class BeatEmitter {
 
     startMain() {
         console.log("BeatEmitter started. Interval: ", this.intervalBetweenBeats);
-        this.playing = true
+        this.setPlaying(true)
         this.firstBeatTime = new Date().getTime()
         this.pausedBeat = this.currentBeat
         this.pausedSecond = this.currentSecond
@@ -54,7 +54,7 @@ module.exports = class BeatEmitter {
         this.pausedBeat = 0
         this.currentSecond = 0
         this.pausedSecond = 0
-        this.playing = false
+        this.setPlaying(false)
         this.preroll && this.resetPreroll(this.preroll.duration)
         console.log("BeatEmitter stopped");
     }
@@ -64,7 +64,7 @@ module.exports = class BeatEmitter {
         this.timeoutId = null
         this.secondTimeoutId && clearTimeout(this.secondTimeoutId)
         this.secondTimeoutId = null
-        this.playing = false
+        this.setPlaying(false)
         this.preroll && this.resetPreroll(this.preroll.duration)
         console.log("BeatEmitter paused");
     }
@@ -102,7 +102,7 @@ module.exports = class BeatEmitter {
     }
 
     resetPreroll(prerollBeats) {
-        this.preroll = new Preroll(this.tempo, prerollBeats)
+        this.preroll = new Preroll(this.tempo, prerollBeats, this.callback)
     }
 
     printMetrics(beatTime) {
@@ -127,5 +127,10 @@ module.exports = class BeatEmitter {
 
     isPrerollPlaying() {
         return this.preroll && this.preroll.playing
+    }
+
+    setPlaying(value) {
+        this.playing = value
+        this.callback('playing', value)
     }
 }

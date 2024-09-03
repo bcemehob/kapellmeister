@@ -76,6 +76,12 @@ export default {
     },
     prerollBeats(newVal) {
       this.beatEmitter && this.beatEmitter.resetPreroll(newVal)
+    },
+    beatEmitter: {
+      handler(newVal) {
+        console.log("BE updated", newVal)
+      },
+      deep: true
     }
   }
 }

@@ -1,6 +1,6 @@
 <template>
   <div v-if="beatEmitter" class="control-block">
-    <div class="container control">
+    <div class="container control"> {{beatEmitter.playing}} {{beatEmitter.currentBeat}} {{beatEmitter.id}}
       <button v-if="!beatEmitter.playing" :disabled="beatEmitter.isPrerollPlaying()"
               class="btn btn-grey" @click="play()"><i class="fa-solid fa-play"></i></button>
       <button v-else class="btn btn-grey" @click="pause()"><i class="fa-solid fa-pause"></i></button>
