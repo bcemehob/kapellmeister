@@ -34,6 +34,14 @@ export class BeatEmitterProxy {
         socket.send(JSON.stringify({command: 'start'}))
     }
 
+    pause() {
+        socket.send(JSON.stringify({command: 'pause'}))
+    }
+
+    stop() {
+        socket.send(JSON.stringify({command: 'stop'}))
+    }
+
     resetPreroll(prerollBeats) {
         socket.send(JSON.stringify({command: 'resetPreroll', prerollBeats}))
     }

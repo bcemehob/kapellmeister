@@ -25,6 +25,9 @@ handleClientMessage = commandString => {
         case 'stop':
             beatEmitter.stop()
             break
+        case 'pause':
+            beatEmitter.stop()
+            break
         case 'resetPreroll':
             beatEmitter.resetPreroll(command.prerollBeats)
     }
