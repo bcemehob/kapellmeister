@@ -40,6 +40,15 @@ export class BeatEmitterProxy {
 
     stop() {
         socket.send(JSON.stringify({command: 'stop'}))
+        console.log("BeatEmitter stopped by user");
+    }
+
+    resetEmitter() {
+        this.currentBeat = 0
+        this.currentSecond = 0
+        this.playing = false
+        this.resetPreroll(this.prerollBeats)
+        console.log('BeatEmitter stopped on the server')
     }
 
     resetPreroll(prerollBeats) {
@@ -62,6 +71,8 @@ export class BeatEmitterProxy {
             case 'playing' :
                 this.playing = msg.value
                 break
+            case 'stop' :
+                this.resetEmitter()
         }
     }
 }

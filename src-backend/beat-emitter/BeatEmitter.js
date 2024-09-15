@@ -56,7 +56,8 @@ module.exports = class BeatEmitter {
         this.pausedSecond = 0
         this.setPlaying(false)
         this.preroll && this.resetPreroll(this.preroll.duration)
-        console.log("BeatEmitter stopped");
+        this.callback('stop', this.currentBeat)
+        console.log("BeatEmitter stopped")
     }
 
     pause() {
