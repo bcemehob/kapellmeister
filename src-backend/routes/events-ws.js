@@ -34,7 +34,6 @@ createBeatEmitter = command => {
     beatEmitter = new BeatEmitter(command.tempo, command.duration, command.prerollBeats, beatEmitterCallback)
 }
 
-
 beatEmitterCallback = (type, value) => {
     server.clients.forEach(client => {
         if (client.readyState === WebSocket.OPEN) {

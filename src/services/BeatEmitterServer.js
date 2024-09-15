@@ -1,4 +1,3 @@
-
 const socket = new WebSocket('ws://localhost:8080');
 
 
@@ -7,6 +6,7 @@ export class BeatEmitterServer {
     currentSecond = 0
     preroll = null
     playing = false
+
     constructor(tempo, duration, prerollBeats) {
         this.id = new Date().getTime()
         this.tempo = tempo
@@ -14,19 +14,10 @@ export class BeatEmitterServer {
         this.prerollBeats = prerollBeats
         this.preroll = prerollBeats ? {tempo, prerollBeats, currentBeat: 0} : null
         const createEmitterCommand = {command: 'create', tempo, duration, prerollBeats}
-        console.log(createEmitterCommand)
         socket.addEventListener('open', () => {
             console.log('Connected to WebSocket server.')
             socket.send(JSON.stringify(createEmitterCommand))
         })
-        const handleMessage = this.handleMessage
-        const beatEmitter = this
-        socket.addEventListener('message', evt => {handleMessage(evt, beatEmitter)})
-        const that = this
-        setTimeout(function () {
-            that.setCurrentBeat(222)
-        }, 1000)
-        console.log(that)
     }
 
     getCurrentPrerollBeat() {
@@ -38,8 +29,9 @@ export class BeatEmitterServer {
     }
 
     start() {
+        const emitter = this
+        socket.addEventListener('message',  event => emitter.handleMessage(event))
         socket.send(JSON.stringify({command: 'start'}))
-        this.wsMessage = ''
     }
 
     resetPreroll(prerollBeats) {
@@ -52,7 +44,7 @@ export class BeatEmitterServer {
     }
 
     setCurrentBeat(val) {
-        this.id=new Date().getTime()
+        this.id = new Date().getTime()
         this.currentBeat = val
     }
 
@@ -60,21 +52,21 @@ export class BeatEmitterServer {
         this.currentSecond = val
     }
 
-    handleMessage(event, beatEmitter) {
+    handleMessage(event) {
         const msg = JSON.parse(event.data)
-        console.log(beatEmitter)
+        console.log('Current beat', this.currentBeat)
         switch (msg.type) {
             case 'preroll' :
-                beatEmitter.prerollBeats = msg.value
+                this.prerollBeats = msg.value
                 break
             case 'beat' :
-                beatEmitter.setCurrentBeat(msg.value)
+                this.currentBeat = msg.value
                 break
             case 'second' :
-                beatEmitter.setCurrentSecond(msg.value)
+                this.setCurrentSecond(msg.value)
                 break
             case 'playing' :
-                beatEmitter.setPlaying(msg.value)
+                this.setPlaying(msg.value)
                 break
         }
     }

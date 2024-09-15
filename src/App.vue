@@ -29,7 +29,6 @@ const loadPattern = () => {
   if (ConductorService.isEmpty(pattern.value)) {
     const patternJson = localStorage.getItem('pattern')
     if (patternJson) {
-      console.log("pattern found", patternJson)
       store.commit('setPattern', JSON.parse(patternJson))
     }
   }
@@ -41,7 +40,6 @@ onMounted(() => {
   loadPattern()
   handleClick()
   if (pattern.value && !ConductorService.isEmpty(pattern.value)) {
-    console.log("BE ON MOUNT")
     let duration = ConductorService.durationInBeats(pattern.value)
     beatEmitter.value = new BeatEmitterProvider(pattern.value.tempo, duration, prerollBeats, serverBeatEmitterEnabled).get()
   }
@@ -58,4 +56,3 @@ watch(prerollBeats, newVal => beatEmitter.value && beatEmitter.value.resetPrerol
 watch(beatEmitter, newVal =>  console.log("BE updated", newVal))
 
 </script>
-
