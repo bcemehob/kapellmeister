@@ -1,7 +1,7 @@
 const socket = new WebSocket('ws://localhost:8080');
 
 
-export class BeatEmitterServer {
+export class BeatEmitterProxy {
     currentBeat = 0
     currentSecond = 0
     preroll = null

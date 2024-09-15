@@ -1,5 +1,5 @@
 import {BeatEmitter} from "@/services/BeatEmitter";
-import {BeatEmitterServer} from "@/services/BeatEmitterServer";
+import {BeatEmitterProxy} from "@/services/BeatEmitterProxy";
 export class BeatEmitterProvider {
     constructor(tempo, duration, prerollBeats, serverBeatEmitterEnabled) {
         this.tempo = tempo
@@ -10,7 +10,7 @@ export class BeatEmitterProvider {
 
     get() {
         return this.serverBeatEmitterEnabled ?
-            new BeatEmitterServer(this.tempo, this.duration, this.prerollBeats) :
+            new BeatEmitterProxy(this.tempo, this.duration, this.prerollBeats) :
             new BeatEmitter(this.tempo, this.duration, this.prerollBeats)
     }
 }
