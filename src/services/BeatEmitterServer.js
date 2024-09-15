@@ -38,20 +38,6 @@ export class BeatEmitterServer {
         socket.send(JSON.stringify({command: 'resetPreroll', prerollBeats}))
     }
 
-    setPlaying(val) {
-        console.log("PLAYING:", val)
-        this.playing = val
-    }
-
-    setCurrentBeat(val) {
-        this.id = new Date().getTime()
-        this.currentBeat = val
-    }
-
-    setCurrentSecond(val) {
-        this.currentSecond = val
-    }
-
     handleMessage(event) {
         const msg = JSON.parse(event.data)
         console.log('Current beat', this.currentBeat)
@@ -63,10 +49,10 @@ export class BeatEmitterServer {
                 this.currentBeat = msg.value
                 break
             case 'second' :
-                this.setCurrentSecond(msg.value)
+                this.currentSecond = msg.value
                 break
             case 'playing' :
-                this.setPlaying(msg.value)
+                this.playing = msg.value
                 break
         }
     }
