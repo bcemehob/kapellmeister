@@ -53,6 +53,5 @@ watch(pattern, newVal => {
       new BeatEmitterProvider(newVal.tempo, duration, prerollBeats.value, serverBeatEmitterEnabled).get()
 })
 watch(prerollBeats, newVal => beatEmitter.value && beatEmitter.value.resetPreroll(newVal))
-watch(beatEmitter, newVal =>  console.log("BE updated", newVal))
 
 </script>

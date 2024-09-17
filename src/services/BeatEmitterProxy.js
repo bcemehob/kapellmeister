@@ -54,7 +54,6 @@ export class BeatEmitterProxy {
     }
 
     resetPreroll(prerollBeats) {
-        console.log("PREROLL", prerollBeats)
         this.preroll = new PrerollProxy(this.tempo, prerollBeats)
         socket.send(JSON.stringify({command: 'resetPreroll', prerollBeats}))
     }
