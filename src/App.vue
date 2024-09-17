@@ -23,7 +23,7 @@ const pattern = computed(() => store.state.pattern)
 const editMode = computed(() => store.state.editMode)
 const currentBeat = computed(() => beatEmitter.value ? beatEmitter.value.currentBeat : 0)
 const currentPrerollBeat = computed(() => beatEmitter.value ? beatEmitter.value.getCurrentPrerollBeat() : 0)
-const prerollBeats = ConductorService.isEmpty(pattern.value) ? 0 : store.state.prerollMeasures * pattern.value.measure.beats
+const prerollBeats = computed(() => ConductorService.isEmpty(pattern.value) ? 0 : store.state.prerollMeasures * pattern.value.measure.beats)
 
 const loadPattern = () => {
   if (ConductorService.isEmpty(pattern.value)) {
@@ -41,7 +41,7 @@ onMounted(() => {
   handleClick()
   if (pattern.value && !ConductorService.isEmpty(pattern.value)) {
     let duration = ConductorService.durationInBeats(pattern.value)
-    beatEmitter.value = new BeatEmitterProvider(pattern.value.tempo, duration, prerollBeats, serverBeatEmitterEnabled).get()
+    beatEmitter.value = new BeatEmitterProvider(pattern.value.tempo, duration, prerollBeats.value, serverBeatEmitterEnabled).get()
   }
 })
 
@@ -50,7 +50,7 @@ onBeforeUnmount(() =>  document.removeEventListener('click', closeContextMenu))
 watch(pattern, newVal => {
   let duration = ConductorService.durationInBeats(newVal)
   beatEmitter.value = ConductorService.isEmpty(newVal) ? null :
-      new BeatEmitterProvider(newVal.tempo, duration, prerollBeats, serverBeatEmitterEnabled).get()
+      new BeatEmitterProvider(newVal.tempo, duration, prerollBeats.value, serverBeatEmitterEnabled).get()
 })
 watch(prerollBeats, newVal => beatEmitter.value && beatEmitter.value.resetPreroll(newVal))
 watch(beatEmitter, newVal =>  console.log("BE updated", newVal))
