@@ -19,6 +19,7 @@ module.exports = class Preroll {
         this.firstBeatTime = new Date().getTime()
         console.log("Preroll started. Interval: ", this.intervalBetweenBeats)
         this.playing = true
+        this.callback('prerollPlaying', true)
         const that = this
         return new Promise(resolve => that.beat(resolve))
     }
@@ -32,7 +33,7 @@ module.exports = class Preroll {
             this.playing = false
             return resolve()
         }
-        this.callback('preroll', this.currentBeat)
+        this.callback('prerollBeat', this.currentBeat)
         let that = this
         this.timeoutId = setTimeout(() => that.beat(resolve), nextBeatTimeout)
     }

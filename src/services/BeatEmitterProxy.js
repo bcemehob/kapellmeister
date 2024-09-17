@@ -1,4 +1,4 @@
-import PrerollProxy from "@/services/PrerollProxy";
+import {PrerollProxy} from "@/services/PrerollProxy"
 
 const socket = new WebSocket('ws://localhost:8080');
 
@@ -23,7 +23,7 @@ export class BeatEmitterProxy {
     }
 
     getCurrentPrerollBeat() {
-        return 0
+        return this.preroll ? this.preroll.currentBeat : 0
     }
 
     isPrerollPlaying() {
@@ -55,15 +55,16 @@ export class BeatEmitterProxy {
 
     resetPreroll(prerollBeats) {
         console.log("PREROLL", prerollBeats)
+        this.preroll = new PrerollProxy(this.tempo, prerollBeats)
         socket.send(JSON.stringify({command: 'resetPreroll', prerollBeats}))
     }
 
     handleMessage(event) {
         const msg = JSON.parse(event.data)
-        console.log('Current beat', msg.type, this.currentBeat)
+        console.log('Message:', msg.type, this.currentBeat)
         switch (msg.type) {
             case 'prerollBeat' :
-                this.preroll && this.preroll.beat(msg.value)
+                if (this.preroll) this.preroll.beat(msg.value)
                 break
             case 'prerollPlaying' :
                 if (this.preroll) this.preroll.playing = msg.value

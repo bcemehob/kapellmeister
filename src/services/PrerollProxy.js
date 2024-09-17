@@ -1,4 +1,4 @@
-export class Preroll {
+export class PrerollProxy {
     tempo
     duration
     currentBeat = 0
