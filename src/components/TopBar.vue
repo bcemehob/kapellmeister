@@ -20,8 +20,8 @@ import TransportControlPanel from "@/views/controls/TransportControlPanel.vue"
 import PatternGeneralOptionsPanel from "@/views/controls/PatternGeneralOptionsPanel.vue"
 import EditModeControlPanel from "@/views/controls/EditModeControlPanel.vue"
 import BrandWithLogo from "@/views/BrandWithLogo.vue"
-import ActionsControlPanel from "@/views/controls/ActionsControlPanel.vue";
-import PreRollControlPanel from "@/views/controls/PreRollControlPanel.vue";
+import ActionsControlPanel from "@/views/controls/ActionsControlPanel.vue"
+import PreRollControlPanel from "@/views/controls/PreRollControlPanel.vue"
 
 defineProps(['beatEmitter'])
 </script>

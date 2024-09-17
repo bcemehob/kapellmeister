@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import {ConductorService} from "@/services/ConductorService";
+import {ConductorService} from "@/services/ConductorService"
 
 export default {
   name: "MeasuresRibbon",

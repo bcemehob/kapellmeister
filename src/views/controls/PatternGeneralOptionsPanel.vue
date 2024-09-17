@@ -18,10 +18,10 @@
 </template>
 
 <script setup>
-import {useStore} from "vuex";
-import {computed} from "vue";
-import {ConductorService} from "@/services/ConductorService";
-import ClickableEditable from "@/views/controls/ClickableEditable.vue";
+import {useStore} from "vuex"
+import {ConductorService} from "@/services/ConductorService"
+import ClickableEditable from "@/views/controls/ClickableEditable.vue"
+import {computed} from "vue"
 
 const store = useStore()
 const pattern = computed(() => store.state.pattern)

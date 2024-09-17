@@ -13,9 +13,9 @@
 </template>
 
 <script setup>
-import {useStore} from "vuex";
-import {computed, ref} from "vue";
-import {ConductorService} from "@/services/ConductorService";
+import {useStore} from "vuex"
+import {computed, ref} from "vue"
+import {ConductorService} from "@/services/ConductorService"
 
 const store = useStore()
 const tooltip = ref(null)
