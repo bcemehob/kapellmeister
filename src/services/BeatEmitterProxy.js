@@ -1,4 +1,5 @@
 import PrerollProxy from "@/services/PrerollProxy";
+
 const socket = new WebSocket('ws://localhost:8080');
 
 
@@ -13,7 +14,7 @@ export class BeatEmitterProxy {
         this.tempo = tempo
         this.duration = duration
         this.prerollBeats = prerollBeats
-        this.preroll = prerollBeats ? new PrerollProxy(tempo, prerollBeats, socket) : null
+        this.preroll = prerollBeats ? new PrerollProxy(tempo, prerollBeats) : null
         const createEmitterCommand = {command: 'create', tempo, duration, prerollBeats}
         socket.addEventListener('open', () => {
             console.log('Connected to WebSocket server.')
@@ -26,12 +27,12 @@ export class BeatEmitterProxy {
     }
 
     isPrerollPlaying() {
-        return false
+        return this.preroll && this.preroll.playing
     }
 
     start() {
         const emitter = this
-        socket.addEventListener('message',  event => emitter.handleMessage(event))
+        socket.addEventListener('message', event => emitter.handleMessage(event))
         socket.send(JSON.stringify({command: 'start'}))
     }
 
@@ -53,6 +54,7 @@ export class BeatEmitterProxy {
     }
 
     resetPreroll(prerollBeats) {
+        console.log("PREROLL", prerollBeats)
         socket.send(JSON.stringify({command: 'resetPreroll', prerollBeats}))
     }
 
@@ -60,11 +62,11 @@ export class BeatEmitterProxy {
         const msg = JSON.parse(event.data)
         console.log('Current beat', msg.type, this.currentBeat)
         switch (msg.type) {
-            case 'preroll' :
-                this.prerollBeats = msg.value
-                break
             case 'prerollBeat' :
                 this.preroll && this.preroll.beat(msg.value)
+                break
+            case 'prerollPlaying' :
+                if (this.preroll) this.preroll.playing = msg.value
                 break
             case 'prerollStop' :
                 this.preroll && this.preroll.stop()

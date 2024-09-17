@@ -6,15 +6,9 @@ export class Preroll {
     playing = false
     timeoutId = null
 
-    constructor(tempo, duration, socket) {
+    constructor(tempo, duration) {
         this.tempo = tempo
         this.duration = duration
-        this.socket = socket
-    }
-
-    start() {
-        this.socket.send(JSON.stringify({command: 'startPreroll'}))
-        this.playing = true
     }
 
     beat(value) {
