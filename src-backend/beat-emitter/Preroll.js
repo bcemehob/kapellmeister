@@ -31,6 +31,8 @@ module.exports = class Preroll {
         if (this.currentBeat > this.duration) {
             clearTimeout(this.timeoutId)
             this.playing = false
+            this.currentBeat = 0
+            this.callback('prerollBeat', this.currentBeat)
             return resolve()
         }
         this.callback('prerollBeat', this.currentBeat)

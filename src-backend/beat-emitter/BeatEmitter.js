@@ -36,7 +36,7 @@ module.exports = class BeatEmitter {
     }
 
     startMain() {
-        console.log("BeatEmitter started. Interval: ", this.intervalBetweenBeats);
+        console.log("BeatEmitter started. Interval: ", this.intervalBetweenBeats, "Preroll: ", this.preroll);
         this.setPlaying(true)
         this.firstBeatTime = new Date().getTime()
         this.pausedBeat = this.currentBeat
