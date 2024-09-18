@@ -126,10 +126,6 @@ module.exports = class BeatEmitter {
         return this.preroll ? this.preroll.currentBeat : 0
     }
 
-    isPrerollPlaying() {
-        return this.preroll && this.preroll.playing
-    }
-
     setPlaying(value) {
         this.playing = value
         this.callback('playing', value)

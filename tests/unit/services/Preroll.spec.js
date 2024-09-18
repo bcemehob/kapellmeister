@@ -1,4 +1,5 @@
 import {Preroll} from "@/services/Preroll"
+
 jest.spyOn(global, "setTimeout")
 jest.spyOn(global, "clearTimeout")
 
@@ -29,7 +30,6 @@ describe('Preroll', () => {
         expect(preroll.currentBeat).toBe(1)
         expect(preroll.timeoutId).not.toBeNull()
         expect(preroll.firstBeatTime).toBe(firstBeatTime)
-        expect(preroll.playing).toBeTruthy()
         expect(clearTimeout).not.toHaveBeenCalled()
     })
     it('will stop Preroll after start if current beat value exceeds duration', () => {

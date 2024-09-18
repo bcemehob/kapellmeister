@@ -4,7 +4,6 @@ export class Preroll {
     currentBeat = 0
     firstBeatTime = null
     intervalBetweenBeats
-    playing = false
     timeoutId = null
 
     constructor(tempo, duration) {
@@ -16,7 +15,6 @@ export class Preroll {
     start() {
         this.firstBeatTime = new Date().getTime()
         console.log("Preroll started. Interval: ", this.intervalBetweenBeats)
-        this.playing = true
         const that = this
         return new Promise(resolve => that.beat(resolve))
     }
@@ -27,7 +25,6 @@ export class Preroll {
         let nextBeatTimeout = expectedNextBeatTime - new Date().getTime() - 5
         if (this.currentBeat > this.duration) {
             clearTimeout(this.timeoutId)
-            this.playing = false
             return resolve()
         }
         let that = this

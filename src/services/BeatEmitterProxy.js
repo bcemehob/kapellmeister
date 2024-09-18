@@ -27,7 +27,7 @@ export class BeatEmitterProxy {
     }
 
     isPrerollPlaying() {
-        return this.preroll && this.preroll.playing
+        return this.preroll && this.preroll.currentBeat
     }
 
     start() {
@@ -64,12 +64,6 @@ export class BeatEmitterProxy {
         switch (msg.type) {
             case 'prerollBeat' :
                 if (this.preroll) this.preroll.beat(msg.value)
-                break
-            case 'prerollPlaying' :
-                if (this.preroll) this.preroll.playing = msg.value
-                break
-            case 'prerollStop' :
-                this.preroll && this.preroll.stop()
                 break
             case 'beat' :
                 this.currentBeat = msg.value

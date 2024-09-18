@@ -19,15 +19,16 @@ export class BeatEmitter {
         }
         this.tempo = tempo;
         this.duration = duration;
-        this.intervalBetweenBeats = 60  * 1000 / this.tempo
+        this.intervalBetweenBeats = 60 * 1000 / this.tempo
         this.preroll = prerollBeats ? new Preroll(this.tempo, prerollBeats) : null
     }
+
     // parameters:
     // 1. Tempo (bpm)
     // 2. Length (Beats number)
     // emits events on each beat
 
-    start(){
+    start() {
         if (this.preroll) this.preroll.start().then(() => this.startMain())
         else this.startMain()
     }
@@ -42,7 +43,7 @@ export class BeatEmitter {
         this.second(this.firstBeatTime)
     }
 
-    stop(){
+    stop() {
         this.timeoutId && clearTimeout(this.timeoutId)
         this.timeoutId = null
         this.secondTimeoutId && clearTimeout(this.secondTimeoutId)
@@ -56,7 +57,7 @@ export class BeatEmitter {
         console.log("BeatEmitter stopped");
     }
 
-    pause(){
+    pause() {
         this.timeoutId && clearTimeout(this.timeoutId)
         this.timeoutId = null
         this.secondTimeoutId && clearTimeout(this.secondTimeoutId)
@@ -121,6 +122,6 @@ export class BeatEmitter {
     }
 
     isPrerollPlaying() {
-        return this.preroll && this.preroll.playing
+        return this.preroll && this.preroll.currentBeat
     }
 }
