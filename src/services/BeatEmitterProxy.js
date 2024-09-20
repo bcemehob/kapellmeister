@@ -31,9 +31,13 @@ export class BeatEmitterProxy {
     }
 
     start() {
+        this.registerMessage();
+        socket.send(JSON.stringify({command: 'start'}))
+    }
+
+    registerMessage() {
         const emitter = this
         socket.addEventListener('message', event => emitter.handleMessage(event))
-        socket.send(JSON.stringify({command: 'start'}))
     }
 
     pause() {
@@ -56,6 +60,11 @@ export class BeatEmitterProxy {
     resetPreroll(prerollBeats) {
         this.preroll = new PrerollProxy(this.tempo, prerollBeats)
         socket.send(JSON.stringify({command: 'resetPreroll', prerollBeats}))
+    }
+
+    goToBeat(currentBeat, tempo) {
+        this.registerMessage()
+        socket.send(JSON.stringify({command: 'goToBeat', currentBeat, tempo}))
     }
 
     handleMessage(event) {

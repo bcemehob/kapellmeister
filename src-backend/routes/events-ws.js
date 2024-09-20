@@ -12,12 +12,12 @@ handleWsEvents = () => {
     })
 }
 
-handleClientMessage = commandString => {
-    const command = JSON.parse(commandString)
-    console.log("command received: ", command)
-    switch (command.command) {
+handleClientMessage = messageStr => {
+    const message = JSON.parse(messageStr)
+    console.log("message received: ", message)
+    switch (message.command) {
         case 'create':
-            createBeatEmitter(command)
+            createBeatEmitter(message)
             break
         case 'start':
             beatEmitter.start()
@@ -29,7 +29,10 @@ handleClientMessage = commandString => {
             beatEmitter.pause()
             break
         case 'resetPreroll':
-            beatEmitter.resetPreroll(command.prerollBeats)
+            beatEmitter.resetPreroll(message.prerollBeats)
+            break
+        case 'goToBeat':
+            beatEmitter.goToBeat(message.currentBeat, message.tempo)
     }
 }
 

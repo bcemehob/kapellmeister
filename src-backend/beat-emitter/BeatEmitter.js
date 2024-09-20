@@ -118,6 +118,8 @@ module.exports = class BeatEmitter {
         this.stop()
         this.currentBeat = currentBeat
         this.currentSecond = DurationService.calculateDuration(currentBeat, tempo).seconds
+        this.callback('beat', this.currentBeat)
+        this.callback('second', this.currentSecond)
         if (!isPlaying) this.pause()
         else this.start()
     }
