@@ -45,7 +45,7 @@ const startFromTime = (event) => {
 const getCurrentBeat = (offsetX, elementWidth) => {
   const beatsTotal = ConductorService.durationInBeats(pattern.value)
   const beatsForPixel = beatsTotal / elementWidth
-  return Math.floor(offsetX * beatsForPixel)
+  return Math.floor(offsetX * beatsForPixel) + 1
 }
 
 const getMeasure = () => {
