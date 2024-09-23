@@ -65,7 +65,7 @@ export default {
           {name: 'instrument 1', parties: []}
         ]
       }
-      this.$store.dispatch('persistPattern',newPattern)
+      this.$store.dispatch('persistPattern', newPattern)
     },
   }
 }

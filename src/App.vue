@@ -1,6 +1,6 @@
 <template>
-  <top-bar :beat-emitter="beatEmitter"/>
-  <pattern-editor v-if="editMode" :current-beat="currentBeat"/>
+  <top-bar :beat-emitter="beatEmitter" :conductor-view="conductorView"/>
+  <pattern-editor v-if="editMode && conductorView" :current-beat="currentBeat"/>
   <conductor v-else :current-beat="currentBeat" :current-preroll-beat="currentPrerollBeat"/>
 </template>
 <script setup>
@@ -14,16 +14,13 @@ import Conductor from "@/views/Conductor.vue"
 
 const beatEmitter = ref(null)
 const serverBeatEmitterEnabled = true
-// const playing = ref(false)
-// const wsMessages = ref([])
-// const wsMessage = ref('')
-
 const store = useStore()
 const pattern = computed(() => store.state.pattern)
 const editMode = computed(() => store.state.editMode)
 const currentBeat = computed(() => beatEmitter.value ? beatEmitter.value.currentBeat : 0)
 const currentPrerollBeat = computed(() => beatEmitter.value ? beatEmitter.value.getCurrentPrerollBeat() : 0)
 const prerollBeats = computed(() => ConductorService.isEmpty(pattern.value) ? 0 : store.state.prerollMeasures * pattern.value.measure.beats)
+const conductorView = computed(() => store.state.conductorView)
 
 const loadPattern = () => {
   if (ConductorService.isEmpty(pattern.value)) {
@@ -35,6 +32,13 @@ const loadPattern = () => {
 }
 const handleClick = ()  => document.addEventListener('click', closeContextMenu)
 const closeContextMenu = () => store.commit('setContextMenuShown', false)
+const pingLocalhost = async () => {
+  const url = "http://localhost:3000/setup.js";
+  try {
+    await fetch(url);
+    store.commit('setConductorView', true)
+  } catch (error) { }
+}
 
 onMounted(() => {
   loadPattern()
@@ -43,6 +47,7 @@ onMounted(() => {
     let duration = ConductorService.durationInBeats(pattern.value)
     beatEmitter.value = new BeatEmitterProvider(pattern.value.tempo, duration, prerollBeats.value, serverBeatEmitterEnabled).get()
   }
+  pingLocalhost()
 })
 
 onBeforeUnmount(() =>  document.removeEventListener('click', closeContextMenu))
