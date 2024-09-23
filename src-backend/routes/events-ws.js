@@ -1,8 +1,12 @@
 const WebSocket = require('ws')
 const BeatEmitter = require('../beat-emitter/BeatEmitter')
-const server = new WebSocket.Server({host: 'localhost', port: 8080})
 let beatEmitter = null
-handleWsEvents = () => {
+let server = null
+setupWebSocket = (applicationAddress) => {
+    server = new WebSocket.Server({
+        host: applicationAddress.host,
+        port: applicationAddress.wsPort
+    })
     server.on('connection', socket => {
         console.log('New client connected')
         socket.on('message', handleClientMessage)
@@ -49,4 +53,4 @@ beatEmitterCallback = (type, value) => {
     console.log("BeatEmitter callback")
 }
 
-module.exports = { handleWsEvents }
+module.exports = { setupWebSocket }
