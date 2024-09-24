@@ -2,10 +2,12 @@
   <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid ">
       <brand-with-logo />
-      <edit-mode-control-panel />
-      <pre-roll-control-panel />
-      <actions-control-panel />
-      <pattern-control-panel/>
+      <template v-if="conductorView">
+        <edit-mode-control-panel />
+        <pre-roll-control-panel />
+        <actions-control-panel />
+        <pattern-control-panel />
+      </template>
       <pattern-general-options-panel/>
     </div>
   </nav>
@@ -22,8 +24,12 @@ import EditModeControlPanel from "@/views/controls/EditModeControlPanel.vue"
 import BrandWithLogo from "@/views/BrandWithLogo.vue"
 import ActionsControlPanel from "@/views/controls/ActionsControlPanel.vue"
 import PreRollControlPanel from "@/views/controls/PreRollControlPanel.vue"
+import {useStore} from "vuex";
+import {computed} from "vue";
 
 defineProps(['beatEmitter'])
+const store = useStore()
+const conductorView = computed(() => store.state.conductorView)
 </script>
 
 <style scoped>

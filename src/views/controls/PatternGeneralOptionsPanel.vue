@@ -1,15 +1,25 @@
 <template>
   <div v-if="!ConductorService.isEmpty(pattern)" class="track-name">
-    <div><clickable-editable v-model="pattern.name" :narrow="true" type="text"/></div>
     <div>
-      <span class="track-info"><clickable-editable v-model="pattern.tempo"/> bpm</span>
-      <span class="track-info"><clickable-editable v-model="pattern.duration"/>
+      <clickable-editable v-if="conductorView" v-model="pattern.name" :narrow="true" type="text"/>
+      <span v-else>{{pattern.name}}</span>
+    </div>
+    <div>
+      <span class="track-info">
+        <clickable-editable v-if="conductorView" v-model="pattern.tempo"/>
+        <span v-else>{{pattern.tempo}}</span>
+        bpm</span>
+      <span class="track-info">
+        <clickable-editable v-if="conductorView" v-model="pattern.duration"/>
+        <span v-else>{{pattern.duration}}</span>
         measures <i class="fa" :class="measureClass"></i>
       </span>
       <span class="track-info">
-        <clickable-editable v-model="pattern.measure.beats"/>
+        <clickable-editable v-if="conductorView" v-model="pattern.measure.beats"/>
+        <span v-else>{{pattern.measure.beats}}</span>
          /
-        <clickable-editable v-model="pattern.measure.base"/>
+        <clickable-editable v-if="conductorView" v-model="pattern.measure.base"/>
+        <span v-else>{{pattern.measure.base}}</span>
       </span>
       <span class="track-info">{{ duration }}</span>
     </div>
@@ -27,7 +37,7 @@ const store = useStore()
 const pattern = computed(() => store.state.pattern)
 const duration = computed(() => ConductorService.calculateDuration(ConductorService.durationInBeats(pattern.value), pattern.value.tempo).timeString)
 const measureClass = computed(() => measureClassMapped(ConductorService.getClassName(pattern.value)))
-
+const conductorView = computed(() => store.state.conductorView)
 const measureClassMapped = className => {
   switch (className) {
     case "not-ok":
