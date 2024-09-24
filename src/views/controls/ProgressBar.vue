@@ -4,7 +4,8 @@
     <div class="current-time">{{ moment.currentTime.timeString }}</div>
     <span>
       <progress ref="progress" id="time" max="100" :value="currentTimePercentage()"
-                @click="startFromTime"
+                :class="{'no-pointer': !conductorView}"
+                @click="goToBeat"
                 @mouseout="hideTooltip"
                 @mousemove="moveTooltip"/>
       <span class="dynamic-tooltip" ref="tooltip"></span>
@@ -20,6 +21,7 @@ import {ConductorService} from "@/services/ConductorService"
 const store = useStore()
 const tooltip = ref(null)
 const progress = ref(null)
+const conductorView = computed(() => store.state.conductorView)
 const pattern = computed(() => store.state.pattern)
 const moment = computed(() => {
   return {
@@ -37,7 +39,8 @@ const currentTimePercentage = () => {
   return Math.floor(100 * moment.value.currentTime.seconds / moment.value.totalTime.seconds)
 }
 
-const startFromTime = (event) => {
+const goToBeat = (event) => {
+  if (!conductorView.value) return
   const newCurrentBeat = getCurrentBeat(event.offsetX, event.target.getBoundingClientRect().width)
   if (props.beatEmitter.currentBeat === newCurrentBeat) return
   props.beatEmitter.goToBeat(newCurrentBeat, pattern.value.tempo)
@@ -85,6 +88,9 @@ progress {
   width: 80%;
   background-color: #000;
   height: 7px;
+  &.no-pointer {
+    cursor: auto;
+  }
 }
 
 progress::-webkit-progress-bar {

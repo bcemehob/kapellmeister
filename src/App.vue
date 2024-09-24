@@ -36,8 +36,10 @@ const pingLocalhost = async () => {
   const url = "http://localhost:3000/setup.js";
   try {
     await fetch(url);
-    store.commit('setConductorView', true)
-  } catch (error) { }
+    // store.commit('setConductorView', true) // DEBUG: enable client mode for development
+  } catch (error) {
+    console.log("")
+  }
 }
 
 onMounted(() => {
