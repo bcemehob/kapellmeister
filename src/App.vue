@@ -11,6 +11,7 @@ import {BeatEmitterProvider} from "@/services/BeatEmitterProvider"
 import TopBar from "@/components/TopBar.vue"
 import PatternEditor from "@/views/editor/PatternEditor.vue"
 import Conductor from "@/views/Conductor.vue"
+import {HttpClient} from "@/http-client/HttpClient"
 
 const beatEmitter = ref(null)
 const serverBeatEmitterEnabled = true
@@ -24,7 +25,7 @@ const conductorView = computed(() => store.state.conductorView)
 
 const loadPattern = async () => {
   if (ConductorService.isEmpty(pattern.value)) {
-    const pattern = conductorView.value ? readPatternFromLocalStorage() : await requestPatternFromBackend()
+    const pattern = conductorView.value ? readPatternFromLocalStorage() : await HttpClient.requestPatternFromBackend()
     pattern && store.commit('setPattern', pattern)
   }
 }
@@ -33,30 +34,8 @@ const readPatternFromLocalStorage = () => {
   const pattern = localStorage.getItem('pattern')
   return pattern ? JSON.parse(pattern) : null
 }
-
-const requestPatternFromBackend = async () => {
-  try {
-    const response = await fetch("/api/pattern")
-    if (!response.ok) throw new Error("alalala")
-    console.log(response)
-    return await response.json()
-  } catch (error) {
-    console.error("Error while fetching pattern", error)
-    return null
-  }
-}
-
 const handleClick = ()  => document.addEventListener('click', closeContextMenu)
 const closeContextMenu = () => store.commit('setContextMenuShown', false)
-const pingLocalhost = async () => {
-  const url = "http://localhost:3000/setup.js";
-  try {
-    await fetch(url);
-    // store.commit('setConductorView', true) // DEBUG: enable client mode for development
-  } catch (error) {
-    console.log("")
-  }
-}
 
 onMounted( () => {
   loadPattern()
@@ -65,7 +44,7 @@ onMounted( () => {
     let duration = ConductorService.durationInBeats(pattern.value)
     beatEmitter.value = new BeatEmitterProvider(pattern.value.tempo, duration, prerollBeats.value, serverBeatEmitterEnabled).get()
   }
-  pingLocalhost()
+  if (!HttpClient.pingLocalhost()) store.commit('setConductorView', true)
 })
 
 onBeforeUnmount(() =>  document.removeEventListener('click', closeContextMenu))
