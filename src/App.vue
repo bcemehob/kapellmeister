@@ -22,14 +22,30 @@ const currentPrerollBeat = computed(() => beatEmitter.value ? beatEmitter.value.
 const prerollBeats = computed(() => ConductorService.isEmpty(pattern.value) ? 0 : store.state.prerollMeasures * pattern.value.measure.beats)
 const conductorView = computed(() => store.state.conductorView)
 
-const loadPattern = () => {
+const loadPattern = async () => {
   if (ConductorService.isEmpty(pattern.value)) {
-    const patternJson = localStorage.getItem('pattern')
-    if (patternJson) {
-      store.commit('setPattern', JSON.parse(patternJson))
-    }
+    const pattern = conductorView.value ? readPatternFromLocalStorage() : await requestPatternFromBackend()
+    pattern && store.commit('setPattern', pattern)
   }
 }
+
+const readPatternFromLocalStorage = () => {
+  const pattern = localStorage.getItem('pattern')
+  return pattern ? JSON.parse(pattern) : null
+}
+
+const requestPatternFromBackend = async () => {
+  try {
+    const response = await fetch("/api/pattern")
+    if (!response.ok) throw new Error("alalala")
+    console.log(response)
+    return await response.json()
+  } catch (error) {
+    console.error("Error while fetching pattern", error)
+    return null
+  }
+}
+
 const handleClick = ()  => document.addEventListener('click', closeContextMenu)
 const closeContextMenu = () => store.commit('setContextMenuShown', false)
 const pingLocalhost = async () => {
@@ -42,7 +58,7 @@ const pingLocalhost = async () => {
   }
 }
 
-onMounted(() => {
+onMounted( () => {
   loadPattern()
   handleClick()
   if (pattern.value && !ConductorService.isEmpty(pattern.value)) {
