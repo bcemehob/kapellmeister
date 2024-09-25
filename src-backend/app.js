@@ -1,21 +1,7 @@
 const express = require('express')
 const localAddress = require('./NetworkUtil')
 const {setupWebSocket, sendMessageToClients} = require('./routes/events-ws')
-
-const patternHolder = {
-    pattern: {
-        name: 'new pattern',
-        tempo: 120,
-        duration: 128,
-        measure: {
-            base: 4,
-            beats: 4
-        },
-        instruments: [
-            {name: 'instrument 1', parties: []}
-        ]
-    }
-}
+const patternHolder = require("./PatternHolder");
 
 module.exports = function (pathToStatic) {
     const app = express()
@@ -50,6 +36,7 @@ module.exports = function (pathToStatic) {
 
     app.post('/api/pattern', (req, res) => {
         console.log(req.body)
+        patternHolder.pattern = req.body
         res.send(JSON.stringify({answer: 'OK'}))
         sendMessageToClients('pattern', '')
     })
