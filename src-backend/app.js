@@ -25,6 +25,7 @@ module.exports = function (pathToStatic) {
         wsPort: 3001
     }
     console.log(__dirname)
+    app.use(express.json())
     app.use(express.static(pathToStatic))
     app.use(function (req, res, next) {
         // res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
@@ -45,6 +46,11 @@ module.exports = function (pathToStatic) {
 
     app.get('/api/pattern', (req, res) => {
         res.send(JSON.stringify(patternHolder.pattern))
+    })
+
+    app.post('/api/pattern', (req, res) => {
+        console.log(req.body)
+        res.send(JSON.stringify({answer: 'OK'}))
     })
 
 }

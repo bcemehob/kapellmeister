@@ -44,12 +44,14 @@ onMounted( () => {
     let duration = ConductorService.durationInBeats(pattern.value)
     beatEmitter.value = new BeatEmitterProvider(pattern.value.tempo, duration, prerollBeats.value, serverBeatEmitterEnabled).get()
   }
-  if (!HttpClient.pingLocalhost()) store.commit('setConductorView', true)
+  if (HttpClient.pingLocalhost()) store.commit('setConductorView', true)
 })
 
 onBeforeUnmount(() =>  document.removeEventListener('click', closeContextMenu))
 
 watch(pattern, newVal => {
+  console.log("pattern triggered. persist: ", pattern.value)
+  HttpClient.sendPatternToBackend(pattern.value)
   let duration = ConductorService.durationInBeats(newVal)
   beatEmitter.value = ConductorService.isEmpty(newVal) ? null :
       new BeatEmitterProvider(newVal.tempo, duration, prerollBeats.value, serverBeatEmitterEnabled).get()
