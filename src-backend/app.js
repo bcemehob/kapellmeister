@@ -1,6 +1,6 @@
 const express = require('express')
 const localAddress = require('./NetworkUtil')
-const {setupWebSocket} = require('./routes/events-ws')
+const {setupWebSocket, sendMessageToClients} = require('./routes/events-ws')
 
 const patternHolder = {
     pattern: {
@@ -51,6 +51,7 @@ module.exports = function (pathToStatic) {
     app.post('/api/pattern', (req, res) => {
         console.log(req.body)
         res.send(JSON.stringify({answer: 'OK'}))
+        sendMessageToClients('pattern', '')
     })
 
 }
