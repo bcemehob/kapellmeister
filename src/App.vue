@@ -11,7 +11,7 @@ import {BeatEmitterProvider} from "@/services/BeatEmitterProvider"
 import TopBar from "@/components/TopBar.vue"
 import PatternEditor from "@/views/editor/PatternEditor.vue"
 import Conductor from "@/views/Conductor.vue"
-import {HttpClient} from "@/http-client/HttpClient"
+import {HttpClient} from "@/clients/HttpClient"
 
 const beatEmitter = ref(null)
 const serverBeatEmitterEnabled = true
@@ -51,7 +51,6 @@ onBeforeUnmount(() =>  document.removeEventListener('click', closeContextMenu))
 
 watch(pattern, newVal => {
   console.log("pattern triggered. persist: ", pattern.value)
-  HttpClient.sendPatternToBackend(pattern.value)
   let duration = ConductorService.durationInBeats(newVal)
   beatEmitter.value = ConductorService.isEmpty(newVal) ? null :
       new BeatEmitterProvider(newVal.tempo, duration, prerollBeats.value, serverBeatEmitterEnabled).get()
