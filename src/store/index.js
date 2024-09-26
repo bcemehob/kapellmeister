@@ -1,5 +1,6 @@
 import {createStore} from 'vuex';
 import {ConductorService} from "@/services/ConductorService";
+import {HttpClient} from "@/clients/HttpClient";
 
 export default createStore({
     state: {
@@ -90,6 +91,7 @@ export default createStore({
             pattern = !pattern ? state.pattern : pattern
             commit('setPattern', pattern)
             localStorage.setItem('pattern', JSON.stringify(pattern))
+            HttpClient.sendPatternToBackend(pattern)
         },
 
         clearPattern({ commit }) {
