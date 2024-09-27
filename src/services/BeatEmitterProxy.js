@@ -1,6 +1,5 @@
 import {PrerollProxy} from "@/services/PrerollProxy"
-
-const socket = new WebSocket(`ws://${window.applicationAddress.host}:${window.applicationAddress.wsPort}`);
+import ws from "@/clients/WebSocket";
 
 
 export class BeatEmitterProxy {
@@ -15,11 +14,8 @@ export class BeatEmitterProxy {
         this.duration = duration
         this.prerollBeats = prerollBeats
         this.preroll = prerollBeats ? new PrerollProxy(tempo, prerollBeats) : null
-        const createEmitterCommand = {command: 'create', tempo, duration, prerollBeats}
-        socket.addEventListener('open', () => {
-            console.log('Connected to WebSocket server.')
-            socket.send(JSON.stringify(createEmitterCommand))
-        })
+        console.log("BE construct")
+        ws.init(tempo, duration, prerollBeats)
     }
 
     getCurrentPrerollBeat() {
@@ -31,21 +27,16 @@ export class BeatEmitterProxy {
     }
 
     start() {
-        this.registerMessage();
-        socket.send(JSON.stringify({command: 'start'}))
-    }
-
-    registerMessage() {
-        const emitter = this
-        socket.addEventListener('message', event => emitter.handleMessage(event))
+        ws.registerMessageListener(this, 'handleMessage')
+        ws.send({command: 'start'})
     }
 
     pause() {
-        socket.send(JSON.stringify({command: 'pause'}))
+        ws.send({command: 'pause'})
     }
 
     stop() {
-        socket.send(JSON.stringify({command: 'stop'}))
+        ws.send({command: 'stop'})
         console.log("BeatEmitter stopped by user");
     }
 
@@ -59,12 +50,12 @@ export class BeatEmitterProxy {
 
     resetPreroll(prerollBeats) {
         this.preroll = new PrerollProxy(this.tempo, prerollBeats)
-        socket.send(JSON.stringify({command: 'resetPreroll', prerollBeats}))
+        ws.send({command: 'resetPreroll', prerollBeats})
     }
 
     goToBeat(currentBeat, tempo) {
-        this.registerMessage()
-        socket.send(JSON.stringify({command: 'goToBeat', currentBeat, tempo}))
+        ws.registerMessageListener(this, 'handleMessage')
+        ws.send({command: 'goToBeat', currentBeat, tempo})
     }
 
     handleMessage(event) {
