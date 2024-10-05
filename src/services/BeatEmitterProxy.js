@@ -27,7 +27,7 @@ export class BeatEmitterProxy {
     }
 
     start() {
-        ws.registerMessageListener(this, 'handleMessage')
+        ws.registerMessageListener(this)
         ws.send({command: 'start'})
     }
 
@@ -54,28 +54,7 @@ export class BeatEmitterProxy {
     }
 
     goToBeat(currentBeat, tempo) {
-        ws.registerMessageListener(this, 'handleMessage')
+        ws.registerMessageListener(this)
         ws.send({command: 'goToBeat', currentBeat, tempo})
-    }
-
-    handleMessage(event) {
-        const msg = JSON.parse(event.data)
-        console.log('Message:', msg.type, this.currentBeat)
-        switch (msg.type) {
-            case 'prerollBeat' :
-                if (this.preroll) this.preroll.beat(msg.value)
-                break
-            case 'beat' :
-                this.currentBeat = msg.value
-                break
-            case 'second' :
-                this.currentSecond = msg.value
-                break
-            case 'playing' :
-                this.playing = msg.value
-                break
-            case 'stop' :
-                this.resetEmitter()
-        }
     }
 }
