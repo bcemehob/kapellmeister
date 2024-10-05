@@ -15,7 +15,6 @@ export class BeatEmitterProxy {
         this.prerollBeats = prerollBeats
         this.preroll = prerollBeats ? new PrerollProxy(tempo, prerollBeats) : null
         console.log("BE construct")
-        ws.init(tempo, duration, prerollBeats)
     }
 
     getCurrentPrerollBeat() {
@@ -27,7 +26,6 @@ export class BeatEmitterProxy {
     }
 
     start() {
-        ws.registerMessageListener(this)
         ws.send({command: 'start'})
     }
 
@@ -54,7 +52,6 @@ export class BeatEmitterProxy {
     }
 
     goToBeat(currentBeat, tempo) {
-        ws.registerMessageListener(this)
         ws.send({command: 'goToBeat', currentBeat, tempo})
     }
 }
