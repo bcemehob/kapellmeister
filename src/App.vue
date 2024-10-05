@@ -38,13 +38,13 @@ const handleClick = ()  => document.addEventListener('click', closeContextMenu)
 const closeContextMenu = () => store.commit('setContextMenuShown', false)
 
 onMounted( async () => {
+  if (await HttpClient.pingLocalhost()) store.commit('setConductorView', true)
   loadPattern()
   handleClick()
   if (pattern.value && !ConductorService.isEmpty(pattern.value)) {
     let duration = ConductorService.durationInBeats(pattern.value)
     beatEmitter.value = new BeatEmitterProvider(pattern.value.tempo, duration, prerollBeats.value, serverBeatEmitterEnabled).get()
   }
-  if (await HttpClient.pingLocalhost()) store.commit('setConductorView', true)
 })
 
 onBeforeUnmount(() =>  document.removeEventListener('click', closeContextMenu))
