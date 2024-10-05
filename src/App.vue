@@ -12,6 +12,7 @@ import TopBar from "@/components/TopBar.vue"
 import PatternEditor from "@/views/editor/PatternEditor.vue"
 import Conductor from "@/views/Conductor.vue"
 import {HttpClient} from "@/clients/HttpClient"
+import ws from "@/clients/WebSocket";
 
 const beatEmitter = ref(null)
 const serverBeatEmitterEnabled = true
@@ -44,6 +45,7 @@ onMounted( async () => {
   if (pattern.value && !ConductorService.isEmpty(pattern.value)) {
     let duration = ConductorService.durationInBeats(pattern.value)
     beatEmitter.value = new BeatEmitterProvider(pattern.value.tempo, duration, prerollBeats.value, serverBeatEmitterEnabled).get()
+    if (serverBeatEmitterEnabled) ws.init(beatEmitter.value)
   }
 })
 
