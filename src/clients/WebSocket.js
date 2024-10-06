@@ -18,33 +18,30 @@ const ws = {
                 prerollBeats: this.beatEmitter.prerollBeats
             }
             this.socket.send(JSON.stringify(createEmitterCommand))
-            this.registerMessageListener(this.beatEmitter)
+            this.socket.addEventListener('message', event => this.handleMessage(event))
         })
-    },
-    registerMessageListener: function(emitter) {
-        this.socket.addEventListener('message', event => this.handleMessage(emitter, event))
     },
     send(command) {
         this.socket.send(JSON.stringify(command))
     },
-    handleMessage(beatEmitter, event) {
+    handleMessage(event) {
         const msg = JSON.parse(event.data)
-        console.log('Message:', msg.type, beatEmitter.currentBeat)
+        console.log('Message:', msg.type, this.beatEmitter.currentBeat)
         switch (msg.type) {
             case 'prerollBeat' :
-                if (beatEmitter.preroll) beatEmitter.preroll.beat(msg.value)
+                if (this.beatEmitter.preroll) this.beatEmitter.preroll.beat(msg.value)
                 break
             case 'beat' :
-                beatEmitter.currentBeat = msg.value
+                this.beatEmitter.currentBeat = msg.value
                 break
             case 'second' :
-                beatEmitter.currentSecond = msg.value
+                this.beatEmitter.currentSecond = msg.value
                 break
             case 'playing' :
-                beatEmitter.playing = msg.value
+                this.beatEmitter.playing = msg.value
                 break
             case 'stop' :
-                beatEmitter.resetEmitter()
+                this.beatEmitter.resetEmitter()
         }
     }
 
