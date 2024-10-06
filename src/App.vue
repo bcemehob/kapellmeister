@@ -12,7 +12,7 @@ import TopBar from "@/components/TopBar.vue"
 import PatternEditor from "@/views/editor/PatternEditor.vue"
 import Conductor from "@/views/Conductor.vue"
 import {HttpClient} from "@/clients/HttpClient"
-import ws from "@/clients/WebSocket";
+import ws from "@/clients/WebSocket"
 
 const beatEmitter = ref(null)
 const serverBeatEmitterEnabled = true

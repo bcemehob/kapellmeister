@@ -15,9 +15,9 @@
 </template>
 
 <script setup>
-import ProgressBar from "@/views/controls/ProgressBar.vue";
-import {useStore} from "vuex";
-import {computed} from "vue";
+import ProgressBar from "@/views/controls/ProgressBar.vue"
+import {useStore} from "vuex"
+import {computed} from "vue"
 
 const props = defineProps({
   beatEmitter: Object
