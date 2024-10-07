@@ -35,27 +35,28 @@ const readPatternFromLocalStorage = () => {
   const pattern = localStorage.getItem('pattern')
   return pattern ? JSON.parse(pattern) : null
 }
-const handleClick = ()  => document.addEventListener('click', closeContextMenu)
+const handleClick = () => document.addEventListener('click', closeContextMenu)
 const closeContextMenu = () => store.commit('setContextMenuShown', false)
 
-onMounted( async () => {
+onMounted(async () => {
   handleClick()
   if (await HttpClient.pingLocalhost()) store.commit('setConductorView', true)
   await loadPattern()
   if (pattern.value && !ConductorService.isEmpty(pattern.value)) {
     let duration = ConductorService.durationInBeats(pattern.value)
     beatEmitter.value = new BeatEmitterProvider(pattern.value.tempo, duration, prerollBeats.value, serverBeatEmitterEnabled).get()
-    if (serverBeatEmitterEnabled) ws.init(beatEmitter.value)
+    if (serverBeatEmitterEnabled) ws.setup(beatEmitter.value)
   }
 })
 
-onBeforeUnmount(() =>  document.removeEventListener('click', closeContextMenu))
+onBeforeUnmount(() => document.removeEventListener('click', closeContextMenu))
 
 watch(pattern, newVal => {
   console.log("pattern triggered. persist: ", pattern.value)
   let duration = ConductorService.durationInBeats(newVal)
   beatEmitter.value = ConductorService.isEmpty(newVal) ? null :
       new BeatEmitterProvider(newVal.tempo, duration, prerollBeats.value, serverBeatEmitterEnabled).get()
+  if (beatEmitter.value && serverBeatEmitterEnabled) ws.setup(beatEmitter.value)
 })
 watch(prerollBeats, newVal => beatEmitter.value && beatEmitter.value.resetPreroll(newVal))
 </script>
