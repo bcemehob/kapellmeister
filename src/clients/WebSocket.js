@@ -12,6 +12,7 @@ const ws = {
         })
     },
     setBeatEmitter() {
+        console.log("BE duration:", this.beatEmitter.duration)
         const createEmitterCommand = {
             command: 'create',
             tempo: this.beatEmitter.tempo,
@@ -23,7 +24,7 @@ const ws = {
     setup(beatEmitter) {
         if (this.socket) {
             this.beatEmitter = beatEmitter
-            this.setBeatEmitter()
+            if (this.socket.readyState === WebSocket.OPEN) this.setBeatEmitter()
         } else this.init(beatEmitter)
 
     },
