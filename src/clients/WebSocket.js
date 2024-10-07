@@ -7,25 +7,25 @@ const ws = {
         this.socket = new WebSocket(`ws://${window.applicationAddress.host}:${window.applicationAddress.wsPort}`)
         this.socket.addEventListener('open', () => {
             console.log('Connected to WebSocket server.', this.beatEmitter)
-            const createEmitterCommand = {
-                command: 'create',
-                tempo: this.beatEmitter.tempo,
-                duration: this.beatEmitter.duration,
-                prerollBeats: this.beatEmitter.prerollBeats
-            }
-            this.socket.send(JSON.stringify(createEmitterCommand))
+            this.setBeatEmitter()
             this.socket.addEventListener('message', event => this.handleMessage(event))
         })
     },
+    setBeatEmitter() {
+        const createEmitterCommand = {
+            command: 'create',
+            tempo: this.beatEmitter.tempo,
+            duration: this.beatEmitter.duration,
+            prerollBeats: this.beatEmitter.prerollBeats
+        }
+        this.socket.send(JSON.stringify(createEmitterCommand))
+    },
     setup(beatEmitter) {
         if (this.socket) {
-            this.socket.close()
-            this.socket.onclose = () => {
-                this.init(beatEmitter)
-            }
-        } else {
-            this.init(beatEmitter)
-        }
+            this.beatEmitter = beatEmitter
+            this.setBeatEmitter()
+        } else this.init(beatEmitter)
+
     },
     send(command) {
         this.socket.send(JSON.stringify(command))
