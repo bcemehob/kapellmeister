@@ -21,6 +21,7 @@ handleClientMessage = messageStr => {
     console.log("message received: ", message)
     switch (message.command) {
         case 'create':
+            beatEmitter && beatEmitter.stop()
             createBeatEmitter(message)
             break
         case 'start':
