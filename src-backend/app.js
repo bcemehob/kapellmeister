@@ -38,7 +38,7 @@ module.exports = function (pathToStatic) {
         console.log(req.body)
         patternHolder.pattern = req.body
         res.send(JSON.stringify({answer: 'OK'}))
-        sendMessageToClients('pattern', '')
+        sendMessageToClients('pattern', JSON.stringify(req.body))
     })
 
 }
