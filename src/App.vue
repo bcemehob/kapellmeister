@@ -37,6 +37,12 @@ const readPatternFromLocalStorage = () => {
 }
 const handleClick = () => document.addEventListener('click', closeContextMenu)
 const closeContextMenu = () => store.commit('setContextMenuShown', false)
+const patternCallback = newPattern => {
+  if (conductorView) return
+  const ptrn = JSON.parse(newPattern)
+  console.log("NEW PATTTERN", ptrn)
+  store.dispatch('persistPattern', ptrn)
+}
 
 onMounted(async () => {
   handleClick()
@@ -44,7 +50,7 @@ onMounted(async () => {
   if (pattern.value && !ConductorService.isEmpty(pattern.value)) {
     let duration = ConductorService.durationInBeats(pattern.value)
     beatEmitter.value = new BeatEmitterProvider(pattern.value.tempo, duration, prerollBeats.value, serverBeatEmitterEnabled).get()
-    if (serverBeatEmitterEnabled) ws.setup(beatEmitter.value)
+    if (serverBeatEmitterEnabled) ws.setup(beatEmitter.value, patternCallback)
   }
 })
 

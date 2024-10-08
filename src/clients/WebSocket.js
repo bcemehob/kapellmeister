@@ -1,7 +1,7 @@
-
 const ws = {
     socket: null,
     beatEmitter: null,
+    patternCallback: null,
     init(beatEmitter) {
         this.beatEmitter = beatEmitter
         this.socket = new WebSocket(`ws://${window.applicationAddress.host}:${window.applicationAddress.wsPort}`)
@@ -21,7 +21,8 @@ const ws = {
         }
         this.socket.send(JSON.stringify(createEmitterCommand))
     },
-    setup(beatEmitter) {
+    setup(beatEmitter, patternCallback) {
+        this.patternCallback = patternCallback
         if (this.socket) {
             this.beatEmitter = beatEmitter
             if (this.socket.readyState === WebSocket.OPEN) this.setBeatEmitter()
@@ -49,9 +50,13 @@ const ws = {
                 break
             case 'stop' :
                 this.beatEmitter.resetEmitter()
+                break
+            case 'pattern' :
+                this.patternCallback(msg.value)
+                break
+
         }
     }
-
 }
 
 export default ws
