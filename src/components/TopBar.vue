@@ -24,12 +24,9 @@ import EditModeControlPanel from "@/views/controls/EditModeControlPanel.vue"
 import BrandWithLogo from "@/views/BrandWithLogo.vue"
 import ActionsControlPanel from "@/views/controls/ActionsControlPanel.vue"
 import PreRollControlPanel from "@/views/controls/PreRollControlPanel.vue"
-import {useStore} from "vuex";
-import {computed} from "vue";
 
 defineProps(['beatEmitter'])
-const store = useStore()
-const conductorView = computed(() => store.state.conductorView)
+const conductorView = window.conductor
 </script>
 
 <style scoped>

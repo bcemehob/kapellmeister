@@ -27,7 +27,10 @@ module.exports = function (pathToStatic) {
     })
 
     app.get('/setup.js', (req, res) => {
-        res.send(`window.applicationAddress = ${JSON.stringify(applicationAddress)}`)
+        const ip = req.ip.split('::ffff:')[1]
+        const conductor = ip === applicationAddress.host
+        console.log(ip, conductor)
+        res.send(`window.applicationAddress = ${JSON.stringify(applicationAddress)}\nwindow.conductor = ${conductor}`)
     })
 
     app.get('/api/pattern', (req, res) => {

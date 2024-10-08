@@ -37,7 +37,7 @@ const store = useStore()
 const pattern = computed(() => store.state.pattern)
 const duration = computed(() => ConductorService.calculateDuration(ConductorService.durationInBeats(pattern.value), pattern.value.tempo).timeString)
 const measureClass = computed(() => measureClassMapped(ConductorService.getClassName(pattern.value)))
-const conductorView = computed(() => store.state.conductorView)
+const conductorView = window.conductor
 const measureClassMapped = className => {
   switch (className) {
     case "not-ok":

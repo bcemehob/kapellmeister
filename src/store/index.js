@@ -9,7 +9,6 @@ export default createStore({
         patternRedoStack: [],
         prerollMeasures: 0,
         contextMenuShown: false,
-        conductorView: false,
         editMode: false
     },
     getters: {
@@ -51,9 +50,6 @@ export default createStore({
             state.editMode = payload;
         },
 
-        setConductorView(state, payload) {
-            state.conductorView = payload;
-        }
     },
     actions: {
         backup ({ commit, state }) {

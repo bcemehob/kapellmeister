@@ -16,14 +16,11 @@
 
 <script setup>
 import ProgressBar from "@/views/controls/ProgressBar.vue"
-import {useStore} from "vuex"
-import {computed} from "vue"
 
 const props = defineProps({
   beatEmitter: Object
 })
-const store = useStore()
-const conductorView = computed(() => store.state.conductorView)
+const conductorView = window.conductor
 
 function play() {
   props.beatEmitter.start()

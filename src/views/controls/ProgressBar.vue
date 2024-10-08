@@ -21,7 +21,7 @@ import {ConductorService} from "@/services/ConductorService"
 const store = useStore()
 const tooltip = ref(null)
 const progress = ref(null)
-const conductorView = computed(() => store.state.conductorView)
+const conductorView = window.conductor
 const pattern = computed(() => store.state.pattern)
 const moment = computed(() => {
   return {
