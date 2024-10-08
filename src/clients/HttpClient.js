@@ -9,15 +9,6 @@ export class HttpClient {
         return null
     }
 
-    static async pingLocalhost () {
-        try {
-            await fetch("http://localhost:3000/setup.js")
-            return true
-        } catch (error) {
-            return false
-        }
-    }
-
     static async sendPatternToBackend (pattern) {
         const body = JSON.stringify(pattern)
         const headers = new Headers()
