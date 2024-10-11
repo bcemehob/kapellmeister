@@ -10,7 +10,7 @@ import {ConductorService} from "@/services/ConductorService"
 import {BeatEmitterProvider} from "@/services/BeatEmitterProvider"
 import TopBar from "@/components/TopBar.vue"
 import PatternEditor from "@/views/editor/PatternEditor.vue"
-import Conductor from "@/views/Conductor.vue"
+import Conductor from "@/views/KapellmeisterCard.vue"
 import {HttpClient} from "@/clients/HttpClient"
 import ws from "@/clients/WebSocket"
 
