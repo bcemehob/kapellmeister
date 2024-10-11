@@ -18,11 +18,7 @@
 import {computed, onMounted, ref} from "vue";
 import {InstrumentService} from "@/services/InstrumentService";
 
-const props = defineProps({
-  currentBeat: Number,
-  instrument: Object,
-  measure: Object,
-})
+const props = defineProps(['currentBeat', 'instrument', 'measure'])
 const instrumentService = ref(null)
 const currentParty = computed(() => instrumentService.value.currentParty(props.currentBeat))
 const upcomingParty = computed(() => instrumentService.value.upcomingParty(props.currentBeat))

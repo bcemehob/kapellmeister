@@ -15,9 +15,7 @@ import instrument from "@/views/InstrumentCard.vue";
 import {useStore} from "vuex";
 import {computed} from "vue";
 
-defineProps({
-  currentBeat: Number
-})
+defineProps(['currentBeat'])
 const store = useStore()
 const pattern = computed(() => store.state.pattern)
 </script>
