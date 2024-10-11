@@ -10,20 +10,14 @@
     </div>
   </div>
 </template>
-<script>
+<script setup>
+import instrument from "@/views/Instrument.vue";
+import {useStore} from "vuex";
+import {computed} from "vue";
 
-import Instrument from "@/views/Instrument.vue";
-
-export default {
-  name: 'InstruMent',
-  components: {Instrument},
-  props: {
-    currentBeat: Number
-  },
-  computed: {
-    pattern() {
-      return this.$store.state.pattern
-    }
-  }
-}
+defineProps({
+  currentBeat: Number
+})
+const store = useStore()
+const pattern = computed(() => store.state.pattern)
 </script>

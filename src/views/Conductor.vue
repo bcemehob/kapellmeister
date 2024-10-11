@@ -10,7 +10,7 @@
 </template>
 
 <script setup>
-import Instruments from "@/views/Instruments.vue";
+import Instruments from "@/views/InstrumentsCard.vue";
 import MotionViewer from "@/views/MotionViewer.vue";
 import PreRoll from "@/views/PreRoll.vue";
 </script>
