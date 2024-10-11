@@ -40,7 +40,7 @@ const currentTimePercentage = () => {
 }
 
 const goToBeat = (event) => {
-  if (!conductorView.value) return
+  if (!conductorView) return
   const newCurrentBeat = getCurrentBeat(event.offsetX, event.target.getBoundingClientRect().width)
   if (props.beatEmitter.currentBeat === newCurrentBeat) return
   props.beatEmitter.goToBeat(newCurrentBeat, pattern.value.tempo)
