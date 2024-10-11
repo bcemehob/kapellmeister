@@ -7,6 +7,11 @@ export class ConductorService {
         return pattern.duration * pattern.measure.beats
     }
 
+    static durationInMeasures(pattern, beats) {
+        if (this.isEmpty(pattern)) return 0
+        return beats / pattern.measure.beats
+    }
+
     static isEmpty(pattern) {
         return Object.keys(pattern).length === 0;
     }

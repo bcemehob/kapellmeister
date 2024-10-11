@@ -35,6 +35,7 @@ handleClientMessage = messageStr => {
             break
         case 'resetPreroll':
             beatEmitter.resetPreroll(message.prerollBeats)
+            sendMessageToClients('prerollBeats', message.prerollBeats)
             break
         case 'goToBeat':
             beatEmitter.goToBeat(message.currentBeat, message.tempo)

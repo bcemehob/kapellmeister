@@ -2,6 +2,7 @@ const ws = {
     socket: null,
     beatEmitter: null,
     patternCallback: null,
+    prerollCallback: null,
     init(beatEmitter) {
         this.beatEmitter = beatEmitter
         this.socket = new WebSocket(`ws://${window.applicationAddress.host}:${window.applicationAddress.wsPort}`)
@@ -21,8 +22,9 @@ const ws = {
         }
         this.socket.send(JSON.stringify(createEmitterCommand))
     },
-    setup(beatEmitter, patternCallback) {
+    setup(beatEmitter, patternCallback, prerollCallback) {
         this.patternCallback = patternCallback
+        this.prerollCallback = prerollCallback
         if (this.socket) {
             this.beatEmitter = beatEmitter
             if (this.socket.readyState === WebSocket.OPEN) this.setBeatEmitter()
@@ -54,7 +56,9 @@ const ws = {
             case 'pattern' :
                 this.patternCallback(msg.value)
                 break
-
+            case 'prerollBeats':
+                this.prerollCallback(msg.value)
+                break
         }
     }
 }

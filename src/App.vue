@@ -44,13 +44,19 @@ const patternCallback = newPattern => {
   store.dispatch('persistPattern', ptrn)
 }
 
+const prerollCallback = prerollBeats => {
+  const prerollMeasures = ConductorService.durationInMeasures(pattern.value, prerollBeats)
+  store.commit('setPrerollMeasures', prerollMeasures)
+}
+
+
 onMounted(async () => {
   handleClick()
   await loadPattern()
   if (pattern.value && !ConductorService.isEmpty(pattern.value)) {
     let duration = ConductorService.durationInBeats(pattern.value)
     beatEmitter.value = new BeatEmitterProvider(pattern.value.tempo, duration, prerollBeats.value, serverBeatEmitterEnabled).get()
-    if (serverBeatEmitterEnabled) ws.setup(beatEmitter.value, patternCallback)
+    if (serverBeatEmitterEnabled) ws.setup(beatEmitter.value, patternCallback, prerollCallback)
   }
 })
 
@@ -61,7 +67,7 @@ watch(pattern, newVal => {
   let duration = ConductorService.durationInBeats(newVal)
   beatEmitter.value = ConductorService.isEmpty(newVal) ? null :
       new BeatEmitterProvider(newVal.tempo, duration, prerollBeats.value, serverBeatEmitterEnabled).get()
-  if (beatEmitter.value && serverBeatEmitterEnabled) ws.setup(beatEmitter.value, patternCallback)
+  if (beatEmitter.value && serverBeatEmitterEnabled) ws.setup(beatEmitter.value, patternCallback, prerollCallback)
 })
 watch(prerollBeats, newVal => beatEmitter.value && beatEmitter.value.resetPreroll(newVal))
 </script>
