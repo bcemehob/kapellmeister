@@ -8,6 +8,7 @@ export default createStore({
         patternUndoStack: [],
         patternRedoStack: [],
         prerollMeasures: 0,
+        currentInstrument: null,
         contextMenuShown: false,
         editMode: false
     },
@@ -23,31 +24,38 @@ export default createStore({
         },
         getPreRollMeasures(state) {
             return state.prerollMeasures
+        },
+        getCurrentInstrument(state) {
+            return state.currentInstrument
         }
     },
     mutations: {
         setPattern(state, payload) {
-            state.pattern = payload;
+            state.pattern = payload
         },
 
         setPatternUndoStack(state, payload) {
-            state.patternUndoStack = payload;
+            state.patternUndoStack = payload
         },
 
         setPatternRedoStack(state, payload) {
-            state.patternRedoStack = payload;
+            state.patternRedoStack = payload
         },
 
         setContextMenuShown(state, payload) {
-            state.contextMenuShown = payload;
+            state.contextMenuShown = payload
         },
 
         setPrerollMeasures(state, payload) {
-            state.prerollMeasures = payload;
+            state.prerollMeasures = payload
+        },
+
+        setCurrentInstrument(state, payload) {
+            state.currentInstrument = payload
         },
 
         setEditMode(state, payload) {
-            state.editMode = payload;
+            state.editMode = payload
         },
 
     },
