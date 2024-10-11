@@ -11,7 +11,7 @@
   </div>
 </template>
 <script setup>
-import instrument from "@/views/Instrument.vue";
+import instrument from "@/views/InstrumentCard.vue";
 import {useStore} from "vuex";
 import {computed} from "vue";
 

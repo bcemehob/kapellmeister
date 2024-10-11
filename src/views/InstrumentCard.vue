@@ -14,37 +14,21 @@
     </div>
   </div>
 </template>
-<script>
-import {InstrumentService} from '@/services/InstrumentService'
+<script setup>
+import {computed, onMounted, ref} from "vue";
+import {InstrumentService} from "@/services/InstrumentService";
 
-export default {
-  name: 'InstruMent',
-  props: {
-    currentBeat: Number,
-    instrument: Object,
-    measure: Object,
-  },
-  data() {
-    return {
-      partyTimeline: [],
-      instrumentService: null
-    }
-  },
-  computed: {
-    currentParty() {
-      return this.instrumentService.currentParty(this.currentBeat)
-    },
-    upcomingParty() {
-      return this.instrumentService.upcomingParty(this.currentBeat)
-    },
-    countDown() {
-      return this.instrumentService.countDown(this.currentBeat)
-    }
-  },
-  mounted() {
-    this.instrumentService = new InstrumentService(this.instrument, this.measure)
-  }
-}
+const props = defineProps({
+  currentBeat: Number,
+  instrument: Object,
+  measure: Object,
+})
+const instrumentService = ref(null)
+const currentParty = computed(() => instrumentService.value.currentParty(props.currentBeat))
+const upcomingParty = computed(() => instrumentService.value.upcomingParty(props.currentBeat))
+const countDown = computed(() => instrumentService.value.countDown(props.currentBeat))
+onMounted( () => instrumentService.value = new InstrumentService(props.instrument, props.measure))
+
 </script>
 <style scoped>
 .inline-box {
