@@ -7,7 +7,7 @@ const ws = {
         this.beatEmitter = beatEmitter
         this.socket = new WebSocket(`ws://${window.applicationAddress.host}:${window.applicationAddress.wsPort}`)
         this.socket.addEventListener('open', () => {
-            console.log('Connected to WebSocket server.', this.beatEmitter)
+            console.log('Connected to WebSocket server.')
             this.setBeatEmitter()
             this.socket.addEventListener('message', event => this.handleMessage(event))
         })
