@@ -193,8 +193,10 @@ body {
 @media (max-width:960px) {
     .navbar-brand {
         font-size: 14px !important;
+        font-weight: bold;
         img {
-            height: 25px;
+            height: 20px;
+            width: 20px;
         }
     }
     .section {

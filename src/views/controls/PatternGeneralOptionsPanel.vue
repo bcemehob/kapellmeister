@@ -2,24 +2,24 @@
   <div v-if="!ConductorService.isEmpty(pattern)" class="track-name">
     <div>
       <clickable-editable v-if="conductorView" v-model="pattern.name" :narrow="true" type="text"/>
-      <span v-else>{{pattern.name}}</span>
+      <span v-else>{{ pattern.name }}</span>
     </div>
     <div>
       <span class="track-info">
         <clickable-editable v-if="conductorView" v-model="pattern.tempo"/>
-        <span v-else>{{pattern.tempo}}</span>
+        <span v-else>{{ pattern.tempo }}</span>
         bpm</span>
       <span class="track-info">
         <clickable-editable v-if="conductorView" v-model="pattern.duration"/>
-        <span v-else>{{pattern.duration}}</span>
+        <span v-else>{{ pattern.duration }}</span>
         measures <i class="fa" :class="measureClass"></i>
       </span>
       <span class="track-info">
         <clickable-editable v-if="conductorView" v-model="pattern.measure.beats"/>
-        <span v-else>{{pattern.measure.beats}}</span>
+        <span v-else>{{ pattern.measure.beats }}</span>
          /
         <clickable-editable v-if="conductorView" v-model="pattern.measure.base"/>
-        <span v-else>{{pattern.measure.base}}</span>
+        <span v-else>{{ pattern.measure.base }}</span>
       </span>
       <span class="track-info">{{ duration }}</span>
     </div>
@@ -82,14 +82,28 @@ const measureClassMapped = className => {
   &.ok {
     color: green;
   }
+
   &.not-ok {
     color: red;
   }
+
   &.good {
     color: #38af38;
   }
+
   &.great {
     color: #58dab4;
+  }
+}
+
+@media (max-width: 960px) {
+  .track-name {
+    width: 85%;
+    font-size: 14px;
+    & > div {
+      display: inline-block;
+      margin: 0 10px;
+    }
   }
 }
 </style>
