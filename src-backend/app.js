@@ -2,6 +2,7 @@ const express = require('express')
 const localAddress = require('./NetworkUtil')
 const {setupWebSocket, sendMessageToClients} = require('./routes/events-ws')
 const patternHolder = require("./PatternHolder");
+const open = require('open');
 
 module.exports = function (pathToStatic) {
     const app = express()
@@ -23,7 +24,9 @@ module.exports = function (pathToStatic) {
     setupWebSocket(applicationAddress)
 
     app.listen(applicationAddress.port, () => {
-        console.log(`App is listening on http://${applicationAddress.host}:${applicationAddress.port}`)
+        const appUrl = `http://${applicationAddress.host}:${applicationAddress.port}`
+        console.log(`App is listening on ${appUrl}`)
+        open(appUrl)
     })
 
     app.get('/setup.js', (req, res) => {
