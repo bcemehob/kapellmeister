@@ -55,4 +55,20 @@ function isCurrent(beat) {
   }
 }
 
+@media (max-width:960px) {
+  .beat-container {
+    width: 40%;
+    .beat {
+      height: 100px;
+      font-size: 50px;
+      width: unset;
+      line-height: unset;
+      &.current {
+        font-size: 50px;
+      }
+    }
+  }
+}
+
+
 </style>

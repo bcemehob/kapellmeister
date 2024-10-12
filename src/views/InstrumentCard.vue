@@ -1,5 +1,5 @@
 <template>
-  <div class="inline-box w-50">
+  <div class="inline-box" :class="conductorView ? 'w-50' : 'w-100'">
     <div class="title">{{ instrument.name }}</div>
     <div v-if="instrumentService" class="party-info w-100 h-100">
       <div class="current-party">
@@ -24,6 +24,7 @@ const currentParty = computed(() => instrumentService.value.currentParty(props.c
 const upcomingParty = computed(() => instrumentService.value.upcomingParty(props.currentBeat))
 const countDown = computed(() => instrumentService.value.countDown(props.currentBeat))
 onMounted( () => instrumentService.value = new InstrumentService(props.instrument, props.measure))
+const conductorView = window.conductor
 
 </script>
 <style scoped>
@@ -67,6 +68,12 @@ onMounted( () => instrumentService.value = new InstrumentService(props.instrumen
   position: absolute;
   right: 0;
   top: -11px;
+}
+@media (max-width:960px) {
+  .inline-box {
+    padding: 2px 5px;
+    margin: 2px 0;
+  }
 }
 
 </style>
