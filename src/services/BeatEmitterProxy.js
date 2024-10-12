@@ -12,7 +12,6 @@ export class BeatEmitterProxy {
         this.id = new Date().getTime()
         this.tempo = tempo
         this.duration = duration
-        this.prerollBeats = prerollBeats
         this.preroll = prerollBeats ? new PrerollProxy(tempo, prerollBeats) : null
     }
 
@@ -41,7 +40,7 @@ export class BeatEmitterProxy {
         this.currentBeat = 0
         this.currentSecond = 0
         this.playing = false
-        this.resetPreroll(this.prerollBeats)
+        this.resetPreroll(this.preroll ? this.preroll.duration : 0)
         console.log('BeatEmitter stopped on the server')
     }
 
