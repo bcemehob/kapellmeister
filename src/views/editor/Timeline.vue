@@ -1,6 +1,7 @@
 <template>
   <div v-if="!ConductorService.isEmpty(pattern)" class="timeline">
     <table>
+      <tbody>
       <tr>
         <th class="narrow-column"> measure</th>
         <th v-for="(instrument, i) in pattern.instruments" v-bind:key="i"
@@ -19,6 +20,7 @@
         </td>
         <td>-</td>
       </tr>
+      </tbody>
     </table>
     <div v-show="contextMenuShown" class="context-menu" :style="getContextMenuStyle()">
       <div class="menu-title">Instrument:</div>
