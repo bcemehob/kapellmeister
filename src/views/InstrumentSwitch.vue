@@ -1,7 +1,5 @@
 <template>
-  <div class="control-block">
-    <label>Instrument:</label>
-    <span>Current: {{currentInstrument}}</span>
+  <div class="switch">
     <select v-model="currentInstrument">
       <option v-for="instrument in instruments" v-bind:key="instrument.name"> {{instrument.name}}</option>
     </select>

@@ -1,6 +1,7 @@
 <template>
   <div class="section w-50">
-    <div class="title">Instruments</div>
+    <div class="title inline">Instruments</div>
+    <instrument-switch v-if="!conductorView" class="inline float-r"/>
     <div class="d-flex align-items-center justify-content-center">
       <instrument v-for="instrument in instruments()"
                   :key="instrument.name"
@@ -14,6 +15,7 @@
 import instrument from "@/views/InstrumentCard.vue";
 import {useStore} from "vuex";
 import {computed} from "vue";
+import InstrumentSwitch from "@/views/InstrumentSwitch.vue";
 
 defineProps(['currentBeat'])
 const store = useStore()

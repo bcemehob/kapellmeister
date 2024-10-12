@@ -51,6 +51,14 @@ body {
     font-size: 24px;
 }
 
+.inline {
+    display: inline-block;
+}
+
+.float-r {
+    float: right;
+}
+
 .section {
     position: relative;
     border: 1px dotted #7d858d;
