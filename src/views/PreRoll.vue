@@ -61,6 +61,7 @@ const prerollDots = computed(() => {
   .dots-container {
     text-align: center;
     margin-top: 12%;
+
     .dot-container {
       position: relative;
       display: inline-block;
@@ -68,6 +69,7 @@ const prerollDots = computed(() => {
       height: 70px;
       padding: 15px;
       transition: all 300ms ease;
+
       .dot {
         position: absolute;
         background-color: #373f57;
@@ -77,24 +79,30 @@ const prerollDots = computed(() => {
         height: 40px;
         transition: all 300ms ease;
       }
+
       &.strong {
         margin-left: 40px;
         padding: 10px;
+
         .dot {
           background-color: #272f47;
           width: 50px;
           height: 50px;
         }
       }
+
       &.wasted {
         padding: 30px 20px;
+
         .dot {
           background-color: #a7afc7;
           height: 10px;
           width: 10px;
         }
+
         &.strong {
-          padding: 30px 10px!important;
+          padding: 30px 10px !important;
+
           .dot {
             background-color: #979fb7;
             height: 10px;
@@ -102,15 +110,19 @@ const prerollDots = computed(() => {
           }
         }
       }
+
       &.current {
         padding: 10px 20px;
+
         .dot {
           background-color: #171f37;
           height: 50px;
           width: 30px;
         }
+
         &.strong {
           padding: 0 5px;
+
           .dot {
             background-color: #070f27;
             height: 70px;
@@ -121,4 +133,80 @@ const prerollDots = computed(() => {
     }
   }
 }
+
+@media (max-width: 960px) {
+  .section {
+    background-color: rgba(230, 245, 245, 0.85);
+    border: 1px solid #7d858d;
+    border-radius: 8px;
+    position: absolute;
+    top: -16px;
+    width: 65%;
+    height: 100%;
+    z-index: 100;
+    transition: opacity 300ms ease;
+
+    .dots-container {
+      margin-top: 3%;
+
+      .dot-container {
+        width: 25px;
+        height: 35px;
+        padding: 8px;
+
+        .dot {
+          width: 20px;
+          height: 20px;
+        }
+
+        &.strong {
+          margin-left: 20px;
+          padding: 5px;
+
+          .dot {
+            width: 25px;
+            height: 25px;
+          }
+        }
+
+        &.wasted {
+          padding: 15px 10px;
+
+          .dot {
+            height: 5px;
+            width: 5px;
+          }
+
+          &.strong {
+            padding: 15px 5px !important;
+
+            .dot {
+              height: 5px;
+              width: 15px;
+            }
+          }
+        }
+
+        &.current {
+          padding: 5px 10px;
+
+          .dot {
+            height: 25px;
+            width: 15px;
+          }
+
+          &.strong {
+            padding: 0 5px;
+
+            .dot {
+              height: 35px;
+              width: 20px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
 </style>
