@@ -141,7 +141,7 @@ body {
     }
     .load-pattern::after {
         content: "\f07c";
-        font-family: "Font Awesome 5 Free";
+        font-family: "Font Awesome 5 Free", serif;
         font-weight: 900;
         cursor: pointer;
     }
@@ -206,5 +206,8 @@ body {
     .section .title {
         color: #3d454d;
         font-size: 16px;
+    }
+    .fraction {
+        font-size: 12px;
     }
 }

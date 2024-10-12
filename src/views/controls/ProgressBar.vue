@@ -126,4 +126,21 @@ progress::-webkit-progress-value {
   width: 50px;
   font-size: 20px;
 }
+
+.fraction {
+  display: inline-block;
+  font-size: 15px;
+}
+
+@media (max-width:960px) {
+  .current-measure {
+    margin: 0 10px;
+    width: 50px;
+    font-size: 13px;
+  }
+  .current-time {
+    font-size: 12px;
+  }
+}
+
 </style>
