@@ -39,14 +39,8 @@ node backend.js
 Standalone server application can be made with Vercel pkg
 
 ### Standalone build steps
-#### 1. Build frontend 
 
-```
-npm run start
-```
-It will create assets in the `dist` folder
-
-#### 2. Define target build
+#### 1. Define target build
 
 To define target builds depending on desired OS update array in `package.json -> pkg -> targets`
 
@@ -60,21 +54,37 @@ Example values (pattern: `nodeRange`-`platform`-`architecture`):
 * `node16-linux-arm64`
 * `node16-win-x64`
 
-#### 3. Add folder with assets
 
-To add `/folder-name` folder with assets being snapshotted by pkg:
+#### 2. Install Kapellmeister
+
+```
+npm install
+```
+
+#### 4. Use custom folder with assets (optional)
+
+To customize `/folder-name` folder with assets being put into the snapshot by pkg:
 ```
 app.use(express.static(path.join(__dirname, 'folder-name')))
 ```
 
-#### 4. Build the app
+#### 3. Build frontend 
+
+```
+npm run build
+```
+It will create assets in the `dist` folder
+
+#### 5. Build the app
 
 From application root folder
 
 ```
 pkg .
 ```
+As a result the distributable package appears in the root of project.
 
+NB! Do not stage it into the GIT repository!
 
 
 
