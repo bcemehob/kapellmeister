@@ -3,8 +3,8 @@
     <div class="title inline">Instruments</div>
     <instrument-switch v-if="!conductorView" class="inline float-r"/>
     <div class="d-flex align-items-center justify-content-center">
-      <instrument v-for="instrument in instruments()"
-                  :key="instrument.name"
+      <instrument-card v-for="instrument in instruments()"
+                  v-bind:key="instrument.name"
                   :instrument="instrument"
                   :measure="pattern.measure"
                   :current-beat="currentBeat" />
@@ -12,7 +12,7 @@
   </div>
 </template>
 <script setup>
-import instrument from "@/views/InstrumentCard.vue";
+import InstrumentCard from "@/views/InstrumentCard.vue";
 import {useStore} from "vuex";
 import {computed} from "vue";
 import InstrumentSwitch from "@/views/InstrumentSwitch.vue";
