@@ -13,14 +13,11 @@ export class HttpClient {
         const body = JSON.stringify(pattern)
         const headers = new Headers()
         headers.append('Content-Type', 'application/json')
-        console.log(body)
         const request = new Request("/api/pattern", {
             method: "POST",
             headers: headers,
             body: body,
         })
-
-        const response = await fetch(request)
-        console.log(response.status)
+        await fetch(request)
     }
 }

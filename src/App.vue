@@ -40,7 +40,6 @@ const closeContextMenu = () => store.commit('setContextMenuShown', false)
 const patternCallback = newPattern => {
   if (conductorView) return
   const ptrn = JSON.parse(newPattern)
-  console.log("NEW PATTTERN", ptrn)
   store.dispatch('persistPattern', ptrn)
 }
 
@@ -63,7 +62,6 @@ onMounted(async () => {
 onBeforeUnmount(() => document.removeEventListener('click', closeContextMenu))
 
 watch(pattern, newVal => {
-  console.log("pattern triggered. persist: ", pattern.value)
   let duration = ConductorService.durationInBeats(newVal)
   beatEmitter.value = ConductorService.isEmpty(newVal) ? null :
       new BeatEmitterProvider(newVal.tempo, duration, prerollBeats.value, serverBeatEmitterEnabled).get()

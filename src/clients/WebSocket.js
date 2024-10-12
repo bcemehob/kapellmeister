@@ -13,7 +13,6 @@ const ws = {
         })
     },
     setBeatEmitter() {
-        console.log("BE duration:", this.beatEmitter.duration)
         const createEmitterCommand = {
             command: 'create',
             tempo: this.beatEmitter.tempo,
@@ -36,7 +35,6 @@ const ws = {
     },
     handleMessage(event) {
         const msg = JSON.parse(event.data)
-        console.log('Message:', msg.type, this.beatEmitter.currentBeat)
         switch (msg.type) {
             case 'prerollBeat' :
                 if (this.beatEmitter.preroll) this.beatEmitter.preroll.beat(msg.value)

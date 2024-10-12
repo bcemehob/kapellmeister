@@ -14,7 +14,6 @@ export class Preroll {
 
     start() {
         this.firstBeatTime = new Date().getTime()
-        console.log("Preroll started. Interval: ", this.intervalBetweenBeats)
         const that = this
         return new Promise(resolve => that.beat(resolve))
     }

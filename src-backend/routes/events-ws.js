@@ -52,7 +52,6 @@ sendMessageToClients = (type, value) => {
             client.send(JSON.stringify({type, value}))
         }
     })
-    console.log("BeatEmitter callback")
 }
 
 module.exports = { setupWebSocket, sendMessageToClients }

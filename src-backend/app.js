@@ -29,7 +29,6 @@ module.exports = function (pathToStatic) {
     app.get('/setup.js', (req, res) => {
         const ip = req.ip.split('::ffff:')[1]
         const conductor = ip === applicationAddress.host
-        console.log(ip, conductor)
         res.send(`window.applicationAddress = ${JSON.stringify(applicationAddress)}\nwindow.conductor = ${conductor}`)
     })
 
@@ -38,7 +37,6 @@ module.exports = function (pathToStatic) {
     })
 
     app.post('/api/pattern', (req, res) => {
-        console.log(req.body)
         patternHolder.pattern = req.body
         res.send(JSON.stringify({answer: 'OK'}))
         sendMessageToClients('pattern', JSON.stringify(req.body))

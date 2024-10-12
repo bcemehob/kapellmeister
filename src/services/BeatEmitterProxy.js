@@ -14,7 +14,6 @@ export class BeatEmitterProxy {
         this.duration = duration
         this.prerollBeats = prerollBeats
         this.preroll = prerollBeats ? new PrerollProxy(tempo, prerollBeats) : null
-        console.log("BE construct")
     }
 
     getCurrentPrerollBeat() {

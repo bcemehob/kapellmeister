@@ -102,7 +102,6 @@ export class BeatEmitter {
     }
 
     printMetrics(beatTime) {
-        console.log("Stop")
         console.log("First beat time: " + this.firstBeatTime)
         console.log("Last beat time: " + beatTime)
         console.log("End time: " + new Date().getTime())
