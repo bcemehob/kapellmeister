@@ -23,10 +23,6 @@ const conductorView = window.conductor
 const pattern = computed(() => store.state.pattern)
 const currentInstrument = computed(() => store.state.currentInstrument)
 const instruments = () => {
-  return conductorView ? pattern.value.instruments : instrumentForMusician()
-}
-const instrumentForMusician = () => {
-  return !(currentInstrument.value && pattern.value.instruments) ?
-      [] : pattern.value.instruments.filter(ins => ins.name === currentInstrument.value)
+  return conductorView ? pattern.value.instruments : currentInstrument.value ? [currentInstrument.value] : []
 }
 </script>
