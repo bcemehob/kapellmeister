@@ -2,7 +2,6 @@
   "name": "kappelmeister",
   "version": "0.1.0",
   "private": true,
-  "bin": "backend.js",
   "engines": {
     "node": "20.13.1"
   },
@@ -10,12 +9,9 @@
     "start": "node index.js",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "build-dev": "vue-cli-service build --mode development",
     "test:unit": "vue-cli-service test:unit",
     "test": "jest",
-    "lint": "vue-cli-service lint",
-    "start-backend": "node backend.js",
-    "build-app": "pkg ."
+    "lint": "vue-cli-service lint"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.1.1",
@@ -23,8 +19,7 @@
     "core-js": "^3.37.0",
     "vue": "^3.4.26",
     "vuex": "^4.1.0",
-    "express": "^4.19.2",
-    "open": "8.4.2"
+    "express": "^4.19.2"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",
@@ -40,8 +35,7 @@
     "babel-jest": "27.5.1",
     "eslint": "7.32.0",
     "eslint-plugin-vue": "^9.25.0",
-    "jest": "27.5.1",
-    "pkg": "^5.8.1"
+    "jest": "27.5.1"
   },
   "eslintConfig": {
     "root": true,
@@ -76,11 +70,5 @@
   ],
   "jest": {
     "preset": "@vue/cli-plugin-unit-jest"
-  },
-  "pkg": {
-    "scripts": "dist/js/*.js",
-    "assets": "dist/**/*",
-    "targets": ["node16-win-x64"],
-    "outputPath": "pkg-dist"
   }
 }
