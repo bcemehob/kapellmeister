@@ -1,16 +1,13 @@
-const {networkInterfaces} = require('os')
+const {get_active_interface} = require('network')
+const util = require('util');
 
 module.exports = () => {
-    const foundInterfaces = findInterfaceWithIpV4LocalNetworkAddress()
-    if (!foundInterfaces.length) {
-        throw new Error("Not found local ip for incoming connections. Check your network preferences")
-    }
-    console.log("available hosts: ", foundInterfaces.map(fi => fi.address))
-    return foundInterfaces[0].address
-}
-
-function findInterfaceWithIpV4LocalNetworkAddress() {
-    return Object.values(networkInterfaces())
-        .flat()
-        .filter(netInterface => netInterface.famidly === 'IPv4' && !netInterface.internal)
+    const getActiveInterface = util.promisify(get_active_interface)
+    return getActiveInterface()
+        .then(networkInterface => {
+            return networkInterface.ip_address
+        })
+        .catch(err => {
+            throw new Error(err)
+        })
 }

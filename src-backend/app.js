@@ -4,10 +4,11 @@ const {setupWebSocket, sendMessageToClients} = require('./routes/events-ws')
 const patternHolder = require("./PatternHolder");
 const open = require('open');
 
-module.exports = function (pathToStatic) {
+module.exports = async function (pathToStatic) {
     const app = express()
+    const locAddress = await localAddress()
     const applicationAddress = {
-        host: localAddress(),
+        host: locAddress,
         port: 3000,
         wsPort: 3001
     }
