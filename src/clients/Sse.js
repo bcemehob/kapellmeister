@@ -1,16 +1,21 @@
-const ws = {
-    socket: null,
+import {HttpClient} from "@/clients/HttpClient";
+
+const sse = {
+    client: new EventSource(`http://${window.applicationAddress.host}:${window.applicationAddress.port}/stream`),
     beatEmitter: null,
     patternCallback: null,
     prerollCallback: null,
-    init(beatEmitter) {
+    init() {
+        this.client.onmessage = e => {
+            console.log('received', e)
+            this.handleMessage(e)
+        }
+    },
+    setupEmitterAndCallbacks(beatEmitter, patternCallback, prerollCallback) {
         this.beatEmitter = beatEmitter
-        this.socket = new WebSocket(`ws://${window.applicationAddress.host}:${window.applicationAddress.wsPort}`)
-        this.socket.addEventListener('open', () => {
-            console.log('Connected to WebSocket server.')
-            this.setBeatEmitter()
-            this.socket.addEventListener('message', event => this.handleMessage(event))
-        })
+        this.patternCallback = patternCallback
+        this.prerollCallback = prerollCallback
+        this.setBeatEmitter()
     },
     setBeatEmitter() {
         const createEmitterCommand = {
@@ -19,20 +24,13 @@ const ws = {
             duration: this.beatEmitter.duration,
             prerollBeats: this.beatEmitter.prerollBeats
         }
-        this.socket.send(JSON.stringify(createEmitterCommand))
+        HttpClient.sendMessageToBackend(createEmitterCommand)
     },
-    setup(beatEmitter, patternCallback, prerollCallback) {
-        this.patternCallback = patternCallback
-        this.prerollCallback = prerollCallback
-        if (this.socket) {
-            this.beatEmitter = beatEmitter
-            if (this.socket.readyState === WebSocket.OPEN) this.setBeatEmitter()
-        } else this.init(beatEmitter)
 
-    },
     send(command) {
-        this.socket.send(JSON.stringify(command))
+        HttpClient.sendMessageToBackend(command)
     },
+
     handleMessage(event) {
         const msg = JSON.parse(event.data)
         switch (msg.type) {
@@ -61,4 +59,4 @@ const ws = {
     }
 }
 
-export default ws
+export default sse

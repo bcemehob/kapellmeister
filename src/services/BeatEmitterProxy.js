@@ -1,5 +1,5 @@
 import {PrerollProxy} from "@/services/PrerollProxy"
-import ws from "@/clients/WebSocket";
+import sse from "@/clients/Sse";
 
 
 export class BeatEmitterProxy {
@@ -24,15 +24,15 @@ export class BeatEmitterProxy {
     }
 
     start() {
-        ws.send({command: 'start'})
+        sse.send({command: 'start'})
     }
 
     pause() {
-        ws.send({command: 'pause'})
+        sse.send({command: 'pause'})
     }
 
     stop() {
-        ws.send({command: 'stop'})
+        sse.send({command: 'stop'})
         console.log("BeatEmitter stopped by user");
     }
 
@@ -46,10 +46,10 @@ export class BeatEmitterProxy {
 
     resetPreroll(prerollBeats) {
         this.preroll = new PrerollProxy(this.tempo, prerollBeats)
-        ws.send({command: 'resetPreroll', prerollBeats})
+        sse.send({command: 'resetPreroll', prerollBeats})
     }
 
     goToBeat(currentBeat, tempo) {
-        ws.send({command: 'goToBeat', currentBeat, tempo})
+        sse.send({command: 'goToBeat', currentBeat, tempo})
     }
 }

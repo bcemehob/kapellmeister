@@ -20,4 +20,16 @@ export class HttpClient {
         })
         await fetch(request)
     }
+
+    static async sendMessageToBackend (message) {
+        const body = JSON.stringify(message)
+        const headers = new Headers()
+        headers.append('Content-Type', 'application/json')
+        const request = new Request("/api/msg", {
+            method: "POST",
+            headers: headers,
+            body: body,
+        })
+        await fetch(request)
+    }
 }

@@ -1,8 +1,8 @@
 const express = require('express')
 const localAddress = require('./NetworkUtil')
-const {setupWebSocket, sendMessageToClients} = require('./routes/events-ws')
 const patternHolder = require("./PatternHolder");
 const open = require('open');
+const {setupClientEventStream, sendMessageToClients, handleClientMessage} = require("./messaging/sse");
 
 module.exports = async function (pathToStatic) {
     const app = express()
@@ -22,7 +22,10 @@ module.exports = async function (pathToStatic) {
         next();
     });
 
-    setupWebSocket(applicationAddress)
+
+    app.get('/stream', (req, res) => {
+        setupClientEventStream(res)
+    });
 
     app.listen(applicationAddress.port, () => {
         const appUrl = `http://${applicationAddress.host}:${applicationAddress.port}`
@@ -38,6 +41,11 @@ module.exports = async function (pathToStatic) {
 
     app.get('/api/pattern', (req, res) => {
         res.send(JSON.stringify(patternHolder.pattern))
+    })
+
+    app.post('/api/msg', (req, res) => {
+        handleClientMessage(req.body)
+        res.send('')
     })
 
     app.post('/api/pattern', (req, res) => {
