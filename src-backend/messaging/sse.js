@@ -15,10 +15,16 @@ setupClientEventStream = response => {
     clients.push(client)
     console.log(`new client connected: ${client.id}`)
     sendMessageToClients('new_client', client.id)
+    sendPrerollBeatsToClient(client)
     response.on('close', () => {
         clients = clients.filter(clnt => client.id !== clnt.id)
         response.end();
     });
+}
+
+sendPrerollBeatsToClient = client => {
+    beatEmitter && beatEmitter.preroll.duration &&
+    sendMessageToClient(client, {type: 'prerollBeats', value: beatEmitter.preroll.duration})
 }
 
 handleClientMessage = message => {
@@ -47,10 +53,12 @@ handleClientMessage = message => {
 }
 
 sendMessageToClients = (type, value) => {
-    clients.forEach(client => {
-        client.response.write('event: message\n');
-        client.response.write(`data: ${JSON.stringify({type, value})} \n\n`)
-    })
+    clients.forEach(client => sendMessageToClient(client, {type, value}))
+}
+
+sendMessageToClient = (client, message) => {
+    client.response.write('event: message\n');
+    client.response.write(`data: ${JSON.stringify(message)} \n\n`)
 }
 
 createBeatEmitter = command => {
