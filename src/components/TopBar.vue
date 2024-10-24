@@ -8,6 +8,9 @@
         <actions-control-panel />
         <pattern-control-panel />
       </template>
+      <template v-else>
+        <preroll-measures-view />
+      </template>
       <pattern-general-options-panel/>
     </div>
   </nav>
@@ -24,6 +27,7 @@ import EditModeControlPanel from "@/views/controls/EditModeControlPanel.vue"
 import BrandWithLogo from "@/views/BrandWithLogo.vue"
 import ActionsControlPanel from "@/views/controls/ActionsControlPanel.vue"
 import PreRollControlPanel from "@/views/controls/PreRollControlPanel.vue"
+import PrerollMeasuresView from "@/views/PrerollMeasuresView.vue";
 
 defineProps(['beatEmitter'])
 const conductorView = window.conductor

@@ -50,12 +50,13 @@ const prerollDots = computed(() => {
   left: 40px;
   width: 65%;
   height: 100%;
-  z-index: 100;
+  z-index: 999;
   transition: opacity 300ms ease;
   opacity: 1;
 
   &.hidden {
     opacity: 0;
+    z-index: -1;
   }
 
   .dots-container {
