@@ -7,7 +7,6 @@ const sse = {
     prerollCallback: null,
     init() {
         this.client.onmessage = e => {
-            console.log('received', e)
             this.handleMessage(e)
         }
     },
@@ -15,7 +14,7 @@ const sse = {
         this.beatEmitter = beatEmitter
         this.patternCallback = patternCallback
         this.prerollCallback = prerollCallback
-        this.setBeatEmitter()
+        if (window.conductor) this.setBeatEmitter()
     },
     setBeatEmitter() {
         const createEmitterCommand = {
