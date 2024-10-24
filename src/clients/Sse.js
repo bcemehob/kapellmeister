@@ -14,7 +14,7 @@ const sse = {
         this.beatEmitter = beatEmitter
         this.patternCallback = patternCallback
         this.prerollCallback = prerollCallback
-        if (window.conductor) this.setBeatEmitter()
+        this.setBeatEmitter()
     },
     setBeatEmitter() {
         const createEmitterCommand = {
@@ -23,10 +23,11 @@ const sse = {
             duration: this.beatEmitter.duration,
             prerollBeats: this.beatEmitter.prerollBeats
         }
-        HttpClient.sendMessageToBackend(createEmitterCommand)
+        this.send(createEmitterCommand)
     },
 
     send(command) {
+        if (!window.conductor) return
         HttpClient.sendMessageToBackend(command)
     },
 
