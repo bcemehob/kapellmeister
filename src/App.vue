@@ -23,7 +23,7 @@ const currentBeat = computed(() => beatEmitter.value ? beatEmitter.value.current
 const currentPrerollBeat = computed(() => beatEmitter.value ? beatEmitter.value.getCurrentPrerollBeat() : 0)
 const prerollBeats = computed(() => ConductorService.isEmpty(pattern.value) ? 0 : store.state.prerollMeasures * pattern.value.measure.beats)
 const conductorView = window.conductor
-sse.init()
+if (serverBeatEmitterEnabled) sse.init()
 
 const loadPattern = async () => {
   if (ConductorService.isEmpty(pattern.value)) {

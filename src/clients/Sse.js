@@ -1,7 +1,7 @@
 import {HttpClient} from "@/clients/HttpClient";
 
 const sse = {
-    client: new EventSource(`http://${window.applicationAddress.host}:${window.applicationAddress.port}/stream`),
+    client: null,
     beatEmitter: null,
     patternCallback: null,
     prerollCallback: null,
@@ -11,6 +11,7 @@ const sse = {
         }
     },
     setupEmitterAndCallbacks(beatEmitter, patternCallback, prerollCallback) {
+        this.client = new EventSource(`http://${window.applicationAddress.host}:${window.applicationAddress.port}/stream`)
         this.beatEmitter = beatEmitter
         this.patternCallback = patternCallback
         this.prerollCallback = prerollCallback
