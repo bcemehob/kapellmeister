@@ -1,5 +1,5 @@
 {
-  "name": "kappelmeister",
+  "name": "kapellmeister",
   "version": "0.1.0",
   "private": true,
   "bin": "backend.js",
