@@ -11,6 +11,7 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "build-dev": "vue-cli-service build --mode development",
+    "build-ui-and-run-server": "vue-cli-service build && node backend.js",
     "test:unit": "vue-cli-service test:unit",
     "test": "jest",
     "lint": "vue-cli-service lint",
