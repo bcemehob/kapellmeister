@@ -22,14 +22,13 @@ const editMode = computed(() => store.state.editMode)
 const currentBeat = computed(() => beatEmitter.value ? beatEmitter.value.currentBeat : 0)
 const currentPrerollBeat = computed(() => beatEmitter.value ? beatEmitter.value.getCurrentPrerollBeat() : 0)
 const prerollBeats = computed(() => ConductorService.isEmpty(pattern.value) ? 0 : store.state.prerollMeasures * pattern.value.measure.beats)
-const conductorView = window.conductor
+const conductorView = window.conductor || !emitterServerEnabled
 if (emitterServerEnabled) sse.init()
 
 const loadPattern = async () => {
-  if (ConductorService.isEmpty(pattern.value)) {
-    const pattern = conductorView ? readPatternFromLocalStorage() : await HttpClient.requestPatternFromBackend()
+    let pattern = readPatternFromLocalStorage()
+    if (!conductorView) pattern = await HttpClient.requestPatternFromBackend()
     pattern && store.commit('setPattern', pattern)
-  }
 }
 
 const readPatternFromLocalStorage = () => {
