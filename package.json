@@ -7,7 +7,6 @@
     "node": "20.13.1"
   },
   "scripts": {
-    "start": "node index.js",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "build-dev": "vue-cli-service build --mode development",
