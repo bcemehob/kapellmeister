@@ -15,7 +15,7 @@ import {HttpClient} from "@/clients/HttpClient"
 import sse from "@/clients/Sse";
 
 const beatEmitter = ref(null)
-const serverBeatEmitterEnabled = true
+const emitterServerEnabled = window.emitterServer
 const store = useStore()
 const pattern = computed(() => store.state.pattern)
 const editMode = computed(() => store.state.editMode)
@@ -23,11 +23,11 @@ const currentBeat = computed(() => beatEmitter.value ? beatEmitter.value.current
 const currentPrerollBeat = computed(() => beatEmitter.value ? beatEmitter.value.getCurrentPrerollBeat() : 0)
 const prerollBeats = computed(() => ConductorService.isEmpty(pattern.value) ? 0 : store.state.prerollMeasures * pattern.value.measure.beats)
 const conductorView = window.conductor
-if (serverBeatEmitterEnabled) sse.init()
+if (emitterServerEnabled) sse.init()
 
 const loadPattern = async () => {
   if (ConductorService.isEmpty(pattern.value)) {
-    const pattern = conductorView.value ? readPatternFromLocalStorage() : await HttpClient.requestPatternFromBackend()
+    const pattern = conductorView ? readPatternFromLocalStorage() : await HttpClient.requestPatternFromBackend()
     pattern && store.commit('setPattern', pattern)
   }
 }
@@ -55,8 +55,8 @@ onMounted(async () => {
   await loadPattern()
   if (pattern.value && !ConductorService.isEmpty(pattern.value)) {
     let duration = ConductorService.durationInBeats(pattern.value)
-    beatEmitter.value = new BeatEmitterProvider(pattern.value.tempo, duration, prerollBeats.value, serverBeatEmitterEnabled).get()
-    if (serverBeatEmitterEnabled) sse.setupEmitterAndCallbacks(beatEmitter.value, patternCallback, prerollCallback)
+    beatEmitter.value = new BeatEmitterProvider(pattern.value.tempo, duration, prerollBeats.value, emitterServerEnabled).get()
+    if (emitterServerEnabled) sse.setupEmitterAndCallbacks(beatEmitter.value, patternCallback, prerollCallback)
   }
 })
 
@@ -65,8 +65,8 @@ onBeforeUnmount(() => document.removeEventListener('click', closeContextMenu))
 watch(pattern, newVal => {
   let duration = ConductorService.durationInBeats(newVal)
   beatEmitter.value = ConductorService.isEmpty(newVal) ? null :
-      new BeatEmitterProvider(newVal.tempo, duration, prerollBeats.value, serverBeatEmitterEnabled).get()
-  if (beatEmitter.value && serverBeatEmitterEnabled) sse.setupEmitterAndCallbacks(beatEmitter.value, patternCallback, prerollCallback)
+      new BeatEmitterProvider(newVal.tempo, duration, prerollBeats.value, emitterServerEnabled).get()
+  if (beatEmitter.value && emitterServerEnabled) sse.setupEmitterAndCallbacks(beatEmitter.value, patternCallback, prerollCallback)
 })
 watch(prerollBeats, newVal => beatEmitter.value && beatEmitter.value.resetPreroll(newVal))
 </script>

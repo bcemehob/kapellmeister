@@ -36,7 +36,8 @@ module.exports = async function (pathToStatic) {
     app.get('/setup.js', (req, res) => {
         const ip = req.ip.split('::ffff:')[1]
         const conductor = ip === applicationAddress.host
-        res.send(`window.applicationAddress = ${JSON.stringify(applicationAddress)}\nwindow.conductor = ${conductor}`)
+        res.send(`window.applicationAddress = ${JSON.stringify(applicationAddress)}\n` +
+                        `window.conductor = ${conductor}\n` + `window.emitterServer = true`)
     })
 
     app.get('/api/pattern', (req, res) => {
