@@ -23,8 +23,8 @@ setupClientEventStream = response => {
 }
 
 sendPrerollBeatsToClient = client => {
-    beatEmitter && beatEmitter.preroll.duration &&
-    sendMessageToClient(client, {type: 'prerollBeats', value: beatEmitter.preroll.duration})
+    const prerollBeats =  !beatEmitter || !beatEmitter.preroll ? 0 : beatEmitter.preroll.duration
+    sendMessageToClient(client, {type: 'prerollBeats', value: prerollBeats})
 }
 
 handleClientMessage = message => {

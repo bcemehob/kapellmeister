@@ -6,12 +6,12 @@ const sse = {
     patternCallback: null,
     prerollCallback: null,
     init() {
+        this.client = new EventSource(`http://${window.applicationAddress.host}:${window.applicationAddress.port}/stream`)
         this.client.onmessage = e => {
             this.handleMessage(e)
         }
     },
     setupEmitterAndCallbacks(beatEmitter, patternCallback, prerollCallback) {
-        this.client = new EventSource(`http://${window.applicationAddress.host}:${window.applicationAddress.port}/stream`)
         this.beatEmitter = beatEmitter
         this.patternCallback = patternCallback
         this.prerollCallback = prerollCallback
