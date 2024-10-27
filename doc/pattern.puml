@@ -1,6 +1,7 @@
 @startuml
 
 class Pattern {
+    + string name
     + int <b>tempo</b> [bpm]
     + int <b>duration</b> [measures]
     + Measure <b>measure
@@ -9,7 +10,7 @@ class Pattern {
 
 note right {
 <b>Rules:
-* tempo > 0
+* tempo > 0d
 * duration % Measure::base == 0
 }
 
