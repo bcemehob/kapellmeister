@@ -3,7 +3,7 @@
     <div class="title">Pattern editor</div>
     <div class="controls-bar">
       <div>
-        <button class="btn btn-dark" @click="save()" :disabled="isPatternEmpty"><i class="fa fa-save"></i></button>
+        <button class="btn btn-dark" @click="save()" :disabled="isPatternEmpty"><i class="kf kf-save"></i></button>
       </div>
     </div>
     <div class="editor">

@@ -1,7 +1,7 @@
 <template>
   <div class="switch inline float-r">
     <button class="btn btn-grey"  :disabled="!currentInstrument" @click="currentInstrument = null">
-      <i class="fa fa-list "></i>
+      <i class="kf kf-list "></i>
     </button>
   </div>
   <div class="instrument-switch-modal" :class="{'disappeared': currentInstrument}">

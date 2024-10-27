@@ -12,7 +12,7 @@
       <span class="track-info">
         <clickable-editable v-if="conductorView" v-model="pattern.duration"/>
         <span v-else>{{ pattern.duration }}</span>
-        measures <i class="fa" :class="measureClass"></i>
+        measures <i class="kf" :class="measureClass"></i>
       </span>
       <span class="track-info">
         <clickable-editable v-if="conductorView" v-model="pattern.measure.beats"/>
@@ -41,13 +41,13 @@ const conductorView = window.conductor
 const measureClassMapped = className => {
   switch (className) {
     case "not-ok":
-      return "fa-circle-exclamation not-ok"
+      return "kf-exclamation not-ok"
     case "ok":
-      return "fa-circle-check ok"
+      return "kf-checked ok"
     case "good":
-      return "fa-thumbs-up good"
+      return "kf-thumbs-up ok"
     case "great":
-      return "fa-heart great"
+      return "kf-heart ok"
     default:
       return ""
   }
@@ -78,21 +78,13 @@ const measureClassMapped = className => {
   padding-right: 10px;
 }
 
-.fa {
+.kf {
   &.ok {
-    color: green;
+    color: #48cf48;
   }
 
   &.not-ok {
     color: red;
-  }
-
-  &.good {
-    color: #38af38;
-  }
-
-  &.great {
-    color: #58dab4;
   }
 }
 

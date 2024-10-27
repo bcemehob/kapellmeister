@@ -2,17 +2,17 @@
   <div class="control-block">
     <label>Pattern options</label>
     <button class="btn btn-grey input-label">
-      <label for="file-upload" class="load-pattern"></label>
+      <label for="file-upload" class="kf kf-open"></label>
     </button>
     <input id="file-upload" type="file" ref="json" @change="readPattern"/>
     <button class="btn btn-grey" @click="addEmptyPattern">
-      <i class="fa fa-add"></i>
+      <i class="kf kf-new"></i>
     </button>
     <button @click="loadSamplePattern" class="btn btn-grey">
-      <i class="fas fa-magic"></i>
+      <i class="kf kf-magic"></i>
     </button>
     <button class="btn btn-grey" @click="clearPattern">
-      <icon class="fa fa-trash"></icon>
+      <i class="kf kf-bin"></i>
     </button>
   </div>
 </template>

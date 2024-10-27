@@ -1,8 +1,8 @@
 <template>
   <div class="control-block">
     <label>Actions</label>
-    <button class="btn btn-grey" :disabled="!undoAvailable" @click="undo()"><i class="fa fa-undo"></i></button>
-    <button class="btn btn-grey" :disabled="!redoAvailable" @click="redo()"><i class="fa fa-redo"></i></button>
+    <button class="btn btn-grey" :disabled="!undoAvailable" @click="undo()"><i class="kf kf-undo"></i></button>
+    <button class="btn btn-grey" :disabled="!redoAvailable" @click="redo()"><i class="kf kf-redo"></i></button>
   </div>
 </template>
 

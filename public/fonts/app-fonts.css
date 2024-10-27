@@ -1,0 +1,88 @@
+@font-face {
+    font-family: 'Kapellmeister';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url(kapellmeister.woff) format('woff');
+}
+
+@font-face {
+    font-family: 'Jura';
+    src: url(jura-lat-400.woff2) format('woff2'),
+    url(jura-lat-300.woff2) format('woff2'),
+    url(jura-cyr-400.woff2) format('woff2');
+}
+
+#app {
+    font-family: 'Jura', sans-serif;
+    font-weight: 400;
+}
+
+i {
+    font-style: normal;
+}
+
+.kf {
+    font-family: "Kapellmeister", serif;
+    font-weight:900
+}
+
+.kf-save:before{
+    content:"\e902"
+}
+
+.kf-open:before{
+    content:"\e908"
+}
+
+.kf-play:before{
+    content:"\e904"
+}
+
+.kf-stop:before{
+    content:"\e903"
+}
+
+.kf-pause:before{
+    content:"\ea1d"
+}
+
+.kf-new:before{
+    content:"\e924"
+}
+
+.kf-magic:before{
+    content:"\e997"
+}
+
+.kf-bin:before{
+    content:"\e9ad"
+}
+
+.kf-undo:before{
+    content:"\e965"
+}
+
+.kf-redo:before{
+    content:"\e966"
+}
+
+.kf-list:before{
+    content:"\e9ba"
+}
+
+.kf-exclamation:before{
+    content:"\ea08"
+}
+
+.kf-checked:before{
+    content:"\e90a"
+}
+
+.kf-heart:before{
+    content:"\e909"
+}
+
+.kf-thumbs-up:before{
+    content:"\e907"
+}
