@@ -6,11 +6,15 @@ export class InstrumentService {
     constructor(instrument, measure) {
         this.instrument = instrument
         this.measure = measure
-        this.instrument.parties.forEach(party => party.spans.forEach((span => {
+        this.instrument.parties.forEach(party => this.createPartyTimeline(party, this.partyTimeline))
+    }
+
+    createPartyTimeline(party, partyTimeline) {
+        party.spans.forEach((span => {
             for (let i = span[0]; i < span[0] + span[1]; i++) {
-                this.partyTimeline[i] = {name: party.name, start: span[0], duration: span[1]}
+                partyTimeline[i] = {name: party.name, start: span[0], duration: span[1]}
             }
-        })))
+        }))
     }
 
     upcomingParty(currentBeat) {
