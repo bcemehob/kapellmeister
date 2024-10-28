@@ -1,0 +1,131 @@
+{
+  "duration": 8,
+  "name": "test name",
+  "tempo": 120,
+  "measure": {
+    "base": 4,
+    "beats": 3
+  },
+  "instruments": [
+    {
+      "id": "4ef4390b-eb61-40d9-9134-06b499f160aa",
+      "name": "drum",
+      "parties": [
+        {
+          "id": "68cb2f88-3148-4d35-8d17-6e8a7e3ed777",
+          "name": "solid",
+          "anacrusis": 0,
+          "duration": 8
+        },
+        {
+          "id": "f4961912-92ba-4c8a-8d41-9b8ea4df542a",
+          "name": "snare trello",
+          "anacrusis": 2,
+          "duration": 16
+        }
+      ],
+      "partyPerformances": [
+        {
+          "partyId": "68cb2f88-3148-4d35-8d17-6e8a7e3ed777",
+          "start": 1
+        },
+        {
+          "partyId": "68cb2f88-3148-4d35-8d17-6e8a7e3ed777",
+          "start": 25
+        },
+        {
+          "partyId": "68cb2f88-3148-4d35-8d17-6e8a7e3ed777",
+          "start": 49
+        },
+        {
+          "partyId": "f4961912-92ba-4c8a-8d41-9b8ea4df542a",
+          "start": 9
+        },
+        {
+          "partyId": "f4961912-92ba-4c8a-8d41-9b8ea4df542a",
+          "start": 41
+        }
+      ]
+    },
+    {
+      "id": "9de4792d-6caf-4ad1-b668-b65328e167c4",
+      "name": "saxo",
+      "parties": [
+        {
+          "id": "04467c20-2ab0-4d04-8f4a-de83662d2211",
+          "name": "coo-coo",
+          "anacrusis": 0,
+          "duration": 16,
+          "partyElements": [
+            {
+              "duration": 4,
+              "picture": null,
+              "start": 1,
+              "text": "Am"
+            },
+            {
+              "duration": 4,
+              "picture": null,
+              "start": 5,
+              "text": "E7"
+            },
+            {
+              "duration": 4,
+              "picture": null,
+              "start": 9,
+              "text": "Dm"
+            },
+            {
+              "duration": 4,
+              "picture": null,
+              "start": 13,
+              "text": "E7"
+            }
+          ]
+        },
+        {
+          "id": "520f6033-91df-44bd-a437-0a849a2f8864",
+          "name": "whole legato",
+          "anacrusis": 1,
+          "duration": 16
+        },
+        {
+          "id": "9af52c3b-fa2f-4b40-a7d9-ddea8c5a84c2",
+          "name": "fast chaos",
+          "anacrusis": 3,
+          "duration": 16
+        }
+      ],
+      "partyPerformances": [
+        {
+          "partyId": "04467c20-2ab0-4d04-8f4a-de83662d2211",
+          "start": 5
+        },
+        {
+          "partyId": "04467c20-2ab0-4d04-8f4a-de83662d2211",
+          "start": 33
+        },
+        {
+          "partyId": "04467c20-2ab0-4d04-8f4a-de83662d2211",
+          "start": 57
+        },
+        {
+          "partyId": "520f6033-91df-44bd-a437-0a849a2f8864",
+          "start": 9
+        },
+        {
+          "partyId": "520f6033-91df-44bd-a437-0a849a2f8864",
+          "start": 41
+        },
+        {
+          "partyId": "9af52c3b-fa2f-4b40-a7d9-ddea8c5a84c2",
+          "start": 25
+        },
+        {
+          "partyId": "9af52c3b-fa2f-4b40-a7d9-ddea8c5a84c2",
+          "start": 49
+        }
+      ]
+    }
+  ]
+}

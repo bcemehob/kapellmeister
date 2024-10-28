@@ -1,14 +1,14 @@
-import {v4 as uuidv4} from 'uuid'
-
 export class Party {
     id
     name = null
     duration = 0
     anacrusis = 0
+    partyElements
 
-    constructor(name, duration, anacrusis) {
-        this.id = uuidv4()
+    constructor(id, name, duration, anacrusis, partyElements) {
+        this.id = id
         this.duration = duration
         this.anacrusis = anacrusis
+        this.partyElements = partyElements
     }
 }
