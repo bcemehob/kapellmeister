@@ -45,7 +45,7 @@ export class PatternParser {
 
     parseParty(party) {
         const partyElements = this.parsePartyElements(party.partyElements)
-        return new Party(party.id, party.name, party.duration, party.anacrusis, partyElements)
+        return new Party(party.id, party.name, party.duration, party.anacrusis, party.clausula, partyElements)
     }
 
     parsePartyElements(rawPartyElements) {

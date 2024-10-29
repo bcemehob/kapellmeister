@@ -15,12 +15,14 @@
           "id": "68cb2f88-3148-4d35-8d17-6e8a7e3ed777",
           "name": "solid",
           "anacrusis": 0,
+          "clausula": 0,
           "duration": 8
         },
         {
           "id": "f4961912-92ba-4c8a-8d41-9b8ea4df542a",
           "name": "snare trello",
           "anacrusis": 2,
+          "clausula": 2,
           "duration": 16
         }
       ],
@@ -55,6 +57,7 @@
           "id": "04467c20-2ab0-4d04-8f4a-de83662d2211",
           "name": "coo-coo",
           "anacrusis": 0,
+          "clausula": 0,
           "duration": 16,
           "partyElements": [
             {
@@ -87,12 +90,14 @@
           "id": "520f6033-91df-44bd-a437-0a849a2f8864",
           "name": "whole legato",
           "anacrusis": 1,
+          "clausula": 3,
           "duration": 16
         },
         {
           "id": "9af52c3b-fa2f-4b40-a7d9-ddea8c5a84c2",
           "name": "fast chaos",
           "anacrusis": 3,
+          "clausula": 1,
           "duration": 16
         }
       ],

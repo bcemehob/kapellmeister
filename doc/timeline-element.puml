@@ -1,0 +1,87 @@
+@startuml
+
+class Pattern {
+    + string name
+    + int <b>tempo</b> [bpm]
+    + int <b>duration</b> [measures]
+    + Measure <b>measure
+    + Instrument[] <b>instruments
+}
+
+note right {
+<b>Rules:
+* tempo > 0
+* duration % Measure::base == 0
+}
+
+class Measure {
+    + int <b>base
+    + int <b>beats
+}
+
+note left {
+<b>Example:
+3 / 4 =>
+{ base: 4, beats: 3 }
+}
+
+class Instrument {
+    + UUID <b>id
+    + string <b>name
+    + PartyPerformance[] <b>partyPerformances
+    + Party[] <b>parties
+}
+
+class Party {
+    + UUID <b>id
+    + string <b>name
+    + int <b>duration</b> [measures]
+    + int <b>anacrusis</b> [beats]
+    + int <b>clausula</b> [beats]
+    + PartyElement[] <b>partyElements
+}
+note left {
+    <b>Rules:
+    duration <= Pattern::duration
+}
+
+
+class PartySpan {
+    + UUID <b>id
+    + string <b>partyName
+    + int <b>partyDuration</b> [beats]
+    + int <b>partyStart</b> [beats]
+    + string <b>elementText
+    + string <b>elementPic
+}
+
+class PartyPerformance {
+    + int <b>start</b> [measures]
+    + UUID <b>partyId
+}
+
+note top {
+    <b>Rules:
+    start <= (Pattern::duration - (Party::duration + Party::anacrusis))
+}
+
+class PartyElement {
+    + int <b>start</b> [beats]
+    + int <b>duration</b> [beats]
+    + string <b>text</b>
+    + string <b>picture</b> [base64]
+}
+
+note top {
+    <b>Rules:
+    duration <= (Party::duration + Party::anacrusis) - start [measures]
+}
+
+Measure "1" -- "1" Pattern
+Instrument "1...n" -- "1" Pattern
+Party "1...n" -- "1" Instrument
+PartyElement "1...n" -- "1" Party
+PartyPerformance "1...n" -- "1" Instrument
+PartyPerformance::partyId ||--o{  Party::id
+
+@enduml
