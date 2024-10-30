@@ -1,9 +1,8 @@
 export class PartyElement {
-    start
-    duration
-    text
-    picture
-    constructor(start, duration, text, picture) {
+    constructor(id, partyId, type, start, duration, text, picture) {
+        this.id = id
+        this.partyId = partyId
+        this.type = type
         this.start = start
         this.duration = duration
         this.text = text

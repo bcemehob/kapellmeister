@@ -1,0 +1,59 @@
+@startuml
+
+class InstrumentTimeline {
+    <b>i</b>: beat_number
+    <b>value</b>: partySnapshotId
+}
+note top {
+List<PartySnapshot>
+}
+
+class PartySnapshot{
+    + UUID <b>id
+    + UUID <b>partyPerformanceId
+    + Map<ElementType, UUID> <b>partyElementIdsByType
+}
+
+class Instrument {
+    + UUID <b>id
+    + string <b>name
+    + PartyPerformance[] <b>partyPerformances
+    + Party[] <b>parties
+}
+
+class Party {
+    + UUID <b>id
+    + string <b>name
+    + int <b>duration</b> [measures]
+    + int <b>anacrusis</b> [beats]
+    + int <b>clausula</b> [beats]
+    + PartyElement[] <b>partyElements
+}
+
+class PartyPerformance {
+    + UUID <b>id
+    + int <b>start</b> [measures]
+    + UUID <b>partyId
+}
+
+class PartyElement {
+    + UUID <b>id
+    + string <b>type
+    + int <b>start</b> [beats]
+    + int <b>duration</b> [beats]
+    + string <b>text</b>
+    + string <b>picture</b> [base64]
+}
+
+
+Party "1...n" -- "1" Instrument
+PartyElement "1...n" -- "1" Party
+PartyPerformance "1...n" -- "1" Instrument
+'PartyPerformance::partyId }o---||  Party::id
+Party::id ||--o{ PartyPerformance::partyId
+PartySnapshot::id ||--o{ InstrumentTimeline::value
+PartyPerformance::id ||--o{ PartySnapshot::partyPerformanceId
+PartyElement::id }o--o{ PartySnapshot::partyElementIds
+PartyElement::type }o--o{ PartySnapshot::partyElementIds
+
+@enduml
