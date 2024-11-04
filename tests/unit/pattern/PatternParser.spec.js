@@ -36,23 +36,22 @@ const saxCooCooPartyElements = [
     new PartyElement('4b6a5cd1-ea72-4d79-82ae-f1455634f197', saxParties[0].id, 'CHORDS', 13, 4, 'E7', null)
 ]
 
-
 const drumPerformances = [
-    new PartyPerformance(1, drumParties[0].id),
-    new PartyPerformance(25, drumParties[0].id),
-    new PartyPerformance(49, drumParties[0].id),
-    new PartyPerformance(9, drumParties[1].id),
-    new PartyPerformance(41, drumParties[1].id),
+    new PartyPerformance('85dac6d5-39a7-4b6b-a833-e74814f93732',  1, drumParties[0].id),
+    new PartyPerformance('3ef47e4c-b728-4b02-b8b6-bdd369fa9a48', 25, drumParties[0].id),
+    new PartyPerformance('607bd531-6787-4db9-86bc-2befce9bf9bf', 49, drumParties[0].id),
+    new PartyPerformance('c8a95c5d-9419-465a-96b8-3b061e89e5f3', 9, drumParties[1].id),
+    new PartyPerformance('6fbdff67-475a-459f-bbc5-053d537c4cc2', 41, drumParties[1].id),
 ]
 
 const saxPerformances = [
-    new PartyPerformance(5, saxParties[0].id),
-    new PartyPerformance(33, saxParties[0].id),
-    new PartyPerformance(57, saxParties[0].id),
-    new PartyPerformance(9, saxParties[1].id),
-    new PartyPerformance(41, saxParties[1].id),
-    new PartyPerformance(25, saxParties[2].id),
-    new PartyPerformance(49, saxParties[2].id),
+    new PartyPerformance('27017e6b-f0e6-417f-a5fd-2444b2ecab80',5, saxParties[0].id),
+    new PartyPerformance('22e37f73-67d0-42eb-a23d-210d89c2ac95',33, saxParties[0].id),
+    new PartyPerformance('b3cde4aa-06f6-4bcb-aa2d-064b4273d126',57, saxParties[0].id),
+    new PartyPerformance('a0aa6924-0b01-4ee0-9c4a-e77fc77e7280',9, saxParties[1].id),
+    new PartyPerformance('941a9500-7e81-4024-af05-cef09446b9d0',41, saxParties[1].id),
+    new PartyPerformance('e407e4d4-d2d2-4047-b411-595a8a17e618',25, saxParties[2].id),
+    new PartyPerformance('e0a0f22d-2640-42e5-bb3b-0d1c25e06641',49, saxParties[2].id),
 ]
 
 const instruments = [

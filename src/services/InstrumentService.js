@@ -1,12 +1,20 @@
+import instrumentTimelineDataFactory from "@/pattern/instrumentTimelineDataFactory";
+
 const EMPTY_PARTY = {start: 0, duration: 0}
 const PREROLL_MEASURES = 4
 
 export class InstrumentService {
     partyTimeline = []
+    instrumentTimelineData = null
+
     constructor(instrument, measure) {
         this.instrument = instrument
         this.measure = measure
-        this.instrument.parties.forEach(party => this.createPartyTimeline(party, this.partyTimeline))
+        if (instrument.partyPerformances) {
+            this.instrumentTimelineData = instrumentTimelineDataFactory.generateInstrumentTimeline(this.instrument, this.measure.beats)
+        } else {
+            this.instrument.parties.forEach(party => this.createPartyTimeline(party, this.partyTimeline))
+        }
     }
 
     createPartyTimeline(party, partyTimeline) {

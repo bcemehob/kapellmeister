@@ -1,7 +1,6 @@
 export class PartyPerformance {
-    start
-    partyId = null
-    constructor(start, partyId) {
+    constructor(id, start, partyId) {
+        this.id = id
         this.start = start
         this.partyId = partyId
     }

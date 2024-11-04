@@ -32,7 +32,7 @@ export class PatternParser {
         if (!rawPartyPerformances || !rawPartyPerformances.length) return partyPerformances
         rawPartyPerformances
             .forEach(rawPartyPerformance => partyPerformances.push(
-                new PartyPerformance(rawPartyPerformance.start, rawPartyPerformance.partyId))
+                new PartyPerformance(rawPartyPerformance.id, rawPartyPerformance.start, rawPartyPerformance.partyId))
             )
         return partyPerformances
     }

@@ -8,4 +8,8 @@ export class PartyElement {
         this.text = text
         this.picture = picture
     }
+
+    end(){
+        return this.start + this.duration - 1
+    }
 }

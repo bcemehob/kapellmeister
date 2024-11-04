@@ -1,8 +1,9 @@
-import {InstrumentService} from "@/services/InstrumentService";
-import {Instrument} from "@/pattern/Instrument";
-import {PartyPerformance} from "@/pattern/PartyPerformance";
-import {Party} from "@/pattern/Party";
-// import expectedTimeline from "./expected-instrument-timeline";
+import {InstrumentService} from "@/services/InstrumentService"
+import {Instrument} from "@/pattern/Instrument"
+import {PartyPerformance} from "@/pattern/PartyPerformance"
+import {Party} from "@/pattern/Party"
+import expectedTimeline from "./expected-instrument-timeline"
+
 const instrument = {
     name: 'sax',
     parties: [
@@ -12,27 +13,27 @@ const instrument = {
 }
 
 const parties = [
-    new Party('party1', 'first', 8, 0, 0, []),
-    new Party('party2', 'second', 8, 0, 0, []),
+    new Party('party1', 'first', 2, 0, 0, []),
+    new Party('party2', 'second', 2, 0, 0, []),
 ]
 
 const partyPerformances = [
-    new PartyPerformance(1, 'party1'),
-    new PartyPerformance(19, 'party1'),
-    new PartyPerformance(9, 'party2'),
-    new PartyPerformance(26, 'party2'),
+    new PartyPerformance('performance 1-1', 1, 'party1'),
+    new PartyPerformance('performance 1-2', 5, 'party1'),
+    new PartyPerformance('performance 2-1', 3, 'party2'),
+    new PartyPerformance('performance 2-2', 7, 'party2'),
 ]
 
-const instrumentNewFormat = new Instrument(null, 'sax', partyPerformances, parties)
+const instrumentNewFormat = new Instrument(null, 'sax', partyPerformances, parties, [])
 
 describe('InstrumentService', () => {
     console.log(instrumentNewFormat)
     const service = new InstrumentService(instrument, {base: 4, beats: 4})
-    /*
-        it('can create timeline in new format', () => {
-            expect(service.partyTimeline).toStrictEqual(expectedTimeline)
-        })
-    */
+    const serviceNew = new InstrumentService(instrumentNewFormat, {base: 4, beats: 3})
+
+    it('can create timeline in new format', () => {
+        expect(serviceNew.instrumentTimelineData).toStrictEqual(expectedTimeline)
+    })
 
     it('can detect upcoming party', () => {
         expect(service.upcomingParty(0)).toStrictEqual({start: 1, duration: 32, name: "first"})
