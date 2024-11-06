@@ -4,6 +4,7 @@ import {PartyPerformance} from "@/pattern/PartyPerformance"
 import {Party} from "@/pattern/Party"
 import expectedTimeline from "./expected-instrument-timeline"
 import {CurrentBeatData} from "@/pattern/CurrentBeatData";
+import {PartyElement} from "@/pattern/PartyElement";
 
 const instrument = {
     name: 'sax',
@@ -25,7 +26,13 @@ const partyPerformances = [
     new PartyPerformance('performance 2-2', 7, 'party2'),
 ]
 
-const instrumentNewFormat = new Instrument(null, 'sax', partyPerformances, parties, [])
+const partyElements = [
+    new PartyElement("element-chords-1-1", "party1", "CHORDS", 1, 2, "Am", null),
+    new PartyElement("element-chords-1-2", "party1", "CHORDS", 3, 2, "E7", null),
+    new PartyElement("element-lyrics-1-3", "party1", "LYRICS", 2, 4, "BO-OT-TA-AK", null),
+]
+
+const instrumentNewFormat = new Instrument(null, 'sax', partyPerformances, parties, partyElements)
 const beatValues = (start, duration) => ({start, duration})
 
 describe('InstrumentService', () => {
@@ -74,15 +81,39 @@ describe('InstrumentService', () => {
     it('can detect current party new', () => {
         expect(serviceNew.currentPartyNew(0)).toStrictEqual({})
         expect(serviceNew.currentPartyNew(1))
-            .toStrictEqual(new CurrentBeatData("first", beatValues(1, 6), []))
+            .toStrictEqual(new CurrentBeatData("first", beatValues(1, 6), [
+                new PartyElement("element-chords-1-1", "party1", "CHORDS", 1, 2, "Am", null)
+            ]))
+        expect(serviceNew.currentPartyNew(2))
+            .toStrictEqual(new CurrentBeatData("first", beatValues(1, 6),[
+                new PartyElement("element-chords-1-1", "party1", "CHORDS", 1, 2, "Am", null),
+                new PartyElement("element-lyrics-1-3", "party1", "LYRICS", 2, 4, "BO-OT-TA-AK", null),
+            ]))
+        expect(serviceNew.currentPartyNew(3))
+            .toStrictEqual(new CurrentBeatData("first", beatValues(1, 6),[
+                new PartyElement("element-chords-1-2", "party1", "CHORDS", 3, 2, "E7", null),
+                new PartyElement("element-lyrics-1-3", "party1", "LYRICS", 2, 4, "BO-OT-TA-AK", null),
+            ]))
+        expect(serviceNew.currentPartyNew(4))
+            .toStrictEqual(new CurrentBeatData("first", beatValues(1, 6),[
+                new PartyElement("element-chords-1-2", "party1", "CHORDS", 3, 2, "E7", null),
+                new PartyElement("element-lyrics-1-3", "party1", "LYRICS", 2, 4, "BO-OT-TA-AK", null),
+            ]))
+        expect(serviceNew.currentPartyNew(5))
+            .toStrictEqual(new CurrentBeatData("first", beatValues(1, 6),[
+                new PartyElement("element-lyrics-1-3", "party1", "LYRICS", 2, 4, "BO-OT-TA-AK", null),
+            ]))
         expect(serviceNew.currentPartyNew(6))
             .toStrictEqual(new CurrentBeatData("first", beatValues(1, 6),[]))
+
         expect(serviceNew.currentPartyNew(7))
             .toStrictEqual(new CurrentBeatData("second", beatValues(7, 6),[]))
         expect(serviceNew.currentPartyNew(12))
             .toStrictEqual(new CurrentBeatData("second", beatValues(7, 6),[]))
         expect(serviceNew.currentPartyNew(13))
-            .toStrictEqual(new CurrentBeatData("first", beatValues(13, 6),[]))
+            .toStrictEqual(new CurrentBeatData("first", beatValues(13, 6),[
+                new PartyElement("element-chords-1-1", "party1", "CHORDS", 1, 2, "Am", null)
+            ]))
         expect(serviceNew.currentPartyNew(18))
             .toStrictEqual(new CurrentBeatData("first", beatValues(13, 6),[]))
         expect(serviceNew.currentPartyNew(19))
