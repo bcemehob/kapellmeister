@@ -42,7 +42,8 @@ const instrumentTimelineDataFactory = {
                         )
                     const partyElementsMap = {}
                     currentPartyElements.forEach(cpe => partyElementsMap[cpe.type] = cpe.id)
-                    timeline[i] = new PartySnapshot(pp.id, party.id, partyElementsMap)
+                    const beatValues = {start: startBeat, duration: durationInBeats}
+                    timeline[i] = new PartySnapshot(pp.id, party.id, beatValues, partyElementsMap)
                 }
             }
         )

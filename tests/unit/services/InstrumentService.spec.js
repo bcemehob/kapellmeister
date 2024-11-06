@@ -3,6 +3,7 @@ import {Instrument} from "@/pattern/Instrument"
 import {PartyPerformance} from "@/pattern/PartyPerformance"
 import {Party} from "@/pattern/Party"
 import expectedTimeline from "./expected-instrument-timeline"
+import {CurrentBeatData} from "@/pattern/CurrentBeatData";
 
 const instrument = {
     name: 'sax',
@@ -25,6 +26,7 @@ const partyPerformances = [
 ]
 
 const instrumentNewFormat = new Instrument(null, 'sax', partyPerformances, parties, [])
+const beatValues = (start, duration) => ({start, duration})
 
 describe('InstrumentService', () => {
     console.log(instrumentNewFormat)
@@ -36,6 +38,15 @@ describe('InstrumentService', () => {
     })
 
     it('can detect upcoming party', () => {
+        expect(service.upcomingParty(0)).toStrictEqual({start: 1, duration: 32, name: "first"})
+        expect(service.upcomingParty(1)).toStrictEqual({start: 0, duration: 0})
+        expect(service.upcomingParty(17)).toStrictEqual({start: 33, duration: 32, name: "second"})
+        expect(service.upcomingParty(68)).toStrictEqual({start: 73, duration: 32, name: "first"})
+        expect(service.upcomingParty(105)).toStrictEqual({start: 106, duration: 32, name: "second"})
+        expect(service.upcomingParty(136)).toStrictEqual({start: 0, duration: 0})
+    })
+
+    it('can detect upcoming party new', () => {
         expect(service.upcomingParty(0)).toStrictEqual({start: 1, duration: 32, name: "first"})
         expect(service.upcomingParty(1)).toStrictEqual({start: 0, duration: 0})
         expect(service.upcomingParty(17)).toStrictEqual({start: 33, duration: 32, name: "second"})
@@ -58,6 +69,26 @@ describe('InstrumentService', () => {
         expect(service.currentParty(106)).toStrictEqual({start: 106, duration: 32, name: "second"})
         expect(service.currentParty(137)).toStrictEqual({start: 106, duration: 32, name: "second"})
         expect(service.currentParty(138)).toStrictEqual({start: 0, duration: 0})
+    })
+
+    it('can detect current party new', () => {
+        expect(serviceNew.currentPartyNew(0)).toStrictEqual({})
+        expect(serviceNew.currentPartyNew(1))
+            .toStrictEqual(new CurrentBeatData("first", beatValues(1, 6), []))
+        expect(serviceNew.currentPartyNew(6))
+            .toStrictEqual(new CurrentBeatData("first", beatValues(1, 6),[]))
+        expect(serviceNew.currentPartyNew(7))
+            .toStrictEqual(new CurrentBeatData("second", beatValues(7, 6),[]))
+        expect(serviceNew.currentPartyNew(12))
+            .toStrictEqual(new CurrentBeatData("second", beatValues(7, 6),[]))
+        expect(serviceNew.currentPartyNew(13))
+            .toStrictEqual(new CurrentBeatData("first", beatValues(13, 6),[]))
+        expect(serviceNew.currentPartyNew(18))
+            .toStrictEqual(new CurrentBeatData("first", beatValues(13, 6),[]))
+        expect(serviceNew.currentPartyNew(19))
+            .toStrictEqual(new CurrentBeatData("second", beatValues(19, 6),[]))
+        expect(serviceNew.currentPartyNew(24))
+            .toStrictEqual(new CurrentBeatData("second", beatValues(19, 6),[]))
     })
 
     it('can calculate countdown for current party', () => {

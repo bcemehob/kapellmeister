@@ -1,4 +1,5 @@
 import instrumentTimelineDataFactory from "@/pattern/instrumentTimelineDataFactory";
+import {CurrentBeatData} from "@/pattern/CurrentBeatData";
 
 const EMPTY_PARTY = {start: 0, duration: 0}
 const PREROLL_MEASURES = 4
@@ -25,6 +26,10 @@ export class InstrumentService {
         }))
     }
 
+    upcomingPartyNew(currentBeat) {
+        return {}
+    }
+
     upcomingParty(currentBeat) {
         if (currentBeat >= this.partyTimeline.length - this.prerollBeats()) return EMPTY_PARTY
         const upcomingParty = this.partyTimeline[currentBeat + this.prerollBeats()]
@@ -36,6 +41,16 @@ export class InstrumentService {
     currentParty(currentBeat) {
         const currentParty = this.partyTimeline[currentBeat]
         return currentParty ? currentParty : EMPTY_PARTY
+    }
+
+    currentPartyNew(currentBeat) {
+        const snapshot = this.instrumentTimelineData.timeline[currentBeat]
+        if (!snapshot) return {}
+        const currentParty = this.instrumentTimelineData.partiesById[snapshot.partyId]
+        const currentElements = []
+        Object.values(snapshot.partyElementsMap)
+            .forEach(elemId => currentElements.push(this.instrumentTimelineData.partyElementsById[elemId]))
+        return new CurrentBeatData(currentParty.name, snapshot.beatValues, currentElements)
     }
 
     currentCountDown(currentBeat) {

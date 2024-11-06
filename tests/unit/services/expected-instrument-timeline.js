@@ -3,41 +3,42 @@ import {PartyPerformance} from "@/pattern/PartyPerformance";
 import {Party} from "@/pattern/Party";
 import {InstrumentTimelineData} from "@/pattern/InstrumentTimelineData";
 
+const beatValues = (start, duration) => ({start, duration})
 
 const timeline = [
     null,
-    new PartySnapshot("performance 1-1", "party1", {}),
-    new PartySnapshot("performance 1-1", "party1", {}),
-    new PartySnapshot("performance 1-1", "party1", {}),
-    new PartySnapshot("performance 1-1", "party1", {}),
-    new PartySnapshot("performance 1-1", "party1", {}),
-    new PartySnapshot("performance 1-1", "party1", {}),
+    new PartySnapshot("performance 1-1", "party1", beatValues(1,6), {}),
+    new PartySnapshot("performance 1-1", "party1", beatValues(1,6), {}),
+    new PartySnapshot("performance 1-1", "party1", beatValues(1,6), {}),
+    new PartySnapshot("performance 1-1", "party1", beatValues(1,6), {}),
+    new PartySnapshot("performance 1-1", "party1", beatValues(1,6), {}),
+    new PartySnapshot("performance 1-1", "party1", beatValues(1,6), {}),
 
-    new PartySnapshot("performance 2-1", "party2", {}),
-    new PartySnapshot("performance 2-1", "party2", {}),
-    new PartySnapshot("performance 2-1", "party2", {}),
-    new PartySnapshot("performance 2-1", "party2", {}),
-    new PartySnapshot("performance 2-1", "party2", {}),
-    new PartySnapshot("performance 2-1", "party2", {}),
+    new PartySnapshot("performance 2-1", "party2", beatValues(7,6), {}),
+    new PartySnapshot("performance 2-1", "party2", beatValues(7,6), {}),
+    new PartySnapshot("performance 2-1", "party2", beatValues(7,6), {}),
+    new PartySnapshot("performance 2-1", "party2", beatValues(7,6), {}),
+    new PartySnapshot("performance 2-1", "party2", beatValues(7,6), {}),
+    new PartySnapshot("performance 2-1", "party2", beatValues(7,6), {}),
 
-    new PartySnapshot("performance 1-2", "party1", {}),
-    new PartySnapshot("performance 1-2", "party1", {}),
-    new PartySnapshot("performance 1-2", "party1", {}),
-    new PartySnapshot("performance 1-2", "party1", {}),
-    new PartySnapshot("performance 1-2", "party1", {}),
-    new PartySnapshot("performance 1-2", "party1", {}),
+    new PartySnapshot("performance 1-2", "party1", beatValues(13,6), {}),
+    new PartySnapshot("performance 1-2", "party1", beatValues(13,6), {}),
+    new PartySnapshot("performance 1-2", "party1", beatValues(13,6), {}),
+    new PartySnapshot("performance 1-2", "party1", beatValues(13,6), {}),
+    new PartySnapshot("performance 1-2", "party1", beatValues(13,6), {}),
+    new PartySnapshot("performance 1-2", "party1", beatValues(13,6), {}),
 
-    new PartySnapshot("performance 2-2", "party2", {}),
-    new PartySnapshot("performance 2-2", "party2", {}),
-    new PartySnapshot("performance 2-2", "party2", {}),
-    new PartySnapshot("performance 2-2", "party2", {}),
-    new PartySnapshot("performance 2-2", "party2", {}),
-    new PartySnapshot("performance 2-2", "party2", {}),
+    new PartySnapshot("performance 2-2", "party2", beatValues(19,6), {}),
+    new PartySnapshot("performance 2-2", "party2", beatValues(19,6), {}),
+    new PartySnapshot("performance 2-2", "party2", beatValues(19,6), {}),
+    new PartySnapshot("performance 2-2", "party2", beatValues(19,6), {}),
+    new PartySnapshot("performance 2-2", "party2", beatValues(19,6), {}),
+    new PartySnapshot("performance 2-2", "party2", beatValues(19,6), {}),
 ]
 
 const partiesById = {
-    "party1": new Party("party1", null, 2, 0, 0),
-    "party2": new Party("party2", null, 2, 0, 0)
+    "party1": new Party("party1", "first", 2, 0, 0),
+    "party2": new Party("party2", "second", 2, 0, 0)
 }
 const partyPerformancesById = {
     "performance 1-1": new PartyPerformance("performance 1-1", 1, "party1"),

@@ -6,6 +6,7 @@ export class Party {
 
     constructor(id, name, duration, anacrusis, clausula) {
         this.id = id
+        this.name = name
         this.duration = duration
         this.anacrusis = anacrusis
         this.clausula = clausula
