@@ -1,10 +1,10 @@
 {
-  "duration": 8,
+  "duration": 16,
   "name": "test name",
   "tempo": 120,
   "measure": {
     "base": 4,
-    "beats": 3
+    "beats": 4
   },
   "instruments": [
     {
@@ -16,7 +16,7 @@
           "name": "solid",
           "anacrusis": 0,
           "clausula": 0,
-          "duration": 8
+          "duration": 16
         },
         {
           "id": "f4961912-92ba-4c8a-8d41-9b8ea4df542a",
@@ -35,22 +35,17 @@
         {
           "id": "3ef47e4c-b728-4b02-b8b6-bdd369fa9a48",
           "partyId": "68cb2f88-3148-4d35-8d17-6e8a7e3ed777",
-          "start": 25
+          "start": 9
         },
         {
           "id": "607bd531-6787-4db9-86bc-2befce9bf9bf",
-          "partyId": "68cb2f88-3148-4d35-8d17-6e8a7e3ed777",
-          "start": 49
+          "partyId": "f4961912-92ba-4c8a-8d41-9b8ea4df542a",
+          "start": 5
         },
         {
           "id": "c8a95c5d-9419-465a-96b8-3b061e89e5f3",
           "partyId": "f4961912-92ba-4c8a-8d41-9b8ea4df542a",
-          "start": 9
-        },
-        {
-          "id": "6fbdff67-475a-459f-bbc5-053d537c4cc2",
-          "partyId": "f4961912-92ba-4c8a-8d41-9b8ea4df542a",
-          "start": 41
+          "start": 13
         }
       ]
     },
@@ -84,37 +79,22 @@
         {
           "id": "27017e6b-f0e6-417f-a5fd-2444b2ecab80",
           "partyId": "04467c20-2ab0-4d04-8f4a-de83662d2211",
-          "start": 5
+          "start": 1
         },
         {
           "id": "22e37f73-67d0-42eb-a23d-210d89c2ac95",
           "partyId": "04467c20-2ab0-4d04-8f4a-de83662d2211",
-          "start": 33
-        },
-        {
-          "id": "b3cde4aa-06f6-4bcb-aa2d-064b4273d126",
-          "partyId": "04467c20-2ab0-4d04-8f4a-de83662d2211",
-          "start": 57
-        },
-        {
-          "id": "a0aa6924-0b01-4ee0-9c4a-e77fc77e7280",
-          "partyId": "520f6033-91df-44bd-a437-0a849a2f8864",
           "start": 9
         },
         {
           "id": "941a9500-7e81-4024-af05-cef09446b9d0",
           "partyId": "520f6033-91df-44bd-a437-0a849a2f8864",
-          "start": 41
+          "start": 5
         },
         {
           "id": "e407e4d4-d2d2-4047-b411-595a8a17e618",
           "partyId": "9af52c3b-fa2f-4b40-a7d9-ddea8c5a84c2",
-          "start": 25
-        },
-        {
-          "id": "e0a0f22d-2640-42e5-bb3b-0d1c25e06641",
-          "partyId": "9af52c3b-fa2f-4b40-a7d9-ddea8c5a84c2",
-          "start": 49
+          "start": 13
         }
       ],
       "partyElements": [
