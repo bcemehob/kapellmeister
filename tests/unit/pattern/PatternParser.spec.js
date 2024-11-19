@@ -19,7 +19,6 @@ describe('PatternParser', () => {
     })
 })
 
-const expectedPatternFull = new Pattern('test name', 120, 16, new Measure(4, 4), instruments)
 
 const drumParties = [
     new Party('68cb2f88-3148-4d35-8d17-6e8a7e3ed777', 'solid', 16, 0, 0, []),
@@ -56,4 +55,7 @@ const instruments = [
     new Instrument('4ef4390b-eb61-40d9-9134-06b499f160aa', 'drum', drumPerformances, drumParties, []),
     new Instrument('9de4792d-6caf-4ad1-b668-b65328e167c4', 'saxo', saxPerformances, saxParties, saxPartyElements)
 ]
+
+const expectedPatternFull = new Pattern('test name', 120, 16, new Measure(4, 4), instruments)
+
 

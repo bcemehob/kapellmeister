@@ -1,4 +1,4 @@
-import instrumentTimelineDataFactory from "@/pattern/instrumentTimelineDataFactory";
+import { InstrumentTimelineDataFactory } from "@/pattern/InstrumentTimelineDataFactory";
 import {CurrentBeatData} from "@/pattern/CurrentBeatData";
 
 const EMPTY_PARTY = {start: 0, duration: 0}
@@ -12,7 +12,7 @@ export class InstrumentService {
         this.instrument = instrument
         this.measure = measure
         if (instrument.partyPerformances) {
-            this.instrumentTimelineData = instrumentTimelineDataFactory.generateInstrumentTimeline(this.instrument, this.measure.beats)
+            this.instrumentTimelineData = new InstrumentTimelineDataFactory(this.instrument, this.measure.beats).get()
         } else {
             this.instrument.parties.forEach(party => this.createPartyTimeline(party, this.partyTimeline))
         }
@@ -45,7 +45,7 @@ export class InstrumentService {
 
     currentPartyNew(currentBeat) {
         const snapshot = this.instrumentTimelineData.timeline[currentBeat]
-        if (!snapshot) return {}
+        if (!snapshot || !snapshot.partyId) return {}
         const currentParty = this.instrumentTimelineData.partiesById[snapshot.partyId]
         const currentElements = []
         Object.values(snapshot.partyElementsMap)
