@@ -18,24 +18,24 @@ export class InstrumentTimelineDataFactory {
 
     mapParts() {
         const mappedParts = {}
-        this.instrument.parties.forEach(p => mappedParts[p.id] = p)
+        this.instrument.parts.forEach(p => mappedParts[p.id] = p)
         return mappedParts
     }
 
     mapPartPerformances() {
         const mappedPartyPerformances = {}
-        this.instrument.partyPerformances.forEach(pp => mappedPartyPerformances[pp.id] = pp)
+        this.instrument.partPerformances.forEach(pp => mappedPartyPerformances[pp.id] = pp)
         return mappedPartyPerformances
     }
 
     mapPartElements() {
         const mappedPartyElements = {}
-        this.instrument.partyElements.forEach(pp => mappedPartyElements[pp.id] = pp)
+        this.instrument.partElements.forEach(pp => mappedPartyElements[pp.id] = pp)
         return mappedPartyElements
     }
 
     findNextPerformanceIdAfterEmptySnapshot(i) {
-        const result = this.instrument.partyPerformances
+        const result = this.instrument.partPerformances
             .filter(pp => this.nextPerformanceSearchCriteria(this.getStartBeat(pp) - i))
             .sort((a, b) => a.start - b.start)[0]
         return result ? this.getStartBeat(result) : null
@@ -47,7 +47,7 @@ export class InstrumentTimelineDataFactory {
     }
 
     findNextPerformanceIdAfterCurrentPerformance(nextPerformanceStart, i) {
-        const result = this.instrument.partyPerformances
+        const result = this.instrument.partPerformances
             .filter(_ => this.nextPerformanceSearchCriteria(nextPerformanceStart - i))
             .find(pp => this.getStartBeat(pp) === nextPerformanceStart)
         return result ? nextPerformanceStart : null
@@ -63,7 +63,7 @@ export class InstrumentTimelineDataFactory {
 
     instrumentTimeline() {
         const timeline = []
-        this.instrument.partyPerformances.forEach(pp => this.fillPerformanceBeatsBySnapshots(pp, timeline))
+        this.instrument.partPerformances.forEach(pp => this.fillPerformanceBeatsBySnapshots(pp, timeline))
         this.fillEmptyBeatsBySnapshots(timeline)
         return timeline
     }
@@ -86,7 +86,7 @@ export class InstrumentTimelineDataFactory {
     }
 
     getCurrentPartElements(part, currentPartBeat) {
-        return this.instrument.partyElements
+        return this.instrument.partElements
             .filter(partElement => partElement.partyId === part.id
                 && partElement.start <= currentPartBeat
                 && partElement.end() >= currentPartBeat

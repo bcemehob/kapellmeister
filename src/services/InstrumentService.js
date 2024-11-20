@@ -11,10 +11,10 @@ export class InstrumentService {
     constructor(instrument, measure) {
         this.instrument = instrument
         this.measure = measure
-        if (instrument.partyPerformances) {
+        if (instrument.partPerformances) {
             this.instrumentTimelineData = new InstrumentTimelineDataFactory(this.instrument, this.measure.beats).get()
         } else {
-            this.instrument.parties.forEach(part => this.createPartTimeline(part, this.partTimeline))
+            this.instrument.parts.forEach(part => this.createPartTimeline(part, this.partTimeline))
         }
     }
 

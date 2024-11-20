@@ -1,6 +1,6 @@
 <template>
   <div class="parties-container">
-    <div v-if="!instrument.parties.length" class="add-party">
+    <div v-if="!instrument.parts.length" class="add-party">
       <button class="btn btn-dark" @click="addParty"><i class="fa fa-add"></i></button>
     </div>
     <div v-for="partySpan in partySpans(instrument)"

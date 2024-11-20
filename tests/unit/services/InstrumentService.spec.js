@@ -8,7 +8,7 @@ import {PartElement} from "@/pattern/PartElement";
 
 const instrument = {
     name: 'sax',
-    parties: [
+    parts: [
         {name: 'first', spans: [[73, 32], [1, 32]]},
         {name: 'second', spans: [[106, 32], [33, 32]]}
     ]

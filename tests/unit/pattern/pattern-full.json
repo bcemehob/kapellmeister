@@ -10,7 +10,7 @@
     {
       "id": "4ef4390b-eb61-40d9-9134-06b499f160aa",
       "name": "drum",
-      "parties": [
+      "parts": [
         {
           "id": "68cb2f88-3148-4d35-8d17-6e8a7e3ed777",
           "name": "solid",
@@ -26,7 +26,7 @@
           "duration": 16
         }
       ],
-      "partyPerformances": [
+      "partPerformances": [
         {
           "id": "85dac6d5-39a7-4b6b-a833-e74814f93732",
           "partyId": "68cb2f88-3148-4d35-8d17-6e8a7e3ed777",
@@ -52,7 +52,7 @@
     {
       "id": "9de4792d-6caf-4ad1-b668-b65328e167c4",
       "name": "saxo",
-      "parties": [
+      "parts": [
         {
           "id": "04467c20-2ab0-4d04-8f4a-de83662d2211",
           "name": "coo-coo",
@@ -75,7 +75,7 @@
           "duration": 16
         }
       ],
-      "partyPerformances": [
+      "partPerformances": [
         {
           "id": "27017e6b-f0e6-417f-a5fd-2444b2ecab80",
           "partyId": "04467c20-2ab0-4d04-8f4a-de83662d2211",
@@ -97,7 +97,7 @@
           "start": 13
         }
       ],
-      "partyElements": [
+      "partElements": [
         {
           "id": "3d0dafe7-0863-4be1-b9e0-f850cfd537a1",
           "partyId": "04467c20-2ab0-4d04-8f4a-de83662d2211",

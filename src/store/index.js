@@ -104,7 +104,7 @@ export default createStore({
         },
 
         addNewSpan({  dispatch }, instrument) {
-            instrument.parties.push({name: 'party x', spans: [[1,16]]})
+            instrument.parts.push({name: 'party x', spans: [[1,16]]})
             dispatch('persistPattern')
         },
 

@@ -21,9 +21,9 @@ export class PatternParser {
     }
 
     parseInstrument(rawInstrument) {
-        const partyPerformances = this.parsePartyPerformances(rawInstrument.partyPerformances)
-        const parties = this.parseParties(rawInstrument.parties)
-        const partyElements = this.parsePartyElements(rawInstrument.partyElements)
+        const partyPerformances = this.parsePartyPerformances(rawInstrument.partPerformances)
+        const parties = this.parseParties(rawInstrument.parts)
+        const partyElements = this.parsePartyElements(rawInstrument.partElements)
         return new Instrument(rawInstrument.id, rawInstrument.name, partyPerformances, parties, partyElements)
     }
 
