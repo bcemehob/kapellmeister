@@ -1,5 +1,5 @@
 import {InstrumentTimelineData} from "@/pattern/InstrumentTimelineData"
-import {PartySnapshot} from "@/pattern/PartySnapshot"
+import {PartSnapshot} from "@/pattern/PartSnapshot"
 import {PREROLL_MEASURES} from "@/settings"
 
 export class InstrumentTimelineDataFactory {
@@ -81,7 +81,7 @@ export class InstrumentTimelineDataFactory {
                 .forEach(cpe => partyElementsMap[cpe.type] = cpe.id)
             const beatValues = {start: startBeat, duration: durationInBeats}
             const nextPerformanceId = this.findNextPerformanceIdAfterCurrentPerformance(startBeat + durationInBeats, i)
-            timeline[i] = new PartySnapshot(partyPerformance.id, nextPerformanceId, party.id, beatValues, partyElementsMap)
+            timeline[i] = new PartSnapshot(partyPerformance.id, nextPerformanceId, party.id, beatValues, partyElementsMap)
         }
     }
 
@@ -96,7 +96,7 @@ export class InstrumentTimelineDataFactory {
     fillEmptyBeatsBySnapshots(timeline) {
         for (let i = 0; i < timeline.length; i++) {
             if (timeline[i] !== undefined) continue
-            timeline[i] = new PartySnapshot(null, this.findNextPerformanceIdAfterEmptySnapshot(i), null, null, null)
+            timeline[i] = new PartSnapshot(null, this.findNextPerformanceIdAfterEmptySnapshot(i), null, null, null)
         }
     }
 }

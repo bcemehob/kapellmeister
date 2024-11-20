@@ -1,4 +1,4 @@
-export class PartySnapshot {
+export class PartSnapshot {
     constructor(partyPerformanceId, nextPerformanceId, partyId, beatValues, partyElementsMap) {
         this.partyPerformanceId = partyPerformanceId
         this.next = nextPerformanceId

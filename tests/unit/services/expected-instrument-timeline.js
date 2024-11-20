@@ -1,4 +1,4 @@
-import {PartySnapshot} from "@/pattern/PartySnapshot";
+import {PartSnapshot} from "@/pattern/PartSnapshot";
 import {PartyPerformance} from "@/pattern/PartyPerformance";
 import {Party} from "@/pattern/Party";
 import {InstrumentTimelineData} from "@/pattern/InstrumentTimelineData";
@@ -7,46 +7,46 @@ import {PartyElement} from "@/pattern/PartyElement";
 const beatValues = (start, duration) => ({start, duration})
 
 const timeline = [
-    new PartySnapshot(null, 1, null, null, null),
+    new PartSnapshot(null, 1, null, null, null),
 
-    new PartySnapshot("performance 1-1", 7, "party1", beatValues(1,6),
+    new PartSnapshot("performance 1-1", 7, "party1", beatValues(1,6),
         { CHORDS: "element-chords-1-1" }),
-    new PartySnapshot("performance 1-1", 7, "party1", beatValues(1,6),
+    new PartSnapshot("performance 1-1", 7, "party1", beatValues(1,6),
         { CHORDS: "element-chords-1-1", LYRICS: "element-lyrics-1-3" }),
-    new PartySnapshot("performance 1-1", 7, "party1", beatValues(1,6),
+    new PartSnapshot("performance 1-1", 7, "party1", beatValues(1,6),
         { CHORDS: "element-chords-1-2", LYRICS: "element-lyrics-1-3" }),
-    new PartySnapshot("performance 1-1", 7, "party1", beatValues(1,6),
+    new PartSnapshot("performance 1-1", 7, "party1", beatValues(1,6),
         { CHORDS: "element-chords-1-2", LYRICS: "element-lyrics-1-3" }),
-    new PartySnapshot("performance 1-1", 7, "party1", beatValues(1,6),
+    new PartSnapshot("performance 1-1", 7, "party1", beatValues(1,6),
         {LYRICS: "element-lyrics-1-3" }),
-    new PartySnapshot("performance 1-1", 7, "party1", beatValues(1,6),
+    new PartSnapshot("performance 1-1", 7, "party1", beatValues(1,6),
         {}),
 
-    new PartySnapshot("performance 2-1", 13, "party2", beatValues(7,6), {}),
-    new PartySnapshot("performance 2-1", 13, "party2", beatValues(7,6), {}),
-    new PartySnapshot("performance 2-1", 13, "party2", beatValues(7,6), {}),
-    new PartySnapshot("performance 2-1", 13, "party2", beatValues(7,6), {}),
-    new PartySnapshot("performance 2-1", 13, "party2", beatValues(7,6), {}),
-    new PartySnapshot("performance 2-1", 13, "party2", beatValues(7,6), {}),
+    new PartSnapshot("performance 2-1", 13, "party2", beatValues(7,6), {}),
+    new PartSnapshot("performance 2-1", 13, "party2", beatValues(7,6), {}),
+    new PartSnapshot("performance 2-1", 13, "party2", beatValues(7,6), {}),
+    new PartSnapshot("performance 2-1", 13, "party2", beatValues(7,6), {}),
+    new PartSnapshot("performance 2-1", 13, "party2", beatValues(7,6), {}),
+    new PartSnapshot("performance 2-1", 13, "party2", beatValues(7,6), {}),
 
-    new PartySnapshot("performance 1-2", 19, "party1", beatValues(13,6),
+    new PartSnapshot("performance 1-2", 19, "party1", beatValues(13,6),
         { CHORDS: "element-chords-1-1" }),
-    new PartySnapshot("performance 1-2", 19, "party1", beatValues(13,6),
+    new PartSnapshot("performance 1-2", 19, "party1", beatValues(13,6),
         { CHORDS: "element-chords-1-1", LYRICS: "element-lyrics-1-3" }),
-    new PartySnapshot("performance 1-2", 19, "party1", beatValues(13,6),
+    new PartSnapshot("performance 1-2", 19, "party1", beatValues(13,6),
         { CHORDS: "element-chords-1-2", LYRICS: "element-lyrics-1-3" }),
-    new PartySnapshot("performance 1-2", 19, "party1", beatValues(13,6),
+    new PartSnapshot("performance 1-2", 19, "party1", beatValues(13,6),
         { CHORDS: "element-chords-1-2", LYRICS: "element-lyrics-1-3" }),
-    new PartySnapshot("performance 1-2", 19, "party1", beatValues(13,6),
+    new PartSnapshot("performance 1-2", 19, "party1", beatValues(13,6),
         {LYRICS: "element-lyrics-1-3" }),
-    new PartySnapshot("performance 1-2", 19, "party1", beatValues(13,6), {}),
+    new PartSnapshot("performance 1-2", 19, "party1", beatValues(13,6), {}),
 
-    new PartySnapshot("performance 2-2", null, "party2", beatValues(19,6), {}),
-    new PartySnapshot("performance 2-2", null, "party2", beatValues(19,6), {}),
-    new PartySnapshot("performance 2-2", null, "party2", beatValues(19,6), {}),
-    new PartySnapshot("performance 2-2", null, "party2", beatValues(19,6), {}),
-    new PartySnapshot("performance 2-2", null, "party2", beatValues(19,6), {}),
-    new PartySnapshot("performance 2-2", null, "party2", beatValues(19,6), {}),
+    new PartSnapshot("performance 2-2", null, "party2", beatValues(19,6), {}),
+    new PartSnapshot("performance 2-2", null, "party2", beatValues(19,6), {}),
+    new PartSnapshot("performance 2-2", null, "party2", beatValues(19,6), {}),
+    new PartSnapshot("performance 2-2", null, "party2", beatValues(19,6), {}),
+    new PartSnapshot("performance 2-2", null, "party2", beatValues(19,6), {}),
+    new PartSnapshot("performance 2-2", null, "party2", beatValues(19,6), {}),
 ]
 
 const partiesById = {
