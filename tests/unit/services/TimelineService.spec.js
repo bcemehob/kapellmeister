@@ -58,10 +58,10 @@ describe('TimelineService', () => {
     it('can create spans for UI', () => {
         expect(service.partySpans(instrument)).toStrictEqual(expectedPartySpans)
     })
-    it('can find next span', () => {
+    it('can find nextStartBeat span', () => {
         expect(service.nextSpan(expectedPartySpans[0])).toStrictEqual(expectedPartySpans[1])
     })
-    it('returns undefined if no next span', () => {
+    it('returns undefined if no nextStartBeat span', () => {
         expect(service.nextSpan(expectedPartySpans[3])).toBe(undefined)
     })
     it('can find previous span', () => {

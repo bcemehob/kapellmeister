@@ -44,7 +44,8 @@ export class InstrumentService {
         if (!snapshot) {
             throw Error("Invalid timeline")
         }
-        const nextView = isNextSnapshot || !snapshot.next ? null : this.currentPart(snapshot.next, true)
+        const nextView = isNextSnapshot || !snapshot.nextStartBeat ? null :
+            this.currentPart(snapshot.nextStartBeat, true)
         if (!snapshot.partyPerformanceId) return new PartViewAtBeat(null, null, null, nextView)
         const currentPart = this.instrumentTimelineData.partsById[snapshot.partyId]
         const currentElements = Object.values(snapshot.partyElementsMap)

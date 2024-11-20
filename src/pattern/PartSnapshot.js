@@ -1,7 +1,7 @@
 export class PartSnapshot {
-    constructor(partyPerformanceId, nextPerformanceId, partyId, beatValues, partyElementsMap) {
+    constructor(partyPerformanceId, nextStartBeat, partyId, beatValues, partyElementsMap) {
         this.partyPerformanceId = partyPerformanceId
-        this.next = nextPerformanceId
+        this.nextStartBeat = nextStartBeat
         this.partyId = partyId
         this.beatValues = beatValues
         this.partyElementsMap = partyElementsMap
