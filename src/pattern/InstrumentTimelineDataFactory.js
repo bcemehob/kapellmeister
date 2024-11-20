@@ -6,29 +6,29 @@ export class InstrumentTimelineDataFactory {
     constructor(instrument, measureBeats) {
         this.instrument = instrument
         this.measureBeats = measureBeats
-        this.partiesById = this.mapParties()
-        this.partyPerformancesById = this.mapPartyPerformances()
-        this.partyElementsById = this.mapPartyElements()
+        this.partsById = this.mapParts()
+        this.partPerformancesById = this.mapPartPerformances()
+        this.partElementsById = this.mapPartElements()
         this.timeline = this.instrumentTimeline()
     }
 
     get() {
-        return new InstrumentTimelineData(this.timeline, this.partiesById, this.partyPerformancesById, this.partyElementsById)
+        return new InstrumentTimelineData(this.timeline, this.partsById, this.partPerformancesById, this.partElementsById)
     }
 
-    mapParties() {
-        const mappedParties = {}
-        this.instrument.parties.forEach(p => mappedParties[p.id] = p)
-        return mappedParties
+    mapParts() {
+        const mappedParts = {}
+        this.instrument.parties.forEach(p => mappedParts[p.id] = p)
+        return mappedParts
     }
 
-    mapPartyPerformances() {
+    mapPartPerformances() {
         const mappedPartyPerformances = {}
         this.instrument.partyPerformances.forEach(pp => mappedPartyPerformances[pp.id] = pp)
         return mappedPartyPerformances
     }
 
-    mapPartyElements() {
+    mapPartElements() {
         const mappedPartyElements = {}
         this.instrument.partyElements.forEach(pp => mappedPartyElements[pp.id] = pp)
         return mappedPartyElements
@@ -54,11 +54,11 @@ export class InstrumentTimelineDataFactory {
     }
 
     getStartBeat(partyPerformance) {
-        return (partyPerformance.start - 1) * this.measureBeats + 1 - this.partiesById[partyPerformance.partyId].anacrusis
+        return (partyPerformance.start - 1) * this.measureBeats + 1 - this.partsById[partyPerformance.partyId].anacrusis
     }
 
-    getDurationInBeats(party) {
-        return party.duration * this.measureBeats + party.anacrusis + party.clausula
+    getDurationInBeats(part) {
+        return part.duration * this.measureBeats + part.anacrusis + part.clausula
     }
 
     instrumentTimeline() {
@@ -68,28 +68,28 @@ export class InstrumentTimelineDataFactory {
         return timeline
     }
 
-    fillPerformanceBeatsBySnapshots(partyPerformance, timeline) {
-        const party = this.partiesById[partyPerformance.partyId]
-        const startBeat = this.getStartBeat(partyPerformance)
-        const durationInBeats = this.getDurationInBeats(party)
+    fillPerformanceBeatsBySnapshots(partPerformance, timeline) {
+        const part = this.partsById[partPerformance.partyId]
+        const startBeat = this.getStartBeat(partPerformance)
+        const durationInBeats = this.getDurationInBeats(part)
         for (let i = startBeat; i < startBeat + durationInBeats; i++) {
             if (timeline[i]) {
                 throw Error(`Party Snapshot already set for position ${i}:`, timeline[i])
             }
-            const partyElementsMap = {}
-            this.getCurrentPartyElements(party, i - startBeat + 1)
-                .forEach(cpe => partyElementsMap[cpe.type] = cpe.id)
+            const partElementsMap = {}
+            this.getCurrentPartElements(part, i - startBeat + 1)
+                .forEach(cpe => partElementsMap[cpe.type] = cpe.id)
             const beatValues = {start: startBeat, duration: durationInBeats}
             const nextPerformanceId = this.findNextPerformanceIdAfterCurrentPerformance(startBeat + durationInBeats, i)
-            timeline[i] = new PartSnapshot(partyPerformance.id, nextPerformanceId, party.id, beatValues, partyElementsMap)
+            timeline[i] = new PartSnapshot(partPerformance.id, nextPerformanceId, part.id, beatValues, partElementsMap)
         }
     }
 
-    getCurrentPartyElements(party, currentPartyBeat) {
+    getCurrentPartElements(part, currentPartBeat) {
         return this.instrument.partyElements
-            .filter(partyElement => partyElement.partyId === party.id
-                && partyElement.start <= currentPartyBeat
-                && partyElement.end() >= currentPartyBeat
+            .filter(partElement => partElement.partyId === part.id
+                && partElement.start <= currentPartBeat
+                && partElement.end() >= currentPartBeat
             )
     }
 
