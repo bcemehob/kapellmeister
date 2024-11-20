@@ -2,7 +2,7 @@ import {PartSnapshot} from "@/pattern/PartSnapshot";
 import {PartPerformance} from "@/pattern/PartPerformance";
 import {Part} from "@/pattern/Part";
 import {InstrumentTimelineData} from "@/pattern/InstrumentTimelineData";
-import {PartyElement} from "@/pattern/PartyElement";
+import {PartElement} from "@/pattern/PartElement";
 
 const beatValues = (start, duration) => ({start, duration})
 
@@ -61,9 +61,9 @@ const partyPerformancesById = {
 }
 
 const partyElementsById = {
-    "element-chords-1-1": new PartyElement("element-chords-1-1", "party1", "CHORDS", 1, 2, "Am", null),
-    "element-chords-1-2": new PartyElement("element-chords-1-2", "party1", "CHORDS", 3, 2, "E7", null),
-    "element-lyrics-1-3": new PartyElement("element-lyrics-1-3", "party1", "LYRICS", 2, 4, "BO-OT-TA-AK", null),
+    "element-chords-1-1": new PartElement("element-chords-1-1", "party1", "CHORDS", 1, 2, "Am", null),
+    "element-chords-1-2": new PartElement("element-chords-1-2", "party1", "CHORDS", 3, 2, "E7", null),
+    "element-lyrics-1-3": new PartElement("element-lyrics-1-3", "party1", "LYRICS", 2, 4, "BO-OT-TA-AK", null),
 }
 
 const expectedTimeline = new InstrumentTimelineData(

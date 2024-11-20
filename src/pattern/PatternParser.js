@@ -3,7 +3,7 @@ import {Measure} from "@/pattern/Measure"
 import {Instrument} from "@/pattern/Instrument"
 import {PartPerformance} from "@/pattern/PartPerformance"
 import {Part} from "@/pattern/Part"
-import {PartyElement} from "@/pattern/PartyElement"
+import {PartElement} from "@/pattern/PartElement"
 
 export class PatternParser {
     parse(patternJson) {
@@ -47,7 +47,7 @@ export class PatternParser {
     parsePartyElements(rawPartyElements) {
         const partyElements = []
         if (!rawPartyElements || !rawPartyElements.length) return partyElements
-        rawPartyElements.forEach(raw => partyElements.push(Object.assign(new PartyElement(), raw)))
+        rawPartyElements.forEach(raw => partyElements.push(Object.assign(new PartElement(), raw)))
         return partyElements
     }
 }

@@ -1,4 +1,4 @@
-export class PartyElement {
+export class PartElement {
     constructor(id, partyId, type, start, duration, text, picture) {
         this.id = id
         this.partyId = partyId

@@ -6,7 +6,7 @@ import * as path from "node:path"
 import {Instrument} from "@/pattern/Instrument"
 import {Part} from "@/pattern/Part"
 import {PartPerformance} from "@/pattern/PartPerformance"
-import {PartyElement} from "@/pattern/PartyElement"
+import {PartElement} from "@/pattern/PartElement"
 
 
 describe('PatternParser', () => {
@@ -31,10 +31,10 @@ const saxParties = [
 ]
 
 const saxPartyElements = [
-    new PartyElement('3d0dafe7-0863-4be1-b9e0-f850cfd537a1', saxParties[0].id, 'CHORDS', 1, 4, 'Am', null),
-    new PartyElement('043155d4-21b5-4b54-8be5-6fb2c5edcb18', saxParties[0].id, 'CHORDS', 5, 4, 'E7', null),
-    new PartyElement('c8a5daea-83ef-4ac6-adcf-221547f8bbe8', saxParties[0].id, 'CHORDS', 9, 4, 'Dm', null),
-    new PartyElement('4b6a5cd1-ea72-4d79-82ae-f1455634f197', saxParties[0].id, 'CHORDS', 13, 4, 'E7', null)
+    new PartElement('3d0dafe7-0863-4be1-b9e0-f850cfd537a1', saxParties[0].id, 'CHORDS', 1, 4, 'Am', null),
+    new PartElement('043155d4-21b5-4b54-8be5-6fb2c5edcb18', saxParties[0].id, 'CHORDS', 5, 4, 'E7', null),
+    new PartElement('c8a5daea-83ef-4ac6-adcf-221547f8bbe8', saxParties[0].id, 'CHORDS', 9, 4, 'Dm', null),
+    new PartElement('4b6a5cd1-ea72-4d79-82ae-f1455634f197', saxParties[0].id, 'CHORDS', 13, 4, 'E7', null)
 ]
 
 const drumPerformances = [
