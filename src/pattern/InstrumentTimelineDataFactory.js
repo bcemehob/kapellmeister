@@ -38,7 +38,7 @@ export class InstrumentTimelineDataFactory {
         const result = this.instrument.partyPerformances
             .filter(pp => this.nextPerformanceSearchCriteria(this.getStartBeat(pp) - i))
             .sort((a, b) => a.start - b.start)[0]
-        return result ? result.id : null
+        return result ? this.getStartBeat(result) : null
     }
 
     nextPerformanceSearchCriteria(beatsTillNextPerformance) {
@@ -50,7 +50,7 @@ export class InstrumentTimelineDataFactory {
         const result = this.instrument.partyPerformances
             .filter(_ => this.nextPerformanceSearchCriteria(nextPerformanceStart - i))
             .find(pp => this.getStartBeat(pp) === nextPerformanceStart)
-        return result ? result.id : null
+        return result ? nextPerformanceStart : null
     }
 
     getStartBeat(partyPerformance) {

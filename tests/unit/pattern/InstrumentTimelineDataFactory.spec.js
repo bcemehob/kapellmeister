@@ -69,27 +69,27 @@ describe('instrumentTimelineDataFactory', () => {
     const beatValues = (start, duration) => ({start, duration})
 
     const expectedTimeline = [
-        new PartySnapshot(null, party1Performance1.id, null, null, null),
+        new PartySnapshot(null, 1, null, null, null),
 
         new PartySnapshot(party1Performance1.id, null, party1.id, beatValues(1,8), {}),
         new PartySnapshot(party1Performance1.id, null, party1.id, beatValues(1,8), {}),
         new PartySnapshot(party1Performance1.id, null, party1.id, beatValues(1,8), {}),
         new PartySnapshot(party1Performance1.id, null, party1.id, beatValues(1,8), {}),
 
-        new PartySnapshot(party1Performance1.id, party2Performance1.id, party1.id, beatValues(1,8), {}),
-        new PartySnapshot(party1Performance1.id, party2Performance1.id, party1.id, beatValues(1,8), {}),
-        new PartySnapshot(party1Performance1.id, party2Performance1.id, party1.id, beatValues(1,8), {}),
-        new PartySnapshot(party1Performance1.id, party2Performance1.id, party1.id, beatValues(1,8), {}),
+        new PartySnapshot(party1Performance1.id, 9, party1.id, beatValues(1,8), {}),
+        new PartySnapshot(party1Performance1.id, 9, party1.id, beatValues(1,8), {}),
+        new PartySnapshot(party1Performance1.id, 9, party1.id, beatValues(1,8), {}),
+        new PartySnapshot(party1Performance1.id, 9, party1.id, beatValues(1,8), {}),
 
         new PartySnapshot(party2Performance1.id, null, party2.id, beatValues(9,8), {'CHORDS':party2Element1.id}),
         new PartySnapshot(party2Performance1.id, null, party2.id, beatValues(9,8), {'CHORDS':party2Element1.id}),
         new PartySnapshot(party2Performance1.id, null, party2.id, beatValues(9,8), {'CHORDS':party2Element1.id}),
         new PartySnapshot(party2Performance1.id, null, party2.id, beatValues(9,8), {'CHORDS':party2Element1.id}),
 
-        new PartySnapshot(party2Performance1.id, party1Performance2.id, party2.id, beatValues(9,8), {'CHORDS':party2Element2.id, 'LYRICS':party2Element3.id}),
-        new PartySnapshot(party2Performance1.id, party1Performance2.id, party2.id, beatValues(9,8), {'CHORDS':party2Element2.id, 'LYRICS':party2Element3.id}),
-        new PartySnapshot(party2Performance1.id, party1Performance2.id, party2.id, beatValues(9,8), {'LYRICS':party2Element3.id}),
-        new PartySnapshot(party2Performance1.id, party1Performance2.id, party2.id, beatValues(9,8), {'LYRICS':party2Element3.id}),
+        new PartySnapshot(party2Performance1.id, 17, party2.id, beatValues(9,8), {'CHORDS':party2Element2.id, 'LYRICS':party2Element3.id}),
+        new PartySnapshot(party2Performance1.id, 17, party2.id, beatValues(9,8), {'CHORDS':party2Element2.id, 'LYRICS':party2Element3.id}),
+        new PartySnapshot(party2Performance1.id, 17, party2.id, beatValues(9,8), {'LYRICS':party2Element3.id}),
+        new PartySnapshot(party2Performance1.id, 17, party2.id, beatValues(9,8), {'LYRICS':party2Element3.id}),
 
         new PartySnapshot(party1Performance2.id, null, party1.id, beatValues(17,8), {}),
         new PartySnapshot(party1Performance2.id, null, party1.id, beatValues(17,8), {}),
@@ -106,10 +106,10 @@ describe('instrumentTimelineDataFactory', () => {
         new PartySnapshot(null, null, null, null, null),
         new PartySnapshot(null, null, null, null, null),
 
-        new PartySnapshot(null, party2Performance2.id, null, null, null),
-        new PartySnapshot(null, party2Performance2.id, null, null, null),
-        new PartySnapshot(null, party2Performance2.id, null, null, null),
-        new PartySnapshot(null, party2Performance2.id, null, null, null),
+        new PartySnapshot(null, 33, null, null, null),
+        new PartySnapshot(null, 33, null, null, null),
+        new PartySnapshot(null, 33, null, null, null),
+        new PartySnapshot(null, 33, null, null, null),
 
         new PartySnapshot(party2Performance2.id, null, party2.id, beatValues(33,8), {'CHORDS':party2Element1.id}),
         new PartySnapshot(party2Performance2.id, null, party2.id, beatValues(33,8), {'CHORDS':party2Element1.id}),
