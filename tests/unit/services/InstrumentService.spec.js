@@ -78,47 +78,67 @@ describe('InstrumentService', () => {
     })
 
     it('can detect current party new', () => {
-        expect(serviceNew.currentPartyNew(0)).toStrictEqual({})
+        expect(serviceNew.currentPartyNew(0)).toStrictEqual(new PartViewAtBeat(null, null, null,
+            new PartViewAtBeat("first", beatValues(1, 6), [
+                new PartyElement("element-chords-1-1", "party1", "CHORDS", 1, 2, "Am", null)
+        ], null)))
         expect(serviceNew.currentPartyNew(1))
             .toStrictEqual(new PartViewAtBeat("first", beatValues(1, 6), [
                 new PartyElement("element-chords-1-1", "party1", "CHORDS", 1, 2, "Am", null)
-            ]))
+            ],
+                new PartViewAtBeat("second", beatValues(7, 6),[], null)))
         expect(serviceNew.currentPartyNew(2))
             .toStrictEqual(new PartViewAtBeat("first", beatValues(1, 6),[
                 new PartyElement("element-chords-1-1", "party1", "CHORDS", 1, 2, "Am", null),
                 new PartyElement("element-lyrics-1-3", "party1", "LYRICS", 2, 4, "BO-OT-TA-AK", null),
-            ]))
+            ],
+                new PartViewAtBeat("second", beatValues(7, 6),[], null)))
         expect(serviceNew.currentPartyNew(3))
             .toStrictEqual(new PartViewAtBeat("first", beatValues(1, 6),[
                 new PartyElement("element-chords-1-2", "party1", "CHORDS", 3, 2, "E7", null),
                 new PartyElement("element-lyrics-1-3", "party1", "LYRICS", 2, 4, "BO-OT-TA-AK", null),
-            ]))
+            ],
+                new PartViewAtBeat("second", beatValues(7, 6),[], null)))
         expect(serviceNew.currentPartyNew(4))
             .toStrictEqual(new PartViewAtBeat("first", beatValues(1, 6),[
                 new PartyElement("element-chords-1-2", "party1", "CHORDS", 3, 2, "E7", null),
                 new PartyElement("element-lyrics-1-3", "party1", "LYRICS", 2, 4, "BO-OT-TA-AK", null),
-            ]))
+            ],
+                new PartViewAtBeat("second", beatValues(7, 6),[], null)))
         expect(serviceNew.currentPartyNew(5))
             .toStrictEqual(new PartViewAtBeat("first", beatValues(1, 6),[
                 new PartyElement("element-lyrics-1-3", "party1", "LYRICS", 2, 4, "BO-OT-TA-AK", null),
-            ]))
+            ],
+                new PartViewAtBeat("second", beatValues(7, 6),[], null)))
         expect(serviceNew.currentPartyNew(6))
-            .toStrictEqual(new PartViewAtBeat("first", beatValues(1, 6),[]))
+            .toStrictEqual(new PartViewAtBeat("first", beatValues(1, 6),[],
+                new PartViewAtBeat("second", beatValues(7, 6),[], null)))
 
         expect(serviceNew.currentPartyNew(7))
-            .toStrictEqual(new PartViewAtBeat("second", beatValues(7, 6),[]))
+            .toStrictEqual(new PartViewAtBeat("second", beatValues(7, 6),[],
+                new PartViewAtBeat("first", beatValues(13, 6), [
+                    new PartyElement("element-chords-1-1", "party1", "CHORDS", 1, 2, "Am", null)
+                ], null)))
         expect(serviceNew.currentPartyNew(12))
-            .toStrictEqual(new PartViewAtBeat("second", beatValues(7, 6),[]))
+            .toStrictEqual(new PartViewAtBeat("second", beatValues(7, 6),[],
+                new PartViewAtBeat("first", beatValues(13, 6), [
+                    new PartyElement("element-chords-1-1", "party1", "CHORDS", 1, 2, "Am", null)
+                ], null)))
+
         expect(serviceNew.currentPartyNew(13))
             .toStrictEqual(new PartViewAtBeat("first", beatValues(13, 6),[
                 new PartyElement("element-chords-1-1", "party1", "CHORDS", 1, 2, "Am", null)
-            ]))
+            ],
+                new PartViewAtBeat("second", beatValues(19, 6),[], null)))
         expect(serviceNew.currentPartyNew(18))
-            .toStrictEqual(new PartViewAtBeat("first", beatValues(13, 6),[]))
+            .toStrictEqual(new PartViewAtBeat("first", beatValues(13, 6),[],
+                new PartViewAtBeat("second", beatValues(19, 6),[], null)))
         expect(serviceNew.currentPartyNew(19))
-            .toStrictEqual(new PartViewAtBeat("second", beatValues(19, 6),[]))
+            .toStrictEqual(new PartViewAtBeat("second", beatValues(19, 6),[],
+                null))
         expect(serviceNew.currentPartyNew(24))
-            .toStrictEqual(new PartViewAtBeat("second", beatValues(19, 6),[]))
+            .toStrictEqual(new PartViewAtBeat("second", beatValues(19, 6),[],
+                null))
     })
 
     it('can calculate countdown for current party', () => {

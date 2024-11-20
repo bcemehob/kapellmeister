@@ -1,4 +1,4 @@
-import { InstrumentTimelineDataFactory } from "@/pattern/InstrumentTimelineDataFactory";
+import {InstrumentTimelineDataFactory} from "@/pattern/InstrumentTimelineDataFactory";
 import {PartViewAtBeat} from "@/pattern/PartViewAtBeat";
 import {PREROLL_MEASURES} from "@/settings"
 
@@ -26,10 +26,6 @@ export class InstrumentService {
         }))
     }
 
-    upcomingPartyNew(currentBeat) {
-        return {}
-    }
-
     upcomingParty(currentBeat) {
         if (currentBeat >= this.partyTimeline.length - this.prerollBeats()) return EMPTY_PARTY
         const upcomingParty = this.partyTimeline[currentBeat + this.prerollBeats()]
@@ -43,13 +39,17 @@ export class InstrumentService {
         return currentParty ? currentParty : EMPTY_PARTY
     }
 
-    currentPartyNew(currentBeat) {
+    currentPartyNew(currentBeat, isNextSnapshot) {
         const snapshot = this.instrumentTimelineData.timeline[currentBeat]
-        if (!snapshot || !snapshot.partyId) return {}
+        if (!snapshot) {
+            throw Error("Invalid timeline")
+        }
+        const nextView = isNextSnapshot || !snapshot.next ? null : this.currentPartyNew(snapshot.next, true)
+        if (!snapshot.partyPerformanceId) return new PartViewAtBeat(null, null, null, nextView)
         const currentParty = this.instrumentTimelineData.partiesById[snapshot.partyId]
         const currentElements = Object.values(snapshot.partyElementsMap)
             .map(elemId => this.instrumentTimelineData.partyElementsById[elemId])
-        return new PartViewAtBeat(currentParty.name, snapshot.beatValues, currentElements)
+        return new PartViewAtBeat(currentParty.name, snapshot.beatValues, currentElements, nextView)
     }
 
     currentCountDown(currentBeat) {
