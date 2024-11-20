@@ -4,12 +4,12 @@
     <div v-if="instrumentService" class="party-info w-100 h-100">
       <div class="current-party">
         <div class="d-flex">
-          <div class="fw-bold"> {{ currentParty.name }}</div>
+          <div class="fw-bold"> {{ currentPartLegacy.name }}</div>
           <div v-if="countDown" :class="'count-down ' + countDown.type"> {{ countDown.count}} </div>
         </div>
       </div>
       <div v-if="upcomingParty.name" class="upcoming-party">
-         Next: <span class="fw-bold">{{ upcomingParty.name }}</span>
+         Next: <span class="fw-bold">{{ upcomingPartLegacy.name }}</span>
       </div>
     </div>
   </div>
@@ -20,8 +20,8 @@ import {InstrumentService} from "@/services/InstrumentService";
 
 const props = defineProps(['currentBeat', 'instrument', 'measure'])
 const instrumentService = ref(null)
-const currentParty = computed(() => instrumentService.value.currentParty(props.currentBeat))
-const upcomingParty = computed(() => instrumentService.value.upcomingParty(props.currentBeat))
+const currentPartLegacy = computed(() => instrumentService.value.currentPartLegacy(props.currentBeat))
+const upcomingPartLegacy = computed(() => instrumentService.value.upcomingPartLegacy(props.currentBeat))
 const countDown = computed(() => instrumentService.value.countDown(props.currentBeat))
 onMounted( () => instrumentService.value = new InstrumentService(props.instrument, props.measure))
 const conductorView = window.conductor
