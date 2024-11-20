@@ -13,7 +13,6 @@ describe('instrumentTimelineDataFactory', () => {
     const party1Performance2 = new PartyPerformance(uuidv4(),5, party1.id)
     const party2Performance1 = new PartyPerformance(uuidv4(),3, party2.id)
     const party2Performance2 = new PartyPerformance(uuidv4(),8, party2.id)
-    console.log("Performance ids: ", party1Performance1.id, party1Performance2.id, party2Performance1.id, party2Performance2.id)
     const party2Element1 = new PartyElement(uuidv4(), party2.id, 'CHORDS', 1, 4, 'Am', null)
     const party2Element2 = new PartyElement(uuidv4(), party2.id, 'CHORDS', 5, 2, 'E', null)
     const party2Element3 = new PartyElement(uuidv4(), party2.id, 'LYRICS', 5, 4, 'Foo', null)
@@ -69,36 +68,32 @@ describe('instrumentTimelineDataFactory', () => {
 
     const expectedTimeline = [
         new PartySnapshot(null, party1Performance1.id, null, null, null),
-        new PartySnapshot(party1Performance1.id, party2Performance1.id, party1.id, beatValues(1,8), {}),
-        new PartySnapshot(party1Performance1.id, party2Performance1.id, party1.id, beatValues(1,8), {}),
-        new PartySnapshot(party1Performance1.id, party2Performance1.id, party1.id, beatValues(1,8), {}),
-        new PartySnapshot(party1Performance1.id, party2Performance1.id, party1.id, beatValues(1,8), {}),
+
         new PartySnapshot(party1Performance1.id, party2Performance1.id, party1.id, beatValues(1,8), {}),
         new PartySnapshot(party1Performance1.id, party2Performance1.id, party1.id, beatValues(1,8), {}),
         new PartySnapshot(party1Performance1.id, party2Performance1.id, party1.id, beatValues(1,8), {}),
         new PartySnapshot(party1Performance1.id, party2Performance1.id, party1.id, beatValues(1,8), {}),
 
-        new PartySnapshot(party2Performance1.id, party1Performance2.id, party2.id, beatValues(9,8),
-            {'CHORDS':party2Element1.id}),
-        new PartySnapshot(party2Performance1.id, party1Performance2.id, party2.id, beatValues(9,8),
-            {'CHORDS':party2Element1.id}),
-        new PartySnapshot(party2Performance1.id, party1Performance2.id, party2.id, beatValues(9,8),
-            {'CHORDS':party2Element1.id}),
-        new PartySnapshot(party2Performance1.id, party1Performance2.id, party2.id, beatValues(9,8),
-            {'CHORDS':party2Element1.id}),
-        new PartySnapshot(party2Performance1.id, party1Performance2.id, party2.id, beatValues(9,8),
-            {'CHORDS':party2Element2.id, 'LYRICS':party2Element3.id}),
-        new PartySnapshot(party2Performance1.id, party1Performance2.id, party2.id, beatValues(9,8),
-            {'CHORDS':party2Element2.id, 'LYRICS':party2Element3.id}),
-        new PartySnapshot(party2Performance1.id, party1Performance2.id, party2.id, beatValues(9,8),
-            {'LYRICS':party2Element3.id}),
-        new PartySnapshot(party2Performance1.id, party1Performance2.id, party2.id, beatValues(9,8),
-            {'LYRICS':party2Element3.id}),
+        new PartySnapshot(party1Performance1.id, party2Performance1.id, party1.id, beatValues(1,8), {}),
+        new PartySnapshot(party1Performance1.id, party2Performance1.id, party1.id, beatValues(1,8), {}),
+        new PartySnapshot(party1Performance1.id, party2Performance1.id, party1.id, beatValues(1,8), {}),
+        new PartySnapshot(party1Performance1.id, party2Performance1.id, party1.id, beatValues(1,8), {}),
+
+        new PartySnapshot(party2Performance1.id, party1Performance2.id, party2.id, beatValues(9,8), {'CHORDS':party2Element1.id}),
+        new PartySnapshot(party2Performance1.id, party1Performance2.id, party2.id, beatValues(9,8), {'CHORDS':party2Element1.id}),
+        new PartySnapshot(party2Performance1.id, party1Performance2.id, party2.id, beatValues(9,8), {'CHORDS':party2Element1.id}),
+        new PartySnapshot(party2Performance1.id, party1Performance2.id, party2.id, beatValues(9,8), {'CHORDS':party2Element1.id}),
+
+        new PartySnapshot(party2Performance1.id, party1Performance2.id, party2.id, beatValues(9,8), {'CHORDS':party2Element2.id, 'LYRICS':party2Element3.id}),
+        new PartySnapshot(party2Performance1.id, party1Performance2.id, party2.id, beatValues(9,8), {'CHORDS':party2Element2.id, 'LYRICS':party2Element3.id}),
+        new PartySnapshot(party2Performance1.id, party1Performance2.id, party2.id, beatValues(9,8), {'LYRICS':party2Element3.id}),
+        new PartySnapshot(party2Performance1.id, party1Performance2.id, party2.id, beatValues(9,8), {'LYRICS':party2Element3.id}),
 
         new PartySnapshot(party1Performance2.id, null, party1.id, beatValues(17,8), {}),
         new PartySnapshot(party1Performance2.id, null, party1.id, beatValues(17,8), {}),
         new PartySnapshot(party1Performance2.id, null, party1.id, beatValues(17,8), {}),
         new PartySnapshot(party1Performance2.id, null, party1.id, beatValues(17,8), {}),
+
         new PartySnapshot(party1Performance2.id, null, party1.id, beatValues(17,8), {}),
         new PartySnapshot(party1Performance2.id, null, party1.id, beatValues(17,8), {}),
         new PartySnapshot(party1Performance2.id, null, party1.id, beatValues(17,8), {}),
@@ -109,21 +104,14 @@ describe('instrumentTimelineDataFactory', () => {
         new PartySnapshot(null, party2Performance2.id, null, null, null),
         new PartySnapshot(null, party2Performance2.id, null, null, null),
 
-        new PartySnapshot(party2Performance2.id, null, party2.id, beatValues(29,8),
-            {'CHORDS':party2Element1.id}),
-        new PartySnapshot(party2Performance2.id, null, party2.id, beatValues(29,8),
-            {'CHORDS':party2Element1.id}),
-        new PartySnapshot(party2Performance2.id, null, party2.id, beatValues(29,8),
-            {'CHORDS':party2Element1.id}),
-        new PartySnapshot(party2Performance2.id, null, party2.id, beatValues(29,8),
-            {'CHORDS':party2Element1.id}),
-        new PartySnapshot(party2Performance2.id, null, party2.id, beatValues(29,8),
-            {'CHORDS':party2Element2.id, 'LYRICS':party2Element3.id}),
-        new PartySnapshot(party2Performance2.id, null, party2.id, beatValues(29,8),
-            {'CHORDS':party2Element2.id, 'LYRICS':party2Element3.id}),
-        new PartySnapshot(party2Performance2.id, null, party2.id, beatValues(29,8),
-            {'LYRICS':party2Element3.id}),
-        new PartySnapshot(party2Performance2.id, null, party2.id, beatValues(29,8),
-            {'LYRICS':party2Element3.id}),
+        new PartySnapshot(party2Performance2.id, null, party2.id, beatValues(29,8), {'CHORDS':party2Element1.id}),
+        new PartySnapshot(party2Performance2.id, null, party2.id, beatValues(29,8), {'CHORDS':party2Element1.id}),
+        new PartySnapshot(party2Performance2.id, null, party2.id, beatValues(29,8), {'CHORDS':party2Element1.id}),
+        new PartySnapshot(party2Performance2.id, null, party2.id, beatValues(29,8), {'CHORDS':party2Element1.id}),
+
+        new PartySnapshot(party2Performance2.id, null, party2.id, beatValues(29,8), {'CHORDS':party2Element2.id, 'LYRICS':party2Element3.id}),
+        new PartySnapshot(party2Performance2.id, null, party2.id, beatValues(29,8), {'CHORDS':party2Element2.id, 'LYRICS':party2Element3.id}),
+        new PartySnapshot(party2Performance2.id, null, party2.id, beatValues(29,8), {'LYRICS':party2Element3.id}),
+        new PartySnapshot(party2Performance2.id, null, party2.id, beatValues(29,8), {'LYRICS':party2Element3.id}),
     ]
 })

@@ -40,7 +40,7 @@ export class InstrumentTimelineDataFactory {
         return result ? result.id : null
     }
 
-    findNextPerformanceIdAfterExistingPerformance(nextPerformanceStart) {
+    findNextPerformanceIdAfterCurrentPerformance(nextPerformanceStart) {
         const result = this.instrument.partyPerformances
             .find(pp => this.getStartBeat(pp) === nextPerformanceStart)
         return result ? result.id : null
@@ -69,29 +69,27 @@ export class InstrumentTimelineDataFactory {
             if (timeline[i]) {
                 throw Error(`Party Snapshot already set for position ${i}:`, timeline[i])
             }
-            const currentBeatOfParty = i - startBeat + 1
-            const currentPartyElements = this.instrument.partyElements
-                .filter(partyElement => partyElement.partyId === party.id
-                    && partyElement.start <= currentBeatOfParty
-                    && partyElement.end() >= currentBeatOfParty
-                )
             const partyElementsMap = {}
-            currentPartyElements.forEach(cpe => partyElementsMap[cpe.type] = cpe.id)
+            this.getCurrentPartyElements(party, i - startBeat + 1)
+                .forEach(cpe => partyElementsMap[cpe.type] = cpe.id)
             const beatValues = {start: startBeat, duration: durationInBeats}
-            const nextPerformanceId = this.findNextPerformanceIdAfterExistingPerformance(startBeat + durationInBeats)
+            const nextPerformanceId = this.findNextPerformanceIdAfterCurrentPerformance(startBeat + durationInBeats)
             timeline[i] = new PartySnapshot(partyPerformance.id, nextPerformanceId, party.id, beatValues, partyElementsMap)
         }
     }
 
+    getCurrentPartyElements(party, currentPartyBeat) {
+        return this.instrument.partyElements
+            .filter(partyElement => partyElement.partyId === party.id
+                && partyElement.start <= currentPartyBeat
+                && partyElement.end() >= currentPartyBeat
+            )
+    }
+
     fillEmptyBeatsBySnapshots(timeline) {
         for (let i = 0; i < timeline.length; i++) {
-            let nextPerformanceId = null
-            if (timeline[i] === undefined) {
-                nextPerformanceId = this.findNextPerformanceId(i)
-                timeline[i] = new PartySnapshot(null, nextPerformanceId, null, null, null)
-            } else {
-            }
-            console.log(i, timeline[i])
+            if (timeline[i] !== undefined) continue
+            timeline[i] = new PartySnapshot(null, this.findNextPerformanceId(i), null, null, null)
         }
     }
 }
