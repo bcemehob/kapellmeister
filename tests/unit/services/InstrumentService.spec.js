@@ -36,7 +36,6 @@ const instrumentNewFormat = new Instrument(null, 'sax', partyPerformances, parti
 const beatValues = (start, duration) => ({start, duration})
 
 describe('InstrumentService', () => {
-    console.log(instrumentNewFormat)
     const service = new InstrumentService(instrument, {base: 4, beats: 4})
     const serviceNew = new InstrumentService(instrumentNewFormat, {base: 4, beats: 3})
 
