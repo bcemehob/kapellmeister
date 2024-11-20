@@ -39,12 +39,12 @@ export class InstrumentService {
         return currentParty ? currentParty : EMPTY_PARTY
     }
 
-    currentPartyNew(currentBeat, isNextSnapshot) {
+    currentPart(currentBeat, isNextSnapshot) {
         const snapshot = this.instrumentTimelineData.timeline[currentBeat]
         if (!snapshot) {
             throw Error("Invalid timeline")
         }
-        const nextView = isNextSnapshot || !snapshot.next ? null : this.currentPartyNew(snapshot.next, true)
+        const nextView = isNextSnapshot || !snapshot.next ? null : this.currentPart(snapshot.next, true)
         if (!snapshot.partyPerformanceId) return new PartViewAtBeat(null, null, null, nextView)
         const currentParty = this.instrumentTimelineData.partiesById[snapshot.partyId]
         const currentElements = Object.values(snapshot.partyElementsMap)
