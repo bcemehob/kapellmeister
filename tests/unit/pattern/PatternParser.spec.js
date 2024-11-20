@@ -5,7 +5,7 @@ import * as fs from "node:fs"
 import * as path from "node:path"
 import {Instrument} from "@/pattern/Instrument"
 import {Part} from "@/pattern/Part"
-import {PartyPerformance} from "@/pattern/PartyPerformance"
+import {PartPerformance} from "@/pattern/PartPerformance"
 import {PartyElement} from "@/pattern/PartyElement"
 
 
@@ -38,17 +38,17 @@ const saxPartyElements = [
 ]
 
 const drumPerformances = [
-    new PartyPerformance('85dac6d5-39a7-4b6b-a833-e74814f93732',  1, drumParties[0].id),
-    new PartyPerformance('3ef47e4c-b728-4b02-b8b6-bdd369fa9a48', 9, drumParties[0].id),
-    new PartyPerformance('607bd531-6787-4db9-86bc-2befce9bf9bf', 5, drumParties[1].id),
-    new PartyPerformance('c8a95c5d-9419-465a-96b8-3b061e89e5f3', 13, drumParties[1].id),
+    new PartPerformance('85dac6d5-39a7-4b6b-a833-e74814f93732',  1, drumParties[0].id),
+    new PartPerformance('3ef47e4c-b728-4b02-b8b6-bdd369fa9a48', 9, drumParties[0].id),
+    new PartPerformance('607bd531-6787-4db9-86bc-2befce9bf9bf', 5, drumParties[1].id),
+    new PartPerformance('c8a95c5d-9419-465a-96b8-3b061e89e5f3', 13, drumParties[1].id),
 ]
 
 const saxPerformances = [
-    new PartyPerformance('27017e6b-f0e6-417f-a5fd-2444b2ecab80',1, saxParties[0].id),
-    new PartyPerformance('22e37f73-67d0-42eb-a23d-210d89c2ac95',9, saxParties[0].id),
-    new PartyPerformance('941a9500-7e81-4024-af05-cef09446b9d0',5, saxParties[1].id),
-    new PartyPerformance('e407e4d4-d2d2-4047-b411-595a8a17e618',13, saxParties[2].id),
+    new PartPerformance('27017e6b-f0e6-417f-a5fd-2444b2ecab80',1, saxParties[0].id),
+    new PartPerformance('22e37f73-67d0-42eb-a23d-210d89c2ac95',9, saxParties[0].id),
+    new PartPerformance('941a9500-7e81-4024-af05-cef09446b9d0',5, saxParties[1].id),
+    new PartPerformance('e407e4d4-d2d2-4047-b411-595a8a17e618',13, saxParties[2].id),
 ]
 
 const instruments = [

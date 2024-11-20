@@ -1,6 +1,6 @@
 import {InstrumentService} from "@/services/InstrumentService"
 import {Instrument} from "@/pattern/Instrument"
-import {PartyPerformance} from "@/pattern/PartyPerformance"
+import {PartPerformance} from "@/pattern/PartPerformance"
 import {Part} from "@/pattern/Part"
 import expectedTimeline from "./expected-instrument-timeline"
 import {PartViewAtBeat} from "@/pattern/PartViewAtBeat";
@@ -20,10 +20,10 @@ const parties = [
 ]
 
 const partyPerformances = [
-    new PartyPerformance('performance 1-1', 1, 'party1'),
-    new PartyPerformance('performance 1-2', 5, 'party1'),
-    new PartyPerformance('performance 2-1', 3, 'party2'),
-    new PartyPerformance('performance 2-2', 7, 'party2'),
+    new PartPerformance('performance 1-1', 1, 'party1'),
+    new PartPerformance('performance 1-2', 5, 'party1'),
+    new PartPerformance('performance 2-1', 3, 'party2'),
+    new PartPerformance('performance 2-2', 7, 'party2'),
 ]
 
 const partyElements = [

@@ -1,7 +1,7 @@
 import {Pattern} from "@/pattern/Pattern"
 import {Measure} from "@/pattern/Measure"
 import {Instrument} from "@/pattern/Instrument"
-import {PartyPerformance} from "@/pattern/PartyPerformance"
+import {PartPerformance} from "@/pattern/PartPerformance"
 import {Part} from "@/pattern/Part"
 import {PartyElement} from "@/pattern/PartyElement"
 
@@ -32,7 +32,7 @@ export class PatternParser {
         if (!rawPartyPerformances || !rawPartyPerformances.length) return partyPerformances
         rawPartyPerformances
             .forEach(rawPartyPerformance => partyPerformances.push(
-                new PartyPerformance(rawPartyPerformance.id, rawPartyPerformance.start, rawPartyPerformance.partyId))
+                new PartPerformance(rawPartyPerformance.id, rawPartyPerformance.start, rawPartyPerformance.partyId))
             )
         return partyPerformances
     }

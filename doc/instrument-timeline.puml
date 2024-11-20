@@ -49,7 +49,7 @@ class PartyElement {
 Party "1...n" -- "1" Instrument
 PartyElement "1...n" -- "1" Party
 PartyPerformance "1...n" -- "1" Instrument
-'PartyPerformance::partyId }o---||  Party::id
+'PartPerformance::partyId }o---||  Party::id
 Party::id ||--o{ PartyPerformance::partyId
 PartySnapshot::id ||--o{ InstrumentTimeline::value
 PartyPerformance::id ||--o{ PartySnapshot::partyPerformanceId
