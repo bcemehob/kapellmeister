@@ -1,5 +1,5 @@
 import { InstrumentTimelineDataFactory } from "@/pattern/InstrumentTimelineDataFactory";
-import {CurrentBeatData} from "@/pattern/CurrentBeatData";
+import {PartViewAtBeat} from "@/pattern/PartViewAtBeat";
 import {PREROLL_MEASURES} from "@/settings"
 
 const EMPTY_PARTY = {start: 0, duration: 0}
@@ -49,7 +49,7 @@ export class InstrumentService {
         const currentParty = this.instrumentTimelineData.partiesById[snapshot.partyId]
         const currentElements = Object.values(snapshot.partyElementsMap)
             .map(elemId => this.instrumentTimelineData.partyElementsById[elemId])
-        return new CurrentBeatData(currentParty.name, snapshot.beatValues, currentElements)
+        return new PartViewAtBeat(currentParty.name, snapshot.beatValues, currentElements)
     }
 
     currentCountDown(currentBeat) {
