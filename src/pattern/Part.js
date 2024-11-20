@@ -1,4 +1,4 @@
-export class Party {
+export class Part {
     id
     name = null
     duration = 0

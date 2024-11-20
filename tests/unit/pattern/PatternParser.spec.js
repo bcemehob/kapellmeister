@@ -4,7 +4,7 @@ import {PatternParser} from "@/pattern/PatternParser"
 import * as fs from "node:fs"
 import * as path from "node:path"
 import {Instrument} from "@/pattern/Instrument"
-import {Party} from "@/pattern/Party"
+import {Part} from "@/pattern/Part"
 import {PartyPerformance} from "@/pattern/PartyPerformance"
 import {PartyElement} from "@/pattern/PartyElement"
 
@@ -21,13 +21,13 @@ describe('PatternParser', () => {
 
 
 const drumParties = [
-    new Party('68cb2f88-3148-4d35-8d17-6e8a7e3ed777', 'solid', 16, 0, 0, []),
-    new Party('f4961912-92ba-4c8a-8d41-9b8ea4df542a', 'snare trello', 16, 2, 2, [])
+    new Part('68cb2f88-3148-4d35-8d17-6e8a7e3ed777', 'solid', 16, 0, 0, []),
+    new Part('f4961912-92ba-4c8a-8d41-9b8ea4df542a', 'snare trello', 16, 2, 2, [])
 ]
 const saxParties = [
-    new Party('04467c20-2ab0-4d04-8f4a-de83662d2211', 'coo-coo', 16, 0, 0),
-    new Party('520f6033-91df-44bd-a437-0a849a2f8864', 'whole legato', 16, 1, 3),
-    new Party('9af52c3b-fa2f-4b40-a7d9-ddea8c5a84c2', 'fast chaos', 16, 3, 1)
+    new Part('04467c20-2ab0-4d04-8f4a-de83662d2211', 'coo-coo', 16, 0, 0),
+    new Part('520f6033-91df-44bd-a437-0a849a2f8864', 'whole legato', 16, 1, 3),
+    new Part('9af52c3b-fa2f-4b40-a7d9-ddea8c5a84c2', 'fast chaos', 16, 3, 1)
 ]
 
 const saxPartyElements = [

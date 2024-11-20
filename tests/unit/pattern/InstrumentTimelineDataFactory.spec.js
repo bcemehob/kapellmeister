@@ -1,7 +1,7 @@
 import {InstrumentTimelineDataFactory} from "@/pattern/instrumentTimelineDataFactory"
 import {Instrument} from "@/pattern/Instrument";
 import {v4 as uuidv4} from 'uuid'
-import {Party} from "@/pattern/Party";
+import {Part} from "@/pattern/Part";
 import {PartyPerformance} from "@/pattern/PartyPerformance";
 import {PartyElement} from "@/pattern/PartyElement";
 import {PartSnapshot} from "@/pattern/PartSnapshot";
@@ -9,8 +9,8 @@ import {PartSnapshot} from "@/pattern/PartSnapshot";
 jest.mock('@/settings', () => ({PREROLL_MEASURES : 1}))
 
 describe('instrumentTimelineDataFactory', () => {
-    const part1 = new Party(uuidv4(), 'part1', 2, 0, 0)
-    const part2 = new Party(uuidv4(), 'part2', 2, 0, 0)
+    const part1 = new Part(uuidv4(), 'part1', 2, 0, 0)
+    const part2 = new Part(uuidv4(), 'part2', 2, 0, 0)
     const part1Performance1 = new PartyPerformance(uuidv4(),1, part1.id)
     const part1Performance2 = new PartyPerformance(uuidv4(),5, part1.id)
     const part2Performance1 = new PartyPerformance(uuidv4(),3, part2.id)

@@ -1,6 +1,6 @@
 import {PartSnapshot} from "@/pattern/PartSnapshot";
 import {PartyPerformance} from "@/pattern/PartyPerformance";
-import {Party} from "@/pattern/Party";
+import {Part} from "@/pattern/Part";
 import {InstrumentTimelineData} from "@/pattern/InstrumentTimelineData";
 import {PartyElement} from "@/pattern/PartyElement";
 
@@ -50,8 +50,8 @@ const timeline = [
 ]
 
 const partiesById = {
-    "party1": new Party("party1", "first", 2, 0, 0),
-    "party2": new Party("party2", "second", 2, 0, 0)
+    "party1": new Part("party1", "first", 2, 0, 0),
+    "party2": new Part("party2", "second", 2, 0, 0)
 }
 const partyPerformancesById = {
     "performance 1-1": new PartyPerformance("performance 1-1", 1, "party1"),
