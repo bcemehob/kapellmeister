@@ -33,7 +33,7 @@ export class InstrumentTimelineDataFactory {
         return mappedPartyElements
     }
 
-    findNextPerformanceId(i) {
+    findNextPerformanceIdAfterEmptySnapshot(i) {
         const result = this.instrument.partyPerformances
             .filter(pp => this.getStartBeat(pp) > i)
             .sort((a, b) => a.start - b.start)[0]
@@ -89,7 +89,7 @@ export class InstrumentTimelineDataFactory {
     fillEmptyBeatsBySnapshots(timeline) {
         for (let i = 0; i < timeline.length; i++) {
             if (timeline[i] !== undefined) continue
-            timeline[i] = new PartySnapshot(null, this.findNextPerformanceId(i), null, null, null)
+            timeline[i] = new PartySnapshot(null, this.findNextPerformanceIdAfterEmptySnapshot(i), null, null, null)
         }
     }
 }
