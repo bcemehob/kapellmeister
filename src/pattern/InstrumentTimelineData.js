@@ -1,8 +1,8 @@
 export class InstrumentTimelineData {
-    constructor(timeline, partiesById, partyPerformancesById, partyElementsById) {
+    constructor(timeline, partsById, partPerformancesById, partElementsById) {
         this.timeline = timeline
-        this.partiesById = partiesById
-        this.partyPerformancesById = partyPerformancesById
-        this.partyElementsById = partyElementsById
+        this.partsById = partsById
+        this.partPerformancesById = partPerformancesById
+        this.partElementsById = partElementsById
     }
 }
