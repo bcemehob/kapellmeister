@@ -47,9 +47,8 @@ export class InstrumentService {
         const snapshot = this.instrumentTimelineData.timeline[currentBeat]
         if (!snapshot || !snapshot.partyId) return {}
         const currentParty = this.instrumentTimelineData.partiesById[snapshot.partyId]
-        const currentElements = []
-        Object.values(snapshot.partyElementsMap)
-            .forEach(elemId => currentElements.push(this.instrumentTimelineData.partyElementsById[elemId]))
+        const currentElements = Object.values(snapshot.partyElementsMap)
+            .map(elemId => this.instrumentTimelineData.partyElementsById[elemId])
         return new CurrentBeatData(currentParty.name, snapshot.beatValues, currentElements)
     }
 
