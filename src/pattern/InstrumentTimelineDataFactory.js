@@ -1,5 +1,6 @@
-import {InstrumentTimelineData} from "@/pattern/InstrumentTimelineData";
-import {PartySnapshot} from "@/pattern/PartySnapshot";
+import {InstrumentTimelineData} from "@/pattern/InstrumentTimelineData"
+import {PartySnapshot} from "@/pattern/PartySnapshot"
+import {PREROLL_MEASURES} from "@/settings"
 
 export class InstrumentTimelineDataFactory {
     constructor(instrument, measureBeats) {
@@ -35,13 +36,19 @@ export class InstrumentTimelineDataFactory {
 
     findNextPerformanceIdAfterEmptySnapshot(i) {
         const result = this.instrument.partyPerformances
-            .filter(pp => this.getStartBeat(pp) > i)
+            .filter(pp => this.nextPerformanceSearchCriteria(this.getStartBeat(pp) - i))
             .sort((a, b) => a.start - b.start)[0]
         return result ? result.id : null
     }
 
-    findNextPerformanceIdAfterCurrentPerformance(nextPerformanceStart) {
+    nextPerformanceSearchCriteria(beatsTillNextPerformance) {
+        const prerollBeats = this.measureBeats * PREROLL_MEASURES
+        return beatsTillNextPerformance > 0 && beatsTillNextPerformance <= prerollBeats
+    }
+
+    findNextPerformanceIdAfterCurrentPerformance(nextPerformanceStart, i) {
         const result = this.instrument.partyPerformances
+            .filter(_ => this.nextPerformanceSearchCriteria(nextPerformanceStart - i))
             .find(pp => this.getStartBeat(pp) === nextPerformanceStart)
         return result ? result.id : null
     }
@@ -73,7 +80,7 @@ export class InstrumentTimelineDataFactory {
             this.getCurrentPartyElements(party, i - startBeat + 1)
                 .forEach(cpe => partyElementsMap[cpe.type] = cpe.id)
             const beatValues = {start: startBeat, duration: durationInBeats}
-            const nextPerformanceId = this.findNextPerformanceIdAfterCurrentPerformance(startBeat + durationInBeats)
+            const nextPerformanceId = this.findNextPerformanceIdAfterCurrentPerformance(startBeat + durationInBeats, i)
             timeline[i] = new PartySnapshot(partyPerformance.id, nextPerformanceId, party.id, beatValues, partyElementsMap)
         }
     }

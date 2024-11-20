@@ -6,6 +6,8 @@ import {PartyPerformance} from "@/pattern/PartyPerformance";
 import {PartyElement} from "@/pattern/PartyElement";
 import {PartySnapshot} from "@/pattern/PartySnapshot";
 
+jest.mock('@/settings', () => ({PREROLL_MEASURES : 1}))
+
 describe('instrumentTimelineDataFactory', () => {
     const party1 = new Party(uuidv4(), 'party1', 2, 0, 0)
     const party2 = new Party(uuidv4(), 'party2', 2, 0, 0)
@@ -69,20 +71,20 @@ describe('instrumentTimelineDataFactory', () => {
     const expectedTimeline = [
         new PartySnapshot(null, party1Performance1.id, null, null, null),
 
-        new PartySnapshot(party1Performance1.id, party2Performance1.id, party1.id, beatValues(1,8), {}),
-        new PartySnapshot(party1Performance1.id, party2Performance1.id, party1.id, beatValues(1,8), {}),
-        new PartySnapshot(party1Performance1.id, party2Performance1.id, party1.id, beatValues(1,8), {}),
-        new PartySnapshot(party1Performance1.id, party2Performance1.id, party1.id, beatValues(1,8), {}),
+        new PartySnapshot(party1Performance1.id, null, party1.id, beatValues(1,8), {}),
+        new PartySnapshot(party1Performance1.id, null, party1.id, beatValues(1,8), {}),
+        new PartySnapshot(party1Performance1.id, null, party1.id, beatValues(1,8), {}),
+        new PartySnapshot(party1Performance1.id, null, party1.id, beatValues(1,8), {}),
 
         new PartySnapshot(party1Performance1.id, party2Performance1.id, party1.id, beatValues(1,8), {}),
         new PartySnapshot(party1Performance1.id, party2Performance1.id, party1.id, beatValues(1,8), {}),
         new PartySnapshot(party1Performance1.id, party2Performance1.id, party1.id, beatValues(1,8), {}),
         new PartySnapshot(party1Performance1.id, party2Performance1.id, party1.id, beatValues(1,8), {}),
 
-        new PartySnapshot(party2Performance1.id, party1Performance2.id, party2.id, beatValues(9,8), {'CHORDS':party2Element1.id}),
-        new PartySnapshot(party2Performance1.id, party1Performance2.id, party2.id, beatValues(9,8), {'CHORDS':party2Element1.id}),
-        new PartySnapshot(party2Performance1.id, party1Performance2.id, party2.id, beatValues(9,8), {'CHORDS':party2Element1.id}),
-        new PartySnapshot(party2Performance1.id, party1Performance2.id, party2.id, beatValues(9,8), {'CHORDS':party2Element1.id}),
+        new PartySnapshot(party2Performance1.id, null, party2.id, beatValues(9,8), {'CHORDS':party2Element1.id}),
+        new PartySnapshot(party2Performance1.id, null, party2.id, beatValues(9,8), {'CHORDS':party2Element1.id}),
+        new PartySnapshot(party2Performance1.id, null, party2.id, beatValues(9,8), {'CHORDS':party2Element1.id}),
+        new PartySnapshot(party2Performance1.id, null, party2.id, beatValues(9,8), {'CHORDS':party2Element1.id}),
 
         new PartySnapshot(party2Performance1.id, party1Performance2.id, party2.id, beatValues(9,8), {'CHORDS':party2Element2.id, 'LYRICS':party2Element3.id}),
         new PartySnapshot(party2Performance1.id, party1Performance2.id, party2.id, beatValues(9,8), {'CHORDS':party2Element2.id, 'LYRICS':party2Element3.id}),
@@ -99,10 +101,10 @@ describe('instrumentTimelineDataFactory', () => {
         new PartySnapshot(party1Performance2.id, null, party1.id, beatValues(17,8), {}),
         new PartySnapshot(party1Performance2.id, null, party1.id, beatValues(17,8), {}),
 
-        new PartySnapshot(null, party2Performance2.id, null, null, null),
-        new PartySnapshot(null, party2Performance2.id, null, null, null),
-        new PartySnapshot(null, party2Performance2.id, null, null, null),
-        new PartySnapshot(null, party2Performance2.id, null, null, null),
+        new PartySnapshot(null, null, null, null, null),
+        new PartySnapshot(null, null, null, null, null),
+        new PartySnapshot(null, null, null, null, null),
+        new PartySnapshot(null, null, null, null, null),
 
         new PartySnapshot(null, party2Performance2.id, null, null, null),
         new PartySnapshot(null, party2Performance2.id, null, null, null),

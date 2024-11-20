@@ -1,8 +1,8 @@
 import { InstrumentTimelineDataFactory } from "@/pattern/InstrumentTimelineDataFactory";
 import {CurrentBeatData} from "@/pattern/CurrentBeatData";
+import {PREROLL_MEASURES} from "@/settings"
 
 const EMPTY_PARTY = {start: 0, duration: 0}
-const PREROLL_MEASURES = 4
 
 export class InstrumentService {
     partyTimeline = []
