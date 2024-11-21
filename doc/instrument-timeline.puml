@@ -1,54 +1,58 @@
 @startuml
 
-class InstrumentTimeline {
-    <b>i</b>: beat_number
-    <b>value</b>: partSnapshotId
-}
-note top {
-List<PartSnapshot>
-}
+  package processedTimeline <<Layout>>
+  {
+    class InstrumentTimeline {
+        + int <b>i</b>: beat_number
+        + PartSnapshot <b>value</b>:
+    }
+    note top {
+    Array of PartSnapshot
+    }
 
-class PartSnapshot{
-    + UUID <b>id
-    + UUID <b>partPerformanceId
-    + Map<ElementType, UUID> <b>partElementIdsByType
+    class PartSnapshot{
+        + UUID <b>id
+        + UUID <b>partPerformanceId
+        + Map<ElementType, UUID> <b>partElementIdsByType
+    }
+  }
+
+  package serialized <<Layout>>
+  {
+    class Instrument {
+        + UUID <b>id
+        + string <b>name
+        + PartPerformance[] <b>partPerformances
+        + Part[] <b>parts
+    }
+
+    class Part {
+        + UUID <b>id
+        + string <b>name
+        + int <b>duration</b> [measures]
+        + int <b>anacrusis</b> [beats]
+        + int <b>clausula</b> [beats]
+        + PartElement[] <b>partElements
+    }
+
+    class PartPerformance {
+        + UUID <b>id
+        + int <b>start</b> [measures]
+        + UUID <b>partId
+    }
+
+    class PartElement {
+        + UUID <b>id
+        + string <b>type
+        + int <b>start</b> [beats]
+        + int <b>duration</b> [beats]
+        + string <b>text</b>
+        + string <b>picture</b> [base64]
+    }
 }
-
-class Instrument {
-    + UUID <b>id
-    + string <b>name
-    + PartPerformance[] <b>partPerformances
-    + Part[] <b>parts
-}
-
-class Part {
-    + UUID <b>id
-    + string <b>name
-    + int <b>duration</b> [measures]
-    + int <b>anacrusis</b> [beats]
-    + int <b>clausula</b> [beats]
-    + PartElement[] <b>partElements
-}
-
-class PartPerformance {
-    + UUID <b>id
-    + int <b>start</b> [measures]
-    + UUID <b>partId
-}
-
-class PartElement {
-    + UUID <b>id
-    + string <b>type
-    + int <b>start</b> [beats]
-    + int <b>duration</b> [beats]
-    + string <b>text</b>
-    + string <b>picture</b> [base64]
-}
-
-
+Part "1...n" -- "1" Instrument
 PartElement "1...n" -- "1" Part
 PartPerformance "1...n" -- "1" Instrument
-Part "1...n" -- "1" Instrument
 'PartPerformance::partId }o---||  Part::id
 Part::id ||--o{ PartPerformance::partId
 PartSnapshot::id ||--o{ InstrumentTimeline::value
