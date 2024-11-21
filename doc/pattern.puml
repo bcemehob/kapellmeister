@@ -28,16 +28,16 @@ note left {
 class Instrument {
     + UUID <b>id
     + string <b>name
-    + PartyPerformance[] <b>partyPerformances
-    + Party[] <b>parties
+    + PartPerformance[] <b>partPerformances
+    + Part[] <b>parts
 }
 
-class Party {
+class Part {
     + UUID <b>id
     + string <b>name
     + int <b>duration</b> [measures]
     + int <b>anacrusis</b> [beats]
-    + PartyElement[] <b>partyElements
+    + PartElement[] <b>partElements
 }
 
 note left {
@@ -45,17 +45,17 @@ note left {
     duration <= Pattern::duration
 }
 
-class PartyPerformance {
+class PartPerformance {
     + int <b>start</b> [measures]
-    + UUID <b>partyId
+    + UUID <b>partId
 }
 
 note top {
     <b>Rules:
-    start <= (Pattern::duration - (Party::duration + Party::anacrusis))
+    start <= (Pattern::duration - (Part::duration + Part::anacrusis))
 }
 
-class PartyElement {
+class PartElement {
     + int <b>start</b> [beats]
     + int <b>duration</b> [beats]
     + string <b>text</b>
@@ -64,14 +64,14 @@ class PartyElement {
 
 note top {
     <b>Rules:
-    duration <= (Party::duration + Party::anacrusis) - start [measures]
+    duration <= (Part::duration + Part::anacrusis) - start [measures]
 }
 
 Measure "1" -- "1" Pattern
 Instrument "1...n" -- "1" Pattern
-Party "1...n" -- "1" Instrument
-PartyElement "1...n" -- "1" Party
-PartyPerformance "1...n" -- "1" Instrument
-PartyPerformance::partyId ||--o{  Party::id
+Part "1...n" -- "1" Instrument
+PartElement "1...n" -- "1" Part
+PartPerformance "1...n" -- "1" Instrument
+PartPerformance::partId ||--o{  Part::id
 
 @enduml
