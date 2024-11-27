@@ -54,7 +54,7 @@ export class InstrumentTimelineDataFactory {
     }
 
     getStartBeat(partyPerformance) {
-        return (partyPerformance.start - 1) * this.measureBeats + 1 - this.partsById[partyPerformance.partyId].anacrusis
+        return (partyPerformance.start - 1) * this.measureBeats + 1 - this.partsById[partyPerformance.partId].anacrusis
     }
 
     getDurationInBeats(part) {
@@ -69,7 +69,7 @@ export class InstrumentTimelineDataFactory {
     }
 
     fillPerformanceBeatsBySnapshots(partPerformance, timeline) {
-        const part = this.partsById[partPerformance.partyId]
+        const part = this.partsById[partPerformance.partId]
         const startBeat = this.getStartBeat(partPerformance)
         const durationInBeats = this.getDurationInBeats(part)
         for (let i = startBeat; i < startBeat + durationInBeats; i++) {

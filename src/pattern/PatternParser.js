@@ -31,9 +31,7 @@ export class PatternParser {
         const partyPerformances = []
         if (!rawPartyPerformances || !rawPartyPerformances.length) return partyPerformances
         rawPartyPerformances
-            .forEach(rawPartyPerformance => partyPerformances.push(
-                new PartPerformance(rawPartyPerformance.id, rawPartyPerformance.start, rawPartyPerformance.partId))
-            )
+            .forEach(rawPartyPerformance => partyPerformances.push(PartPerformance.instance(rawPartyPerformance)))
         return partyPerformances
     }
 
