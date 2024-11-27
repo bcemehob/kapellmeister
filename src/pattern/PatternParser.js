@@ -47,7 +47,7 @@ export class PatternParser {
     parsePartyElements(rawPartyElements) {
         const partyElements = []
         if (!rawPartyElements || !rawPartyElements.length) return partyElements
-        rawPartyElements.forEach(raw => partyElements.push(Object.assign(new PartElement(), raw)))
+        rawPartyElements.forEach(raw => partyElements.push(PartElement.instance(raw)))
         return partyElements
     }
 }
