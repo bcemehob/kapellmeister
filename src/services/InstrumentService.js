@@ -14,7 +14,7 @@ export class InstrumentService {
         if (instrument.partPerformances) {
             this.instrumentTimelineData = new InstrumentTimelineDataFactory(this.instrument, this.measure.beats).get()
         } else {
-            this.instrument.parts.forEach(part => this.createPartTimeline(part, this.partTimeline))
+            this.instrument.parties.forEach(part => this.createPartTimeline(part, this.partTimeline))
         }
     }
 

@@ -8,7 +8,7 @@
           <div v-if="countDown" :class="'count-down ' + countDown.type"> {{ countDown.count}} </div>
         </div>
       </div>
-      <div v-if="upcomingParty.name" class="upcoming-party">
+      <div v-if="upcomingPartLegacy.name" class="upcoming-party">
          Next: <span class="fw-bold">{{ upcomingPartLegacy.name }}</span>
       </div>
     </div>

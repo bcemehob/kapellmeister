@@ -4,11 +4,11 @@ export class Instrument {
     partPerformances
     parts
 
-    constructor(id, name, partyPerformances, parties, partyElements) {
+    constructor(id, name, partyPerformances, parts, partyElements) {
         this.id = id
         this.name = name
         this.partPerformances = partyPerformances
-        this.parts = parties
+        this.parts = parts
         this.partElements = partyElements
     }
 }
