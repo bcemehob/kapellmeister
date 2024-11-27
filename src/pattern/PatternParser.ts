@@ -10,7 +10,7 @@ export class PatternParser {
         const rawPattern = JSON.parse(patternJson)
         const measure: Measure = new Measure(rawPattern.measure.base, rawPattern.measure.beats)
         const instruments: Instrument[] = this.parseInstruments(rawPattern.instruments)
-        return new Pattern(rawPattern.name, rawPattern.tempo, rawPattern.duration, measure, instruments)
+        return Pattern.instance(rawPattern, measure, instruments)
     }
 
     parseInstruments(rawInstruments: any[]): Instrument[] {
