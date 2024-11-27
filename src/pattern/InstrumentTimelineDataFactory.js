@@ -48,7 +48,7 @@ export class InstrumentTimelineDataFactory {
 
     findNextPerformanceStartBeatAfterCurrentPerformance(nextPerformanceStart, i) {
         const result = this.instrument.partPerformances
-            .filter(_ => this.nextPerformanceSearchCriteria(nextPerformanceStart - i))
+            .filter(() => this.nextPerformanceSearchCriteria(nextPerformanceStart - i))
             .find(pp => this.getStartBeat(pp) === nextPerformanceStart)
         return result ? nextPerformanceStart : null
     }
