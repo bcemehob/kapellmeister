@@ -49,29 +49,29 @@ const timeline = [
     new PartSnapshot("performance 2-2", null, "party2", beatValues(19,6), {}),
 ]
 
-const partiesById = {
+const partsById = {
     "party1": new Part("party1", "first", 2, 0, 0),
     "party2": new Part("party2", "second", 2, 0, 0)
 }
-const partyPerformancesById = {
+const partPerformancesById = {
     "performance 1-1": new PartPerformance("performance 1-1", 1, "party1"),
     "performance 1-2": new PartPerformance("performance 1-2", 5, "party1"),
     "performance 2-1": new PartPerformance("performance 2-1", 3, "party2"),
     "performance 2-2": new PartPerformance("performance 2-2", 7, "party2")
 }
 
-const partyElementsById = {
+const partElementsById = {
     "element-chords-1-1": new PartElement("element-chords-1-1", "party1", "CHORDS", 1, 2, "Am", null),
     "element-chords-1-2": new PartElement("element-chords-1-2", "party1", "CHORDS", 3, 2, "E7", null),
     "element-lyrics-1-3": new PartElement("element-lyrics-1-3", "party1", "LYRICS", 2, 4, "BO-OT-TA-AK", null),
 }
 
-const expectedTimeline = new InstrumentTimelineData(
-    timeline,
-    partiesById,
-    partyPerformancesById,
-    partyElementsById
-
+const expectedTimeline = InstrumentTimelineData.instance({
+        timeline,
+        partsById,
+        partPerformancesById,
+        partElementsById
+    }
 )
 
 export default expectedTimeline

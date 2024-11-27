@@ -13,7 +13,7 @@ export class InstrumentTimelineDataFactory {
     }
 
     get() {
-        return new InstrumentTimelineData(this.timeline, this.partsById, this.partPerformancesById, this.partElementsById)
+        return InstrumentTimelineData.instance(this)
     }
 
     mapParts() {
