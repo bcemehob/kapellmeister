@@ -1,6 +1,6 @@
 @startuml
 
-  package processedTimeline <<Layout>>
+  package processed_timeline
   {
     class InstrumentTimeline {
         + int <b>i</b>: beat_number
@@ -11,13 +11,14 @@
     }
 
     class PartSnapshot{
-        + UUID <b>id
         + UUID <b>partPerformanceId
-        + Map<ElementType, UUID> <b>partElementIdsByType
+        + int <b>nextStartBeat
+        + UUID <b>partId
+        + Map<ElementType, UUID> <b>partElementsMap
     }
   }
 
-  package serialized <<Layout>>
+  package serialized_instrument_with_parts
   {
     class Instrument {
         + UUID <b>id
