@@ -1,7 +1,7 @@
 export class PartElement {
-    constructor(id, partyId, type, start, duration, text, picture) {
+    constructor(id, partId, type, start, duration, text, picture) {
         this.id = id
-        this.partyId = partyId
+        this.partId = partId
         this.type = type
         this.start = start
         this.duration = duration

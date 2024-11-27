@@ -29,22 +29,22 @@
       "partPerformances": [
         {
           "id": "85dac6d5-39a7-4b6b-a833-e74814f93732",
-          "partyId": "68cb2f88-3148-4d35-8d17-6e8a7e3ed777",
+          "partId": "68cb2f88-3148-4d35-8d17-6e8a7e3ed777",
           "start": 1
         },
         {
           "id": "3ef47e4c-b728-4b02-b8b6-bdd369fa9a48",
-          "partyId": "68cb2f88-3148-4d35-8d17-6e8a7e3ed777",
+          "partId": "68cb2f88-3148-4d35-8d17-6e8a7e3ed777",
           "start": 9
         },
         {
           "id": "607bd531-6787-4db9-86bc-2befce9bf9bf",
-          "partyId": "f4961912-92ba-4c8a-8d41-9b8ea4df542a",
+          "partId": "f4961912-92ba-4c8a-8d41-9b8ea4df542a",
           "start": 5
         },
         {
           "id": "c8a95c5d-9419-465a-96b8-3b061e89e5f3",
-          "partyId": "f4961912-92ba-4c8a-8d41-9b8ea4df542a",
+          "partId": "f4961912-92ba-4c8a-8d41-9b8ea4df542a",
           "start": 13
         }
       ]
@@ -78,29 +78,29 @@
       "partPerformances": [
         {
           "id": "27017e6b-f0e6-417f-a5fd-2444b2ecab80",
-          "partyId": "04467c20-2ab0-4d04-8f4a-de83662d2211",
+          "partId": "04467c20-2ab0-4d04-8f4a-de83662d2211",
           "start": 1
         },
         {
           "id": "22e37f73-67d0-42eb-a23d-210d89c2ac95",
-          "partyId": "04467c20-2ab0-4d04-8f4a-de83662d2211",
+          "partId": "04467c20-2ab0-4d04-8f4a-de83662d2211",
           "start": 9
         },
         {
           "id": "941a9500-7e81-4024-af05-cef09446b9d0",
-          "partyId": "520f6033-91df-44bd-a437-0a849a2f8864",
+          "partId": "520f6033-91df-44bd-a437-0a849a2f8864",
           "start": 5
         },
         {
           "id": "e407e4d4-d2d2-4047-b411-595a8a17e618",
-          "partyId": "9af52c3b-fa2f-4b40-a7d9-ddea8c5a84c2",
+          "partId": "9af52c3b-fa2f-4b40-a7d9-ddea8c5a84c2",
           "start": 13
         }
       ],
       "partElements": [
         {
           "id": "3d0dafe7-0863-4be1-b9e0-f850cfd537a1",
-          "partyId": "04467c20-2ab0-4d04-8f4a-de83662d2211",
+          "partId": "04467c20-2ab0-4d04-8f4a-de83662d2211",
           "type": "CHORDS",
           "start": 1,
           "duration": 4,
@@ -109,7 +109,7 @@
         },
         {
           "id": "043155d4-21b5-4b54-8be5-6fb2c5edcb18",
-          "partyId": "04467c20-2ab0-4d04-8f4a-de83662d2211",
+          "partId": "04467c20-2ab0-4d04-8f4a-de83662d2211",
           "type": "CHORDS",
           "start": 5,
           "duration": 4,
@@ -118,7 +118,7 @@
         },
         {
           "id": "c8a5daea-83ef-4ac6-adcf-221547f8bbe8",
-          "partyId": "04467c20-2ab0-4d04-8f4a-de83662d2211",
+          "partId": "04467c20-2ab0-4d04-8f4a-de83662d2211",
           "type": "CHORDS",
           "start": 9,
           "duration": 4,
@@ -127,7 +127,7 @@
         },
         {
           "id": "4b6a5cd1-ea72-4d79-82ae-f1455634f197",
-          "partyId": "04467c20-2ab0-4d04-8f4a-de83662d2211",
+          "partId": "04467c20-2ab0-4d04-8f4a-de83662d2211",
           "type": "CHORDS",
           "start": 13,
           "duration": 4,

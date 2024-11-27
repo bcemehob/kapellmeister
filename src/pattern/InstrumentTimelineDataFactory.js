@@ -87,7 +87,7 @@ export class InstrumentTimelineDataFactory {
 
     getCurrentPartElements(part, currentPartBeat) {
         return this.instrument.partElements
-            .filter(partElement => partElement.partyId === part.id
+            .filter(partElement => partElement.partId === part.id
                 && partElement.start <= currentPartBeat
                 && partElement.end() >= currentPartBeat
             )
