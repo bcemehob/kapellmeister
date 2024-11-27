@@ -48,7 +48,7 @@ export class InstrumentService {
             this.currentPart(snapshot.nextStartBeat, true)
         if (!snapshot.partyPerformanceId) return new PartViewAtBeat(null, null, null, nextView)
         const currentPart = this.instrumentTimelineData.partsById[snapshot.partId]
-        const currentElements = Object.values(snapshot.partyElementsMap)
+        const currentElements = Object.values(snapshot.partElementsMap)
             .map(elemId => this.instrumentTimelineData.partElementsById[elemId])
         return new PartViewAtBeat(currentPart.name, snapshot.beatValues, currentElements, nextView)
     }
