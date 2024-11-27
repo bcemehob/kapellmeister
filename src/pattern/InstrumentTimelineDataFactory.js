@@ -46,7 +46,7 @@ export class InstrumentTimelineDataFactory {
         return beatsTillNextPerformance > 0 && beatsTillNextPerformance <= prerollBeats
     }
 
-    findNextPerformanceIdAfterCurrentPerformance(nextPerformanceStart, i) {
+    findNextPerformanceStartBeatAfterCurrentPerformance(nextPerformanceStart, i) {
         const result = this.instrument.partPerformances
             .filter(_ => this.nextPerformanceSearchCriteria(nextPerformanceStart - i))
             .find(pp => this.getStartBeat(pp) === nextPerformanceStart)
@@ -80,8 +80,8 @@ export class InstrumentTimelineDataFactory {
             this.getCurrentPartElements(part, i - startBeat + 1)
                 .forEach(cpe => partElementsMap[cpe.type] = cpe.id)
             const beatValues = {start: startBeat, duration: durationInBeats}
-            const nextPerformanceId = this.findNextPerformanceIdAfterCurrentPerformance(startBeat + durationInBeats, i)
-            timeline[i] = new PartSnapshot(partPerformance.id, nextPerformanceId, part.id, beatValues, partElementsMap)
+            const nextPerformanceStartBeat = this.findNextPerformanceStartBeatAfterCurrentPerformance(startBeat + durationInBeats, i)
+            timeline[i] = new PartSnapshot(partPerformance.id, nextPerformanceStartBeat, part.id, beatValues, partElementsMap)
         }
     }
 
