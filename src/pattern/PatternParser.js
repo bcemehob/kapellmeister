@@ -22,7 +22,7 @@ export class PatternParser {
 
     parseInstrument(rawInstrument) {
         const partyPerformances = this.parsePartyPerformances(rawInstrument.partPerformances)
-        const parties = this.parseParties(rawInstrument.parts)
+        const parties = this.parseParts(rawInstrument.parts)
         const partyElements = this.parsePartyElements(rawInstrument.partElements)
         return new Instrument(rawInstrument.id, rawInstrument.name, partyPerformances, parties, partyElements)
     }
@@ -37,7 +37,7 @@ export class PatternParser {
         return partyPerformances
     }
 
-    parseParties(rawParties) {
+    parseParts(rawParties) {
         const parties = []
         if (!rawParties || !rawParties.length) return parties
         rawParties.forEach(party => parties.push(Part.instance(party)))
