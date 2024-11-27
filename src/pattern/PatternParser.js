@@ -8,7 +8,7 @@ import {PartElement} from "@/pattern/PartElement"
 export class PatternParser {
     parse(patternJson) {
         const rawPattern = JSON.parse(patternJson)
-        const measure = Object.assign(new Measure(), rawPattern.measure)
+        const measure = new Measure(rawPattern.measure.base, rawPattern.measure.beats)
         const instruments = this.parseInstruments(rawPattern.instruments)
         return new Pattern(rawPattern.name, rawPattern.tempo, rawPattern.duration, measure, instruments)
     }
