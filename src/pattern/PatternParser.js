@@ -40,7 +40,7 @@ export class PatternParser {
     parseParties(rawParties) {
         const parties = []
         if (!rawParties || !rawParties.length) return parties
-        rawParties.forEach(party => parties.push(new Part(party.id, party.name, party.duration, party.anacrusis, party.clausula)))
+        rawParties.forEach(party => parties.push(Part.instance(party)))
         return parties
     }
 
