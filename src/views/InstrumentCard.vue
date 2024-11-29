@@ -16,14 +16,14 @@
 </template>
 <script setup>
 import {computed, onMounted, ref} from "vue";
-import {InstrumentService} from "@/services/InstrumentService";
+import {InstrumentServiceLegacy} from "@/services/InstrumentServiceLegacy";
 
 const props = defineProps(['currentBeat', 'instrument', 'measure'])
 const instrumentService = ref(null)
 const currentPartLegacy = computed(() => instrumentService.value.currentPartLegacy(props.currentBeat))
 const upcomingPartLegacy = computed(() => instrumentService.value.upcomingPartLegacy(props.currentBeat))
 const countDown = computed(() => instrumentService.value.countDown(props.currentBeat))
-onMounted( () => instrumentService.value = new InstrumentService(props.instrument, props.measure))
+onMounted( () => instrumentService.value = new InstrumentServiceLegacy(props.instrument, props.measure))
 const conductorView = window.conductor
 
 </script>

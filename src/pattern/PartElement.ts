@@ -5,9 +5,9 @@ export class PartElement {
     public start: number
     public duration: number
     public text: string
-    public picture: string
+    public picture: string | null
 
-    constructor(id: string, partId: string, type: string, start: number, duration: number, text: string, picture: string) {
+    constructor(id: string, partId: string, type: string, start: number, duration: number, text: string, picture: string | null) {
         this.id = id
         this.partId = partId
         this.type = type

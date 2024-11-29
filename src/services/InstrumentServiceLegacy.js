@@ -1,21 +1,14 @@
-import {InstrumentTimelineDataFactory} from "@/pattern/InstrumentTimelineDataFactory";
-import {PartViewAtBeat} from "@/pattern/PartViewAtBeat";
 import {PREROLL_MEASURES} from "@/settings"
 
 const EMPTY_PART = {start: 0, duration: 0}
 
-export class InstrumentService {
+export class InstrumentServiceLegacy {
     partTimeline = []
-    instrumentTimelineData = null
 
     constructor(instrument, measure) {
         this.instrument = instrument
         this.measure = measure
-        if (instrument.partPerformances) {
-            this.instrumentTimelineData = new InstrumentTimelineDataFactory(this.instrument, this.measure.beats).get()
-        } else {
-            this.instrument.parties.forEach(part => this.createPartTimeline(part, this.partTimeline))
-        }
+        this.instrument.parties.forEach(part => this.createPartTimeline(part, this.partTimeline))
     }
 
     createPartTimeline(part, partTimeline) {
@@ -37,20 +30,6 @@ export class InstrumentService {
     currentPartLegacy(currentBeat) {
         const currentParty = this.partTimeline[currentBeat]
         return currentParty ? currentParty : EMPTY_PART
-    }
-
-    currentPart(currentBeat, isNextSnapshot) {
-        const snapshot = this.instrumentTimelineData.timeline[currentBeat]
-        if (!snapshot) {
-            throw Error("Invalid timeline")
-        }
-        const nextView = isNextSnapshot || !snapshot.nextStartBeat ? null :
-            this.currentPart(snapshot.nextStartBeat, true)
-        if (!snapshot.partyPerformanceId) return new PartViewAtBeat(null, null, null, nextView)
-        const currentPart = this.instrumentTimelineData.partsById[snapshot.partId]
-        const currentElements = Object.values(snapshot.partElementsMap)
-            .map(elemId => this.instrumentTimelineData.partElementsById[elemId])
-        return new PartViewAtBeat(currentPart.name, snapshot.beatValues, currentElements, nextView)
     }
 
     currentCountDown(currentBeat) {

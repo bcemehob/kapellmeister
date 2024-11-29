@@ -1,9 +1,9 @@
 export class PartViewAtBeat {
-    partyName: string
+    partyName: string | null
     beatValues: any
     currentElements: any
-    nextPartView: PartViewAtBeat
-    constructor(partyName: string, beatValues: any, currentElements: any, nextPartView: PartViewAtBeat) {
+    nextPartView: PartViewAtBeat | null
+    constructor(partyName: string | null, beatValues: any, currentElements: any, nextPartView: PartViewAtBeat | null) {
         this.partyName = partyName
         this.beatValues = beatValues
         this.currentElements = currentElements
