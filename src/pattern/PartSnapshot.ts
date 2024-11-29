@@ -1,10 +1,16 @@
 export class PartSnapshot {
-    partyPerformanceId: string
-    nextStartBeat: number
-    partId: string
-    beatValues: any
-    partElementsMap: any
-    constructor(partyPerformanceId: string, nextStartBeat: number, partId: string, beatValues: any, partElementsMap: any) {
+    partyPerformanceId: string | null
+    nextStartBeat: number | null
+    partId: string | null
+    beatValues: any | null
+    partElementsMap: any | null
+    constructor(
+        partyPerformanceId: string | null,
+        nextStartBeat: number | null,
+        partId: string | null,
+        beatValues: any | null,
+        partElementsMap: any | null
+    ) {
         this.partyPerformanceId = partyPerformanceId
         this.nextStartBeat = nextStartBeat
         this.partId = partId

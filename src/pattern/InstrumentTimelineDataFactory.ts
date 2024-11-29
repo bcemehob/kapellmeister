@@ -1,9 +1,20 @@
 import {InstrumentTimelineData} from "@/pattern/InstrumentTimelineData"
 import {PartSnapshot} from "@/pattern/PartSnapshot"
 import {PREROLL_MEASURES} from "@/settings"
+import {Instrument} from "@/pattern/Instrument";
+import {Part} from "@/pattern/Part";
+import {PartElement} from "@/pattern/PartElement";
+import {PartPerformance} from "@/pattern/PartPerformance";
+import {BeatValues} from "@/pattern/BeatValues";
 
 export class InstrumentTimelineDataFactory {
-    constructor(instrument, measureBeats) {
+    instrument: Instrument
+    measureBeats: any
+    partsById: Map<string, Part>
+    partPerformancesById: Map<string, PartPerformance>
+    partElementsById: Map<string, PartElement>
+    timeline: PartSnapshot[]
+    constructor(instrument: Instrument, measureBeats: any) {
         this.instrument = instrument
         this.measureBeats = measureBeats
         this.partsById = this.mapParts()
@@ -16,76 +27,78 @@ export class InstrumentTimelineDataFactory {
         return InstrumentTimelineData.instance(this)
     }
 
-    mapParts() {
-        const mappedParts = {}
-        this.instrument.parts.forEach(p => mappedParts[p.id] = p)
+    mapParts(): Map<string, Part> {
+        const mappedParts = new Map<string, Part>()
+        this.instrument.parts.forEach(p => mappedParts.set(p.id, p))
         return mappedParts
     }
 
-    mapPartPerformances() {
-        const mappedPartyPerformances = {}
-        this.instrument.partPerformances.forEach(pp => mappedPartyPerformances[pp.id] = pp)
+    mapPartPerformances(): Map<string, PartPerformance> {
+        const mappedPartyPerformances = new Map<string, PartPerformance>()
+        this.instrument.partPerformances.forEach(pp => mappedPartyPerformances.set(pp.id, pp))
         return mappedPartyPerformances
     }
 
-    mapPartElements() {
-        const mappedPartyElements = {}
-        this.instrument.partElements.forEach(pp => mappedPartyElements[pp.id] = pp)
+    mapPartElements(): Map<string, PartElement> {
+        const mappedPartyElements = new Map<string, PartElement>()
+        this.instrument.partElements.forEach(pe => mappedPartyElements.set(pe.id, pe))
         return mappedPartyElements
     }
 
-    findNextPerformanceIdAfterEmptySnapshot(i) {
+    findNextPerformanceStartBeatAfterEmptySnapshot(i: number): number | null {
         const result = this.instrument.partPerformances
             .filter(pp => this.nextPerformanceSearchCriteria(this.getStartBeat(pp) - i))
             .sort((a, b) => a.start - b.start)[0]
         return result ? this.getStartBeat(result) : null
     }
 
-    nextPerformanceSearchCriteria(beatsTillNextPerformance) {
+    nextPerformanceSearchCriteria(beatsTillNextPerformance: number): boolean {
         const prerollBeats = this.measureBeats * PREROLL_MEASURES
         return beatsTillNextPerformance > 0 && beatsTillNextPerformance <= prerollBeats
     }
 
-    findNextPerformanceStartBeatAfterCurrentPerformance(nextPerformanceStart, i) {
+    findNextPerformanceStartBeatAfterCurrentPerformance(nextPerformanceStart: number, i: number): number | null {
         const result = this.instrument.partPerformances
             .filter(() => this.nextPerformanceSearchCriteria(nextPerformanceStart - i))
             .find(pp => this.getStartBeat(pp) === nextPerformanceStart)
         return result ? nextPerformanceStart : null
     }
 
-    getStartBeat(partyPerformance) {
-        return (partyPerformance.start - 1) * this.measureBeats + 1 - this.partsById[partyPerformance.partId].anacrusis
+    getStartBeat(partyPerformance: PartPerformance): number {
+        const anacrusis = this.partsById.get(partyPerformance.partId)?.anacrusis || 0
+        return (partyPerformance.start - 1) * this.measureBeats + 1 - anacrusis
     }
 
-    getDurationInBeats(part) {
+    getDurationInBeats(part: Part): number{
         return part.duration * this.measureBeats + part.anacrusis + part.clausula
     }
 
-    instrumentTimeline() {
-        const timeline = []
+    instrumentTimeline(): PartSnapshot[] {
+        const timeline: PartSnapshot[] = []
         this.instrument.partPerformances.forEach(pp => this.fillPerformanceBeatsBySnapshots(pp, timeline))
         this.fillEmptyBeatsBySnapshots(timeline)
         return timeline
     }
 
-    fillPerformanceBeatsBySnapshots(partPerformance, timeline) {
-        const part = this.partsById[partPerformance.partId]
+    fillPerformanceBeatsBySnapshots(partPerformance: PartPerformance, timeline: PartSnapshot[]) {
+        const part = this.partsById.get(partPerformance.partId)
+        if (!part) throw new Error(`No part found for part performance ${partPerformance}`)
         const startBeat = this.getStartBeat(partPerformance)
         const durationInBeats = this.getDurationInBeats(part)
         for (let i = startBeat; i < startBeat + durationInBeats; i++) {
             if (timeline[i]) {
-                throw Error(`Party Snapshot already set for position ${i}:`, timeline[i])
+                throw Error(`Party Snapshot already set for position ${i}: ${timeline[i]}`)
             }
-            const partElementsMap = {}
+            const partElementsMap = new Map<string, string>()
             this.getCurrentPartElements(part, i - startBeat + 1)
-                .forEach(cpe => partElementsMap[cpe.type] = cpe.id)
-            const beatValues = {start: startBeat, duration: durationInBeats}
+                .forEach(cpe => partElementsMap.set(cpe.type, cpe.id))
+            const beatValues = new BeatValues(startBeat, durationInBeats)
             const nextPerformanceStartBeat = this.findNextPerformanceStartBeatAfterCurrentPerformance(startBeat + durationInBeats, i)
             timeline[i] = new PartSnapshot(partPerformance.id, nextPerformanceStartBeat, part.id, beatValues, partElementsMap)
         }
     }
 
-    getCurrentPartElements(part, currentPartBeat) {
+    getCurrentPartElements(part: Part, currentPartBeat: number): PartElement[] {
         return this.instrument.partElements
             .filter(partElement => partElement.partId === part.id
                 && partElement.start <= currentPartBeat
@@ -93,10 +106,10 @@ export class InstrumentTimelineDataFactory {
             )
     }
 
-    fillEmptyBeatsBySnapshots(timeline) {
+    fillEmptyBeatsBySnapshots(timeline: PartSnapshot[]) {
         for (let i = 0; i < timeline.length; i++) {
             if (timeline[i] !== undefined) continue
-            timeline[i] = new PartSnapshot(null, this.findNextPerformanceIdAfterEmptySnapshot(i), null, null, null)
+            timeline[i] = new PartSnapshot(null, this.findNextPerformanceStartBeatAfterEmptySnapshot(i), null, null, null)
         }
     }
 }
