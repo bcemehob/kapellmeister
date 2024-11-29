@@ -23,11 +23,11 @@ export class InstrumentService {
         }
         const nextView = isNextSnapshot || !snapshot.nextStartBeat ? null :
             this.currentPart(snapshot.nextStartBeat, true)
-        if (!snapshot.partyPerformanceId) return new PartViewAtBeat(null, null, null, nextView)
-        const currentPart = this.instrumentTimelineData.partsById.get(snapshot.partId)
+        if (!snapshot.partyPerformanceId) return new PartViewAtBeat(undefined, null, null, nextView)
+        const currentPartName = snapshot.partId ? this.instrumentTimelineData.partsById.get(snapshot.partId)?.name : undefined
         const currentElements = Array.from(snapshot.partElementsMap.entries())
             .map(keyAndValue => this.instrumentTimelineData.partElementsById.get((<Array<string>>keyAndValue)[1]))
-        return new PartViewAtBeat(currentPart.name, snapshot.beatValues, currentElements, nextView)
+        return new PartViewAtBeat(currentPartName, snapshot.beatValues, currentElements, nextView)
     }
 
 }
