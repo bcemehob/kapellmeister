@@ -10,12 +10,13 @@ import {snapshotElements} from "../../tests/utils/TestUtils";
 
 export class InstrumentTimelineDataFactory {
     instrument: Instrument
-    measureBeats: any
+    measureBeats: number
     partsById: Map<string, Part>
     partPerformancesById: Map<string, PartPerformance>
     partElementsById: Map<string, PartElement>
     timeline: PartSnapshot[]
-    constructor(instrument: Instrument, measureBeats: any) {
+
+    constructor(instrument: Instrument, measureBeats: number) {
         this.instrument = instrument
         this.measureBeats = measureBeats
         this.partsById = this.mapParts()
@@ -70,7 +71,7 @@ export class InstrumentTimelineDataFactory {
         return (partyPerformance.start - 1) * this.measureBeats + 1 - anacrusis
     }
 
-    getDurationInBeats(part: Part): number{
+    getDurationInBeats(part: Part): number {
         return part.duration * this.measureBeats + part.anacrusis + part.clausula
     }
 

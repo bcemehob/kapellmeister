@@ -1,7 +1,7 @@
 export class Measure {
-    base: Number
-    beats: Number
-    constructor(base: Number, beats: Number) {
+    base: number
+    beats: number
+    constructor(base: number, beats: number) {
         this.base = base
         this.beats = beats
     }
