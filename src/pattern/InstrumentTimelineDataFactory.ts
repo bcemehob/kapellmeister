@@ -6,6 +6,7 @@ import {Part} from "@/pattern/Part";
 import {PartElement} from "@/pattern/PartElement";
 import {PartPerformance} from "@/pattern/PartPerformance";
 import {BeatValues} from "@/pattern/BeatValues";
+import {snapshotElements} from "../../tests/utils/TestUtils";
 
 export class InstrumentTimelineDataFactory {
     instrument: Instrument
@@ -109,7 +110,7 @@ export class InstrumentTimelineDataFactory {
     fillEmptyBeatsBySnapshots(timeline: PartSnapshot[]) {
         for (let i = 0; i < timeline.length; i++) {
             if (timeline[i] !== undefined) continue
-            timeline[i] = new PartSnapshot(null, this.findNextPerformanceStartBeatAfterEmptySnapshot(i), null, null, null)
+            timeline[i] = new PartSnapshot(null, this.findNextPerformanceStartBeatAfterEmptySnapshot(i), null, null, snapshotElements())
         }
     }
 }

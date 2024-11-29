@@ -68,7 +68,7 @@ describe('instrumentTimelineDataFactory', () => {
     })
 
     const expectedTimeline = [
-        new PartSnapshot(null, 1, null, null, null),
+        new PartSnapshot(null, 1, null, null, snapshotElements()),
 
         new PartSnapshot(part1Performance1.id, null, part1.id, beatValues(1, 8), snapshotElements()),
         new PartSnapshot(part1Performance1.id, null, part1.id, beatValues(1, 8), snapshotElements()),
@@ -100,15 +100,15 @@ describe('instrumentTimelineDataFactory', () => {
         new PartSnapshot(part1Performance2.id, null, part1.id, beatValues(17, 8), snapshotElements()),
         new PartSnapshot(part1Performance2.id, null, part1.id, beatValues(17, 8), snapshotElements()),
 
-        new PartSnapshot(null, null, null, null, null),
-        new PartSnapshot(null, null, null, null, null),
-        new PartSnapshot(null, null, null, null, null),
-        new PartSnapshot(null, null, null, null, null),
+        new PartSnapshot(null, null, null, null, snapshotElements()),
+        new PartSnapshot(null, null, null, null, snapshotElements()),
+        new PartSnapshot(null, null, null, null, snapshotElements()),
+        new PartSnapshot(null, null, null, null, snapshotElements()),
 
-        new PartSnapshot(null, 33, null, null, null),
-        new PartSnapshot(null, 33, null, null, null),
-        new PartSnapshot(null, 33, null, null, null),
-        new PartSnapshot(null, 33, null, null, null),
+        new PartSnapshot(null, 33, null, null, snapshotElements()),
+        new PartSnapshot(null, 33, null, null, snapshotElements()),
+        new PartSnapshot(null, 33, null, null, snapshotElements()),
+        new PartSnapshot(null, 33, null, null, snapshotElements()),
 
         new PartSnapshot(part2Performance2.id, null, part2.id, beatValues(33, 8), snapshotElements('CHORDS', part2Element1.id)),
         new PartSnapshot(part2Performance2.id, null, part2.id, beatValues(33, 8), snapshotElements('CHORDS', part2Element1.id)),

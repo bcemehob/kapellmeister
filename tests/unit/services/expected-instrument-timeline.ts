@@ -7,7 +7,7 @@ import {beatValues, snapshotElements} from "../../utils/TestUtils";
 
 
 const timeline = [
-    new PartSnapshot(null, 1, null, null, null),
+    new PartSnapshot(null, 1, null, null, snapshotElements()),
 
     new PartSnapshot("performance 1-1", 7, "party1", beatValues(1,6), snapshotElements( "CHORDS", "element-chords-1-1")),
     new PartSnapshot("performance 1-1", 7, "party1", beatValues(1,6), snapshotElements( "CHORDS", "element-chords-1-1", "LYRICS", "element-lyrics-1-3")),
