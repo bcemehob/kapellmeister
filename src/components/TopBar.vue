@@ -19,7 +19,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import PatternControlPanel from "@/views/controls/PatternControlPanel.vue"
 import TransportControlPanel from "@/views/controls/TransportControlPanel.vue"
 import PatternGeneralOptionsPanel from "@/views/controls/PatternGeneralOptionsPanel.vue"
@@ -30,7 +30,7 @@ import PreRollControlPanel from "@/views/controls/PreRollControlPanel.vue"
 import PrerollMeasuresView from "@/views/PrerollMeasuresView.vue";
 
 defineProps(['beatEmitter'])
-const conductorView = window.conductor
+const conductorView = window['conductor']
 </script>
 
 <style scoped>

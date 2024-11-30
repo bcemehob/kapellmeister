@@ -12,17 +12,15 @@ import {PartElement} from "@/pattern/deserialized/PartElement"
 describe('PatternParser', () => {
     const parser = new PatternParser()
     it('can parse pattern from json', () => {
-        const json = fs.readFileSync(path.join(__dirname, "./", "pattern-full.json"), "utf-8", (err, data) => {
-            return data
-        })
+        const json = fs.readFileSync(path.join(__dirname, "./", "pattern-full.json"), "utf-8")
         expect(parser.parse(json)).toStrictEqual(expectedPatternFull)
     })
 })
 
 
 const drumParties = [
-    new Part('68cb2f88-3148-4d35-8d17-6e8a7e3ed777', 'solid', 16, 0, 0, []),
-    new Part('f4961912-92ba-4c8a-8d41-9b8ea4df542a', 'snare trello', 16, 2, 2, [])
+    new Part('68cb2f88-3148-4d35-8d17-6e8a7e3ed777', 'solid', 16, 0, 0),
+    new Part('f4961912-92ba-4c8a-8d41-9b8ea4df542a', 'snare trello', 16, 2, 2)
 ]
 const saxParties = [
     new Part('04467c20-2ab0-4d04-8f4a-de83662d2211', 'coo-coo', 16, 0, 0),
