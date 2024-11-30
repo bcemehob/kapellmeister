@@ -1,5 +1,5 @@
 import {BeatValues} from "@/pattern/BeatValues";
-import {PartElement} from "@/pattern/PartElement";
+import {PartElement} from "@/pattern/deserialized/PartElement";
 
 export class PartViewAtBeat {
     partyName: string | undefined

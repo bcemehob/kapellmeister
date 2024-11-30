@@ -1,9 +1,9 @@
-import {Pattern} from "@/pattern/Pattern"
-import {Measure} from "@/pattern/Measure"
-import {Instrument} from "@/pattern/Instrument"
-import {PartPerformance} from "@/pattern/PartPerformance"
-import {Part} from "@/pattern/Part"
-import {PartElement} from "@/pattern/PartElement"
+import {Pattern} from "@/pattern/deserialized/Pattern"
+import {Measure} from "@/pattern/deserialized/Measure"
+import {Instrument} from "@/pattern/deserialized/Instrument"
+import {PartPerformance} from "@/pattern/deserialized/PartPerformance"
+import {Part} from "@/pattern/deserialized/Part"
+import {PartElement} from "@/pattern/deserialized/PartElement"
 
 export class PatternParser {
     parse(patternJson: string): Pattern {

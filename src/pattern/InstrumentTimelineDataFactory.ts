@@ -1,12 +1,12 @@
 import {InstrumentTimelineData} from "@/pattern/InstrumentTimelineData"
 import {PartSnapshot} from "@/pattern/PartSnapshot"
 import {PREROLL_MEASURES} from "@/settings"
-import {Instrument} from "@/pattern/Instrument";
-import {Part} from "@/pattern/Part";
-import {PartElement} from "@/pattern/PartElement";
-import {PartPerformance} from "@/pattern/PartPerformance";
-import {BeatValues} from "@/pattern/BeatValues";
-import {snapshotElements} from "../../tests/utils/TestUtils";
+import {Instrument} from "@/pattern/deserialized/Instrument"
+import {Part} from "@/pattern/deserialized/Part"
+import {PartElement} from "@/pattern/deserialized/PartElement"
+import {PartPerformance} from "@/pattern/deserialized/PartPerformance"
+import {BeatValues} from "@/pattern/BeatValues"
+import {snapshotElements} from "../../tests/utils/TestUtils"
 
 export class InstrumentTimelineDataFactory {
     instrument: Instrument

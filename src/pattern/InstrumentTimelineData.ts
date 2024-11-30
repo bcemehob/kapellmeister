@@ -1,7 +1,7 @@
-import {PartSnapshot} from "@/pattern/PartSnapshot";
-import {Part} from "@/pattern/Part";
-import {PartPerformance} from "@/pattern/PartPerformance";
-import {PartElement} from "@/pattern/PartElement";
+import {PartSnapshot} from "@/pattern/PartSnapshot"
+import {Part} from "@/pattern/deserialized/Part"
+import {PartPerformance} from "@/pattern/deserialized/PartPerformance"
+import {PartElement} from "@/pattern/deserialized/PartElement"
 
 export class InstrumentTimelineData {
     timeline: PartSnapshot[]

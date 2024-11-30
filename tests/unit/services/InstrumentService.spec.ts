@@ -1,10 +1,10 @@
 import {InstrumentService} from "@/services/InstrumentService"
-import {Instrument} from "@/pattern/Instrument"
-import {PartPerformance} from "@/pattern/PartPerformance"
-import {Part} from "@/pattern/Part"
+import {Instrument} from "@/pattern/deserialized/Instrument"
+import {PartPerformance} from "@/pattern/deserialized/PartPerformance"
+import {Part} from "@/pattern/deserialized/Part"
 import expectedTimeline from "./expected-instrument-timeline"
 import {PartViewAtBeat} from "@/pattern/PartViewAtBeat"
-import {PartElement} from "@/pattern/PartElement"
+import {PartElement} from "@/pattern/deserialized/PartElement"
 import {beatValues} from "../../utils/TestUtils"
 
 

@@ -1,9 +1,9 @@
 import {InstrumentTimelineDataFactory} from "@/pattern/InstrumentTimelineDataFactory"
 import {PartViewAtBeat} from "@/pattern/PartViewAtBeat"
-import {Instrument} from "@/pattern/Instrument"
-import {Measure} from "@/pattern/Measure"
+import {Instrument} from "@/pattern/deserialized/Instrument"
+import {Measure} from "@/pattern/deserialized/Measure"
 import {InstrumentTimelineData} from "@/pattern/InstrumentTimelineData"
-import {PartElement} from "@/pattern/PartElement";
+import {PartElement} from "@/pattern/deserialized/PartElement"
 
 
 export class InstrumentService {

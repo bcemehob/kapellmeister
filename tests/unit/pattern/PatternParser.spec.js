@@ -1,12 +1,12 @@
-import {Pattern} from "@/pattern/Pattern"
-import {Measure} from "@/pattern/Measure"
+import {Pattern} from "@/pattern/deserialized/Pattern"
+import {Measure} from "@/pattern/deserialized/Measure"
 import {PatternParser} from "@/pattern/PatternParser"
 import * as fs from "node:fs"
 import * as path from "node:path"
-import {Instrument} from "@/pattern/Instrument"
-import {Part} from "@/pattern/Part"
-import {PartPerformance} from "@/pattern/PartPerformance"
-import {PartElement} from "@/pattern/PartElement"
+import {Instrument} from "@/pattern/deserialized/Instrument"
+import {Part} from "@/pattern/deserialized/Part"
+import {PartPerformance} from "@/pattern/deserialized/PartPerformance"
+import {PartElement} from "@/pattern/deserialized/PartElement"
 
 
 describe('PatternParser', () => {

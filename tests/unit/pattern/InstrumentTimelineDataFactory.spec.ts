@@ -1,11 +1,11 @@
 import {InstrumentTimelineDataFactory} from "@/pattern/InstrumentTimelineDataFactory"
-import {Instrument} from "@/pattern/Instrument"
+import {Instrument} from "@/pattern/deserialized/Instrument"
 import {v4 as uuidv4} from 'uuid'
-import {Part} from "@/pattern/Part"
-import {PartPerformance} from "@/pattern/PartPerformance"
-import {PartElement} from "@/pattern/PartElement"
+import {Part} from "@/pattern/deserialized/Part"
+import {PartPerformance} from "@/pattern/deserialized/PartPerformance"
+import {PartElement} from "@/pattern/deserialized/PartElement"
 import {PartSnapshot} from "@/pattern/PartSnapshot"
-import {snapshotElements, beatValues} from "../../utils/TestUtils";
+import {snapshotElements, beatValues} from "../../utils/TestUtils"
 
 jest.mock('@/settings', () => ({PREROLL_MEASURES: 1}))
 

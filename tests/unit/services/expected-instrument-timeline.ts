@@ -1,9 +1,9 @@
 import {PartSnapshot} from "@/pattern/PartSnapshot"
-import {PartPerformance} from "@/pattern/PartPerformance"
-import {Part} from "@/pattern/Part"
+import {PartPerformance} from "@/pattern/deserialized/PartPerformance"
+import {Part} from "@/pattern/deserialized/Part"
 import {InstrumentTimelineData} from "@/pattern/InstrumentTimelineData"
-import {PartElement} from "@/pattern/PartElement"
-import {beatValues, snapshotElements} from "../../utils/TestUtils";
+import {PartElement} from "@/pattern/deserialized/PartElement"
+import {beatValues, snapshotElements} from "../../utils/TestUtils"
 
 
 const timeline = [

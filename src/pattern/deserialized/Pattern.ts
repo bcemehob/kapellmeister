@@ -1,5 +1,5 @@
-import {Measure} from "@/pattern/Measure";
-import {Instrument} from "@/pattern/Instrument";
+import {Measure} from "@/pattern/deserialized/Measure"
+import {Instrument} from "@/pattern/deserialized/Instrument"
 
 export class Pattern {
     name: string

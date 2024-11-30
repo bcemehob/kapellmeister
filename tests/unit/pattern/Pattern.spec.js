@@ -1,5 +1,5 @@
-import {Pattern} from "@/pattern/Pattern";
-import {Measure} from "@/pattern/Measure";
+import {Pattern} from "@/pattern/deserialized/Pattern";
+import {Measure} from "@/pattern/deserialized/Measure";
 
 describe('Pattern', () => {
     const pattern = new Pattern('test name', 120, 8, new Measure(), [])

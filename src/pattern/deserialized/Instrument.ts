@@ -1,6 +1,6 @@
-import {PartPerformance} from "@/pattern/PartPerformance";
-import {Part} from "@/pattern/Part";
-import {PartElement} from "@/pattern/PartElement";
+import {PartPerformance} from "@/pattern/deserialized/PartPerformance"
+import {Part} from "@/pattern/deserialized/Part"
+import {PartElement} from "@/pattern/deserialized/PartElement"
 
 export class Instrument {
     id: string | null
