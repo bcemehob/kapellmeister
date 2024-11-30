@@ -16,7 +16,10 @@ export class InstrumentTimelineDataFactory {
     partElementsById: Map<string, PartElement>
     timeline: PartSnapshot[]
 
-    constructor(instrument: Instrument, measureBeats: number) {
+    constructor(
+        instrument: Instrument,
+        measureBeats: number
+    ) {
         this.instrument = instrument
         this.measureBeats = measureBeats
         this.partsById = this.mapParts()

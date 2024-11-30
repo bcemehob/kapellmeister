@@ -6,6 +6,7 @@ export class PartSnapshot {
     partId: string | null
     beatValues: BeatValues | null
     partElementsMap: Map<string, string>
+
     constructor(
         partyPerformanceId: string | null,
         nextStartBeat: number | null,

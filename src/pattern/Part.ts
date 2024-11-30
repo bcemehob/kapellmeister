@@ -5,7 +5,13 @@ export class Part {
     anacrusis: number
     clausula: number
 
-    constructor(id: string, name: string, duration: number, anacrusis: number, clausula?: number) {
+    constructor(
+        id: string,
+        name: string,
+        duration: number,
+        anacrusis: number,
+        clausula?: number
+    ) {
         this.id = id
         this.name = name
         this.duration = duration

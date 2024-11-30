@@ -2,6 +2,7 @@ export class PartPerformance {
     id: string
     start: number
     partId: string
+
     constructor(id: string, start: number, partId: string) {
         this.id = id
         this.start = start

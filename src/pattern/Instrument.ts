@@ -9,7 +9,13 @@ export class Instrument {
     parts: Part[]
     partElements: PartElement[]
 
-    constructor(id: string | null, name:string, partyPerformances: PartPerformance[], parts: Part[], partyElements: PartElement[]) {
+    constructor(
+        id: string | null,
+        name: string,
+        partyPerformances: PartPerformance[],
+        parts: Part[],
+        partyElements: PartElement[]
+    ) {
         this.id = id
         this.name = name
         this.partPerformances = partyPerformances

@@ -11,7 +11,10 @@ export class InstrumentService {
     measure: Measure
     instrumentTimelineData: InstrumentTimelineData
 
-    constructor(instrument: Instrument, measure: Measure) {
+    constructor(
+        instrument: Instrument,
+        measure: Measure
+    ) {
         this.instrument = instrument
         this.measure = measure
         this.instrumentTimelineData = new InstrumentTimelineDataFactory(this.instrument, this.measure.beats).get()

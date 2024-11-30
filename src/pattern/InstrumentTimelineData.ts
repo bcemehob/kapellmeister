@@ -8,7 +8,13 @@ export class InstrumentTimelineData {
     partsById: Map<string, Part>
     partPerformancesById: Map<string, PartPerformance>
     partElementsById: Map<string, PartElement>
-    constructor(timeline: PartSnapshot[], partsById: any, partPerformancesById:any, partElementsById: any) {
+
+    constructor(
+        timeline: PartSnapshot[],
+        partsById: any,
+        partPerformancesById: any,
+        partElementsById: any
+    ) {
         this.timeline = timeline
         this.partsById = partsById
         this.partPerformancesById = partPerformancesById
