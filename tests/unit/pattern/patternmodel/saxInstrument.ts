@@ -15,9 +15,9 @@ const part2Performance2 = new PartPerformance(uuidv4(), 9, part2.id)
 const part2Element1 = new PartElement(uuidv4(), part2.id, 'CHORDS', 1, 4, 'Am', null)
 const part2Element2 = new PartElement(uuidv4(), part2.id, 'CHORDS', 5, 2, 'E', null)
 const part2Element3 = new PartElement(uuidv4(), part2.id, 'LYRICS', 5, 4, 'Foo', null)
-export const instrument = new Instrument(
+export const sax = new Instrument(
     uuidv4(),
-    'instrument',
+    'saxophone',
     [part1Performance1, part1Performance2, part2Performance1, part2Performance2],
     [part1, part2],
     [part2Element1, part2Element2, part2Element3])
@@ -94,10 +94,10 @@ export const expectedTimeline = [
     new PartSnapshot(part2Performance2.id, null, part2.id, beatValues(33, 8), snapshotElements('CHORDS', part2Element1.id)),
     new PartSnapshot(part2Performance2.id, null, part2.id, beatValues(33, 8), snapshotElements('CHORDS', part2Element1.id)),
 
-    new PartSnapshot(part2Performance2.id, null, part2.id, beatValues(33, 8),snapshotElements('CHORDS', part2Element2.id, 'LYRICS', part2Element3.id)),
-    new PartSnapshot(part2Performance2.id, null, part2.id, beatValues(33, 8),snapshotElements('CHORDS', part2Element2.id, 'LYRICS', part2Element3.id)),
-    new PartSnapshot(part2Performance2.id, null, part2.id, beatValues(33, 8),snapshotElements('LYRICS', part2Element3.id)),
-    new PartSnapshot(part2Performance2.id, null, part2.id, beatValues(33, 8),snapshotElements('LYRICS', part2Element3.id)),
+    new PartSnapshot(part2Performance2.id, null, part2.id, beatValues(33, 8), snapshotElements('CHORDS', part2Element2.id, 'LYRICS', part2Element3.id)),
+    new PartSnapshot(part2Performance2.id, null, part2.id, beatValues(33, 8), snapshotElements('CHORDS', part2Element2.id, 'LYRICS', part2Element3.id)),
+    new PartSnapshot(part2Performance2.id, null, part2.id, beatValues(33, 8), snapshotElements('LYRICS', part2Element3.id)),
+    new PartSnapshot(part2Performance2.id, null, part2.id, beatValues(33, 8), snapshotElements('LYRICS', part2Element3.id)),
 ]
 
 

@@ -1,7 +1,7 @@
 import {InstrumentTimelineDataFactory} from "@/pattern/InstrumentTimelineDataFactory"
 import {
     expectedTimeline,
-    instrument,
+    sax,
     mappedPartElements,
     mappedPartPerformances,
     mappedParts
@@ -10,7 +10,7 @@ import {
 jest.mock('@/settings', () => ({PREROLL_MEASURES: 1}))
 
 describe('instrumentTimelineDataFactory', () => {
-    const instrumentTimelineDataFactory = new InstrumentTimelineDataFactory(instrument, 4)
+    const instrumentTimelineDataFactory = new InstrumentTimelineDataFactory(sax, 4)
 
 
     it('can map parts by ids', () => {
