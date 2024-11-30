@@ -12,7 +12,6 @@ jest.mock('@/settings', () => ({PREROLL_MEASURES: 1}))
 describe('instrumentTimelineDataFactory', () => {
     const instrumentTimelineDataFactory = new InstrumentTimelineDataFactory(sax, 4)
 
-
     it('can map parts by ids', () => {
         expect(instrumentTimelineDataFactory.mapParts()).toEqual(mappedParts())
     })
