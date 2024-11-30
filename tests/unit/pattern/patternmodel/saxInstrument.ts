@@ -23,27 +23,27 @@ export const sax = new Instrument(
     [part2Element1, part2Element2, part2Element3])
 
 export const mappedParts = (): Map<string, Part> => {
-    const result = new Map<string, Part>()
-    result.set(part1.id, part1)
-    result.set(part2.id, part2)
-    return result
+    return new Map<string, Part>([
+        [part1.id, part1],
+        [part2.id, part2]
+    ])
 }
 
 export const mappedPartPerformances = (): Map<string, PartPerformance> => {
-    const result = new Map<string, PartPerformance>()
-    result.set(part1Performance1.id, part1Performance1)
-    result.set(part1Performance2.id, part1Performance2)
-    result.set(part2Performance1.id, part2Performance1)
-    result.set(part2Performance2.id, part2Performance2)
-    return result
+    return new Map<string, PartPerformance>([
+        [part1Performance1.id, part1Performance1],
+        [part1Performance2.id, part1Performance2],
+        [part2Performance1.id, part2Performance1],
+        [part2Performance2.id, part2Performance2]
+    ])
 }
 
 export const mappedPartElements = (): Map<string, PartElement> => {
-    const result = new Map<string, PartElement>()
-    result.set(part2Element1.id, part2Element1)
-    result.set(part2Element2.id, part2Element2)
-    result.set(part2Element3.id, part2Element3)
-    return result
+    return new Map<string, PartElement>([
+        [part2Element1.id, part2Element1],
+        [part2Element2.id, part2Element2],
+        [part2Element3.id, part2Element3]
+    ])
 }
 
 export const expectedTimeline = [
