@@ -36,7 +36,7 @@ describe('InstrumentService', () => {
     })
 
     it('can detect current party new', () => {
-        expect(serviceNew.currentPart(0)).toStrictEqual(new PartViewAtBeat(undefined, null, null,
+        expect(serviceNew.currentPart(0)).toStrictEqual(new PartViewAtBeat(undefined, null, [],
             new PartViewAtBeat("first", beatValues( 1, 6), [
                 new PartElement("element-chords-1-1", "party1", "CHORDS", 1, 2, "Am", null)
             ], null)))
