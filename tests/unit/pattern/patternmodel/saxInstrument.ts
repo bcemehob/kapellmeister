@@ -2,21 +2,21 @@ import {Part} from "@/pattern/deserialized/Part";
 import {PartPerformance} from "@/pattern/deserialized/PartPerformance";
 import {PartElement} from "@/pattern/deserialized/PartElement";
 import {Instrument} from "@/pattern/deserialized/Instrument";
-import {v4 as uuidv4} from 'uuid'
 import {PartSnapshot} from "@/pattern/PartSnapshot";
 import {beatValues, snapshotElements} from "../../../utils/TestUtils";
+import {generateUUID} from "@/services/InstrumentService";
 
-const part1 = new Part(uuidv4(), 'sax part 1', 2, 0, 0)
-const part2 = new Part(uuidv4(), 'sax part 2', 2, 0, 0)
-const part1Performance1 = new PartPerformance(uuidv4(), 1, part1.id)
-const part1Performance2 = new PartPerformance(uuidv4(), 5, part1.id)
-const part2Performance1 = new PartPerformance(uuidv4(), 3, part2.id)
-const part2Performance2 = new PartPerformance(uuidv4(), 9, part2.id)
-const part2Element1 = new PartElement(uuidv4(), part2.id, 'CHORDS', 1, 4, 'Am', null)
-const part2Element2 = new PartElement(uuidv4(), part2.id, 'CHORDS', 5, 2, 'E', null)
-const part2Element3 = new PartElement(uuidv4(), part2.id, 'LYRICS', 5, 4, 'Foo', null)
+const part1 = new Part(generateUUID(), 'sax part 1', 2, 0, 0)
+const part2 = new Part(generateUUID(), 'sax part 2', 2, 0, 0)
+const part1Performance1 = new PartPerformance(generateUUID(), 1, part1.id)
+const part1Performance2 = new PartPerformance(generateUUID(), 5, part1.id)
+const part2Performance1 = new PartPerformance(generateUUID(), 3, part2.id)
+const part2Performance2 = new PartPerformance(generateUUID(), 9, part2.id)
+const part2Element1 = new PartElement(generateUUID(), part2.id, 'CHORDS', 1, 4, 'Am', null)
+const part2Element2 = new PartElement(generateUUID(), part2.id, 'CHORDS', 5, 2, 'E', null)
+const part2Element3 = new PartElement(generateUUID(), part2.id, 'LYRICS', 5, 4, 'Foo', null)
 export const sax = new Instrument(
-    uuidv4(),
+    generateUUID(),
     'saxophone',
     [part1Performance1, part1Performance2, part2Performance1, part2Performance2],
     [part1, part2],

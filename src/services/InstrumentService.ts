@@ -4,8 +4,11 @@ import {Instrument} from "@/pattern/deserialized/Instrument"
 import {Measure} from "@/pattern/deserialized/Measure"
 import {InstrumentTimelineData} from "@/pattern/InstrumentTimelineData"
 import {PartElement} from "@/pattern/deserialized/PartElement"
+import {v4 as uuidv4} from 'uuid'
 
-
+export const generateUUID = () => {
+    return uuidv4()
+}
 export class InstrumentService {
     instrument: Instrument
     measure: Measure

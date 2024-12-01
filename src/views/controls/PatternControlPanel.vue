@@ -16,8 +16,15 @@
     </button>
   </div>
 </template>
-<script setup>
+
+<script setup lang="ts">
 import {useStore} from "vuex"
+import {Pattern} from "@/pattern/deserialized/Pattern";
+import {Measure} from "@/pattern/deserialized/Measure";
+import {Instrument} from "@/pattern/deserialized/Instrument";
+import {generateUUID} from "@/services/InstrumentService";
+import {PartPerformance} from "@/pattern/deserialized/PartPerformance";
+import {Part} from "@/pattern/deserialized/Part";
 
 const store = useStore()
 
@@ -50,20 +57,12 @@ const readPattern = () => {
 }
 
 const addEmptyPattern = () => {
-  const newPattern = {
-    name: 'new pattern',
-    tempo: 120,
-    duration: 128,
-    measure: {
-      base: 4,
-      beats: 4
-    },
-    instruments: [
-      {name: 'instrument 1', parts: [], partPerformances: [], partElements: []}
-    ]
-  }
-  store.dispatch('persistPattern', newPattern)
-
+  const measure = new Measure(4, 4)
+  const part = new Part(generateUUID(), "part 1", 4, 0)
+  const performance = new PartPerformance(generateUUID(), 1, part.id)
+  const instrument = new Instrument(generateUUID(), "instrument 1", [performance], [part], [])
+  const pattern = new Pattern("new pattern", 120, 8, measure, [instrument])
+  store.dispatch('persistPattern', pattern)
 }
 
 </script>
