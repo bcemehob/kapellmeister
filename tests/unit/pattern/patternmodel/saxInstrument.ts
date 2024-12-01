@@ -6,8 +6,8 @@ import {v4 as uuidv4} from 'uuid'
 import {PartSnapshot} from "@/pattern/PartSnapshot";
 import {beatValues, snapshotElements} from "../../../utils/TestUtils";
 
-const part1 = new Part(uuidv4(), 'part1', 2, 0, 0)
-const part2 = new Part(uuidv4(), 'part2', 2, 0, 0)
+const part1 = new Part(uuidv4(), 'sax part 1', 2, 0, 0)
+const part2 = new Part(uuidv4(), 'sax part 2', 2, 0, 0)
 const part1Performance1 = new PartPerformance(uuidv4(), 1, part1.id)
 const part1Performance2 = new PartPerformance(uuidv4(), 5, part1.id)
 const part2Performance1 = new PartPerformance(uuidv4(), 3, part2.id)
