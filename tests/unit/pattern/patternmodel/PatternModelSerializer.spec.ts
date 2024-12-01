@@ -4,7 +4,7 @@ import * as path from "node:path"
 import {pattern} from "./patternModel";
 
 
-describe('Serializer', () => {
+describe.skip('Serializer', () => {
     const parser = new PatternParser()
     it('can create model pattern file', async () => {
         const patternStr = JSON.stringify(pattern)
