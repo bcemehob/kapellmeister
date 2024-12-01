@@ -16,59 +16,54 @@
     </button>
   </div>
 </template>
+<script setup>
+import {useStore} from "vuex"
 
-<script>
+const store = useStore()
 
-export default {
-  name: 'PatternControlPanel',
-  computed: {
-    pattern() {
-      return this.$store.state.pattern
-    }
-  },
-  methods: {
-    loadSamplePattern() {
-      fetch("/samples/sample-pattern-2-0.kpm")
-          .then(res => res.json().then(data => this.$store.dispatch('persistPattern', data)))
-    },
-    clearPattern() {
-      this.$store.dispatch('clearPattern')
-    },
-    readPattern() {
-      this.error = null
-      const file = this.$refs.json.files[0]
-      const reader = new FileReader()
-      if (file.name.endsWith(".kpm") || file.name.endsWith(".json")) {
-        reader.onload = (readingEvent) => {
-          try {
-            this.$store.dispatch('persistPattern', JSON.parse(readingEvent.target.result))
-          } catch (e) {
-            this.error = 'Could not read file'
-          }
-        };
-        reader.onerror = (err) => this.error = err
-        reader.readAsText(file)
-      } else {
-        this.error = `Invalid file format: ${file.name}`
+const loadSamplePattern = () => {
+  fetch("/samples/sample-pattern-2-0.kpm")
+      .then(res => res.json().then(data => store.dispatch('persistPattern', data)))
+}
+
+const clearPattern = () => {
+  store.dispatch('clearPattern')
+}
+
+const readPattern = () => {
+  this.error = null
+  const file = this.$refs.json.files[0]
+  const reader = new FileReader()
+  if (file.name.endsWith(".kpm") || file.name.endsWith(".json")) {
+    reader.onload = (readingEvent) => {
+      try {
+        store.dispatch('persistPattern', JSON.parse(readingEvent.target.result))
+      } catch (e) {
+        this.error = 'Could not read file'
       }
-    },
-    addEmptyPattern() {
-      const newPattern = {
-        name: 'new pattern',
-        tempo: 120,
-        duration: 128,
-        measure: {
-          base: 4,
-          beats: 4
-        },
-        instruments: [
-          {name: 'instrument 1', parties: []}
-        ]
-      }
-      this.$store.dispatch('persistPattern', newPattern)
-    },
+    };
+    reader.onerror = (err) => this.error = err
+    reader.readAsText(file)
+  } else {
+    this.error = `Invalid file format: ${file.name}`
   }
 }
 
+const addEmptyPattern = () => {
+  const newPattern = {
+    name: 'new pattern',
+    tempo: 120,
+    duration: 128,
+    measure: {
+      base: 4,
+      beats: 4
+    },
+    instruments: [
+      {name: 'instrument 1', parts: [], partPerformances: [], partElements: []}
+    ]
+  }
+  store.dispatch('persistPattern', newPattern)
+
+}
 
 </script>
