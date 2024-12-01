@@ -7,7 +7,10 @@ import {PartElement} from "@/pattern/deserialized/PartElement"
 
 export class PatternParser {
     parse(patternJson: string): Pattern {
-        const rawPattern = JSON.parse(patternJson)
+        return this.cast(JSON.parse(patternJson))
+    }
+
+    cast(rawPattern: any): Pattern {
         const measure: Measure = new Measure(rawPattern.measure.base, rawPattern.measure.beats)
         const instruments: Instrument[] = this.parseInstruments(rawPattern.instruments)
         return Pattern.instance(rawPattern, measure, instruments)
