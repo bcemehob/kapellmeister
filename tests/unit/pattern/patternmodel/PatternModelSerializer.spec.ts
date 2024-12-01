@@ -6,7 +6,7 @@ import {pattern} from "./patternModel";
 
 describe('Serializer', () => {
     const parser = new PatternParser()
-    it('can create model pattern file', () => {
+    it('can create model pattern file', async () => {
         const patternStr = JSON.stringify(pattern)
         fs.writeFile(
             path.join(__dirname, "./", "pattern-model.json"),
