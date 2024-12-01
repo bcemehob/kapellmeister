@@ -95,7 +95,7 @@ export default createStore({
             pattern = !pattern ? state.pattern : pattern
             commit('setPattern', pattern)
             localStorage.setItem('pattern', JSON.stringify(pattern))
-            if (window.conductor) HttpClient.sendPatternToBackend(pattern)
+            if (window.conductor && !window.standalone) HttpClient.sendPatternToBackend(pattern)
         },
 
         clearPattern({ commit }) {
