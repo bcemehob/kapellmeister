@@ -28,7 +28,7 @@ export default {
   },
   methods: {
     loadSamplePattern() {
-      fetch("/samples/samplePattern.kpm")
+      fetch("/samples/sample-pattern-2-0.kpm")
           .then(res => res.json().then(data => this.$store.dispatch('persistPattern', data)))
     },
     clearPattern() {

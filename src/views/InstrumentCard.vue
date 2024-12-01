@@ -4,26 +4,26 @@
     <div v-if="instrumentService" class="party-info w-100 h-100">
       <div class="current-party">
         <div class="d-flex">
-          <div class="fw-bold"> {{ currentPartLegacy.name }}</div>
+          <div class="fw-bold"> {{ currentPart.partName || 'no current part' }}</div>
           <div v-if="countDown" :class="'count-down ' + countDown.type"> {{ countDown.count}} </div>
         </div>
       </div>
-      <div v-if="upcomingPartLegacy.name" class="upcoming-party">
-         Next: <span class="fw-bold">{{ upcomingPartLegacy.name }}</span>
+      <div v-if="currentPart.nextPartView" class="upcoming-party">
+         Next: <span class="fw-bold">{{ currentPart.nextPartView.partName }}</span>
       </div>
     </div>
   </div>
 </template>
-<script setup>
+<script setup lang="ts">
 import {computed, onMounted, ref} from "vue";
-import {InstrumentServiceLegacy} from "@/services/InstrumentServiceLegacy";
+import {InstrumentService} from "@/services/InstrumentService";
+import {PartViewAtBeat} from "@/pattern/PartViewAtBeat";
 
 const props = defineProps(['currentBeat', 'instrument', 'measure'])
 const instrumentService = ref(null)
-const currentPartLegacy = computed(() => instrumentService.value.currentPartLegacy(props.currentBeat))
-const upcomingPartLegacy = computed(() => instrumentService.value.upcomingPartLegacy(props.currentBeat))
-const countDown = computed(() => instrumentService.value.countDown(props.currentBeat))
-onMounted( () => instrumentService.value = new InstrumentServiceLegacy(props.instrument, props.measure))
+const currentPart: PartViewAtBeat = computed(() => instrumentService.value.currentPart(props.currentBeat))
+const countDown = computed(() => 0)
+onMounted( () => instrumentService.value = new InstrumentService(props.instrument, props.measure))
 const conductorView = window.conductor
 
 </script>
