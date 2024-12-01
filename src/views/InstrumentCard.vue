@@ -7,6 +7,9 @@
           <div class="fw-bold"> {{ currentPart.partName || 'no current part' }}</div>
           <div v-if="countDown" :class="'count-down ' + countDown.type"> {{ countDown.count}} </div>
         </div>
+        <div v-for="element in currentPart.currentElements" v-bind:key="element.id">
+          {{element.type}} -- {{element.text}}
+        </div>
       </div>
       <div v-if="currentPart.nextPartView" class="upcoming-party">
          Next: <span class="fw-bold">{{ currentPart.nextPartView.partName }}</span>
@@ -21,11 +24,11 @@ import {InstrumentService} from "@/services/InstrumentService";
 import {PartViewAtBeat} from "@/pattern/PartViewAtBeat";
 
 const props = defineProps(['currentBeat', 'instrument', 'measure'])
+const conductorView = window.conductor
 const instrumentService = ref(null)
 const currentPart: PartViewAtBeat = computed(() => instrumentService.value.currentPart(props.currentBeat))
 const countDown = computed(() => 0)
 onMounted( () => instrumentService.value = new InstrumentService(props.instrument, props.measure))
-const conductorView = window.conductor
 </script>
 
 <style scoped>
