@@ -14,6 +14,7 @@
     </div>
   </div>
 </template>
+
 <script setup lang="ts">
 import {computed, onMounted, ref} from "vue";
 import {InstrumentService} from "@/services/InstrumentService";
@@ -25,8 +26,8 @@ const currentPart: PartViewAtBeat = computed(() => instrumentService.value.curre
 const countDown = computed(() => 0)
 onMounted( () => instrumentService.value = new InstrumentService(props.instrument, props.measure))
 const conductorView = window.conductor
-
 </script>
+
 <style scoped>
 .inline-box {
   padding: 5px;
