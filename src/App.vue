@@ -1,6 +1,5 @@
 <template>
   <top-bar :beat-emitter="beatEmitter" :conductor-view="conductorView"/>
-  <div>TS: {{patternNewHolder.value.name}}</div>
   <pattern-editor v-if="editMode && conductorView" :current-beat="currentBeat"/>
   <conductor v-else :current-beat="currentBeat" :current-preroll-beat="currentPrerollBeat"/>
 </template>
@@ -14,7 +13,6 @@ import PatternEditor from "@/views/editor/PatternEditor.vue"
 import Conductor from "@/views/KapellmeisterCard.vue"
 import {HttpClient} from "@/clients/HttpClient"
 import sse from "@/clients/Sse";
-import {PatternNew} from "@/pattern/PatternNew";
 
 const beatEmitter = ref(null)
 const emitterServerEnabled = window.emitterServer
@@ -25,7 +23,6 @@ const currentBeat = computed(() => beatEmitter.value ? beatEmitter.value.current
 const currentPrerollBeat = computed(() => beatEmitter.value ? beatEmitter.value.getCurrentPrerollBeat() : 0)
 const prerollBeats = computed(() => ConductorService.isEmpty(pattern.value) ? 0 : store.state.prerollMeasures * pattern.value.measure.beats)
 const conductorView = window.conductor || !emitterServerEnabled
-const patternNewHolder = {value: {}}
 if (emitterServerEnabled) sse.init()
 
 const loadPattern = async () => {
@@ -33,7 +30,6 @@ const loadPattern = async () => {
   if (!conductorView) pattern = await HttpClient.requestPatternFromBackend()
   if (pattern) {
     store.commit('setPattern', pattern)
-    patternNewHolder.value = new PatternNew("enabled")
   }
 }
 
