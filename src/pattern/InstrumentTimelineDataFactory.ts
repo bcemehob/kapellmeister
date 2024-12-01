@@ -107,7 +107,7 @@ export class InstrumentTimelineDataFactory {
         return this.instrument.partElements
             .filter(partElement => partElement.partId === part.id
                 && partElement.start <= currentPartBeat
-                && partElement.end() >= currentPartBeat
+                && partElement.end >= currentPartBeat
             )
     }
 

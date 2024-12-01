@@ -25,7 +25,7 @@ export class PartElement {
         this.picture = picture
     }
 
-    end() {
+    get end() {
         return this.start + this.duration - 1
     }
 
