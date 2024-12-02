@@ -2,60 +2,69 @@ import {createStore} from 'vuex';
 import {ConductorService} from "@/services/ConductorService";
 import {HttpClient} from "@/clients/HttpClient";
 import {Pattern} from "@/pattern/deserialized/Pattern";
+import {Instrument} from "@/pattern/deserialized/Instrument";
+
+const pattern: Pattern = Pattern.empty()
+const patternUndoStack: Pattern[] = []
+const patternRedoStack: Pattern[] = []
+const prerollMeasures: number = 0
+const currentInstrument: Instrument = Instrument.empty()
+const contextMenuShown: boolean = false
+const editMode: boolean = false
 
 export default createStore({
     state: {
-        pattern: {},
-        patternUndoStack: [],
-        patternRedoStack: [],
-        prerollMeasures: 0,
-        currentInstrument: null,
-        contextMenuShown: false,
-        editMode: false
+        pattern,
+        patternUndoStack,
+        patternRedoStack,
+        prerollMeasures,
+        currentInstrument,
+        contextMenuShown,
+        editMode,
     },
     getters: {
-        getPattern(state) {
+        getPattern(state): Pattern {
             return state.pattern
         },
-        getContextMenuShown(state) {
+        getContextMenuShown(state): boolean {
             return state.contextMenuShown
         },
-        isEditMode(state) {
+        isEditMode(state): boolean {
             return state.editMode
         },
-        getPreRollMeasures(state) {
+        getPreRollMeasures(state): number {
             return state.prerollMeasures
         },
-        getCurrentInstrument(state) {
+        getCurrentInstrument(state) : Instrument | null{
             return state.currentInstrument
         }
     },
     mutations: {
-        setPattern(state, payload) {
+        setPattern(state, payload: Pattern) {
             state.pattern = payload
         },
 
-        setPatternUndoStack(state, payload) {
+        setPatternUndoStack(state, payload: Pattern[]) {
             state.patternUndoStack = payload
         },
 
-        setPatternRedoStack(state, payload) {
+        setPatternRedoStack(state, payload: Pattern[]) {
             state.patternRedoStack = payload
         },
 
-        setContextMenuShown(state, payload) {
+        setContextMenuShown(state, payload: boolean) {
             state.contextMenuShown = payload
         },
 
-        setPrerollMeasures(state, payload) {
+        setPrerollMeasures(state, payload: number) {
             state.prerollMeasures = payload
         },
 
-        setCurrentInstrument(state, payload) {
+        setCurrentInstrument(state, payload: Instrument) {
             state.currentInstrument = payload
         },
 
-        setEditMode(state, payload) {
+        setEditMode(state, payload: boolean) {
             state.editMode = payload
         },
 

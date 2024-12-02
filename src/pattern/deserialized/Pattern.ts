@@ -25,4 +25,8 @@ export class Pattern {
     public static instance(obj: any, measure: Measure, instruments: Instrument[]): Pattern {
         return new Pattern(obj.name, obj.tempo, obj.duration, measure, instruments)
     }
+
+    public static empty(): Pattern{
+        return new Pattern("", 0, 0, new Measure(0, 0), [])
+    }
 }

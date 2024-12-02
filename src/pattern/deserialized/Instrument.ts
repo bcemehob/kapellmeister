@@ -22,4 +22,8 @@ export class Instrument {
         this.parts = parts
         this.partElements = partyElements
     }
+
+    public static empty(): Instrument {
+        return new Instrument(null, "", [], [], [])
+    }
 }
