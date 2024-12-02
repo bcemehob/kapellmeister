@@ -1,6 +1,7 @@
 import {createStore} from 'vuex';
 import {ConductorService} from "@/services/ConductorService";
 import {HttpClient} from "@/clients/HttpClient";
+import {Pattern} from "@/pattern/deserialized/Pattern";
 
 export default createStore({
     state: {
@@ -63,7 +64,7 @@ export default createStore({
         backup ({ commit, state }) {
             if (ConductorService.isEmpty(state.pattern)) return
             const latestPattern = JSON.parse(JSON.stringify(state.pattern))
-            const undoStack = [...state.patternUndoStack]
+            const undoStack: Pattern[] = [...state.patternUndoStack]
             undoStack.push(latestPattern)
             commit('setPatternUndoStack', undoStack)
             commit('setPatternRedoStack', [])
@@ -71,8 +72,8 @@ export default createStore({
 
         undo ({ commit, state }) {
             if (!state.patternUndoStack.length) return null;
-            const undoStack = [...state.patternUndoStack]
-            const redoStack = [...state.patternRedoStack]
+            const undoStack: Pattern[] = [...state.patternUndoStack]
+            const redoStack: Pattern[] = [...state.patternRedoStack]
             const previousPattern = JSON.parse(JSON.stringify(undoStack.pop()))
             redoStack.push(JSON.parse(JSON.stringify(state.pattern)))
             commit('setPatternUndoStack', undoStack)
@@ -82,8 +83,8 @@ export default createStore({
 
         redo ({ commit, state }) {
             if (!state.patternRedoStack.length) return null;
-            const undoStack = [...state.patternUndoStack]
-            const redoStack = [...state.patternRedoStack]
+            const undoStack: Pattern[] = [...state.patternUndoStack]
+            const redoStack: Pattern[] = [...state.patternRedoStack]
             const nextPattern = JSON.parse(JSON.stringify(redoStack.pop()))
             undoStack.push(JSON.parse(JSON.stringify(state.pattern)))
             commit('setPatternUndoStack', undoStack)
@@ -95,7 +96,7 @@ export default createStore({
             pattern = !pattern ? state.pattern : pattern
             commit('setPattern', pattern)
             localStorage.setItem('pattern', JSON.stringify(pattern))
-            if (window.conductor && !window.standalone) HttpClient.sendPatternToBackend(pattern)
+            if (window['conductor'] && !window['standalone']) HttpClient.sendPatternToBackend(pattern)
         },
 
         clearPattern({ commit }) {
