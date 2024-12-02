@@ -2,7 +2,7 @@ import {createStore} from 'vuex';
 import {HttpClient} from "@/clients/HttpClient";
 import {Pattern} from "@/pattern/deserialized/Pattern";
 import {Instrument} from "@/pattern/deserialized/Instrument";
-import {PatternParser} from "@/pattern/PatternParser";
+import {PatternMapper} from "@/pattern/PatternMapper";
 
 const pattern: Pattern = Pattern.empty()
 const patternUndoStack: Pattern[] = []
@@ -102,7 +102,7 @@ export default createStore({
         },
 
         persistPattern({ commit, state }, patternCandidate: any) {
-            const pattern: Pattern = !patternCandidate ? state.pattern : new PatternParser().cast(patternCandidate)
+            const pattern: Pattern = !patternCandidate ? state.pattern : new PatternMapper().map(patternCandidate)
             commit('setPattern', pattern)
             localStorage.setItem('pattern', JSON.stringify(pattern))
             if (window['conductor'] && !window['standalone']) HttpClient.sendPatternToBackend(pattern)

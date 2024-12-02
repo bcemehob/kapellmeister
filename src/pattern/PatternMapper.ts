@@ -5,12 +5,12 @@ import {PartPerformance} from "@/pattern/deserialized/PartPerformance"
 import {Part} from "@/pattern/deserialized/Part"
 import {PartElement} from "@/pattern/deserialized/PartElement"
 
-export class PatternParser {
+export class PatternMapper {
     parse(patternJson: string): Pattern {
-        return this.cast(JSON.parse(patternJson))
+        return this.map(JSON.parse(patternJson))
     }
 
-    cast(rawPattern: any): Pattern {
+    map(rawPattern: any): Pattern {
         const measure: Measure = new Measure(rawPattern.measure.base, rawPattern.measure.beats)
         const instruments: Instrument[] = this.parseInstruments(rawPattern.instruments)
         return Pattern.instance(rawPattern, measure, instruments)

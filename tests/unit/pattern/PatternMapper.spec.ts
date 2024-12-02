@@ -1,6 +1,6 @@
 import {Pattern} from "@/pattern/deserialized/Pattern"
 import {Measure} from "@/pattern/deserialized/Measure"
-import {PatternParser} from "@/pattern/PatternParser"
+import {PatternMapper} from "@/pattern/PatternMapper"
 import * as fs from "node:fs"
 import * as path from "node:path"
 import {Instrument} from "@/pattern/deserialized/Instrument"
@@ -9,11 +9,11 @@ import {PartPerformance} from "@/pattern/deserialized/PartPerformance"
 import {PartElement} from "@/pattern/deserialized/PartElement"
 
 
-describe('PatternParser', () => {
-    const parser = new PatternParser()
+describe('PatternMapper', () => {
+    const patternMapper = new PatternMapper()
     it('can parse pattern from json', () => {
         const json = fs.readFileSync(path.join(__dirname, "./", "pattern-full.json"), "utf-8")
-        expect(parser.parse(json)).toStrictEqual(expectedPatternFull)
+        expect(patternMapper.parse(json)).toStrictEqual(expectedPatternFull)
     })
 })
 

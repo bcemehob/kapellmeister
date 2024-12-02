@@ -1,11 +1,11 @@
-import {PatternParser} from "@/pattern/PatternParser"
+import {PatternMapper} from "@/pattern/PatternMapper"
 import * as fs from "node:fs"
 import * as path from "node:path"
 import {pattern} from "./patternModel";
 
 
 describe.skip('Serializer', () => {
-    const parser = new PatternParser()
+    const parser = new PatternMapper()
     it('can create model pattern file', async () => {
         const patternStr = JSON.stringify(pattern)
         fs.writeFile(
