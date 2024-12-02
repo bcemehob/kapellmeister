@@ -1,5 +1,5 @@
 <template>
-  <div v-if="!ConductorService.isEmpty(pattern)" class="timeline">
+  <div v-if="!pattern.isEmpty()" class="timeline">
     <table>
       <tbody>
       <tr>

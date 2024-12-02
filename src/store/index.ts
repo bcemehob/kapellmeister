@@ -1,5 +1,4 @@
 import {createStore} from 'vuex';
-import {ConductorService} from "@/services/ConductorService";
 import {HttpClient} from "@/clients/HttpClient";
 import {Pattern} from "@/pattern/deserialized/Pattern";
 import {Instrument} from "@/pattern/deserialized/Instrument";
@@ -72,7 +71,7 @@ export default createStore({
     },
     actions: {
         backup ({ commit, state }) {
-            if (ConductorService.isEmpty(state.pattern)) return
+            if (state.pattern.isEmpty()) return
             const latestPattern = JSON.parse(JSON.stringify(state.pattern))
             const undoStack: Pattern[] = [...state.patternUndoStack]
             undoStack.push(latestPattern)

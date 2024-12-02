@@ -21,7 +21,7 @@ const pattern = computed(() => store.state.pattern)
 const editMode = computed(() => store.state.editMode)
 const currentBeat = computed(() => beatEmitter.value ? beatEmitter.value.currentBeat : 0)
 const currentPrerollBeat = computed(() => beatEmitter.value ? beatEmitter.value.getCurrentPrerollBeat() : 0)
-const prerollBeats = computed(() => ConductorService.isEmpty(pattern.value) ? 0 : store.state.prerollMeasures * pattern.value.measure.beats)
+const prerollBeats = computed(() => pattern.value.isEmpty() ? 0 : store.state.prerollMeasures * pattern.value.measure.beats)
 const conductorView = window.conductor || !emitterServerEnabled
 if (emitterServerEnabled) sse.init()
 
@@ -54,7 +54,7 @@ const prerollCallback = prerollBeats => {
 onMounted(async () => {
   handleClick()
   await loadPattern()
-  if (pattern.value && !ConductorService.isEmpty(pattern.value)) {
+  if (pattern.value && !pattern.value.isEmpty()) {
     let duration = ConductorService.durationInBeats(pattern.value)
     beatEmitter.value = new BeatEmitterProvider(pattern.value.tempo, duration, prerollBeats.value, emitterServerEnabled).get()
     if (emitterServerEnabled) sse.setupEmitterAndCallbacks(beatEmitter.value, patternCallback, prerollCallback)
@@ -65,7 +65,7 @@ onBeforeUnmount(() => document.removeEventListener('click', closeContextMenu))
 
 watch(pattern, newVal => {
   let duration = ConductorService.durationInBeats(newVal)
-  beatEmitter.value = ConductorService.isEmpty(newVal) ? null :
+  beatEmitter.value = newVal.isEmpty() ? null :
       new BeatEmitterProvider(newVal.tempo, duration, prerollBeats.value, emitterServerEnabled).get()
   if (beatEmitter.value && emitterServerEnabled) sse.setupEmitterAndCallbacks(beatEmitter.value, patternCallback, prerollCallback)
 })

@@ -15,7 +15,6 @@
 <script>
 
 import Timeline from "@/views/editor/Timeline.vue";
-import {ConductorService} from "@/services/ConductorService";
 
 export default {
   name: "PatternEditor",
@@ -32,7 +31,7 @@ export default {
       return this.$store.state.pattern
     },
     isPatternEmpty() {
-      return ConductorService.isEmpty(this.pattern)
+      return this.pattern.isEmpty()
     }
   },
   methods: {

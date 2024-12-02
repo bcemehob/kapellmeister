@@ -1,5 +1,5 @@
 <template>
-  <div v-if="!ConductorService.isEmpty(pattern)" class="track-name">
+  <div v-if="!pattern.isEmpty()" class="track-name">
     <div>
       <clickable-editable v-if="conductorView" v-model="pattern.name" :narrow="true" type="text"/>
       <span v-else>{{ pattern.name }}</span>

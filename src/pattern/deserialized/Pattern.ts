@@ -22,6 +22,10 @@ export class Pattern {
         this.instruments = instruments
     }
 
+    public isEmpty(): boolean {
+        return this.duration === 0
+    }
+
     public static instance(obj: any, measure: Measure, instruments: Instrument[]): Pattern {
         return new Pattern(obj.name, obj.tempo, obj.duration, measure, instruments)
     }
