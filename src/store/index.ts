@@ -3,6 +3,7 @@ import {ConductorService} from "@/services/ConductorService";
 import {HttpClient} from "@/clients/HttpClient";
 import {Pattern} from "@/pattern/deserialized/Pattern";
 import {Instrument} from "@/pattern/deserialized/Instrument";
+import {PatternParser} from "@/pattern/PatternParser";
 
 const pattern: Pattern = Pattern.empty()
 const patternUndoStack: Pattern[] = []
@@ -101,8 +102,8 @@ export default createStore({
             commit('setPattern', nextPattern)
         },
 
-        persistPattern({ commit, state }, pattern) {
-            pattern = !pattern ? state.pattern : pattern
+        persistPattern({ commit, state }, patternCandidate: any) {
+            const pattern: Pattern = !patternCandidate ? state.pattern : new PatternParser().cast(patternCandidate)
             commit('setPattern', pattern)
             localStorage.setItem('pattern', JSON.stringify(pattern))
             if (window['conductor'] && !window['standalone']) HttpClient.sendPatternToBackend(pattern)

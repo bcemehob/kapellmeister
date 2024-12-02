@@ -29,7 +29,7 @@ const loadPattern = async () => {
   let pattern = readPatternFromLocalStorage()
   if (!conductorView) pattern = await HttpClient.requestPatternFromBackend()
   if (pattern) {
-    store.commit('setPattern', pattern)
+    await store.dispatch('persistPattern', pattern)
   }
 }
 
