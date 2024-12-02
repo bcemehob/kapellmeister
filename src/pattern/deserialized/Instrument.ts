@@ -14,13 +14,13 @@ export class Instrument {
         name: string,
         partyPerformances: PartPerformance[],
         parts: Part[],
-        partyElements: PartElement[]
+        partElements: PartElement[]
     ) {
         this.id = id
         this.name = name
         this.partPerformances = partyPerformances
         this.parts = parts
-        this.partElements = partyElements
+        this.partElements = partElements
     }
 
     public static empty(): Instrument {
