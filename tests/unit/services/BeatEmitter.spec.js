@@ -24,19 +24,19 @@ jest.mock('@/services/Preroll', () => ({
 describe('BeatEmitter', () => {
     it('throws error when invalid arguments', () => {
         expect(() => new BeatEmitter(null, null, null))
-            .toThrow("Tempo and duration must be numbers");
+            .toThrow("Tempo null and duration null must be numbers");
 
         expect(() => new BeatEmitter(123, null, null))
-            .toThrow("Tempo and duration must be numbers");
+            .toThrow("Tempo 123 and duration null must be numbers");
 
         expect(() => new BeatEmitter(null, 123, null))
-            .toThrow("Tempo and duration must be numbers");
+            .toThrow("Tempo null and duration 123 must be numbers");
 
         expect(() => new BeatEmitter("abc", 123, null))
-            .toThrow("Tempo and duration must be numbers");
+            .toThrow("Tempo abc and duration 123 must be numbers");
 
         expect(() => new BeatEmitter(123, "abc", null))
-            .toThrow("Tempo and duration must be numbers");
+            .toThrow("Tempo 123 and duration abc must be numbers");
     })
     it('compiles valid instance', () => {
         const beatEmitter = new BeatEmitter(120, 24, null)

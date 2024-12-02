@@ -15,7 +15,7 @@ export class BeatEmitter {
 
     constructor(tempo, duration, prerollBeats) {
         if (!tempo || !duration || isNaN(tempo) || isNaN(duration)) {
-            throw new Error('Tempo and duration must be numbers')
+            throw new Error(`Tempo ${tempo} and duration ${duration} must be numbers`)
         }
         this.tempo = tempo;
         this.duration = duration;
