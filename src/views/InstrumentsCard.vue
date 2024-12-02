@@ -11,18 +11,21 @@
     </div>
   </div>
 </template>
-<script setup>
+<script setup lang="ts">
 import InstrumentCard from "@/views/InstrumentCard.vue";
 import {useStore} from "vuex";
-import {computed} from "vue";
+import {computed, ComputedRef} from "vue";
 import InstrumentSwitch from "@/views/InstrumentSwitch.vue";
+import {Pattern} from "@/pattern/deserialized/Pattern";
+import {Instrument} from "@/pattern/deserialized/Instrument";
 
-defineProps(['currentBeat'])
+defineProps<{ currentBeat: number }>()
+
 const store = useStore()
-const conductorView = window.conductor
-const pattern = computed(() => store.state.pattern)
-const currentInstrument = computed(() => store.state.currentInstrument)
-const instruments = () => {
+const conductorView = window['conductor']
+const pattern: ComputedRef<Pattern> = computed(() => store.state.pattern)
+const currentInstrument: ComputedRef<Instrument> = computed(() => store.state.currentInstrument)
+const instruments: Instrument[] = () => {
   return conductorView ? pattern.value.instruments : currentInstrument.value ? [currentInstrument.value] : []
 }
 </script>
