@@ -19,14 +19,21 @@
 </template>
 
 <script setup lang="ts">
-import {computed, onMounted, ref} from "vue";
-import {InstrumentService} from "@/services/InstrumentService";
-import {PartViewAtBeat} from "@/pattern/PartViewAtBeat";
+import {computed, ComputedRef, onMounted, ref} from "vue"
+import {InstrumentService} from "@/services/InstrumentService"
+import {PartViewAtBeat} from "@/pattern/PartViewAtBeat"
+import {Instrument} from "@/pattern/deserialized/Instrument"
+import {Measure} from "@/pattern/deserialized/Measure"
 
-const props = defineProps(['currentBeat', 'instrument', 'measure'])
-const conductorView = window.conductor
-const instrumentService = ref(null)
-const currentPart: PartViewAtBeat = computed(() => instrumentService.value.currentPart(props.currentBeat))
+const props = defineProps<{
+  currentBeat: number
+  instrument: Instrument
+  measure: Measure
+}>()
+
+const conductorView = window['conductor']
+const instrumentService = ref<InstrumentService | null>(null)
+const currentPart: ComputedRef<PartViewAtBeat | undefined> = computed(() => instrumentService.value?.currentPart(props.currentBeat))
 const countDown = computed(() => 0)
 onMounted( () => instrumentService.value = new InstrumentService(props.instrument, props.measure))
 </script>
