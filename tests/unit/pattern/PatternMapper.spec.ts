@@ -13,7 +13,7 @@ describe('PatternMapper', () => {
     const patternMapper = new PatternMapper()
     it('can parse pattern from json', () => {
         const json = fs.readFileSync(path.join(__dirname, "./", "pattern-full.json"), "utf-8")
-        expect(patternMapper.parse(json)).toStrictEqual(expectedPatternFull)
+        expect(patternMapper.map(JSON.parse(json))).toStrictEqual(expectedPatternFull)
     })
 })
 

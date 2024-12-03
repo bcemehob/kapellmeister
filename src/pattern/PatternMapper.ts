@@ -6,10 +6,6 @@ import {Part} from "@/pattern/deserialized/Part"
 import {PartElement} from "@/pattern/deserialized/PartElement"
 
 export class PatternMapper {
-    parse(patternJson: string): Pattern {
-        return this.map(JSON.parse(patternJson))
-    }
-
     map(rawPattern: any): Pattern {
         const measure: Measure = new Measure(rawPattern.measure.base, rawPattern.measure.beats)
         const instruments: Instrument[] = this.mapInstruments(rawPattern.instruments)
