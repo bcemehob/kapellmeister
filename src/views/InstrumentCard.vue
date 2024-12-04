@@ -5,15 +5,17 @@
       <div class="current-party">
         <div class="d-flex">
           <div class="fw-bold"> {{ currentPart.partName || 'no current part' }}</div>
-          <div v-if="countDown" :class="'count-down ' + countDown.type"> {{ countDown.count}} </div>
         </div>
         <div v-for="element in currentPart.currentElements" v-bind:key="element.id">
-          {{element.type}} -- {{element.text}}
+          {{ element.type }}: {{ element.text }}
         </div>
+        <div>{{ currentBeat - currentPart.beatValues?.start }}</div>
       </div>
       <div v-if="currentPart.nextPartView" class="upcoming-party">
-         Next: <span class="fw-bold">{{ currentPart.nextPartView.partName }}</span>
+        Next: <span class="fw-bold">{{ currentPart.nextPartView.partName }}</span>
       </div>
+      <progress ref="progress" id="time" max="100" :value="partPercentage()"/>
+
     </div>
   </div>
 </template>
@@ -24,6 +26,7 @@ import {InstrumentService} from "@/services/InstrumentService"
 import {PartViewAtBeat} from "@/pattern/PartViewAtBeat"
 import {Instrument} from "@/pattern/deserialized/Instrument"
 import {Measure} from "@/pattern/deserialized/Measure"
+import {BeatValues} from "@/pattern/BeatValues";
 
 const props = defineProps<{
   currentBeat: number
@@ -34,8 +37,13 @@ const props = defineProps<{
 const conductorView = window['conductor']
 const instrumentService = ref<InstrumentService | null>(null)
 const currentPart: ComputedRef<PartViewAtBeat | undefined> = computed(() => instrumentService.value?.currentPart(props.currentBeat))
-const countDown = computed(() => 0)
-onMounted( () => instrumentService.value = new InstrumentService(props.instrument, props.measure))
+
+const partPercentage = (): number => {
+  const beatValues: BeatValues | null = currentPart.value ? currentPart.value.beatValues : null
+  return !beatValues ? 0 :(props.currentBeat - beatValues.start) / beatValues.duration * 100
+}
+
+onMounted(() => instrumentService.value = new InstrumentService(props.instrument, props.measure))
 </script>
 
 <style scoped>
@@ -58,9 +66,11 @@ onMounted( () => instrumentService.value = new InstrumentService(props.instrumen
   justify-content: space-between;
   align-items: center;
 }
+
 .current-party div {
   margin: 10px;
 }
+
 .count-down {
   font-size: 30px;
 }
@@ -68,19 +78,23 @@ onMounted( () => instrumentService.value = new InstrumentService(props.instrumen
 .count-down.common {
   color: red;
 }
+
 .count-down.upcoming {
   color: blue;
 }
+
 .party-info {
- position: relative;
+  position: relative;
 }
+
 .upcoming-party {
   border: 1px solid #7d858d;
   position: absolute;
   right: 0;
   top: -11px;
 }
-@media (max-width:960px) {
+
+@media (max-width: 960px) {
   .inline-box {
     padding: 2px 5px;
     margin: 2px 0;

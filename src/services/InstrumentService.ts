@@ -5,6 +5,7 @@ import {Measure} from "@/pattern/deserialized/Measure"
 import {InstrumentTimelineData} from "@/pattern/InstrumentTimelineData"
 import {PartElement} from "@/pattern/deserialized/PartElement"
 import {v4 as uuidv4} from 'uuid'
+import {PartSnapshot} from "@/pattern/PartSnapshot";
 
 export const generateUUID = () => {
     return uuidv4()
@@ -24,11 +25,11 @@ export class InstrumentService {
     }
 
     currentPart(currentBeat: number, isNextSnapshot?: boolean): PartViewAtBeat {
-        const snapshot = this.instrumentTimelineData.timeline[currentBeat]
+        const snapshot: PartSnapshot = this.instrumentTimelineData.timeline[currentBeat]
         if (!snapshot) {
             throw Error("Invalid timeline")
         }
-        const nextView = isNextSnapshot || !snapshot.nextStartBeat ? null :
+        const nextView: PartViewAtBeat | null = isNextSnapshot || !snapshot.nextStartBeat ? null :
             this.currentPart(snapshot.nextStartBeat, true)
         if (!snapshot.partyPerformanceId) return new PartViewAtBeat(undefined, null, [], nextView)
         const currentPartName = snapshot.partId ? this.instrumentTimelineData.partsById.get(snapshot.partId)?.name : undefined

@@ -1,8 +1,8 @@
 export class BeatValues {
-    start: Number
-    duration: Number
+    start: number
+    duration: number
 
-    constructor(start: Number, duration: Number) {
+    constructor(start: number, duration: number) {
         this.start = start
         this.duration = duration
     }
