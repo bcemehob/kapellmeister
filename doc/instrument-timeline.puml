@@ -2,19 +2,40 @@
 
   package processed_timeline
   {
+    class PartViewAtBeat {
+        + String <b>partName
+        + BeatValues <b>beatValues
+        + PartElementsSnapshot <b>partElementsSnapshot
+        + PartViewAtBeat <b>nextPartView
+    }
+
     class InstrumentTimeline {
         + int <b>i</b>: beat_number
         + PartSnapshot <b>value</b>:
     }
-    note top {
+    note right {
     Array of PartSnapshot
     }
+
+    class PartElementsSnapshot {
+        String[] <b>text
+        String[] <b>chords
+        String[] <b>lyrics
+        byte[] <b>picture
+    }
+        note right {
+        the first element of each array --
+        the current element, then next
+        is no current element, then "-"
+        }
+
 
     class PartSnapshot{
         + UUID <b>partPerformanceId
         + int <b>nextStartBeat
         + UUID <b>partId
-        + Map<ElementType, UUID> <b>partElementsMap
+        + Map<ElementType, UUID> <b>partElementsMap</b> <<deprecated>>
+        + PartElementsSnapshot <b>partElementsSnapshot
     }
   }
 
@@ -54,11 +75,14 @@
 Part "1...n" -- "1" Instrument
 PartElement "1...n" -- "1" Part
 PartPerformance "1...n" -- "1" Instrument
+PartElementsSnapshot -- PartSnapshot::partElementsSnapshot
 'PartPerformance::partId }o---||  Part::id
+PartViewAtBeat::partName -- Part::name
+PartViewAtBeat::currentElements -- PartSnapshot::currentElements
 Part::id ||--o{ PartPerformance::partId
 PartSnapshot::id ||--o{ InstrumentTimeline::value
-PartElement::type }o--o{ PartSnapshot::partElementIds
+PartElement::type }o--o{ PartSnapshot::partElementsMap
 PartPerformance::id ||--o{ PartSnapshot::partPerformanceId
-PartElement::id }o--o{ PartSnapshot::partElementIds
+PartElement::id }o--o{ PartSnapshot::partElementsMap
 
 @enduml
