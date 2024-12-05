@@ -99,7 +99,7 @@ export class InstrumentTimelineDataFactory {
                 .forEach(cpe => partElementsMap.set(cpe.type, cpe.id))
             const beatValues = new BeatValues(startBeat, durationInBeats)
             const nextPerformanceStartBeat = this.findNextPerformanceStartBeatAfterCurrentPerformance(startBeat + durationInBeats, i)
-            timeline[i] = new PartSnapshot(partPerformance.id, nextPerformanceStartBeat, part.id, beatValues, partElementsMap)
+            timeline[i] = new PartSnapshot(partPerformance.id, nextPerformanceStartBeat, part.id, beatValues, partElementsMap, null)
         }
     }
 
@@ -114,7 +114,7 @@ export class InstrumentTimelineDataFactory {
     fillEmptyBeatsBySnapshots(timeline: PartSnapshot[]) {
         for (let i = 0; i < timeline.length; i++) {
             if (timeline[i] !== undefined) continue
-            timeline[i] = new PartSnapshot(null, this.findNextPerformanceStartBeatAfterEmptySnapshot(i), null, null, snapshotElements())
+            timeline[i] = new PartSnapshot(null, this.findNextPerformanceStartBeatAfterEmptySnapshot(i), null, null, snapshotElements(), null)
         }
     }
 }
