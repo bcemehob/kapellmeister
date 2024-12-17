@@ -4,38 +4,40 @@ import {Part} from "@/pattern/deserialized/Part"
 import {InstrumentTimelineData} from "@/pattern/InstrumentTimelineData"
 import {PartElement} from "@/pattern/deserialized/PartElement"
 import {beatValues, snapshotElements} from "../../utils/TestUtils"
+import {PartElementsSnapshot} from "@/pattern/PartElementsSnapshot";
 
+const emptyPartElementsSnapshot = new PartElementsSnapshot([], [], [], [])
 
 const timeline = [
     new PartSnapshot(null, 1, null, null, snapshotElements(), null),
 
-    new PartSnapshot("performance 1-1", 7, "party1", beatValues(1,6), snapshotElements( "CHORDS", "element-chords-1-1"), null),
-    new PartSnapshot("performance 1-1", 7, "party1", beatValues(1,6), snapshotElements( "CHORDS", "element-chords-1-1", "LYRICS", "element-lyrics-1-3"), null),
-    new PartSnapshot("performance 1-1", 7, "party1", beatValues(1,6), snapshotElements( "CHORDS", "element-chords-1-2", "LYRICS", "element-lyrics-1-3" ), null),
-    new PartSnapshot("performance 1-1", 7, "party1", beatValues(1,6), snapshotElements( "CHORDS", "element-chords-1-2", "LYRICS", "element-lyrics-1-3" ), null),
-    new PartSnapshot("performance 1-1", 7, "party1", beatValues(1,6), snapshotElements( "LYRICS", "element-lyrics-1-3" ), null),
-    new PartSnapshot("performance 1-1", 7, "party1", beatValues(1,6), snapshotElements(), null),
+    new PartSnapshot("performance 1-1", 7, "party1", beatValues(1,6), snapshotElements( "CHORDS", "element-chords-1-1"), emptyPartElementsSnapshot),
+    new PartSnapshot("performance 1-1", 7, "party1", beatValues(1,6), snapshotElements( "CHORDS", "element-chords-1-1", "LYRICS", "element-lyrics-1-3"), emptyPartElementsSnapshot),
+    new PartSnapshot("performance 1-1", 7, "party1", beatValues(1,6), snapshotElements( "CHORDS", "element-chords-1-2", "LYRICS", "element-lyrics-1-3" ), emptyPartElementsSnapshot),
+    new PartSnapshot("performance 1-1", 7, "party1", beatValues(1,6), snapshotElements( "CHORDS", "element-chords-1-2", "LYRICS", "element-lyrics-1-3" ), emptyPartElementsSnapshot),
+    new PartSnapshot("performance 1-1", 7, "party1", beatValues(1,6), snapshotElements( "LYRICS", "element-lyrics-1-3" ), emptyPartElementsSnapshot),
+    new PartSnapshot("performance 1-1", 7, "party1", beatValues(1,6), snapshotElements(), emptyPartElementsSnapshot),
 
-    new PartSnapshot("performance 2-1", 13, "party2", beatValues(7,6), snapshotElements(), null),
-    new PartSnapshot("performance 2-1", 13, "party2", beatValues(7,6), snapshotElements(), null),
-    new PartSnapshot("performance 2-1", 13, "party2", beatValues(7,6), snapshotElements(), null),
-    new PartSnapshot("performance 2-1", 13, "party2", beatValues(7,6), snapshotElements(), null),
-    new PartSnapshot("performance 2-1", 13, "party2", beatValues(7,6), snapshotElements(), null),
-    new PartSnapshot("performance 2-1", 13, "party2", beatValues(7,6), snapshotElements(), null),
+    new PartSnapshot("performance 2-1", 13, "party2", beatValues(7,6), snapshotElements(), emptyPartElementsSnapshot),
+    new PartSnapshot("performance 2-1", 13, "party2", beatValues(7,6), snapshotElements(), emptyPartElementsSnapshot),
+    new PartSnapshot("performance 2-1", 13, "party2", beatValues(7,6), snapshotElements(), emptyPartElementsSnapshot),
+    new PartSnapshot("performance 2-1", 13, "party2", beatValues(7,6), snapshotElements(), emptyPartElementsSnapshot),
+    new PartSnapshot("performance 2-1", 13, "party2", beatValues(7,6), snapshotElements(), emptyPartElementsSnapshot),
+    new PartSnapshot("performance 2-1", 13, "party2", beatValues(7,6), snapshotElements(), emptyPartElementsSnapshot),
 
-    new PartSnapshot("performance 1-2", 19, "party1", beatValues(13,6), snapshotElements( "CHORDS", "element-chords-1-1"), null),
-    new PartSnapshot("performance 1-2", 19, "party1", beatValues(13,6), snapshotElements( "CHORDS", "element-chords-1-1", "LYRICS", "element-lyrics-1-3"), null),
-    new PartSnapshot("performance 1-2", 19, "party1", beatValues(13,6), snapshotElements( "CHORDS", "element-chords-1-2", "LYRICS", "element-lyrics-1-3" ), null),
-    new PartSnapshot("performance 1-2", 19, "party1", beatValues(13,6), snapshotElements( "CHORDS", "element-chords-1-2", "LYRICS", "element-lyrics-1-3" ), null),
-    new PartSnapshot("performance 1-2", 19, "party1", beatValues(13,6), snapshotElements( "LYRICS", "element-lyrics-1-3" ), null),
-    new PartSnapshot("performance 1-2", 19, "party1", beatValues(13,6), snapshotElements(), null),
+    new PartSnapshot("performance 1-2", 19, "party1", beatValues(13,6), snapshotElements( "CHORDS", "element-chords-1-1"), emptyPartElementsSnapshot),
+    new PartSnapshot("performance 1-2", 19, "party1", beatValues(13,6), snapshotElements( "CHORDS", "element-chords-1-1", "LYRICS", "element-lyrics-1-3"), emptyPartElementsSnapshot),
+    new PartSnapshot("performance 1-2", 19, "party1", beatValues(13,6), snapshotElements( "CHORDS", "element-chords-1-2", "LYRICS", "element-lyrics-1-3" ), emptyPartElementsSnapshot),
+    new PartSnapshot("performance 1-2", 19, "party1", beatValues(13,6), snapshotElements( "CHORDS", "element-chords-1-2", "LYRICS", "element-lyrics-1-3" ), emptyPartElementsSnapshot),
+    new PartSnapshot("performance 1-2", 19, "party1", beatValues(13,6), snapshotElements( "LYRICS", "element-lyrics-1-3" ), emptyPartElementsSnapshot),
+    new PartSnapshot("performance 1-2", 19, "party1", beatValues(13,6), snapshotElements(), emptyPartElementsSnapshot),
 
-    new PartSnapshot("performance 2-2", null, "party2", beatValues(19,6), snapshotElements(), null),
-    new PartSnapshot("performance 2-2", null, "party2", beatValues(19,6), snapshotElements(), null),
-    new PartSnapshot("performance 2-2", null, "party2", beatValues(19,6), snapshotElements(), null),
-    new PartSnapshot("performance 2-2", null, "party2", beatValues(19,6), snapshotElements(), null),
-    new PartSnapshot("performance 2-2", null, "party2", beatValues(19,6), snapshotElements(), null),
-    new PartSnapshot("performance 2-2", null, "party2", beatValues(19,6), snapshotElements(), null),
+    new PartSnapshot("performance 2-2", null, "party2", beatValues(19,6), snapshotElements(), emptyPartElementsSnapshot),
+    new PartSnapshot("performance 2-2", null, "party2", beatValues(19,6), snapshotElements(), emptyPartElementsSnapshot),
+    new PartSnapshot("performance 2-2", null, "party2", beatValues(19,6), snapshotElements(), emptyPartElementsSnapshot),
+    new PartSnapshot("performance 2-2", null, "party2", beatValues(19,6), snapshotElements(), emptyPartElementsSnapshot),
+    new PartSnapshot("performance 2-2", null, "party2", beatValues(19,6), snapshotElements(), emptyPartElementsSnapshot),
+    new PartSnapshot("performance 2-2", null, "party2", beatValues(19,6), snapshotElements(), emptyPartElementsSnapshot),
 ]
 
 const partsById = new Map<string, Part>()

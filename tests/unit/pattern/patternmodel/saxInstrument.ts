@@ -5,6 +5,7 @@ import {Instrument} from "@/pattern/deserialized/Instrument";
 import {PartSnapshot} from "@/pattern/PartSnapshot";
 import {beatValues, snapshotElements} from "../../../utils/TestUtils";
 import {generateUUID} from "@/services/InstrumentService";
+import {PartElementsSnapshot} from "@/pattern/PartElementsSnapshot";
 
 const part1 = new Part(generateUUID(), 'sax part 1', 2, 0, 0)
 const part2 = new Part(generateUUID(), 'sax part 2', 2, 0, 0)
@@ -15,6 +16,8 @@ const part2Performance2 = new PartPerformance(generateUUID(), 9, part2.id)
 const part2Element1 = new PartElement(generateUUID(), part2.id, 'CHORDS', 1, 4, 'Am', null)
 const part2Element2 = new PartElement(generateUUID(), part2.id, 'CHORDS', 5, 2, 'E', null)
 const part2Element3 = new PartElement(generateUUID(), part2.id, 'LYRICS', 5, 4, 'Foo', null)
+
+const partElementsSnapshot: PartElementsSnapshot = new PartElementsSnapshot([], [], [], [])
 export const sax = new Instrument(
     generateUUID(),
     'saxophone',
@@ -49,35 +52,35 @@ export const mappedPartElements = (): Map<string, PartElement> => {
 export const expectedTimeline = [
     new PartSnapshot(null, 1, null, null, snapshotElements(), null),
 
-    new PartSnapshot(part1Performance1.id, null, part1.id, beatValues(1, 8), snapshotElements(), null),
-    new PartSnapshot(part1Performance1.id, null, part1.id, beatValues(1, 8), snapshotElements(), null),
-    new PartSnapshot(part1Performance1.id, null, part1.id, beatValues(1, 8), snapshotElements(), null),
-    new PartSnapshot(part1Performance1.id, null, part1.id, beatValues(1, 8), snapshotElements(), null),
+    new PartSnapshot(part1Performance1.id, null, part1.id, beatValues(1, 8), snapshotElements(), partElementsSnapshot),
+    new PartSnapshot(part1Performance1.id, null, part1.id, beatValues(1, 8), snapshotElements(), partElementsSnapshot),
+    new PartSnapshot(part1Performance1.id, null, part1.id, beatValues(1, 8), snapshotElements(), partElementsSnapshot),
+    new PartSnapshot(part1Performance1.id, null, part1.id, beatValues(1, 8), snapshotElements(), partElementsSnapshot),
 
-    new PartSnapshot(part1Performance1.id, 9, part1.id, beatValues(1, 8), snapshotElements(), null),
-    new PartSnapshot(part1Performance1.id, 9, part1.id, beatValues(1, 8), snapshotElements(), null),
-    new PartSnapshot(part1Performance1.id, 9, part1.id, beatValues(1, 8), snapshotElements(), null),
-    new PartSnapshot(part1Performance1.id, 9, part1.id, beatValues(1, 8), snapshotElements(), null),
+    new PartSnapshot(part1Performance1.id, 9, part1.id, beatValues(1, 8), snapshotElements(), partElementsSnapshot),
+    new PartSnapshot(part1Performance1.id, 9, part1.id, beatValues(1, 8), snapshotElements(), partElementsSnapshot),
+    new PartSnapshot(part1Performance1.id, 9, part1.id, beatValues(1, 8), snapshotElements(), partElementsSnapshot),
+    new PartSnapshot(part1Performance1.id, 9, part1.id, beatValues(1, 8), snapshotElements(), partElementsSnapshot),
 
-    new PartSnapshot(part2Performance1.id, null, part2.id, beatValues(9, 8), snapshotElements('CHORDS', part2Element1.id), null),
-    new PartSnapshot(part2Performance1.id, null, part2.id, beatValues(9, 8), snapshotElements('CHORDS', part2Element1.id), null),
-    new PartSnapshot(part2Performance1.id, null, part2.id, beatValues(9, 8), snapshotElements('CHORDS', part2Element1.id), null),
-    new PartSnapshot(part2Performance1.id, null, part2.id, beatValues(9, 8), snapshotElements('CHORDS', part2Element1.id), null),
+    new PartSnapshot(part2Performance1.id, null, part2.id, beatValues(9, 8), snapshotElements('CHORDS', part2Element1.id), partElementsSnapshot),
+    new PartSnapshot(part2Performance1.id, null, part2.id, beatValues(9, 8), snapshotElements('CHORDS', part2Element1.id), partElementsSnapshot),
+    new PartSnapshot(part2Performance1.id, null, part2.id, beatValues(9, 8), snapshotElements('CHORDS', part2Element1.id), partElementsSnapshot),
+    new PartSnapshot(part2Performance1.id, null, part2.id, beatValues(9, 8), snapshotElements('CHORDS', part2Element1.id), partElementsSnapshot),
 
-    new PartSnapshot(part2Performance1.id, 17, part2.id, beatValues(9, 8), snapshotElements('CHORDS', part2Element2.id, 'LYRICS', part2Element3.id), null),
-    new PartSnapshot(part2Performance1.id, 17, part2.id, beatValues(9, 8), snapshotElements('CHORDS', part2Element2.id, 'LYRICS', part2Element3.id), null),
-    new PartSnapshot(part2Performance1.id, 17, part2.id, beatValues(9, 8), snapshotElements('LYRICS', part2Element3.id), null),
-    new PartSnapshot(part2Performance1.id, 17, part2.id, beatValues(9, 8), snapshotElements('LYRICS', part2Element3.id), null),
+    new PartSnapshot(part2Performance1.id, 17, part2.id, beatValues(9, 8), snapshotElements('CHORDS', part2Element2.id, 'LYRICS', part2Element3.id), partElementsSnapshot),
+    new PartSnapshot(part2Performance1.id, 17, part2.id, beatValues(9, 8), snapshotElements('CHORDS', part2Element2.id, 'LYRICS', part2Element3.id), partElementsSnapshot),
+    new PartSnapshot(part2Performance1.id, 17, part2.id, beatValues(9, 8), snapshotElements('LYRICS', part2Element3.id), partElementsSnapshot),
+    new PartSnapshot(part2Performance1.id, 17, part2.id, beatValues(9, 8), snapshotElements('LYRICS', part2Element3.id), partElementsSnapshot),
 
-    new PartSnapshot(part1Performance2.id, null, part1.id, beatValues(17, 8), snapshotElements(), null),
-    new PartSnapshot(part1Performance2.id, null, part1.id, beatValues(17, 8), snapshotElements(), null),
-    new PartSnapshot(part1Performance2.id, null, part1.id, beatValues(17, 8), snapshotElements(), null),
-    new PartSnapshot(part1Performance2.id, null, part1.id, beatValues(17, 8), snapshotElements(), null),
+    new PartSnapshot(part1Performance2.id, null, part1.id, beatValues(17, 8), snapshotElements(), partElementsSnapshot),
+    new PartSnapshot(part1Performance2.id, null, part1.id, beatValues(17, 8), snapshotElements(), partElementsSnapshot),
+    new PartSnapshot(part1Performance2.id, null, part1.id, beatValues(17, 8), snapshotElements(), partElementsSnapshot),
+    new PartSnapshot(part1Performance2.id, null, part1.id, beatValues(17, 8), snapshotElements(), partElementsSnapshot),
 
-    new PartSnapshot(part1Performance2.id, null, part1.id, beatValues(17, 8), snapshotElements(), null),
-    new PartSnapshot(part1Performance2.id, null, part1.id, beatValues(17, 8), snapshotElements(), null),
-    new PartSnapshot(part1Performance2.id, null, part1.id, beatValues(17, 8), snapshotElements(), null),
-    new PartSnapshot(part1Performance2.id, null, part1.id, beatValues(17, 8), snapshotElements(), null),
+    new PartSnapshot(part1Performance2.id, null, part1.id, beatValues(17, 8), snapshotElements(), partElementsSnapshot),
+    new PartSnapshot(part1Performance2.id, null, part1.id, beatValues(17, 8), snapshotElements(), partElementsSnapshot),
+    new PartSnapshot(part1Performance2.id, null, part1.id, beatValues(17, 8), snapshotElements(), partElementsSnapshot),
+    new PartSnapshot(part1Performance2.id, null, part1.id, beatValues(17, 8), snapshotElements(), partElementsSnapshot),
 
     new PartSnapshot(null, null, null, null, snapshotElements(), null),
     new PartSnapshot(null, null, null, null, snapshotElements(), null),
@@ -89,15 +92,15 @@ export const expectedTimeline = [
     new PartSnapshot(null, 33, null, null, snapshotElements(), null),
     new PartSnapshot(null, 33, null, null, snapshotElements(), null),
 
-    new PartSnapshot(part2Performance2.id, null, part2.id, beatValues(33, 8), snapshotElements('CHORDS', part2Element1.id), null),
-    new PartSnapshot(part2Performance2.id, null, part2.id, beatValues(33, 8), snapshotElements('CHORDS', part2Element1.id), null),
-    new PartSnapshot(part2Performance2.id, null, part2.id, beatValues(33, 8), snapshotElements('CHORDS', part2Element1.id), null),
-    new PartSnapshot(part2Performance2.id, null, part2.id, beatValues(33, 8), snapshotElements('CHORDS', part2Element1.id), null),
+    new PartSnapshot(part2Performance2.id, null, part2.id, beatValues(33, 8), snapshotElements('CHORDS', part2Element1.id), partElementsSnapshot),
+    new PartSnapshot(part2Performance2.id, null, part2.id, beatValues(33, 8), snapshotElements('CHORDS', part2Element1.id), partElementsSnapshot),
+    new PartSnapshot(part2Performance2.id, null, part2.id, beatValues(33, 8), snapshotElements('CHORDS', part2Element1.id), partElementsSnapshot),
+    new PartSnapshot(part2Performance2.id, null, part2.id, beatValues(33, 8), snapshotElements('CHORDS', part2Element1.id), partElementsSnapshot),
 
-    new PartSnapshot(part2Performance2.id, null, part2.id, beatValues(33, 8), snapshotElements('CHORDS', part2Element2.id, 'LYRICS', part2Element3.id), null),
-    new PartSnapshot(part2Performance2.id, null, part2.id, beatValues(33, 8), snapshotElements('CHORDS', part2Element2.id, 'LYRICS', part2Element3.id), null),
-    new PartSnapshot(part2Performance2.id, null, part2.id, beatValues(33, 8), snapshotElements('LYRICS', part2Element3.id), null),
-    new PartSnapshot(part2Performance2.id, null, part2.id, beatValues(33, 8), snapshotElements('LYRICS', part2Element3.id), null),
+    new PartSnapshot(part2Performance2.id, null, part2.id, beatValues(33, 8), snapshotElements('CHORDS', part2Element2.id, 'LYRICS', part2Element3.id), partElementsSnapshot),
+    new PartSnapshot(part2Performance2.id, null, part2.id, beatValues(33, 8), snapshotElements('CHORDS', part2Element2.id, 'LYRICS', part2Element3.id), partElementsSnapshot),
+    new PartSnapshot(part2Performance2.id, null, part2.id, beatValues(33, 8), snapshotElements('LYRICS', part2Element3.id), partElementsSnapshot),
+    new PartSnapshot(part2Performance2.id, null, part2.id, beatValues(33, 8), snapshotElements('LYRICS', part2Element3.id), partElementsSnapshot),
 ]
 
 

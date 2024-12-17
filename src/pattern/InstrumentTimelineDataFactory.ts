@@ -7,6 +7,7 @@ import {PartElement} from "@/pattern/deserialized/PartElement"
 import {PartPerformance} from "@/pattern/deserialized/PartPerformance"
 import {BeatValues} from "@/pattern/BeatValues"
 import {snapshotElements} from "../../tests/utils/TestUtils"
+import {PartElementsSnapshot} from "@/pattern/PartElementsSnapshot";
 
 export class InstrumentTimelineDataFactory {
     instrument: Instrument
@@ -99,9 +100,19 @@ export class InstrumentTimelineDataFactory {
                 .forEach(cpe => partElementsMap.set(cpe.type, cpe.id))
             const beatValues = new BeatValues(startBeat, durationInBeats)
             const nextPerformanceStartBeat = this.findNextPerformanceStartBeatAfterCurrentPerformance(startBeat + durationInBeats, i)
-            timeline[i] = new PartSnapshot(partPerformance.id, nextPerformanceStartBeat, part.id, beatValues, partElementsMap, null)
+            timeline[i] = new PartSnapshot(partPerformance.id, nextPerformanceStartBeat, part.id, beatValues, partElementsMap,
+                this.partElementsSnapshot(i, part))
         }
     }
+
+    partElementsSnapshot(currentPartBeat: number, part: Part): PartElementsSnapshot | null {
+        const text: string[] = []
+        const chords: string[] = []
+        const lyrics: string[] = []
+        const pictures: string[] = []
+        return new PartElementsSnapshot(text, chords, lyrics, pictures)
+    }
+
 
     getCurrentPartElements(part: Part, currentPartBeat: number): PartElement[] {
         return this.instrument.partElements

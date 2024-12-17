@@ -5,6 +5,7 @@ import {Instrument} from "@/pattern/deserialized/Instrument";
 import {PartSnapshot} from "@/pattern/PartSnapshot";
 import {beatValues, snapshotElements} from "../../../utils/TestUtils";
 import {generateUUID} from "@/services/InstrumentService";
+import {PartElementsSnapshot} from "@/pattern/PartElementsSnapshot";
 
 const part1 = new Part(generateUUID(), 'drum part 1', 1, 0, 0)
 const part2 = new Part(generateUUID(), 'drum part 2', 1, 0, 0)
@@ -20,6 +21,7 @@ const perf9 = new PartPerformance(generateUUID(), 9, part1.id)
 const perf10 = new PartPerformance(generateUUID(), 10, part2.id)
 const partElement1 = new PartElement(generateUUID(), part1.id, 'PATTERN', 1, 4, '1___1___', null)
 const partElement2 = new PartElement(generateUUID(), part2.id, 'PATTERN', 1, 4, '1_1_1_1_', null)
+const emptyPartElementsSnapshot = new PartElementsSnapshot([], [], [], [])
 export const drums = new Instrument(
     generateUUID(),
     'drums',
@@ -58,55 +60,55 @@ export const mappedPartElements = (): Map<string, PartElement> => {
 export const expectedDrumTimeline = [
     new PartSnapshot(null, 1, null, null, snapshotElements(), null),
 
-    new PartSnapshot(perf1.id, 5, part1.id, beatValues(1, 4), snapshotElements('PATTERN', partElement1.id), null),
-    new PartSnapshot(perf1.id, 5, part1.id, beatValues(1, 4), snapshotElements('PATTERN', partElement1.id), null),
-    new PartSnapshot(perf1.id, 5, part1.id, beatValues(1, 4), snapshotElements('PATTERN', partElement1.id), null),
-    new PartSnapshot(perf1.id, 5, part1.id, beatValues(1, 4), snapshotElements('PATTERN', partElement1.id), null),
+    new PartSnapshot(perf1.id, 5, part1.id, beatValues(1, 4), snapshotElements('PATTERN', partElement1.id), emptyPartElementsSnapshot),
+    new PartSnapshot(perf1.id, 5, part1.id, beatValues(1, 4), snapshotElements('PATTERN', partElement1.id), emptyPartElementsSnapshot),
+    new PartSnapshot(perf1.id, 5, part1.id, beatValues(1, 4), snapshotElements('PATTERN', partElement1.id), emptyPartElementsSnapshot),
+    new PartSnapshot(perf1.id, 5, part1.id, beatValues(1, 4), snapshotElements('PATTERN', partElement1.id), emptyPartElementsSnapshot),
 
-    new PartSnapshot(perf2.id, 9, part2.id, beatValues(5, 4), snapshotElements('PATTERN', partElement2.id), null),
-    new PartSnapshot(perf2.id, 9, part2.id, beatValues(5, 4), snapshotElements('PATTERN', partElement2.id), null),
-    new PartSnapshot(perf2.id, 9, part2.id, beatValues(5, 4), snapshotElements('PATTERN', partElement2.id), null),
-    new PartSnapshot(perf2.id, 9, part2.id, beatValues(5, 4), snapshotElements('PATTERN', partElement2.id), null),
+    new PartSnapshot(perf2.id, 9, part2.id, beatValues(5, 4), snapshotElements('PATTERN', partElement2.id), emptyPartElementsSnapshot),
+    new PartSnapshot(perf2.id, 9, part2.id, beatValues(5, 4), snapshotElements('PATTERN', partElement2.id), emptyPartElementsSnapshot),
+    new PartSnapshot(perf2.id, 9, part2.id, beatValues(5, 4), snapshotElements('PATTERN', partElement2.id), emptyPartElementsSnapshot),
+    new PartSnapshot(perf2.id, 9, part2.id, beatValues(5, 4), snapshotElements('PATTERN', partElement2.id), emptyPartElementsSnapshot),
 
-    new PartSnapshot(perf3.id, 13, part1.id, beatValues(9, 4), snapshotElements('PATTERN', partElement1.id), null),
-    new PartSnapshot(perf3.id, 13, part1.id, beatValues(9, 4), snapshotElements('PATTERN', partElement1.id), null),
-    new PartSnapshot(perf3.id, 13, part1.id, beatValues(9, 4), snapshotElements('PATTERN', partElement1.id), null),
-    new PartSnapshot(perf3.id, 13, part1.id, beatValues(9, 4), snapshotElements('PATTERN', partElement1.id), null),
+    new PartSnapshot(perf3.id, 13, part1.id, beatValues(9, 4), snapshotElements('PATTERN', partElement1.id), emptyPartElementsSnapshot),
+    new PartSnapshot(perf3.id, 13, part1.id, beatValues(9, 4), snapshotElements('PATTERN', partElement1.id), emptyPartElementsSnapshot),
+    new PartSnapshot(perf3.id, 13, part1.id, beatValues(9, 4), snapshotElements('PATTERN', partElement1.id), emptyPartElementsSnapshot),
+    new PartSnapshot(perf3.id, 13, part1.id, beatValues(9, 4), snapshotElements('PATTERN', partElement1.id), emptyPartElementsSnapshot),
 
-    new PartSnapshot(perf4.id, 17, part2.id, beatValues(13, 4), snapshotElements('PATTERN', partElement2.id), null),
-    new PartSnapshot(perf4.id, 17, part2.id, beatValues(13, 4), snapshotElements('PATTERN', partElement2.id), null),
-    new PartSnapshot(perf4.id, 17, part2.id, beatValues(13, 4), snapshotElements('PATTERN', partElement2.id), null),
-    new PartSnapshot(perf4.id, 17, part2.id, beatValues(13, 4), snapshotElements('PATTERN', partElement2.id), null),
+    new PartSnapshot(perf4.id, 17, part2.id, beatValues(13, 4), snapshotElements('PATTERN', partElement2.id), emptyPartElementsSnapshot),
+    new PartSnapshot(perf4.id, 17, part2.id, beatValues(13, 4), snapshotElements('PATTERN', partElement2.id), emptyPartElementsSnapshot),
+    new PartSnapshot(perf4.id, 17, part2.id, beatValues(13, 4), snapshotElements('PATTERN', partElement2.id), emptyPartElementsSnapshot),
+    new PartSnapshot(perf4.id, 17, part2.id, beatValues(13, 4), snapshotElements('PATTERN', partElement2.id), emptyPartElementsSnapshot),
 
-    new PartSnapshot(perf5.id, 21, part1.id, beatValues(17, 4), snapshotElements('PATTERN', partElement1.id), null),
-    new PartSnapshot(perf5.id, 21, part1.id, beatValues(17, 4), snapshotElements('PATTERN', partElement1.id), null),
-    new PartSnapshot(perf5.id, 21, part1.id, beatValues(17, 4), snapshotElements('PATTERN', partElement1.id), null),
-    new PartSnapshot(perf5.id, 21, part1.id, beatValues(17, 4), snapshotElements('PATTERN', partElement1.id), null),
+    new PartSnapshot(perf5.id, 21, part1.id, beatValues(17, 4), snapshotElements('PATTERN', partElement1.id), emptyPartElementsSnapshot),
+    new PartSnapshot(perf5.id, 21, part1.id, beatValues(17, 4), snapshotElements('PATTERN', partElement1.id), emptyPartElementsSnapshot),
+    new PartSnapshot(perf5.id, 21, part1.id, beatValues(17, 4), snapshotElements('PATTERN', partElement1.id), emptyPartElementsSnapshot),
+    new PartSnapshot(perf5.id, 21, part1.id, beatValues(17, 4), snapshotElements('PATTERN', partElement1.id), emptyPartElementsSnapshot),
 
-    new PartSnapshot(perf6.id, 25, part2.id, beatValues(21, 4), snapshotElements('PATTERN', partElement2.id), null),
-    new PartSnapshot(perf6.id, 25, part2.id, beatValues(21, 4), snapshotElements('PATTERN', partElement2.id), null),
-    new PartSnapshot(perf6.id, 25, part2.id, beatValues(21, 4), snapshotElements('PATTERN', partElement2.id), null),
-    new PartSnapshot(perf6.id, 25, part2.id, beatValues(21, 4), snapshotElements('PATTERN', partElement2.id), null),
+    new PartSnapshot(perf6.id, 25, part2.id, beatValues(21, 4), snapshotElements('PATTERN', partElement2.id), emptyPartElementsSnapshot),
+    new PartSnapshot(perf6.id, 25, part2.id, beatValues(21, 4), snapshotElements('PATTERN', partElement2.id), emptyPartElementsSnapshot),
+    new PartSnapshot(perf6.id, 25, part2.id, beatValues(21, 4), snapshotElements('PATTERN', partElement2.id), emptyPartElementsSnapshot),
+    new PartSnapshot(perf6.id, 25, part2.id, beatValues(21, 4), snapshotElements('PATTERN', partElement2.id), emptyPartElementsSnapshot),
 
-    new PartSnapshot(perf7.id, 29, part1.id, beatValues(25, 4), snapshotElements('PATTERN', partElement1.id), null),
-    new PartSnapshot(perf7.id, 29, part1.id, beatValues(25, 4), snapshotElements('PATTERN', partElement1.id), null),
-    new PartSnapshot(perf7.id, 29, part1.id, beatValues(25, 4), snapshotElements('PATTERN', partElement1.id), null),
-    new PartSnapshot(perf7.id, 29, part1.id, beatValues(25, 4), snapshotElements('PATTERN', partElement1.id), null),
+    new PartSnapshot(perf7.id, 29, part1.id, beatValues(25, 4), snapshotElements('PATTERN', partElement1.id), emptyPartElementsSnapshot),
+    new PartSnapshot(perf7.id, 29, part1.id, beatValues(25, 4), snapshotElements('PATTERN', partElement1.id), emptyPartElementsSnapshot),
+    new PartSnapshot(perf7.id, 29, part1.id, beatValues(25, 4), snapshotElements('PATTERN', partElement1.id), emptyPartElementsSnapshot),
+    new PartSnapshot(perf7.id, 29, part1.id, beatValues(25, 4), snapshotElements('PATTERN', partElement1.id), emptyPartElementsSnapshot),
 
-    new PartSnapshot(perf8.id, 33, part2.id, beatValues(29, 4), snapshotElements('PATTERN', partElement2.id), null),
-    new PartSnapshot(perf8.id, 33, part2.id, beatValues(29, 4), snapshotElements('PATTERN', partElement2.id), null),
-    new PartSnapshot(perf8.id, 33, part2.id, beatValues(29, 4), snapshotElements('PATTERN', partElement2.id), null),
-    new PartSnapshot(perf8.id, 33, part2.id, beatValues(29, 4), snapshotElements('PATTERN', partElement2.id), null),
+    new PartSnapshot(perf8.id, 33, part2.id, beatValues(29, 4), snapshotElements('PATTERN', partElement2.id), emptyPartElementsSnapshot),
+    new PartSnapshot(perf8.id, 33, part2.id, beatValues(29, 4), snapshotElements('PATTERN', partElement2.id), emptyPartElementsSnapshot),
+    new PartSnapshot(perf8.id, 33, part2.id, beatValues(29, 4), snapshotElements('PATTERN', partElement2.id), emptyPartElementsSnapshot),
+    new PartSnapshot(perf8.id, 33, part2.id, beatValues(29, 4), snapshotElements('PATTERN', partElement2.id), emptyPartElementsSnapshot),
 
-    new PartSnapshot(perf9.id, 37, part1.id, beatValues(33, 4), snapshotElements('PATTERN', partElement1.id), null),
-    new PartSnapshot(perf9.id, 37, part1.id, beatValues(33, 4), snapshotElements('PATTERN', partElement1.id), null),
-    new PartSnapshot(perf9.id, 37, part1.id, beatValues(33, 4), snapshotElements('PATTERN', partElement1.id), null),
-    new PartSnapshot(perf9.id, 37, part1.id, beatValues(33, 4), snapshotElements('PATTERN', partElement1.id), null),
+    new PartSnapshot(perf9.id, 37, part1.id, beatValues(33, 4), snapshotElements('PATTERN', partElement1.id), emptyPartElementsSnapshot),
+    new PartSnapshot(perf9.id, 37, part1.id, beatValues(33, 4), snapshotElements('PATTERN', partElement1.id), emptyPartElementsSnapshot),
+    new PartSnapshot(perf9.id, 37, part1.id, beatValues(33, 4), snapshotElements('PATTERN', partElement1.id), emptyPartElementsSnapshot),
+    new PartSnapshot(perf9.id, 37, part1.id, beatValues(33, 4), snapshotElements('PATTERN', partElement1.id), emptyPartElementsSnapshot),
 
-    new PartSnapshot(perf10.id, null, part2.id, beatValues(37, 4), snapshotElements('PATTERN', partElement2.id), null),
-    new PartSnapshot(perf10.id, null, part2.id, beatValues(37, 4), snapshotElements('PATTERN', partElement2.id), null),
-    new PartSnapshot(perf10.id, null, part2.id, beatValues(37, 4), snapshotElements('PATTERN', partElement2.id), null),
-    new PartSnapshot(perf10.id, null, part2.id, beatValues(37, 4), snapshotElements('PATTERN', partElement2.id), null),
+    new PartSnapshot(perf10.id, null, part2.id, beatValues(37, 4), snapshotElements('PATTERN', partElement2.id), emptyPartElementsSnapshot),
+    new PartSnapshot(perf10.id, null, part2.id, beatValues(37, 4), snapshotElements('PATTERN', partElement2.id), emptyPartElementsSnapshot),
+    new PartSnapshot(perf10.id, null, part2.id, beatValues(37, 4), snapshotElements('PATTERN', partElement2.id), emptyPartElementsSnapshot),
+    new PartSnapshot(perf10.id, null, part2.id, beatValues(37, 4), snapshotElements('PATTERN', partElement2.id), emptyPartElementsSnapshot),
 ]
 
 
