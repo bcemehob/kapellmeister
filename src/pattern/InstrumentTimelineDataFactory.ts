@@ -96,21 +96,37 @@ export class InstrumentTimelineDataFactory {
                 throw Error(`Party Snapshot already set for position ${i}: ${timeline[i]}`)
             }
             const partElementsMap = new Map<string, string>()
-            this.getCurrentPartElements(part, i - startBeat + 1)
+            const currentBeatInPart = i - startBeat + 1
+            this.getCurrentPartElements(part, currentBeatInPart)
                 .forEach(cpe => partElementsMap.set(cpe.type, cpe.id))
             const beatValues = new BeatValues(startBeat, durationInBeats)
             const nextPerformanceStartBeat = this.findNextPerformanceStartBeatAfterCurrentPerformance(startBeat + durationInBeats, i)
             timeline[i] = new PartSnapshot(partPerformance.id, nextPerformanceStartBeat, part.id, beatValues, partElementsMap,
-                this.partElementsSnapshot(i, part))
+                this.partElementsSnapshot(currentBeatInPart, part))
         }
     }
 
     partElementsSnapshot(currentPartBeat: number, part: Part): PartElementsSnapshot | null {
-        const text: string[] = []
-        const chords: string[] = []
-        const lyrics: string[] = []
-        const pictures: string[] = []
-        return new PartElementsSnapshot(text, chords, lyrics, pictures)
+        const elementsMap: Map<string, string[]> = this.getPartElementsFromCurrent(part, currentPartBeat)
+        return new PartElementsSnapshot(
+            elementsMap.get("TEXT") || [],
+            elementsMap.get("CHORDS") || [],
+            elementsMap.get("LYRICS") || [],
+            elementsMap.get("PICTURES") || []
+        )
+    }
+
+    getPartElementsFromCurrent(part: Part, currentPartBeat: number): Map<string, string[]> {
+        const result = new Map<string, string[]>();
+        const allTypes =
+        const chordsElems = this.instrument.partElements
+            .filter(el => el.type === 'CHORDS')
+            .filter(el => el.partId === part.id)
+            .filter(el => el.end >= currentPartBeat)
+        return new Map<string, string[]>([
+            ["CHORDS", ["A", "B"]],
+            ["LYRICS", ["C"]],
+        ])
     }
 
 
